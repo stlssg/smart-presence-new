@@ -57,7 +57,7 @@ class DeclarationFragment : Fragment() {
         val packageName = (activity as AppCompatActivity).packageName
         val manuallySettings = view.findViewById<TextView>(R.id.manuallySettings)
         manuallySettings.makeLinks(
-            Pair("grant all time positioning permission", View.OnClickListener {
+            Pair(getString(R.string.pairDeclaration1), View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
                     intent.addCategory(Intent.CATEGORY_DEFAULT)
@@ -67,7 +67,7 @@ class DeclarationFragment : Fragment() {
                     Toast.makeText(requireContext(), getString(R.string.alreadyGrantAllTimePositioningPermission), Toast.LENGTH_SHORT).show()
                 }
             }),
-            Pair("stop battery optimization", View.OnClickListener {
+            Pair(getString(R.string.pairDeclaration2), View.OnClickListener {
                 val pm = requireContext().applicationContext.getSystemService(POWER_SERVICE) as PowerManager
                 if (pm.isIgnoringBatteryOptimizations(packageName)) {
                     Toast.makeText(requireContext(), getString(R.string.alreadyStopBatteryOptimization), Toast.LENGTH_SHORT).show()

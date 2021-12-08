@@ -1,16 +1,8 @@
 <resources>
     <string name="app_name">Smart Presence</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="fragment_name_introduction">Introduction</string>
     <string name="fragment_name_presence_detection">Presence Detection</string>
     <string name="fragment_name_setting">Setting</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="signInWelcome">Welcome</string>
     <string name="signOutButton">sign out</string>
     <string name="plzSign">Please sign the agreement!</string>
@@ -119,17 +111,17 @@
     <string name="reStartButton">Restart</string>
     <string name="stopButton">Stop</string>
     <string name="showInfoButton">Show working status</string>
-    <string name="introduction_more"> If you have not grant the all time positioning permission and stop battery optimization, please do it manually.</string>
+    <string name="introduction_more">If you have not grant the all time positioning permission and stop battery optimization, please do it manually.</string>
     <string name="introduction_plus">Furthermore, for devices from certain manufacturers, you may need to manually change some settings. Please check out here.</string>
     <string name="fragment_info_brand_name">Information For Different Devices</string>
-    <string name="huawei_description">Huawei: even if you have disabled the battery optimization from the app, you still need to do it in your setting page. Moreover,
+    <string name="huawei_description">Huawei: even if you have disabled the battery optimization from the app, you still need to do it in your system setting page. Moreover,
     for older version of Huawei devices, the app works not perfectly due to intrinsic property of its customized Android system which significantly limit the background
     services, thus, please turn on the daily notification and re-start the service everyday or when you wakeup in the morning. However, for later version, due to the
     restriction of Google, the positioning based method does not work due to the fact that Google play service no longer supports Huawei.</string>
     <string name="samsung_description">Samsung: it does put some restrictions on background service so that please turn on the daily notification. On the other hand,
     you still need to manually grant the permission to run background service.</string>
     <string name="onePlus_description">OnePlus: you have to manually disable to battery optimization which cannot be stopped in the app for onePlus.</string>
-    <string name="meizu_description">MEIZU: you need to go to the setting page and find "privacy and security", in which you can enable the background running for
+    <string name="meizu_description">MEIZU: you need to go to the system setting page and find "privacy and security", in which you can enable the background running for
     this application.</string>
     <string name="more_info_devices">For more information, please contact s287288@studenti.polito.it. </string>
     <string name="wifi_guidance">
@@ -164,7 +156,7 @@
         5. You can click "STOP" to terminate the service. The "START" button will become "RESTART" after clicking "START" so that you can restart your service whenever you want. \n \n
         6. Additionally, you can also click "SHOW WORKING STATUS" to check current service condition (ENQUEUED: the service is waiting in the line for the next detection;
         RUNNING: the service is running and performing the detection or the geofence is working; CANCELLED: the service has been terminated by you; NOTHING: you have not
-        define any service or the geofence triggering has been stopped.).
+        define any service or the geofence triggering has been stopped).
     </string>
     <string name="manual_guidance">
         This method totally rely on your habits of clicking on the buttons whenever you entering or leaving the target building, which is not easy for daily routines, so
@@ -172,7 +164,7 @@
         In order to manually record the entering or leaving to determine user\'s presence, you need to follow several steps: \n \n
         1. Go to the configuration page by clicking the three dots on right-top corner. \n \n
         2. In the configuration page, you need the address of target building, which can be inputted manually (in such case, please make sure the inputs are right!!!) or
-        selected from a map. Finally, you need to define what is the maximum occupancy of target building. n \n
+        selected from a map. Finally, you need to define what is the maximum occupancy of target building. \n \n
         3. Click on right-top corner to save your configuration and then come back to this page. \n \n
         4. Click "CHECK IN" to record your entering whenever you enter the target building and the data will be uploaded. \n \n
         5. Click "CHECK OUT" to record your leaving whenever you leave the target building and the data will be uploaded. \n \n
@@ -183,4 +175,11 @@
     <string name="checkOutButton">check out</string>
     <string name="checkInMessage">The entering has been successfully recorded!</string>
     <string name="checkOutMessage">The leaving has been successfully recorded!</string>
+    <string name="start_fragment_title">Smart Presence</string>
+    <string name="start_fragment_content">Smart Home</string>
+    <string name="pairDeclaration1">grant all time positioning permission</string>
+    <string name="pairDeclaration2">stop battery optimization</string>
+    <string name="pairIntroduction1">all time positioning permission</string>
+    <string name="pairIntroduction2">stop battery optimization</string>
+    <string name="pairIntroduction3">here</string>
 </resources>

@@ -116,7 +116,7 @@ class SignInFragment : Fragment() {
                             putString( "setting_start_time", "07:00")
                             putString( "setting_stop_time", "23:00")
                             putString("workingIntervalSpinnerPosition", "0")
-                            putString("languageSpinnerPosition", "0")
+//                            putString("languageSpinnerPosition", "0")
                             putString("notificationOnOffCondition", "true")
                             putString("ssid", "nothing")
                             putString("bssid", "nothing")

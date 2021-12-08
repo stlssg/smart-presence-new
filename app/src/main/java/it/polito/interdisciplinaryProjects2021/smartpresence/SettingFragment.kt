@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.recreate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -82,7 +84,7 @@ class SettingFragment : Fragment() {
                 putString("setting_start_time", "07:00")
                 putString("setting_stop_time", "23:00")
                 putString("workingIntervalSpinnerPosition", "0")
-                putString("languageSpinnerPosition", "0")
+//                putString("languageSpinnerPosition", "0")
                 putString("notificationOnOffCondition", "true")
                 putString("ssid", "nothing")
                 putString("bssid", "nothing")
@@ -175,6 +177,19 @@ class SettingFragment : Fragment() {
         languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 language = language_list[position]
+                if (languageSpinnerPosition != position) {
+                    when (position) {
+                        0 -> {
+                            Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
+                        }
+                        1 -> {
+                            Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(requireContext(), "请重启应用！", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
                 with(sharedPreferences.edit()) {
                     putString( "languageSpinnerPosition", position.toString())
                     commit()
@@ -198,5 +213,9 @@ class SettingFragment : Fragment() {
             }
         }
     }
+
+//    private fun recreateFragment() {
+//        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+//    }
 
 }

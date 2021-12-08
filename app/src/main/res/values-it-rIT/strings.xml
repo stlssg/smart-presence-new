@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Presence</string>
+    <string name="fragment_name_introduction">Introduzione</string>
+    <string name="fragment_name_presence_detection">Rilevamento di presenza</string>
+    <string name="fragment_name_setting">Collocamento</string>
+    <string name="signInWelcome">Accoglienza</string>
+    <string name="signOutButton">disconnessione</string>
+    <string name="plzSign">Si prega di firmare l\'accordo!</string>
+    <string name="declaration_title"><![CDATA[Informativa sulla privacy, Dichiarazione, Accordo:]]></string>
+    <string name="declaration_content">
+        Si prega di leggere attentamente la seguente informativa sulla privacy di Smart Presence.\n
+        La presenza intelligente sta raccogliendo le tue informazioni personali tra cui posizioni, connessione WiFi, e-mail, indirizzo, ecc. Questa applicazione accederà alle tue posizioni o alle informazioni WiFi per rilevare la tua presenza nel target
+     edificio e avrà anche bisogno delle tue informazioni personali per configurare il database firebase cloud firestore che memorizzerà tutti i tuoi dati. Dalla presenza intelligente
+     si concentra sulla zona residenziale, è necessario anche l\'indirizzo della tua casa. \n
+        Promettiamo che le tue informazioni non saranno esposte e non saranno accessibili a nessun altro. Inoltre, le tue informazioni non verranno utilizzate per uso commerciale e lo faremo
+     garantire la sicurezza del database in modo che le tue informazioni personali siano conservate. Inoltre, hai il diritto di cancellare il tuo account e tutti i dati. Come un
+     risultato, nessuna copia dei tuoi dati verrà conservata. \n
+        Firmando questo accordo, accetti di concedere l\'autorizzazione al posizionamento assoluto, interrompere l\'ottimizzazione della batteria per Smart Presence e potenzialmente modificare le impostazioni
+     trattare con dispositivi di determinati produttori. Accetti di fornire informazioni su luoghi, indirizzo ed e-mail. Hai letto e compreso tutte le sezioni
+     scritto sopra.</string>
+    <string name="finishSignIn">Fine</string>
+    <string name="checkbox">Concordare</string>
+    <string name="locationPermission">Pagina di autorizzazione alla posizione</string>
+    <string name="stopBatteryOptimization">Interrompi l\'ottimizzazione della batteria</string>
+    <string name="manuallySettings"><![CDATA[Se non hai modificato le impostazioni, fallo manualmente: concedi tutti i permessi di posizionamento temporale e interrompi l\'ottimizzazione della batteria.]]></string>
+    <string name="setting_account">Account</string>
+    <string name="deleteDataButton">cancellare i dati</string>
+    <string name="settingTimeOptions">Opzioni di tempo</string>
+    <string name="setting_working_time_interval">Intervallo di tempo di lavoro (min):</string>
+    <string name="setting_working_time_interval_description">La durata tra due rilevamenti consecutivi. Se sei sempre lontano da casa per molto tempo, puoi
+     scegli una durata maggiore per risparmiare batteria.</string>
+    <string name="setting_start_time">Ora di inizio:</string>
+    <string name="setting_stop_time">Tempo di stop:</string>
+    <string name="settingStartStopTimeDescription">Puoi scegliere quando iniziare o terminare il rilevamento durante il giorno. Si prega di notare che l\'ora di fine dovrebbe venire dopo l\'ora di inizio.</string>
+    <string-array name="working_interval">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
+    </string-array>
+    <string name="deleteDataMessage">Hai cancellato con successo i tuoi dati archiviati nel database cloud!</string>
+    <string name="setting_daily_notification">Notifica giornaliera</string>
+    <string name="setting_daily_notification_description">Continua a ricevere notifiche giornaliere</string>
+    <string name="notificationOnMessage">Riceverai una notifica push tutti i giorni alle 14:00!</string>
+    <string name="notificationOffMessage">Non riceverai più la notifica push giornaliera!</string>
+    <string name="setting_language">Lingua</string>
+    <string-array name="language">
+        <item>Inglese</item>
+        <item>Italiano</item>
+        <item>Cinese</item>
+    </string-array>
+    <string name="setting_alert_title">Cancella conferma</string>
+    <string name="setting_alert_content">Sei sicuro di voler eliminare tutti i tuoi dati archiviati nel database cloud??</string>
+    <string name="setting_alert_cancel">Annulla</string>
+    <string name="setting_alert_confirm">Si</string>
+    <string name="configuration_menu">Configurazione</string>
+    <string name="fragment_wifi_checking_name">Controllo WiFi</string>
+    <string name="fragment_positioning_checking_name">Controllo della posizione</string>
+    <string name="fragment_manual_checking_name">Controllo manualev</string>
+    <string name="fragment_configuration_name">Configurazione</string>
+    <string name="ssid_input">SSID (WiFi Nome)</string>
+    <string name="bssid_input">BSSID (ID univoco)</string>
+    <string name="update_wifi_info_button">Aggiorna le informazioni WIFI</string>
+    <string name="update_wifi_info_description">Se le informazioni attuali non sono corrette o non sai cosa inserire nei campi, fai clic su
+         pulsante per mostrare le informazioni WiFi sulla connessione WiFi corrente, altrimenti inserire manualmente.</string>
+    <string name="address_input">Indirizzo dell\'edificio di destinazione</string>
+    <string name="update_address_button">Seleziona dalla mappa</string>
+    <string name="update_address_description">Fai clic sul pulsante per selezionare l\'edificio di destinazione da una mappa.</string>
+    <string name="max_occupancy_input">Occupazione massima prevista</string>
+    <string name="max_occupancy_description">Il numero massimo di persone che soggiornano nell\'edificio di destinazione.</string>
+    <string name="save_menu">Salva</string>
+    <string name="configuration_confirm_title">Si prega di confermare la configurazione.</string>
+    <string name="configuration_alert_confirm_button">Sì, confermato</string>
+    <string name="configuration_alert_toast">Hai configurato con successo il tuo profilo.</string>
+    <string name="no_wifi_connection_message">Assicurati di connetterti al WiFi o di inserire manualmente.</string>
+    <string name="configuration_empty_input_message">Si prega di non lasciare spazi vuoti.</string>
+    <string name="save_location_button">Salva</string>
+    <string name="map_fragment_name">Carta geografica</string>
+    <string name="turn_on_location_message">Si prega di attivare il servizio di localizzazione.</string>
+    <string name="map_error_message">Riavvia la connessione WiFi e il servizio di localizzazione.</string>
+    <string name="success_location_save">Hai selezionato con successo la tua posizione.</string>
+    <string name="latitude">latitudine</string>
+    <string name="longitude">longitudine</string>
+    <string name="energySavingModeOnOff">Modalità risparmio batteria</string>
+    <string name="energySavingModeAlertTitle">Modalità risparmio energetico</string>
+    <string name="energySavingModeOnMessage">Attivando la modalità di risparmio della batteria, ti affiderai al cosiddetto geofence per rilevare la presenza, che non è preciso
+     perché dipende dall\'aggiornamento della posizione da altre app!</string>
+    <string name="energySavingModeOffMessage">Disattivando la modalità di risparmio della batteria, la precisione del rilevamento aumenta, ma potresti riscontrare un calo della batteria più rapido!</string>
+    <string name="energySavingModeAlertButton">Inteso</string>
+    <string name="energySavingModeAlertNoButton">Non cambiare</string>
+    <string name="alreadyStopBatteryOptimization">Hai già disattivato l\'ottimizzazione della batteria per questa app.</string>
+    <string name="alreadyGrantAllTimePositioningPermission">Hai già concesso l\'autorizzazione per questa app.</string>
+    <string name="introduction_text_main">
+        Benvenuto in presenza intelligente. L\'obiettivo di questa applicazione è rilevare la tua presenza nell\'edificio di destinazione e ricavare il profilo di occupazione dell\'edificio per aiutarti
+     la tua gestione intelligente degli edifici. In generale, forniamo tre metodi tra cui scegliere: metodo basato su WiFi, metodo basato sul posizionamento e metodo manuale. \n \n
+        Basato su WiFi: l\'app confronterà periodicamente l\'SSID (nome WiFi) e il BSSID (un ID univoco assegnato dal router) della tua connessione WiFi corrente con il target
+     uno configurato da te in modo che tu possa essere considerato presente se corrispondono. Di conseguenza, l\'app può ricavare il periodo in cui sei rimasto o hai lasciato l\'obiettivo
+     costruzione. \n \n
+        Basato sul posizionamento: il concetto è che sarai considerato una presenza se ti trovi entro un certo raggio intorno all\'edificio di destinazione. In particolare, l\'app può
+     aggiorna periodicamente la tua posizione con latitudine e longitudine per verificare la tua presenza, che costa più batteria o ascolta passivamente gli aggiornamenti della posizione da altri
+     app per attivare un geofence, che consuma meno energia. \n \n
+        Metodo manuale: devi semplicemente fare clic sulle scorciatoie fornite dall\'app per effettuare il check-in o il check-out ogni volta che entri o esci dall\'edificio di destinazione. Si basa totalmente su
+     le tue abitudini. \n \n
+        Consigliamo vivamente prima di avviare i servizi di accedere alla pagina delle impostazioni in cui è possibile gestire il proprio account, modificare l\'intervallo tra due rilevazioni, modificare
+     per quale periodo durante la giornata il servizio dovrebbe funzionare, determinare se ricevere o meno la notifica giornaliera e cambiare lingua.\n \n
+        Infine, l\'app funzionerà in background e i tuoi dati verranno caricati e archiviati nel database Firestore per ulteriori analisi.
+    </string>
+    <string name="startButton">Cominciare</string>
+    <string name="reStartButton">Ricomincia</string>
+    <string name="stopButton">Fermare</string>
+    <string name="showInfoButton">Mostra stato di lavoro</string>
+    <string name="introduction_more">Se non hai concesso il permesso di posizionamento assoluto e non hai interrotto l\'ottimizzazione della batteria, fallo manualmente.</string>
+    <string name="introduction_plus">Inoltre, per i dispositivi di determinati produttori, potrebbe essere necessario modificare manualmente alcune impostazioni. Si prega di controllare qui.</string>
+    <string name="fragment_info_brand_name">Informazioni per dispositivi diversi</string>
+    <string name="huawei_description">Huawei: anche se hai disabilitato l\'ottimizzazione della batteria dall\'app, devi comunque farlo nella pagina delle impostazioni di sistema. Inoltre,
+     per le versioni precedenti dei dispositivi Huawei, l\'app non funziona perfettamente a causa della proprietà intrinseca del suo sistema Android personalizzato che limita in modo significativo lo sfondo
+     servizi, quindi, attiva la notifica giornaliera e riavvia il servizio tutti i giorni o quando ti svegli al mattino. Tuttavia, per la versione successiva, a causa del
+     restrizione di Google, il metodo basato sul posizionamento non funziona a causa del fatto che il servizio di riproduzione di Google non supporta più Huawei.</string>
+    <string name="samsung_description">Samsung: pone alcune restrizioni al servizio in background, quindi si prega di attivare la notifica giornaliera. D\'altra parte,
+     devi comunque concedere manualmente l\'autorizzazione per eseguire il servizio in background.</string>
+    <string name="onePlus_description">OnePlus: devi disabilitare manualmente l\'ottimizzazione della batteria che non può essere interrotta nell\'app per onePlus.</string>
+    <string name="meizu_description">MEIZU: devi andare alla pagina delle impostazioni di sistema e trovare "privacy e sicurezza", in cui puoi abilitare lo sfondo in esecuzione per
+     questa applicazione.</string>
+    <string name="more_info_devices">Per ulteriori informazioni, si prega di contattare s287288@studenti.polito.it. </string>
+    <string name="wifi_guidance">
+        Per utilizzare la connessione WiFi per rilevare la presenza dell\'utente, è necessario seguire diversi passaggi: \n \n
+        1. Vai alla pagina di configurazione facendo clic sui tre punti nell\'angolo in alto a destra. \n \n
+        2. Nella pagina di configurazione, puoi generare SSID e BSSID della tua connessione WiFi corrente o inserirli manualmente (in tal caso, assicurati di avere ragione!!!).
+        È inoltre necessario decidere l\'indirizzo che può essere inserito manualmente o selezionato da una mappa. Infine, è necessario definire qual è l\'occupazione massima dell\'edificio di destinazione. \n \n
+        3. Fare clic sull\'angolo in alto a destra per salvare la configurazione e quindi tornare a questa pagina. \n \n
+        4. Fare clic su "START" per avviare il servizio, quindi il servizio verrà eseguito automaticamente in background in base alle impostazioni. \n \n
+        5. È possibile fare clic su "STOP" per terminare il servizio. Il pulsante "START" diventerà "RESTART" dopo aver fatto clic su "START" in modo da poter riavviare il servizio ogni volta che lo desideri. \n \n
+        6. Inoltre, è anche possibile fare clic su "MOSTRA STATO FUNZIONANTE" per verificare le condizioni correnti del servizio (IN CODA: il servizio è in attesa in linea per il rilevamento successivo;
+        RUNNING: il servizio è in esecuzione ed esegue il rilevamento; ANNULLATO: il servizio è stato da te interrotto; NIENTE: non hai definito alcun servizio).
+    </string>
+    <string name="startServiceMessage">Hai avviato con successo il servizio!</string>
+    <string name="stopServiceMessage">Hai interrotto con successo il servizio!</string>
+    <string name="restartServiceMessage">Hai riavviato con successo il servizio!</string>
+    <string name="workStatus">Lo stato del tuo servizio attuale è:</string>
+    <string name="wifi_based_method_name">Metodo basato su WiFi</string>
+    <string name="positioning_based_method_name">Metodo basato sul posizionamento</string>
+    <string name="manual_method_name">Metodo manuale</string>
+    <string name="positioning_guidance">
+        Per utilizzare il servizio di posizionamento di Google per rilevare la presenza dell\'utente, devi seguire diversi passaggi: \n \n
+        1. Vai alla pagina di configurazione facendo clic sui tre punti nell\'angolo in alto a destra. \n \n
+        2. Nella pagina di configurazione, è necessario l\'indirizzo e la posizione (latitudine e longitudine) dell\'edificio di destinazione, che possono essere inseriti manualmente (in tal caso, per favore
+        assicurati che gli input siano corretti!!!) o selezionati da una mappa. Inoltre, è necessario definire qual è l\'occupazione massima dell\'edificio di destinazione. Infine, puoi anche scegliere se
+        per disabilitare o meno la modalità di risparmio della batteria. Se ti attieni a quello predefinito senza risparmio di batteria, l\'app aggiornerà la posizione da sola periodicamente, il che potrebbe costare di più
+        batteria. D\'altra parte, se si passa alla modalità di risparmio della batteria, non si avrà un calo significativo della batteria, tuttavia, la precisione del rilevamento non è buona poiché l\'app
+        farà riferimento al cosiddetto geofence che si basa totalmente sull\'aggiornamento della posizione da altre app. Ti suggeriamo di attivare la modalità di risparmio della batteria solo quando
+        spesso utilizzano app che richiedono un servizio di localizzazione, ad es. Google Map. \n \n
+        3. Fare clic sull\'angolo in alto a destra per salvare la configurazione e quindi tornare a questa pagina. \n \n
+        4. Fare clic su "START" per avviare il servizio, quindi il servizio verrà eseguito automaticamente in background in base alle impostazioni. \n \n
+        5. È possibile fare clic su "STOP" per terminare il servizio. Il pulsante "START" diventerà "RESTART" dopo aver fatto clic su "START" in modo da poter riavviare il servizio ogni volta che lo desideri. \n \n
+        6. Inoltre, è anche possibile fare clic su "MOSTRA STATO FUNZIONANTE" per verificare le condizioni correnti del servizio (IN CODA: il servizio è in attesa in linea per il rilevamento successivo;
+        RUNNING: il servizio è in esecuzione e sta effettuando il rilevamento o il geofence è funzionante; ANNULLATO: il servizio è stato da te interrotto; NIENTE: non hai
+        definire qualsiasi servizio o l\'attivazione del geofence è stata interrotta).
+    </string>
+    <string name="manual_guidance">
+        Questo metodo si basa totalmente sulle tue abitudini di fare clic sui pulsanti ogni volta che entri o esci dall\'edificio di destinazione, il che non è facile per le routine quotidiane, quindi
+        per favore scegli questo metodo solo se ritieni di poterlo ricordare e non vuoi che la tua posizione o la connessione WiFi siano esposte. \n \n
+        Per registrare manualmente l\'ingresso o l\'uscita per determinare la presenza dell\'utente, è necessario seguire diversi passaggi: \n \n
+        1. Vai alla pagina di configurazione facendo clic sui tre punti nell\'angolo in alto a destra. \n \n
+        2. Nella pagina di configurazione, è necessario l\'indirizzo dell\'edificio di destinazione, che può essere inserito manualmente (in tal caso, assicurarsi che gli input siano corretti!!!) o
+        selezionato da una mappa. Infine, è necessario definire qual è l\'occupazione massima dell\'edificio di destinazione. \n \n
+        3. Fare clic sull\'angolo in alto a destra per salvare la configurazione e quindi tornare a questa pagina. \n \n
+        4. Fai clic su "CHECK IN" per registrare il tuo ingresso ogni volta che entri nell\'edificio di destinazione e i dati verranno caricati. \n \n
+        5. Fai clic su "CHECK OUT" per registrare la tua partenza ogni volta che lasci l\'edificio di destinazione e i dati verranno caricati. \n \n
+        Tieni presente che forniamo scorciatoie per questi due pulsanti in modo che tu possa fare clic a lungo sull\'icona dell\'app e quindi trascinare le scorciatoie in un punto comodo. Come
+        di conseguenza, non devi venire a questa pagina per effettuare il check-in o il check-out ogni volta.
+    </string>
+    <string name="checkInButton">registrare</string>
+    <string name="checkOutButton">guardare</string>
+    <string name="checkInMessage">L\'inserimento è stato registrato con successo!</string>
+    <string name="checkOutMessage">L\'uscita è stata registrata con successo!</string>
+    <string name="start_fragment_title">Smart Presence</string>
+    <string name="start_fragment_content">Casa intelligente</string>
+    <string name="pairDeclaration1">concedi tutti i permessi di posizionamento temporale</string>
+    <string name="pairDeclaration2">interrompi l\'ottimizzazione della batteria</string>
+    <string name="pairIntroduction1">permesso di posizionamento assoluto</string>
+    <string name="pairIntroduction2">interrotto l\'ottimizzazione della batteria</string>
+    <string name="pairIntroduction3">qui</string>
+</resources>

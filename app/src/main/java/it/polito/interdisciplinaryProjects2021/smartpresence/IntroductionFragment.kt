@@ -40,7 +40,7 @@ class IntroductionFragment : Fragment() {
         val packageName = (activity as AppCompatActivity).packageName
         val introduction_more_text = view.findViewById<TextView>(R.id.introduction_more_text)
         introduction_more_text.makeLinks(
-            Pair("all time positioning permission", View.OnClickListener {
+            Pair(getString(R.string.pairIntroduction1), View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
                     intent.addCategory(Intent.CATEGORY_DEFAULT)
@@ -50,7 +50,7 @@ class IntroductionFragment : Fragment() {
                     Toast.makeText(requireContext(), getString(R.string.alreadyGrantAllTimePositioningPermission), Toast.LENGTH_SHORT).show()
                 }
             }),
-            Pair("stop battery optimization", View.OnClickListener {
+            Pair(getString(R.string.pairIntroduction2), View.OnClickListener {
                 val pm = requireContext().applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager
                 if (pm.isIgnoringBatteryOptimizations(packageName)) {
                     Toast.makeText(requireContext(), getString(R.string.alreadyStopBatteryOptimization), Toast.LENGTH_SHORT).show()
@@ -64,7 +64,7 @@ class IntroductionFragment : Fragment() {
 
         val introduction_plus_text = view.findViewById<TextView>(R.id.introduction_plus_text)
         introduction_plus_text.makeLinks(
-            Pair("here", View.OnClickListener {
+            Pair(getString(R.string.pairIntroduction3), View.OnClickListener {
                 findNavController().navigate(R.id.infoBrandFragment)
             }))
     }

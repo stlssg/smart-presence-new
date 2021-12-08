@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/signInFragment">
+    app:startDestination="@+id/startFragment">
 
     <fragment
         android:id="@+id/nav_introduction"
@@ -119,4 +119,13 @@
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.InfoBrandFragment"
         android:label="@string/fragment_info_brand_name"
         tools:layout="@layout/fragment_info_brand" />
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>

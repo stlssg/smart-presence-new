@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/font-v26/font.xml" value="0.3963541666666667" />
+        <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/font/font.xml" value="0.3963541666666667" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout-land/fragment_declaration.xml" value="0.3099647266313933" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout-land/fragment_map.xml" value="0.3099647266313933" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout-land/fragment_presence_detection.xml" value="0.3099647266313933" />
@@ -18,6 +20,7 @@
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout/fragment_presence_detection.xml" value="0.322463768115942" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout/fragment_setting.xml" value="0.322463768115942" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout/fragment_sign_in.xml" value="0.3229166666666667" />
+        <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/layout/fragment_start.xml" value="0.3491847826086957" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/menu/configuration_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/study/Interdisciplinary_projects/Mobile_user_occupancy_app/Smart_Presence/app/src/main/res/menu/save_menu.xml" value="0.36614583333333334" />
