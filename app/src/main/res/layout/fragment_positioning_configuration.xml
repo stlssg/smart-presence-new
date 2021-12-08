@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".WifiConfigurationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:hint="@string/address_input"
+                app:startIconDrawable="@drawable/ic_baseline_edit_location_24"
+                app:startIconContentDescription="temp"
+                app:endIconMode="clear_text"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#4D000000"
+                    android:inputType="textMultiLine"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="40dp"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/latitude_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/latitude"
+                    app:startIconDrawable="@drawable/ic_baseline_add_location_24"
+                    app:startIconContentDescription="temp"
+                    app:endIconMode="clear_text"
+                    android:layout_marginEnd="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#4D000000"
+                        android:inputType="number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/longitude_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/longitude"
+                    app:startIconDrawable="@drawable/ic_baseline_add_location_24"
+                    app:startIconContentDescription="temp"
+                    app:endIconMode="clear_text"
+                    android:layout_marginStart="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#4D000000"
+                        android:inputType="number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/update_address_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/update_address_button"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="10sp"
+                android:backgroundTint="@color/browser_actions_bg_grey"
+                android:textColor="@android:color/black"
+                tools:ignore="SmallSp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/update_address_description"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/max_occupancy_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:hint="@string/max_occupancy_input"
+                app:startIconDrawable="@drawable/ic_baseline_people_24"
+                app:startIconContentDescription="temp"
+                app:endIconMode="clear_text"
+                android:layout_marginBottom="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#4D000000"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="@string/max_occupancy_description"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <Switch
+                android:id="@+id/energySavingModeOnOff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:text="@string/energySavingModeOnOff" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
