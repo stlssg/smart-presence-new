@@ -182,4 +182,5 @@
     <string name="pairIntroduction1">all time positioning permission</string>
     <string name="pairIntroduction2">stop battery optimization</string>
     <string name="pairIntroduction3">here</string>
+    <string name="notInMyPositionMessage">If the map is not centered in your current location, please open Google map and restart the app.</string>
 </resources>

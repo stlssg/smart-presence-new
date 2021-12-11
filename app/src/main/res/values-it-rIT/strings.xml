@@ -183,4 +183,5 @@
     <string name="pairIntroduction1">permesso di posizionamento assoluto</string>
     <string name="pairIntroduction2">interrotto l\'ottimizzazione della batteria</string>
     <string name="pairIntroduction3">qui</string>
+    <string name="notInMyPositionMessage">Se la mappa non è centrata nella tua posizione attuale, apri Google map e riavvia l\'app.</string>
 </resources>

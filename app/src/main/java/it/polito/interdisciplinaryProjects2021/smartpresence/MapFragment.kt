@@ -62,6 +62,8 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Toast.makeText(requireContext(), getString(R.string.notInMyPositionMessage), Toast.LENGTH_LONG).show()
+
         Configuration.getInstance().load(activity, PreferenceManager.getDefaultSharedPreferences(activity))
         Configuration.getInstance().userAgentValue = requireContext().packageName;
         map = view.findViewById<MapView>(R.id.map)
@@ -95,7 +97,7 @@ class MapFragment : Fragment() {
                     val latitude = set_point.latitude
                     val longitude = set_point.longitude
                     val address = geoCoder.getFromLocation(latitude, longitude,1)
-                    startMarker.setPosition(set_point)
+                    startMarker.position = set_point
                     startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                     map.getOverlays().add(startMarker)
 

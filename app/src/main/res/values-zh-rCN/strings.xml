@@ -154,4 +154,5 @@
     <string name="pairIntroduction1">后台定位权限</string>
     <string name="pairIntroduction2">停止电池优化</string>
     <string name="pairIntroduction3">此处</string>
+    <string name="notInMyPositionMessage">如果地图未已你的当前位置为中心，请打开谷歌地图并重启应用。</string>
 </resources>
