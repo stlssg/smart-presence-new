@@ -56,4 +56,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'net.danlew:android.joda:2.10.12.2'
     implementation 'org.osmdroid:osmdroid-shape:6.1.6'
+    implementation 'androidx.work:work-runtime-ktx:2.5.0'
 }

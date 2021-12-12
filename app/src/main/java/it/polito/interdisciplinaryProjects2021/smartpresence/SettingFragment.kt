@@ -95,6 +95,7 @@ class SettingFragment : Fragment() {
                 putString("energySavingMode", "nothing")
                 putString("wifiCheckingStatus", "false")
                 putString("positioningCheckingStatus", "false")
+                putString("wifiConfigurationFinished", "false")
                 commit()
             }
             signOutCondition = true

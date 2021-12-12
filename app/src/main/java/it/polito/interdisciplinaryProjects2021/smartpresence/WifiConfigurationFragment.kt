@@ -127,6 +127,7 @@ class WifiConfigurationFragment : Fragment() {
                                 putString("bssid", bssid_input)
                                 putString("address", address_input.replace(" ", "_"))
                                 putString("maxOccupancy", max_occupancy_input)
+                                putString("wifiConfigurationFinished", "true")
                                 apply()
                             }
                         }

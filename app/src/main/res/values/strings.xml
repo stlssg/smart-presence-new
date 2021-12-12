@@ -183,4 +183,9 @@
     <string name="pairIntroduction2">stop battery optimization</string>
     <string name="pairIntroduction3">here</string>
     <string name="notInMyPositionMessage">If the map is not centered in your current location, please open Google map and restart the app.</string>
+    <string name="configurationNotFinishedMessage">Please click the three dots on top-right corner and make sure you have finished the configuration.</string>
+    <string name="workStatusString_ENQUEUED">ENQUEUED</string>
+    <string name="workStatusString_RUNNING">RUNNING</string>
+    <string name="workStatusString_CANCELLED">CANCELLED</string>
+    <string name="workStatusString_NOTHING">NOTHING</string>
 </resources>

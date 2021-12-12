@@ -127,6 +127,7 @@ class SignInFragment : Fragment() {
                             putString("energySavingMode", "nothing")
                             putString("wifiCheckingStatus", "false")
                             putString("positioningCheckingStatus", "false")
+                            putString("wifiConfigurationFinished", "false")
                             commit()
                         }
                     }

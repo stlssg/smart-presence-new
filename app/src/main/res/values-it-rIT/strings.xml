@@ -184,4 +184,9 @@
     <string name="pairIntroduction2">interrotto l\'ottimizzazione della batteria</string>
     <string name="pairIntroduction3">qui</string>
     <string name="notInMyPositionMessage">Se la mappa non è centrata nella tua posizione attuale, apri Google map e riavvia l\'app.</string>
+    <string name="configurationNotFinishedMessage">Fare clic sui tre punti nell\'angolo in alto a destra e assicurarsi di aver terminato la configurazione.</string>
+    <string name="workStatusString_ENQUEUED">IN CODA</string>
+    <string name="workStatusString_RUNNING">RUNNING</string>
+    <string name="workStatusString_CANCELLED">ANNULLATO</string>
+    <string name="workStatusString_NOTHING">NIENTE</string>
 </resources>
