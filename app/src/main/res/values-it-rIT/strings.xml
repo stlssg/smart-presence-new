@@ -189,4 +189,6 @@
     <string name="workStatusString_RUNNING">RUNNING</string>
     <string name="workStatusString_CANCELLED">ANNULLATO</string>
     <string name="workStatusString_NOTHING">NIENTE</string>
+    <string name="onMapMarkerClickMessage">L\'indirizzo è: </string>
+    <string name="geocoderNotWorkingMessage">Il servizio GeoCoder non è implementato nei tuoi dispositivi, devi inserire l\'indirizzo manualmente.</string>
 </resources>

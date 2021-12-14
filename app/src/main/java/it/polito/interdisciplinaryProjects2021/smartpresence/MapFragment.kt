@@ -13,11 +13,8 @@ import android.os.Looper
 import android.os.StrictMode
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -92,6 +89,7 @@ class MapFragment : Fragment() {
                 val geoPoint = projection.fromPixels(e.x.toInt(), e.y.toInt())
                 val set_point = GeoPoint(geoPoint.latitude, geoPoint.longitude)
                 val geoCoder = Geocoder(requireContext(), Locale.getDefault())
+                Log.d("address!!!!!!", "${Geocoder.isPresent()}")
 
                 try {
                     val latitude = set_point.latitude
@@ -99,13 +97,37 @@ class MapFragment : Fragment() {
                     val address = geoCoder.getFromLocation(latitude, longitude,1)
                     startMarker.position = set_point
                     startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
-                    map.getOverlays().add(startMarker)
+                    map.overlays.add(startMarker)
+
+//                    val queue = Volley.newRequestQueue(requireContext())
+//                    val url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4221,-122.0841&key=AIzaSyCq_5W1BoaOg0sGXgof0oeSWxzWoL3KCv8"
+//                    val stringRequest = StringRequest(Request.Method.GET, url,
+//                        { response ->
+//                            Log.d("address!!!!!!", "Response: %s".format(response.toString()))
+//                        },
+//                        {_ ->
+//                            //Handle error
+//                        })
+//                    queue.add(stringRequest)
+
+                    val addressInput: String = if (Geocoder.isPresent()) {
+                        address[0].getAddressLine(0).replace(" ", "_")
+                    } else {
+                        getString(R.string.geocoderNotWorkingMessage)
+                    }
+
+                    startMarker.setOnMarkerClickListener { _, _ ->
+                        val toast = Toast.makeText(requireContext(), getString(R.string.onMapMarkerClickMessage) + addressInput, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        return@setOnMarkerClickListener true
+                    }
 
                     val buttonSaveLocation = view.findViewById<Button>(R.id.buttonSaveLocation)
                     buttonSaveLocation.setOnClickListener{
                         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
                         with(sharedPreferences.edit()) {
-                            putString("address", address[0].getAddressLine(0).replace(" ", "_"))
+                            putString("address", addressInput)
                             putString("latitude", latitude.toString())
                             putString("longitude", longitude.toString())
                             apply()

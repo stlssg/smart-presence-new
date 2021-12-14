@@ -188,4 +188,6 @@
     <string name="workStatusString_RUNNING">RUNNING</string>
     <string name="workStatusString_CANCELLED">CANCELLED</string>
     <string name="workStatusString_NOTHING">NOTHING</string>
+    <string name="onMapMarkerClickMessage">The Address is: </string>
+    <string name="geocoderNotWorkingMessage">The GeoCoder service is not implemented in your devices, you need to input the address manually.</string>
 </resources>

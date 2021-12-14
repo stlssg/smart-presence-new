@@ -160,4 +160,6 @@
     <string name="workStatusString_RUNNING">运行</string>
     <string name="workStatusString_CANCELLED">取消</string>
     <string name="workStatusString_NOTHING">无</string>
+    <string name="onMapMarkerClickMessage">地址是: </string>
+    <string name="geocoderNotWorkingMessage">您的设备没有安装GeoCoder服务，请手动输入地址。</string>
 </resources>
