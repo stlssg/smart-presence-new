@@ -64,7 +64,8 @@ class ManualConfigurationFragment : Fragment() {
                 } else {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(getString(R.string.configuration_confirm_title))
-                        .setMessage("Address: ${address_input}\nMaximum expected occupancy: ${max_occupancy_input}\n")
+                        .setMessage("${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
+                                "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
                         .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
                         .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
                             findNavController().popBackStack()

@@ -117,7 +117,10 @@ class WifiConfigurationFragment : Fragment() {
                 } else {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(getString(R.string.configuration_confirm_title))
-                        .setMessage("SSID: ${ssid_input}\nBSSID: ${bssid_input}\nAddress: ${address_input}\nMaximum expected occupancy: ${max_occupancy_input}\n")
+                        .setMessage("SSID: ${ssid_input}\n" +
+                                "BSSID: ${bssid_input}\n" +
+                                "${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
+                                "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
                         .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
                         .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
                             findNavController().popBackStack()

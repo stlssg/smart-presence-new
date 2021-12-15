@@ -68,7 +68,8 @@
          pulsante per mostrare le informazioni WiFi sulla connessione WiFi corrente, altrimenti inserire manualmente.</string>
     <string name="address_input">Indirizzo dell\'edificio di destinazione</string>
     <string name="update_address_button">Seleziona dalla mappa</string>
-    <string name="update_address_description">Fai clic sul pulsante per selezionare l\'edificio di destinazione da una mappa.</string>
+    <string name="update_address_description">Fai clic sul pulsante per selezionare l\'edificio di destinazione da una mappa. In ogni caso, assicurati che gli input
+        siano gli stessi di quelli degli utenti nello stesso edificio di destinazione.</string>
     <string name="max_occupancy_input">Occupazione massima prevista</string>
     <string name="max_occupancy_description">Il numero massimo di persone che soggiornano nell\'edificio di destinazione.</string>
     <string name="save_menu">Salva</string>
@@ -191,4 +192,8 @@
     <string name="workStatusString_NOTHING">NIENTE</string>
     <string name="onMapMarkerClickMessage">L\'indirizzo è: </string>
     <string name="geocoderNotWorkingMessage">Il servizio GeoCoder non è implementato nei tuoi dispositivi, devi inserire l\'indirizzo manualmente.</string>
+    <string name="configurationAlertAddressName">Indirizzo</string>
+    <string name="configurationAlertMaxName">Occupazione massima prevista</string>
+    <string name="configurationAlertLatName">Latitudine</string>
+    <string name="configurationAlertLonName">Longitudine</string>
 </resources>

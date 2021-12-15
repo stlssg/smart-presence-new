@@ -100,7 +100,7 @@ class MapFragment : Fragment() {
                     map.overlays.add(startMarker)
 
 //                    val queue = Volley.newRequestQueue(requireContext())
-//                    val url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4221,-122.0841&key=AIzaSyCq_5W1BoaOg0sGXgof0oeSWxzWoL3KCv8"
+//                    val url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4221,-122.0841&key=..."
 //                    val stringRequest = StringRequest(Request.Method.GET, url,
 //                        { response ->
 //                            Log.d("address!!!!!!", "Response: %s".format(response.toString()))

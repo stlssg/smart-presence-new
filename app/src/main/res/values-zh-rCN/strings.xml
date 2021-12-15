@@ -61,7 +61,7 @@
     <string name="update_wifi_info_description">如果当前信息不正确或你不知道需要输入什么，请点击按钮以显示当前WiFi连接的信息，否则请手动输入。</string>
     <string name="address_input">目标建筑地址</string>
     <string name="update_address_button">从地图中选取</string>
-    <string name="update_address_description">点击按钮以从地图中选取目标建筑。</string>
+    <string name="update_address_description">点击按钮以从地图中选取目标建筑。无论如何，请确保你的输入和其他在目标建筑的人的输入相同。</string>
     <string name="max_occupancy_input">最大理论占有数</string>
     <string name="max_occupancy_description">处于目标建筑中的最大人数。</string>
     <string name="save_menu">保存</string>
@@ -162,4 +162,8 @@
     <string name="workStatusString_NOTHING">无</string>
     <string name="onMapMarkerClickMessage">地址是: </string>
     <string name="geocoderNotWorkingMessage">您的设备没有安装GeoCoder服务，请手动输入地址。</string>
+    <string name="configurationAlertAddressName">地址</string>
+    <string name="configurationAlertMaxName">最大占有数</string>
+    <string name="configurationAlertLatName">纬度</string>
+    <string name="configurationAlertLonName">经度</string>
 </resources>

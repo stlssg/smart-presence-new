@@ -67,7 +67,8 @@
         button to show the WiFi information about current WiFi connection, otherwise, please input manually.</string>
     <string name="address_input">Address of target building</string>
     <string name="update_address_button">Select from map</string>
-    <string name="update_address_description">Click the button to select your target building from a map.</string>
+    <string name="update_address_description">Click the button to select your target building from a map. In any case, please make sure the inputs are as same as
+    those from users in the same target building.</string>
     <string name="max_occupancy_input">Maximum expected occupancy</string>
     <string name="max_occupancy_description">The maximum number of people staying in the target building.</string>
     <string name="save_menu">Save</string>
@@ -190,4 +191,8 @@
     <string name="workStatusString_NOTHING">NOTHING</string>
     <string name="onMapMarkerClickMessage">The Address is: </string>
     <string name="geocoderNotWorkingMessage">The GeoCoder service is not implemented in your devices, you need to input the address manually.</string>
+    <string name="configurationAlertAddressName">Address</string>
+    <string name="configurationAlertMaxName">Maximum expected occupancy</string>
+    <string name="configurationAlertLatName">Latitude</string>
+    <string name="configurationAlertLonName">Longitude</string>
 </resources>
