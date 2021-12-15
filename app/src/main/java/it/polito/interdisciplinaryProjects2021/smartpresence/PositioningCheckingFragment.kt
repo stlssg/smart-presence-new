@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 
 class PositioningCheckingFragment : Fragment() {
 
@@ -59,6 +61,16 @@ class PositioningCheckingFragment : Fragment() {
                 putString("positioningCheckingStatus", "true")
                 apply()
             }
+
+            val notificationOnOffCondition = sharedPreferences.getString("notificationOnOffCondition", "true").toBoolean()
+            if (notificationOnOffCondition) {
+                Firebase.messaging.subscribeToTopic("RemindingManuallyRestartService")
+                    .addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            Toast.makeText(requireContext(), getString(R.string.subscribeNotSuccess), Toast.LENGTH_LONG).show()
+                        }
+                    }
+            }
         }
 
         positioningStop.setOnClickListener {
@@ -70,6 +82,8 @@ class PositioningCheckingFragment : Fragment() {
                 putString("positioningCheckingStatus", "false")
                 apply()
             }
+
+            Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
         }
 
         positioningRestart.setOnClickListener {

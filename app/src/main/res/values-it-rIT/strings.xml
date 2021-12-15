@@ -196,4 +196,7 @@
     <string name="configurationAlertMaxName">Occupazione massima prevista</string>
     <string name="configurationAlertLatName">Latitudine</string>
     <string name="configurationAlertLonName">Longitudine</string>
+    <string name="notificationTitle">Si prega di riavviare il servizio.</string>
+    <string name="notificationContent">Garantire il lavoro a lungo termine.</string>
+    <string name="subscribeNotSuccess">Il servizio di notifica push è in qualche modo interrotto, prova a riavviarlo più tardi.</string>
 </resources>

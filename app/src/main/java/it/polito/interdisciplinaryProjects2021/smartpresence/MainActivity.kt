@@ -43,6 +43,18 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_introduction, R.id.nav_presence_detection, R.id.nav_setting))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val checkFromNotification = intent.getStringExtra("fromNotificationToFragmentOrNot")
+        if (checkFromNotification != null) {
+            val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
+            val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
+
+            if (wifiCheckingStatus) {
+                navController.navigate(R.id.wifiCheckingFragment)
+            } else if (positioningCheckingStatus) {
+                navController.navigate(R.id.positioningCheckingFragment)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

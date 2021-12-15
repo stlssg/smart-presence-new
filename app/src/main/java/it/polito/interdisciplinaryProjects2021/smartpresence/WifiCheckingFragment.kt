@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import java.util.concurrent.TimeUnit
 
 class WifiCheckingFragment : Fragment() {
@@ -76,6 +77,16 @@ class WifiCheckingFragment : Fragment() {
                 }
 
                 manageMyPeriodicWork()
+
+                val notificationOnOffCondition = sharedPreferences.getString("notificationOnOffCondition", "true").toBoolean()
+                if (notificationOnOffCondition) {
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartService")
+                        .addOnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Toast.makeText(requireContext(), getString(R.string.subscribeNotSuccess), Toast.LENGTH_LONG).show()
+                            }
+                        }
+                }
             } else {
                 Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_LONG).show()
             }
@@ -92,6 +103,8 @@ class WifiCheckingFragment : Fragment() {
             }
 
             stopWork()
+
+            Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
         }
 
         wifiRestart.setOnClickListener {

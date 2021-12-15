@@ -23,6 +23,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import java.util.*
 
 class SettingFragment : Fragment() {
@@ -157,6 +159,18 @@ class SettingFragment : Fragment() {
                     putString( "notificationOnOffCondition", "true")
                     commit()
                 }
+
+                val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
+                val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
+                if (wifiCheckingStatus || positioningCheckingStatus) {
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartService")
+                        .addOnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Toast.makeText(requireContext(), getString(R.string.subscribeNotSuccess), Toast.LENGTH_LONG).show()
+                            }
+                        }
+                }
+
                 Toast.makeText(requireContext(), getString(R.string.notificationOnMessage), Toast.LENGTH_LONG).show()
             } else {
                 with(sharedPreferences.edit()) {
@@ -164,6 +178,7 @@ class SettingFragment : Fragment() {
                     commit()
                 }
                 Toast.makeText(requireContext(), getString(R.string.notificationOffMessage), Toast.LENGTH_LONG).show()
+                Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
             }
         }
 

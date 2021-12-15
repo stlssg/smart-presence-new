@@ -166,4 +166,7 @@
     <string name="configurationAlertMaxName">最大占有数</string>
     <string name="configurationAlertLatName">纬度</string>
     <string name="configurationAlertLonName">经度</string>
+    <string name="notificationTitle">请重启服务。</string>
+    <string name="notificationContent">保证长期工作。</string>
+    <string name="subscribeNotSuccess">推送通知因未知原因被停职，请稍后重启再试。</string>
 </resources>

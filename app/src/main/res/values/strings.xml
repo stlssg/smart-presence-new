@@ -195,4 +195,7 @@
     <string name="configurationAlertMaxName">Maximum expected occupancy</string>
     <string name="configurationAlertLatName">Latitude</string>
     <string name="configurationAlertLonName">Longitude</string>
+    <string name="notificationTitle">Please restart the service.</string>
+    <string name="notificationContent">Guarantee the long term work.</string>
+    <string name="subscribeNotSuccess">The pushed notification service is somehow stopped, please try to restart it later.</string>
 </resources>
