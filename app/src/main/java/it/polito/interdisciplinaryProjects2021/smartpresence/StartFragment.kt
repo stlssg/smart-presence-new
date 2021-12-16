@@ -29,9 +29,11 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mAuth = FirebaseAuth.getInstance()
-        val user = mAuth.currentUser
-        if (user != null){
+//        val mAuth = FirebaseAuth.getInstance()
+//        val user = mAuth.currentUser
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val logInOrNot = sharedPreferences.getString("logInOrNot", "false").toBoolean()
+        if (logInOrNot){
             findNavController().navigate(R.id.nav_introduction)
         } else {
             val startTitle = view.findViewById<TextView>(R.id.startTitle)

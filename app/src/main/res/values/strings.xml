@@ -198,4 +198,20 @@
     <string name="notificationTitle">Please restart the service.</string>
     <string name="notificationContent">Guarantee the long term work.</string>
     <string name="subscribeNotSuccess">The pushed notification service is somehow stopped, please try to restart it later.</string>
+    <string name="LOGINPAGE_log_in_title">Log In</string>
+    <string name="LOGINPAGE_sign_up_title">Sign Up</string>
+    <string name="email_as_user_name">Email as User Name</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="LOGINPAGE_or">OR</string>
+    <string name="LOGINPAGE_log_in_and_sign_up_title">Sign Up &amp; Log In</string>
+    <string name="logInUnsuccess">Cannot log in now, please try it later.</string>
+    <string name="logInSuccess">You have successfully logged in.</string>
+    <string name="logInAndRegisteredSuccess">You have successfully created your account and logged in.</string>
+    <string name="notEmailMessage">The user name should be an email.</string>
+    <string name="userExist">The email is used, please choose another one.</string>
+    <string name="passwordSettingNotSame">The passwords are not the same.</string>
+    <string name="noSuchUser">The user doesn\'t exist.</string>
+    <string name="passwordNotCorrect">The password you input is not correct.</string>
 </resources>

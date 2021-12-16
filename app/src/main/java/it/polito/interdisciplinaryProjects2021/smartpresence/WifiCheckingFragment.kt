@@ -42,8 +42,6 @@ class WifiCheckingFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-//        val actionBar = (activity as AppCompatActivity).actionBar
-//        actionBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
 
         setHasOptionsMenu(true)
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)

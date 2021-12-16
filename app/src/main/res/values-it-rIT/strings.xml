@@ -199,4 +199,20 @@
     <string name="notificationTitle">Si prega di riavviare il servizio.</string>
     <string name="notificationContent">Garantire il lavoro a lungo termine.</string>
     <string name="subscribeNotSuccess">Il servizio di notifica push è in qualche modo interrotto, prova a riavviarlo più tardi.</string>
+    <string name="LOGINPAGE_log_in_title">Accesso</string>
+    <string name="LOGINPAGE_sign_up_title">Iscriviti</string>
+    <string name="email_as_user_name">Email Come Nome Utente</string>
+    <string name="password">Parola D\'ordine</string>
+    <string name="forget_password">Dimenticare la password?</string>
+    <string name="confirm_password">Conferma Password</string>
+    <string name="LOGINPAGE_or">O</string>
+    <string name="LOGINPAGE_log_in_and_sign_up_title">Iscriviti &amp; Accesso</string>
+    <string name="logInUnsuccess">Impossibile accedere ora, riprova più tardi.</string>
+    <string name="logInSuccess">Hai effettuato il log in con successo.</string>
+    <string name="logInAndRegisteredSuccess">Hai creato con successo il tuo account ed effettuato l\'accesso.</string>
+    <string name="notEmailMessage">Il nome utente dovrebbe essere un\'e-mail.</string>
+    <string name="userExist">L\'email è utilizzata, scegline un\'altra.</string>
+    <string name="passwordSettingNotSame">Le password non sono le stesse.</string>
+    <string name="noSuchUser">L\'utente non esiste.</string>
+    <string name="passwordNotCorrect">La password inserita non è corretta.</string>
 </resources>

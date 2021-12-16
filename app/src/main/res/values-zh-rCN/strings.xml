@@ -168,5 +168,21 @@
     <string name="configurationAlertLonName">经度</string>
     <string name="notificationTitle">请重启服务。</string>
     <string name="notificationContent">保证长期工作。</string>
-    <string name="subscribeNotSuccess">推送通知因未知原因被停职，请稍后重启再试。</string>
+    <string name="subscribeNotSuccess">推送通知因未知原因被停止，请稍后重启再试。</string>
+    <string name="LOGINPAGE_log_in_title">登录</string>
+    <string name="LOGINPAGE_sign_up_title">注册</string>
+    <string name="email_as_user_name">邮箱作为用户名</string>
+    <string name="password">密码</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="LOGINPAGE_or">或</string>
+    <string name="LOGINPAGE_log_in_and_sign_up_title">注册 &amp; 登录</string>
+    <string name="logInUnsuccess">目前无法登录，请稍后再试。</string>
+    <string name="logInSuccess">您已成功登录。</string>
+    <string name="logInAndRegisteredSuccess">您已成功注册并登录。</string>
+    <string name="notEmailMessage">用户名应是邮箱。</string>
+    <string name="userExist">邮箱已被使用，请选择另外一个。</string>
+    <string name="passwordSettingNotSame">密码不一样。</string>
+    <string name="noSuchUser">该用户不存在。</string>
+    <string name="passwordNotCorrect">你输入的密码不正确。</string>
 </resources>

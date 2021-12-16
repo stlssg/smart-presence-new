@@ -46,11 +46,8 @@ class SettingFragment : Fragment() {
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
 
-        val acc = GoogleSignIn.getLastSignedInAccount(requireContext())
-        if (acc != null) {
-            val currentEmail = acc.email
-            view.findViewById<TextView>(R.id.setting_current_account).text = currentEmail
-        }
+        val currentAccount = sharedPreferences.getString("keyCurrentAccount", "noEmail")
+        view.findViewById<TextView>(R.id.setting_current_account).text = currentAccount
 
         val working_interval_list = resources.getStringArray(R.array.working_interval)
         val workingIntervalSpinner = view.findViewById<Spinner>(R.id.workingIntervalSpinner)
@@ -82,6 +79,7 @@ class SettingFragment : Fragment() {
         val signOutButton = view.findViewById<Button>(R.id.signOut)
         signOutButton.setOnClickListener{
             with(sharedPreferences.edit()) {
+                putString("logInOrNot", "false")
                 putString("keyCurrentAccount", "noEmail")
                 putString("setting_start_time", "07:00")
                 putString("setting_stop_time", "23:00")
