@@ -279,7 +279,10 @@ class SignInFragment : Fragment() {
             putString("energySavingMode", "nothing")
             putString("wifiCheckingStatus", "false")
             putString("positioningCheckingStatus", "false")
-            putString("wifiConfigurationFinished", "false")
+            putString("ssidConfigurationFinished", "false")
+            putString("bssidConfigurationFinished", "false")
+            putString("addressConfigurationFinished", "false")
+            putString("maxOccupancyConfigurationFinished", "false")
             commit()
         }
     }

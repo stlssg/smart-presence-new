@@ -185,4 +185,10 @@
     <string name="passwordSettingNotSame">密码不一样。</string>
     <string name="noSuchUser">该用户不存在。</string>
     <string name="passwordNotCorrect">你输入的密码不正确。</string>
+    <string name="shortcutCheckInTitle">进入</string>
+    <string name="shortcutCheckOutTitle">离开</string>
+    <string name="shortcutCheckInLongTitle">登记进入行为</string>
+    <string name="shortcutCheckOutLongTitle">登记离开行为</string>
+    <string name="shortcutCheckInMessage">您的进入已被记录。</string>
+    <string name="shortcutCheckOutMessage">您的离开已被记录。</string>
 </resources>

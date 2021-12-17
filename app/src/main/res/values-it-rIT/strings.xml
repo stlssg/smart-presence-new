@@ -215,4 +215,10 @@
     <string name="passwordSettingNotSame">Le password non sono le stesse.</string>
     <string name="noSuchUser">L\'utente non esiste.</string>
     <string name="passwordNotCorrect">La password inserita non è corretta.</string>
+    <string name="shortcutCheckInTitle">Registrare</string>
+    <string name="shortcutCheckOutTitle">Guardare</string>
+    <string name="shortcutCheckInLongTitle">Registrati IN azione</string>
+    <string name="shortcutCheckOutLongTitle">Registra l\'azione FUORI</string>
+    <string name="shortcutCheckInMessage">La tua azione di check-in è stata registrata.</string>
+    <string name="shortcutCheckOutMessage">La tua azione di check-out è stata registrata.</string>
 </resources>

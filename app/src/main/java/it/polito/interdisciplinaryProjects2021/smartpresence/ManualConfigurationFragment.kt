@@ -73,6 +73,8 @@ class ManualConfigurationFragment : Fragment() {
                             with(sharedPreferences.edit()) {
                                 putString("address", address_input.replace(" ", "_"))
                                 putString("maxOccupancy", max_occupancy_input)
+                                putString("addressConfigurationFinished", "true")
+                                putString("maxOccupancyConfigurationFinished", "true")
                                 apply()
                             }
                         }

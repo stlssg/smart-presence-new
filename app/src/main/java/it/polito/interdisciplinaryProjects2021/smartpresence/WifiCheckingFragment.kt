@@ -62,9 +62,15 @@ class WifiCheckingFragment : Fragment() {
             wifiStop.isEnabled = false
         }
 
-        val wifiConfigurationFinished = sharedPreferences.getString("wifiConfigurationFinished", "false").toBoolean()
+        val ssidConfigurationFinished = sharedPreferences.getString("ssidConfigurationFinished", "false").toBoolean()
+        val bssidConfigurationFinished = sharedPreferences.getString("bssidConfigurationFinished", "false").toBoolean()
+        val addressConfigurationFinished = sharedPreferences.getString("addressConfigurationFinished", "false").toBoolean()
+        val maxOccupancyConfigurationFinished = sharedPreferences.getString("maxOccupancyConfigurationFinished", "false").toBoolean()
         wifiStart.setOnClickListener {
-            if (wifiConfigurationFinished) {
+            if (ssidConfigurationFinished &&
+                bssidConfigurationFinished &&
+                addressConfigurationFinished &&
+                maxOccupancyConfigurationFinished) {
                 wifiStart.isVisible = false
                 wifiRestart.isVisible = true
                 wifiStop.isEnabled = true

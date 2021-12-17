@@ -3,6 +3,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_introduction, R.id.nav_presence_detection, R.id.nav_setting))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (Build.VERSION.SDK_INT >= 25) {
+            Shortcuts.setUp(applicationContext)
+        }
 
         val checkFromNotification = intent.getStringExtra("fromNotificationToFragmentOrNot")
         if (checkFromNotification != null) {
