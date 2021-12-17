@@ -15,4 +15,5 @@
     <color name="transparentColor">#00FFFFFF</color>
     <color name="textColor">#ECE5EC</color>
     <color name="pinkColor">#FF003B</color>
+    <color name="textBackground">#EFEFF3</color>
 </resources>

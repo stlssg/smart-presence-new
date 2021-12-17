@@ -15,6 +15,7 @@
         app:layout_constraintGuide_percent="0.02" />
 
     <ScrollView
+        android:background="@color/textBackground"
         android:id="@+id/scrollView_wifiGuide"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline1"
-        android:layout_margin="15dp">
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"

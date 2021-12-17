@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.positioningCheckingFragment)
             }
         }
+
+        val fromCheckInOrOut = intent.getStringExtra("fromCheckInOrOut")
+        if (fromCheckInOrOut != null) {
+            navController.navigate(R.id.manualConfigurationFragment)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

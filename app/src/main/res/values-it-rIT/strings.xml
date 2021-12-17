@@ -221,4 +221,5 @@
     <string name="shortcutCheckOutLongTitle">Registra l\'azione FUORI</string>
     <string name="shortcutCheckInMessage">La tua azione di check-in è stata registrata.</string>
     <string name="shortcutCheckOutMessage">La tua azione di check-out è stata registrata.</string>
+    <string name="shortcutNoConfiguration">Configura il tuo profilo prima di effettuare il check-in o il check-out.</string>
 </resources>

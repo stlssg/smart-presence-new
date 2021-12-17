@@ -58,7 +58,7 @@ class SettingFragment : Fragment() {
         val workingIntervalSpinnerPosition = sharedPreferences.getString("workingIntervalSpinnerPosition", "0")?.toInt()
         workingIntervalSpinnerPosition?.let { workingIntervalSpinner.setSelection(it) }
         workingIntervalSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 //                Toast.makeText(requireContext(), working_interval_list[position], Toast.LENGTH_SHORT).show()
                 working_interval = working_interval_list[position].toInt()
                 Log.d("working_interval", working_interval.toString())
@@ -192,7 +192,7 @@ class SettingFragment : Fragment() {
         val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
         languageSpinnerPosition?.let { languageSpinner.setSelection(it) }
         languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 language = language_list[position]
                 if (languageSpinnerPosition != position) {
                     when (position) {

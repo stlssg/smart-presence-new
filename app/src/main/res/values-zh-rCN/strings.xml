@@ -191,4 +191,5 @@
     <string name="shortcutCheckOutLongTitle">登记离开行为</string>
     <string name="shortcutCheckInMessage">您的进入已被记录。</string>
     <string name="shortcutCheckOutMessage">您的离开已被记录。</string>
+    <string name="shortcutNoConfiguration">请在记录进入或离开前完成配置。</string>
 </resources>

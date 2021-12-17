@@ -1,6 +1,7 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,7 +34,11 @@ class CheckOutActivity : AppCompatActivity() {
 
             Toast.makeText(applicationContext, getString(R.string.shortcutCheckOutMessage), Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(applicationContext, getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, getString(R.string.shortcutNoConfiguration), Toast.LENGTH_LONG).show()
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("fromCheckInOrOut", "yes")
+            startActivity(intent)
         }
 
         finish()

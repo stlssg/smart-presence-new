@@ -220,4 +220,5 @@
     <string name="shortcutCheckOutLongTitle">Register the OUT action</string>
     <string name="shortcutCheckInMessage">Your check-in action has been recorded.</string>
     <string name="shortcutCheckOutMessage">Your check-out action has been recorded.</string>
+    <string name="shortcutNoConfiguration">Please configure your profile before checking in or out.</string>
 </resources>
