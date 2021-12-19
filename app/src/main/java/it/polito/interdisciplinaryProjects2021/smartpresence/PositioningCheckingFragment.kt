@@ -2,6 +2,8 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaActionSound
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -52,6 +54,8 @@ class PositioningCheckingFragment : Fragment() {
             positioningStop.isEnabled = false
         }
 
+        val sound = MediaActionSound()
+
         positioningStart.setOnClickListener {
             positioningStart.isVisible = false
             positioningRestart.isVisible = true
@@ -71,6 +75,8 @@ class PositioningCheckingFragment : Fragment() {
                         }
                     }
             }
+
+            sound.play(MediaActionSound.START_VIDEO_RECORDING)
         }
 
         positioningStop.setOnClickListener {
@@ -84,9 +90,12 @@ class PositioningCheckingFragment : Fragment() {
             }
 
             Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
+
+            sound.play(MediaActionSound.STOP_VIDEO_RECORDING)
         }
 
         positioningRestart.setOnClickListener {
+            sound.play(MediaActionSound.START_VIDEO_RECORDING)
             Toast.makeText(requireContext(), getString(R.string.restartServiceMessage), Toast.LENGTH_SHORT).show()
         }
 

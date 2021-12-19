@@ -2,8 +2,10 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Context.POWER_SERVICE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -17,6 +19,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
@@ -26,8 +30,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import it.polito.interdisciplinaryProjects2021.smartpresence.databinding.ActivityMainBinding
 
 class DeclarationFragment : Fragment() {
 
@@ -43,13 +55,30 @@ class DeclarationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
         val checkBox = view.findViewById<CheckBox>(R.id.checkBox)
+        val checkBox2 = view.findViewById<CheckBox>(R.id.checkBox2)
 
         val finishSignIn = view.findViewById<Button>(R.id.finishSignIn)
         finishSignIn.setOnClickListener{
             if (checkBox.isChecked) {
-                findNavController().navigate(R.id.nav_introduction)
+                if (checkBox2.isChecked) {
+                    with(sharedPreferences.edit()) {
+                        putString("professionalOrNot", "true")
+                        commit()
+                    }
+                } else {
+                    with(sharedPreferences.edit()) {
+                        putString("professionalOrNot", "false")
+                        commit()
+                    }
+                }
+//                findNavController().navigate(R.id.nav_introduction)
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
             } else {
+                checkBox.blink(3)
                 Toast.makeText(requireContext(), getString(R.string.plzSign), Toast.LENGTH_SHORT).show()
             }
         }
@@ -79,6 +108,16 @@ class DeclarationFragment : Fragment() {
                 }
             }))
 
+        val professionalSentence = view.findViewById<TextView>(R.id.professionalSentence)
+        professionalSentence.makeLinks(
+            Pair("(?)", View.OnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.whatIsProfessionalTitle))
+                    .setMessage(getString(R.string.whatIsProfessionalMessage))
+                    .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
+                    .show()
+            })
+        )
     }
 
     override fun onResume() {
@@ -121,6 +160,22 @@ class DeclarationFragment : Fragment() {
         this.movementMethod =
             LinkMovementMethod.getInstance()
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
+
+    private fun View.blink(
+        times: Int = Animation.INFINITE,
+        duration: Long = 50L,
+        offset: Long = 20L,
+        minAlpha: Float = 0.0f,
+        maxAlpha: Float = 1.0f,
+        repeatMode: Int = Animation.REVERSE
+    ) {
+        startAnimation(AlphaAnimation(minAlpha, maxAlpha).also {
+            it.duration = duration
+            it.startOffset = offset
+            it.repeatMode = repeatMode
+            it.repeatCount = times
+        })
     }
 
 }

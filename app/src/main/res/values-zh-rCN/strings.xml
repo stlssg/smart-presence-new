@@ -193,4 +193,9 @@
     <string name="shortcutCheckOutMessage">您的离开已被记录。</string>
     <string name="shortcutNoConfiguration">请在记录进入或离开前完成配置。</string>
     <string name="fieldRequiredMessage">该区域是必须的。</string>
+    <string name="fragment_name_graph">图表</string>
+    <string name="logInAsProfessionalTitle">以专业人士(?)身份登录。</string>
+    <string name="whatIsProfessionalTitle">什么是专业人士?</string>
+    <string name="whatIsProfessionalMessage">作为专业人士，你可以在图标中查看占有率并进行可能的行为。</string>
+    <string name="fragment_detection_title">智能检测</string>
 </resources>

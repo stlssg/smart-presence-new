@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -37,18 +38,37 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             when (Locale.getDefault().language) {
-                "it" -> setLang("it")
-                "zh" -> setLang("zh")
-                else -> setLang("en")
+                "it" -> {
+                    setLang("it")
+                    with(sharedPreferences.edit()) {
+                        putString("languageSpinnerPosition", "1")
+                        commit()
+                    }
+                }
+                "zh" -> {
+                    with(sharedPreferences.edit()) {
+                        putString("languageSpinnerPosition", "2")
+                        commit()
+                    }
+                }
+                else -> {
+                    with(sharedPreferences.edit()) {
+                        putString("languageSpinnerPosition", "0")
+                        commit()
+                    }
+                }
             }
         }
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val navView: BottomNavigationView = binding.navView
+        val professionalOrNot = sharedPreferences.getString("professionalOrNot", "false")?.toBoolean()
+        if (professionalOrNot == false) {
+            navView.menu.removeItem(R.id.nav_chart)
+        }
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_introduction, R.id.nav_presence_detection, R.id.nav_setting))
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_introduction, R.id.nav_presence_detection, R.id.nav_setting, R.id.nav_chart))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -86,4 +106,10 @@ class MainActivity : AppCompatActivity() {
         config.locale = locale
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
+
+//    fun setBottomNavigation(professionalOrNot: Boolean) {
+//        if (professionalOrNot) {
+//            binding.navView.menu.removeItem(R.id.nav_chart)
+//        }
+//    }
 }

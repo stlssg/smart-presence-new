@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Smart Presence</string>
     <string name="fragment_name_introduction">Introduction</string>
-    <string name="fragment_name_presence_detection">Presence Detection</string>
+    <string name="fragment_name_presence_detection">Detection</string>
     <string name="fragment_name_setting">Setting</string>
     <string name="signInWelcome">Welcome</string>
     <string name="signOutButton">sign out</string>
@@ -222,4 +222,9 @@
     <string name="shortcutCheckOutMessage">Your check-out action has been recorded.</string>
     <string name="shortcutNoConfiguration">Please configure your profile before checking in or out.</string>
     <string name="fieldRequiredMessage">This field is required.</string>
+    <string name="fragment_name_graph">Graph</string>
+    <string name="logInAsProfessionalTitle">Log in as a professional(?).</string>
+    <string name="whatIsProfessionalTitle">What is a professional?</string>
+    <string name="whatIsProfessionalMessage">As a professional, you can visualize the occupancy profile in graphs and potentially perform other actions.</string>
+    <string name="fragment_detection_title">Presence Detection</string>
 </resources>

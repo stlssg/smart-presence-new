@@ -42,12 +42,36 @@
                 tools:ignore="SmallSp"
                 android:layout_marginStart="10dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/professionalSentence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logInAsProfessionalTitle"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/setting_alert_confirm"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp"
+                    android:paddingHorizontal="5dp"
+                    android:layout_marginStart="10dp"/>
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/manuallySettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/manuallySettings"
                 android:textColorLink="#0558E8"/>

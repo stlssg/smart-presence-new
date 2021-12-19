@@ -2,6 +2,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaActionSound
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -62,6 +63,8 @@ class WifiCheckingFragment : Fragment() {
             wifiStop.isEnabled = false
         }
 
+        val sound = MediaActionSound()
+
         val ssidConfigurationFinished = sharedPreferences.getString("ssidConfigurationFinished", "false").toBoolean()
         val bssidConfigurationFinished = sharedPreferences.getString("bssidConfigurationFinished", "false").toBoolean()
         val addressConfigurationFinished = sharedPreferences.getString("addressConfigurationFinished", "false").toBoolean()
@@ -91,6 +94,8 @@ class WifiCheckingFragment : Fragment() {
                             }
                         }
                 }
+
+                sound.play(MediaActionSound.START_VIDEO_RECORDING)
             } else {
                 Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_LONG).show()
             }
@@ -109,12 +114,15 @@ class WifiCheckingFragment : Fragment() {
             stopWork()
 
             Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
+
+            sound.play(MediaActionSound.STOP_VIDEO_RECORDING)
         }
 
         wifiRestart.setOnClickListener {
             Toast.makeText(requireContext(), getString(R.string.restartServiceMessage), Toast.LENGTH_SHORT).show()
             stopWork()
             manageMyPeriodicWork()
+            sound.play(MediaActionSound.START_VIDEO_RECORDING)
         }
 
         wifiShowInfo.setOnClickListener {

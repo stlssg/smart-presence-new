@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/fragment_name_setting" />
 
+    <item
+        android:id="@+id/nav_chart"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="@string/fragment_name_graph" />
+
 </menu>

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Smart Presence</string>
     <string name="fragment_name_introduction">Introduzione</string>
-    <string name="fragment_name_presence_detection">Rilevamento di presenza</string>
+    <string name="fragment_name_presence_detection">Rilevamento</string>
     <string name="fragment_name_setting">Collocamento</string>
     <string name="signInWelcome">Accoglienza</string>
     <string name="signOutButton">disconnessione</string>
@@ -223,4 +223,9 @@
     <string name="shortcutCheckOutMessage">La tua azione di check-out è stata registrata.</string>
     <string name="shortcutNoConfiguration">Configura il tuo profilo prima di effettuare il check-in o il check-out.</string>
     <string name="fieldRequiredMessage">Questo campo è obbligatorio.</string>
+    <string name="fragment_name_graph">Grafico</string>
+    <string name="logInAsProfessionalTitle">Accedi come professionista(?).</string>
+    <string name="whatIsProfessionalTitle">Cos\'è un professionista?</string>
+    <string name="whatIsProfessionalMessage">Come professionista, puoi visualizzare il profilo di occupazione nei grafici e potenzialmente eseguire altre azioni.</string>
+    <string name="fragment_detection_title">Rilevamento di Presenza</string>
 </resources>
