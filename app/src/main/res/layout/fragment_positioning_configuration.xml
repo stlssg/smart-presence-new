@@ -27,8 +27,7 @@
                 android:hint="@string/address_input"
                 app:startIconDrawable="@drawable/ic_baseline_edit_location_24"
                 app:startIconContentDescription="temp"
-                app:endIconMode="clear_text"
-                android:layout_marginBottom="10dp">
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -38,13 +37,23 @@
                     android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/address_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:minHeight="40dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/latitude_input"
@@ -86,6 +95,16 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/location_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
             <Button
                 android:id="@+id/update_address_button"
                 android:layout_width="match_parent"
@@ -97,7 +116,8 @@
                 android:backgroundTint="@color/browser_actions_bg_grey"
                 android:textColor="@android:color/black"
                 tools:ignore="SmallSp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -117,8 +137,7 @@
                 android:hint="@string/max_occupancy_input"
                 app:startIconDrawable="@drawable/ic_baseline_people_24"
                 app:startIconContentDescription="temp"
-                app:endIconMode="clear_text"
-                android:layout_marginBottom="5dp">
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -129,9 +148,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/maxOccupancy_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
                 android:gravity="center"
                 android:text="@string/max_occupancy_description"

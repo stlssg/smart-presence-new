@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -28,8 +27,7 @@
                 android:hint="@string/ssid_input"
                 app:startIconDrawable="@drawable/ic_baseline_wifi_24"
                 app:startIconContentDescription="temp"
-                app:endIconMode="clear_text"
-                android:layout_marginBottom="10dp">
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -38,6 +36,16 @@
                     android:textColor="#4D000000"
                     android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/ssid_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bssid_input"
@@ -48,7 +56,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_router_24"
                 app:startIconContentDescription="temp"
                 app:endIconMode="clear_text"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -57,6 +65,16 @@
                     android:textColor="#4D000000"
                     android:inputType="textUri"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/bssid_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
             <Button
                 android:id="@+id/update_wifi_info_button"
@@ -69,6 +87,7 @@
                 android:backgroundTint="@color/browser_actions_bg_grey"
                 android:textColor="@android:color/black"
                 tools:ignore="SmallSp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"/>
 
             <TextView
@@ -89,8 +108,7 @@
                 android:hint="@string/address_input"
                 app:startIconDrawable="@drawable/ic_baseline_edit_location_24"
                 app:startIconContentDescription="temp"
-                app:endIconMode="clear_text"
-                android:layout_marginBottom="10dp">
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -99,6 +117,16 @@
                     android:textColor="#4D000000"
                     android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/address_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
 <!--            <LinearLayout-->
 <!--                android:id="@+id/linearLayout"-->
@@ -159,7 +187,8 @@
                 android:backgroundTint="@color/browser_actions_bg_grey"
                 android:textColor="@android:color/black"
                 tools:ignore="SmallSp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -179,8 +208,7 @@
                 android:hint="@string/max_occupancy_input"
                 app:startIconDrawable="@drawable/ic_baseline_people_24"
                 app:startIconContentDescription="temp"
-                app:endIconMode="clear_text"
-                android:layout_marginBottom="5dp">
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -191,6 +219,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/maxOccupancy_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fieldRequiredMessage"
+                android:textColor="@color/pinkColor"
+                android:gravity="start"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"

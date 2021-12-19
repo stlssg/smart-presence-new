@@ -5,10 +5,10 @@ import android.content.SharedPreferences
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -40,10 +40,33 @@ class WifiConfigurationFragment : Fragment() {
 //        layoutParams.height = 0
 //        linearLayout.layoutParams = layoutParams
 
+        val ssid_required = view.findViewById<TextView>(R.id.ssid_required)
+        val bssid_required = view.findViewById<TextView>(R.id.bssid_required)
+        val address_required = view.findViewById<TextView>(R.id.address_required)
+        val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
+
+        makeLayoutGone(ssid_required)
+        makeLayoutGone(bssid_required)
+        makeLayoutGone(address_required)
+        makeLayoutGone(maxOccupancy_required)
+
         val ssid_input = view.findViewById<TextInputLayout>(R.id.ssid_input)
         val bssid_input = view.findViewById<TextInputLayout>(R.id.bssid_input)
         val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
         val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
+
+        ssid_input.editText?.doAfterTextChanged {
+            makeLayoutGone(ssid_required)
+        }
+        bssid_input.editText?.doAfterTextChanged {
+            makeLayoutGone(bssid_required)
+        }
+        address_input.editText?.doAfterTextChanged {
+            makeLayoutGone(address_required)
+        }
+        max_occupancy_input.editText?.doAfterTextChanged {
+            makeLayoutGone(maxOccupancy_required)
+        }
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val ssid = sharedPreferences.getString("ssid", "nothing")
@@ -113,6 +136,16 @@ class WifiConfigurationFragment : Fragment() {
                 val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
 
                 if (ssid_input == "" || bssid_input == "" || address_input == "" || max_occupancy_input == "") {
+                    val ssid_required = requireView().findViewById<TextView>(R.id.ssid_required)
+                    val bssid_required = requireView().findViewById<TextView>(R.id.bssid_required)
+                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
+                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
+
+                    if (ssid_input == "") { getLayoutBack(ssid_required) }
+                    if (bssid_input == "") { getLayoutBack(bssid_required) }
+                    if (address_input == "") { getLayoutBack(address_required) }
+                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
+
                     Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
                 } else {
                     MaterialAlertDialogBuilder(requireContext())
@@ -143,6 +176,20 @@ class WifiConfigurationFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun makeLayoutGone(view: TextView) {
+        view.isVisible = false
+        val para_layout = view.layoutParams
+        para_layout.height = 0
+        view.layoutParams = para_layout
+    }
+
+    private fun getLayoutBack(view: TextView) {
+        view.isVisible = true
+        val para_layout = view.layoutParams
+        para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        view.layoutParams = para_layout
     }
 
 }
