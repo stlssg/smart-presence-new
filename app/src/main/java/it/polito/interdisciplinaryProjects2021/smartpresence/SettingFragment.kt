@@ -99,6 +99,7 @@ class SettingFragment : Fragment() {
                 putString("bssidConfigurationFinished", "false")
                 putString("addressConfigurationFinished", "false")
                 putString("maxOccupancyConfigurationFinished", "false")
+                putString( "customizedLanguage", "false")
                 commit()
             }
             signOutCondition = true
@@ -209,6 +210,7 @@ class SettingFragment : Fragment() {
                 }
                 with(sharedPreferences.edit()) {
                     putString( "languageSpinnerPosition", position.toString())
+                    putString( "customizedLanguage", "true")
                     commit()
                 }
             }

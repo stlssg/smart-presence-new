@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -23,19 +24,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Log.d("language!!!!!!!!", Locale.getDefault().language)
+
         val sharedPreferences: SharedPreferences = getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
-        when (languageSpinnerPosition) {
-            1 -> {
-                setLang("it")
+        val customizedLanguage = sharedPreferences.getString("customizedLanguage", "false")?.toBoolean()
+        if (customizedLanguage == true) {
+            when (languageSpinnerPosition) {
+                1 -> setLang("it")
+                2 -> setLang("zh")
+                else -> setLang("en")
             }
-            2 -> {
-                setLang("zh")
-            }
-            else -> {
-                setLang("en")
+        } else {
+            when (Locale.getDefault().language) {
+                "it" -> setLang("it")
+                "zh" -> setLang("zh")
+                else -> setLang("en")
             }
         }
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
