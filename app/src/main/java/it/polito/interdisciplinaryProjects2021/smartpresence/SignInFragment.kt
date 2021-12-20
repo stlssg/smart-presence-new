@@ -283,7 +283,7 @@ class SignInFragment : Fragment() {
             putString("bssidConfigurationFinished", "false")
             putString("addressConfigurationFinished", "false")
             putString("maxOccupancyConfigurationFinished", "false")
-            putString("customizedLanguage", "false")
+//            putString("customizedLanguage", "false")
             putString("professionalOrNot", "false")
             commit()
         }

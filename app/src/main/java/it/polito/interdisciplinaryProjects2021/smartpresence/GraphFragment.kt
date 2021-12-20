@@ -1,10 +1,14 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -14,6 +18,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import java.util.*
 
 class GraphFragment : Fragment() {
 
@@ -74,6 +79,27 @@ class GraphFragment : Fragment() {
 //        lineChart.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
 //        lineChart.animateXY(3000, 3000)
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+
+        when (languageSpinnerPosition) {
+            1 -> setLang("it")
+            2 -> setLang("zh")
+            else -> setLang("en")
+        }
+    }
+
+    private fun setLang(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        (activity as AppCompatActivity).baseContext.resources.updateConfiguration(config, (activity as AppCompatActivity).baseContext.resources.displayMetrics)
     }
 
 }

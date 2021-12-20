@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("language!!!!!!!!", Locale.getDefault().language)
+//        Log.d("language!!!!!!!!", Locale.getDefault().language)
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
@@ -46,12 +46,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 "zh" -> {
+                    setLang("zh")
                     with(sharedPreferences.edit()) {
                         putString("languageSpinnerPosition", "2")
                         commit()
                     }
                 }
                 else -> {
+                    setLang("en")
                     with(sharedPreferences.edit()) {
                         putString("languageSpinnerPosition", "0")
                         commit()

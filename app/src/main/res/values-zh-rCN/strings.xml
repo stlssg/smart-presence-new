@@ -198,4 +198,5 @@
     <string name="whatIsProfessionalTitle">什么是专业人士?</string>
     <string name="whatIsProfessionalMessage">作为专业人士，你可以在图标中查看占有率并进行可能的行为。</string>
     <string name="fragment_detection_title">智能检测</string>
+    <string name="restartAppMessage">请重启应用!</string>
 </resources>

@@ -99,7 +99,7 @@ class SettingFragment : Fragment() {
                 putString("bssidConfigurationFinished", "false")
                 putString("addressConfigurationFinished", "false")
                 putString("maxOccupancyConfigurationFinished", "false")
-                putString("customizedLanguage", "false")
+//                putString("customizedLanguage", "false")
                 putString("professionalOrNot", "false")
                 commit()
             }
@@ -202,7 +202,7 @@ class SettingFragment : Fragment() {
                             Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
                         }
                         1 -> {
-                            Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Riavvia l\\'app!", Toast.LENGTH_SHORT).show()
                         }
                         else -> {
                             Toast.makeText(requireContext(), "请重启应用！", Toast.LENGTH_SHORT).show()

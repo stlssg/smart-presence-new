@@ -227,4 +227,5 @@
     <string name="whatIsProfessionalTitle">What is a professional?</string>
     <string name="whatIsProfessionalMessage">As a professional, you can visualize the occupancy profile in graphs and potentially perform other actions.</string>
     <string name="fragment_detection_title">Presence Detection</string>
+    <string name="restartAppMessage">Please restart the app!</string>
 </resources>
