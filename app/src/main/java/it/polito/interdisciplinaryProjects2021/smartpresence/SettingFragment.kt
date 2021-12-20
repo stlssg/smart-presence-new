@@ -3,6 +3,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.icu.text.SimpleDateFormat
@@ -199,24 +200,36 @@ class SettingFragment : Fragment() {
                 if (languageSpinnerPosition != position) {
                     when (position) {
                         0 -> {
-                            Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireContext(), "Please restart the app!", Toast.LENGTH_SHORT).show()
+                            writeSharedPreferencesAndRestart(position)
                         }
                         1 -> {
-                            Toast.makeText(requireContext(), "Riavvia l\\'app!", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireContext(), "Riavvia l\'app!", Toast.LENGTH_SHORT).show()
+                            writeSharedPreferencesAndRestart(position)
                         }
                         else -> {
-                            Toast.makeText(requireContext(), "请重启应用！", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireContext(), "请重启应用！", Toast.LENGTH_SHORT).show()
+                            writeSharedPreferencesAndRestart(position)
                         }
                     }
-                }
-                with(sharedPreferences.edit()) {
-                    putString( "languageSpinnerPosition", position.toString())
-                    putString( "customizedLanguage", "true")
-                    commit()
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>) { }
         }
+    }
+
+    private fun writeSharedPreferencesAndRestart(position: Int) {
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        with(sharedPreferences.edit()) {
+            putString( "languageSpinnerPosition", position.toString())
+            putString( "customizedLanguage", "true")
+            commit()
+        }
+
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.putExtra("fromSettingChangeLanguage", "yes")
+        startActivity(intent)
     }
 
     override fun onPause() {

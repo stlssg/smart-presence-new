@@ -94,6 +94,11 @@ class MainActivity : AppCompatActivity() {
         if (fromCheckInOrOut != null) {
             navController.navigate(R.id.manualConfigurationFragment)
         }
+
+        val fromSettingChangeLanguage = intent.getStringExtra("fromSettingChangeLanguage")
+        if (fromSettingChangeLanguage != null) {
+            navController.navigate(R.id.nav_setting)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

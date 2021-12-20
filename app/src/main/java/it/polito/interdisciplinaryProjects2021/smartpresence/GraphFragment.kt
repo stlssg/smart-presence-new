@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.github.aachartmodel.aainfographics.aachartcreator.*
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import com.github.mikephil.charting.charts.LineChart
@@ -56,19 +57,27 @@ class GraphFragment : Fragment() {
         val example_results = db.collection("example_result").document("Results")
 
         val aaChartView = view.findViewById<AAChartView>(R.id.aa_chart_view)
+        aaChartView.visibility = GONE
         val errorTextView = view.findViewById<TextView>(R.id.errorTextView)
         errorTextView.visibility = GONE
+        val loadingAnim = view.findViewById<LottieAnimationView>(R.id.loadingAnim)
 
         val dailyOption = view.findViewById<TextView>(R.id.dailyOption)
         val weeklyOption = view.findViewById<TextView>(R.id.weeklyOption)
         val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
         val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
         val totalOption = view.findViewById<TextView>(R.id.totalOption)
+        dailyOption.text = getString(R.string.graphOptionDaily)
+        weeklyOption.text = getString(R.string.graphOptionWeekly)
+        monthlyOption.text = getString(R.string.graphOptionMonthly)
+        yearlyOption.text = getString(R.string.graphOptionYearly)
+        totalOption.text = getString(R.string.graphOptionTotal)
 
         dailyOption.setOnClickListener {
             resetData()
             setButton(dailyOption, weeklyOption, monthlyOption, yearlyOption, totalOption)
             errorTextView.visibility = GONE
+            loadingAnim.visibility = VISIBLE
 
             example_results.get()
                 .addOnSuccessListener { document ->
@@ -77,6 +86,7 @@ class GraphFragment : Fragment() {
                             .orderBy("time_interval")
                             .get()
                             .addOnSuccessListener { documents ->
+                                loadingAnim.visibility = GONE
                                 aaChartView.visibility = VISIBLE
                                 for (document in documents) {
                                     dailyLabel.add(document.data.getValue("time_interval").toString())
@@ -87,12 +97,14 @@ class GraphFragment : Fragment() {
                                 )
                             }
                     } else {
+                        loadingAnim.visibility = GONE
                         aaChartView.visibility = GONE
                         errorTextView.visibility = VISIBLE
                         errorTextView.text = getString(R.string.graphNoDataMessage)
                     }
                 }
                 .addOnFailureListener { _ ->
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphErrorMessage)
@@ -103,6 +115,7 @@ class GraphFragment : Fragment() {
             resetData()
             setButton(weeklyOption, dailyOption, monthlyOption, yearlyOption, totalOption)
             errorTextView.visibility = GONE
+            loadingAnim.visibility = VISIBLE
 
             example_results.get()
                 .addOnSuccessListener { document ->
@@ -111,6 +124,7 @@ class GraphFragment : Fragment() {
                             .orderBy("time_interval")
                             .get()
                             .addOnSuccessListener { documents ->
+                                loadingAnim.visibility = GONE
                                 aaChartView.visibility = VISIBLE
                                 for (document in documents) {
                                     weeklyLabel.add(document.data.getValue("time_interval").toString())
@@ -121,12 +135,14 @@ class GraphFragment : Fragment() {
                                 )
                             }
                     } else {
+                        loadingAnim.visibility = GONE
                         aaChartView.visibility = GONE
                         errorTextView.visibility = VISIBLE
                         errorTextView.text = getString(R.string.graphNoDataMessage)
                     }
                 }
                 .addOnFailureListener { _ ->
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphErrorMessage)
@@ -137,6 +153,7 @@ class GraphFragment : Fragment() {
             resetData()
             setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption, totalOption)
             errorTextView.visibility = GONE
+            loadingAnim.visibility = VISIBLE
 
             example_results.get()
                 .addOnSuccessListener { document ->
@@ -145,6 +162,7 @@ class GraphFragment : Fragment() {
                             .orderBy("time_interval")
                             .get()
                             .addOnSuccessListener { documents ->
+                                loadingAnim.visibility = GONE
                                 aaChartView.visibility = VISIBLE
                                 for (document in documents) {
                                     monthlyLabel.add(document.data.getValue("time_interval").toString())
@@ -155,12 +173,14 @@ class GraphFragment : Fragment() {
                                 )
                             }
                     } else {
+                        loadingAnim.visibility = GONE
                         aaChartView.visibility = GONE
                         errorTextView.visibility = VISIBLE
                         errorTextView.text = getString(R.string.graphNoDataMessage)
                     }
                 }
                 .addOnFailureListener { _ ->
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphErrorMessage)
@@ -171,6 +191,7 @@ class GraphFragment : Fragment() {
             resetData()
             setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption, totalOption)
             errorTextView.visibility = GONE
+            loadingAnim.visibility = VISIBLE
 
             example_results.get()
                 .addOnSuccessListener { document ->
@@ -179,6 +200,7 @@ class GraphFragment : Fragment() {
                             .orderBy("time_interval")
                             .get()
                             .addOnSuccessListener { documents ->
+                                loadingAnim.visibility = GONE
                                 aaChartView.visibility = VISIBLE
                                 for (document in documents) {
                                     yearlyLabel.add(document.data.getValue("time_interval").toString())
@@ -189,12 +211,14 @@ class GraphFragment : Fragment() {
                                 )
                             }
                     } else {
+                        loadingAnim.visibility = GONE
                         aaChartView.visibility = GONE
                         errorTextView.visibility = VISIBLE
                         errorTextView.text = getString(R.string.graphNoDataMessage)
                     }
                 }
                 .addOnFailureListener { _ ->
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphErrorMessage)
@@ -205,6 +229,7 @@ class GraphFragment : Fragment() {
             resetData()
             setButton(totalOption, dailyOption, weeklyOption, monthlyOption, yearlyOption)
             errorTextView.visibility = GONE
+            loadingAnim.visibility = VISIBLE
 
             example_results.get()
                 .addOnSuccessListener { document ->
@@ -213,6 +238,7 @@ class GraphFragment : Fragment() {
                             .orderBy("time_interval")
                             .get()
                             .addOnSuccessListener { documents ->
+                                loadingAnim.visibility = GONE
                                 aaChartView.visibility = VISIBLE
                                 for (document in documents) {
                                     totalLabel.add(document.data.getValue("time_interval").toString())
@@ -223,12 +249,14 @@ class GraphFragment : Fragment() {
                                 )
                             }
                     } else {
+                        loadingAnim.visibility = GONE
                         aaChartView.visibility = GONE
                         errorTextView.visibility = VISIBLE
                         errorTextView.text = getString(R.string.graphNoDataMessage)
                     }
                 }
                 .addOnFailureListener { _ ->
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphErrorMessage)
@@ -243,6 +271,8 @@ class GraphFragment : Fragment() {
                         .orderBy("time_interval")
                         .get()
                         .addOnSuccessListener { documents ->
+                            loadingAnim.visibility = GONE
+                            aaChartView.visibility = VISIBLE
                             for (document in documents) {
 //                                Log.d("data!!!!!!!", "${document.id} => " +
 //                                        "${document.data.getValue("occupancy")} and " +
@@ -256,17 +286,32 @@ class GraphFragment : Fragment() {
                             )
                         }
                 } else {
+                    loadingAnim.visibility = GONE
                     aaChartView.visibility = GONE
                     errorTextView.visibility = VISIBLE
                     errorTextView.text = getString(R.string.graphNoDataMessage)
                 }
             }
             .addOnFailureListener { _ ->
+                loadingAnim.visibility = GONE
                 aaChartView.visibility = GONE
                 errorTextView.visibility = VISIBLE
                 errorTextView.text = getString(R.string.graphErrorMessage)
             }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+
+        when (languageSpinnerPosition) {
+            1 -> setLang("it")
+            2 -> setLang("zh")
+            else -> setLang("en")
+        }
     }
 
     override fun onPause() {
@@ -296,7 +341,7 @@ class GraphFragment : Fragment() {
                               subtitle: String): AAChartModel {
         val aaChartModel = AAChartModel()
             .chartType(AAChartType.Area)
-            .animationType(AAChartAnimationType.Bounce)
+            .animationType(AAChartAnimationType.EaseOutBack)
             .title(title)
             .subtitle(subtitle)
             .yAxisTitle(getString(R.string.graphYTitle))
