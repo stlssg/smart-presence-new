@@ -229,4 +229,14 @@
     <string name="whatIsProfessionalMessage">Come professionista, puoi visualizzare il profilo di occupazione nei grafici e potenzialmente eseguire altre azioni.</string>
     <string name="fragment_detection_title">Rilevamento di Presenza</string>
     <string name="restartAppMessage">Riavvia l\'app!</string>
+    <string name="graphDailyTitle">Occupazione Giornaliera</string>
+    <string name="graphDailySubtitle">Valore medio per ogni ora durante un giorno</string>
+    <string name="graphYTitle">Percentuale[%]</string>
+    <string name="graphOptionDaily">Quotidiano</string>
+    <string name="graphOptionWeekly">settimanalmente</string>
+    <string name="graphOptionMonthly">Mensile</string>
+    <string name="graphOptionYearly">Annuale</string>
+    <string name="graphOptionTotal">Totale</string>
+    <string name="graphNoDataMessage">Al momento non sono disponibili dati per questa opzione.</string>
+    <string name="graphErrorMessage">Spiacenti, l\'app ha problemi con la visualizzazione del grafico, il che potrebbe essere dovuto a un errore di connessione o ad altri motivi. Per favore prova più tardi.</string>
 </resources>

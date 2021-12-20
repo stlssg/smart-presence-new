@@ -199,4 +199,14 @@
     <string name="whatIsProfessionalMessage">作为专业人士，你可以在图标中查看占有率并进行可能的行为。</string>
     <string name="fragment_detection_title">智能检测</string>
     <string name="restartAppMessage">请重启应用!</string>
+    <string name="graphDailyTitle">日占有率</string>
+    <string name="graphDailySubtitle">一天中每个小时的平均值</string>
+    <string name="graphYTitle">百分比[%]</string>
+    <string name="graphOptionDaily">日</string>
+    <string name="graphOptionWeekly">周</string>
+    <string name="graphOptionMonthly">月</string>
+    <string name="graphOptionYearly">年</string>
+    <string name="graphOptionTotal">总</string>
+    <string name="graphNoDataMessage">目前该选项无数据可用。</string>
+    <string name="graphErrorMessage">对不起，应用在显示图表时出现问题，可能由连接或其他原因造成。请稍后再试。</string>
 </resources>

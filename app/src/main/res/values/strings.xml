@@ -228,4 +228,14 @@
     <string name="whatIsProfessionalMessage">As a professional, you can visualize the occupancy profile in graphs and potentially perform other actions.</string>
     <string name="fragment_detection_title">Presence Detection</string>
     <string name="restartAppMessage">Please restart the app!</string>
+    <string name="graphDailyTitle">Daily Occupancy</string>
+    <string name="graphDailySubtitle">Average value for each hour during a day</string>
+    <string name="graphYTitle">Percentage[%]</string>
+    <string name="graphOptionDaily">Daily</string>
+    <string name="graphOptionWeekly">Weekly</string>
+    <string name="graphOptionMonthly">Monthly</string>
+    <string name="graphOptionYearly">Yearly</string>
+    <string name="graphOptionTotal">Total</string>
+    <string name="graphNoDataMessage">Currently, no data is available for this option.</string>
+    <string name="graphErrorMessage">Sorry, the app has problems showing graph, which may due to connection failure or other reasons. Please try it later.</string>
 </resources>
