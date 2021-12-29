@@ -10,7 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_account_circle_24"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -57,7 +59,8 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/setting_current_account"
@@ -69,7 +72,8 @@
                     android:gravity="center_vertical"
                     android:layout_gravity="center_vertical"
                     android:paddingStart="10dp"
-                    tools:ignore="RtlSymmetry" />
+                    tools:ignore="HardcodedText,RtlSymmetry"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -82,7 +86,8 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    tools:ignore="ContentDescription" />
 
                 <Button
                     android:id="@+id/signOut"
@@ -128,7 +133,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_access_time_24"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -155,7 +161,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -177,7 +184,8 @@
                             android:gravity="center_vertical"
                             android:paddingStart="10dp"
                             tools:ignore="RtlSymmetry"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/black"/>
 
                         <Spinner
                             android:id="@+id/workingIntervalSpinner"
@@ -214,7 +222,8 @@
                             android:gravity="center_vertical"
                             android:paddingStart="10dp"
                             tools:ignore="RtlSymmetry"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/black"/>
 
                         <EditText
                             android:id="@+id/setting_start_time"
@@ -239,7 +248,8 @@
                             android:gravity="center_vertical"
                             android:paddingStart="10dp"
                             tools:ignore="RtlSymmetry"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/black"/>
 
                         <EditText
                             android:id="@+id/setting_stop_time"
@@ -284,7 +294,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_circle_notifications_24"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -311,7 +322,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <Switch
                     android:id="@+id/notificationOnOff"
@@ -320,9 +332,63 @@
                     android:layout_weight="5"
                     tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml"
                     android:text="@string/setting_daily_notification_description"
-                    android:textColor="@color/black_overlay"
+                    android:textColor="@color/black"
                     android:textAlignment="viewStart"
                     android:paddingStart="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:minHeight="35dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+                <Switch
+                    android:id="@+id/frequentNotificationOnOff"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml"
+                    android:text="@string/settingFrequentNotificationDescription"
+                    android:textColor="@color/black"
+                    android:textAlignment="viewStart"
+                    android:paddingStart="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="5dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:paddingStart="10dp"
+                    android:text="@string/settingNotificationContent"
+                    tools:ignore="RtlSymmetry,SmallSp"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"/>
 
             </LinearLayout>
 
@@ -339,7 +405,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_language_24"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="0dp"

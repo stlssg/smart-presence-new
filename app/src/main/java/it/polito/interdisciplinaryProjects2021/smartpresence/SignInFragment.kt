@@ -285,6 +285,7 @@ class SignInFragment : Fragment() {
             putString("maxOccupancyConfigurationFinished", "false")
 //            putString("customizedLanguage", "false")
             putString("professionalOrNot", "false")
+            putString("frequentNotificationOnOffCondition", "false")
             commit()
         }
     }

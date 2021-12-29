@@ -238,4 +238,9 @@
     <string name="graphOptionTotal">Total</string>
     <string name="graphNoDataMessage">Currently, no data is available for this option.</string>
     <string name="graphErrorMessage">Sorry, the app has problems showing graph, which may due to connection failure or other reasons. Please try it later.</string>
+    <string name="settingFrequentNotificationDescription">More frequent notification</string>
+    <string name="frequentNotificationOnMessage">Beside the normal one, you will receive daily pushed notification more frequently, once at 7:00 and once at 18:00.</string>
+    <string name="frequentNotificationOffMessage">You will no longer receive frequent notification.</string>
+    <string name="settingNotificationContent">We strongly suggest you to turn on the daily notification so that you can restart your background service in case it stops.
+    We will inspect the behaviour of your smart phone and we will let you know when you need to turn on the frequent notification.</string>
 </resources>

@@ -239,4 +239,9 @@
     <string name="graphOptionTotal">Totale</string>
     <string name="graphNoDataMessage">Al momento non sono disponibili dati per questa opzione.</string>
     <string name="graphErrorMessage">Spiacenti, l\'app ha problemi con la visualizzazione del grafico, il che potrebbe essere dovuto a un errore di connessione o ad altri motivi. Per favore prova più tardi.</string>
+    <string name="settingFrequentNotificationDescription">Notifica più frequente</string>
+    <string name="frequentNotificationOnMessage">Oltre a quella normale, riceverai una notifica push giornaliera più frequentemente, una volta alle 7:00 e una volta alle 18:00.</string>
+    <string name="frequentNotificationOffMessage">Non riceverai più notifiche frequenti.</string>
+    <string name="settingNotificationContent">Ti consigliamo vivamente di attivare la notifica giornaliera in modo da poter riavviare il servizio in background nel caso in cui si interrompa.
+    Ispezioneremo il comportamento del tuo smartphone e ti faremo sapere quando sarà necessario attivare la notifica frequente.</string>
 </resources>

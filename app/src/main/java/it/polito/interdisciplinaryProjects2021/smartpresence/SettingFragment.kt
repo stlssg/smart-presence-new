@@ -102,6 +102,7 @@ class SettingFragment : Fragment() {
                 putString("maxOccupancyConfigurationFinished", "false")
 //                putString("customizedLanguage", "false")
                 putString("professionalOrNot", "false")
+                putString("frequentNotificationOnOffCondition", "false")
                 commit()
             }
             signOutCondition = true
@@ -154,7 +155,10 @@ class SettingFragment : Fragment() {
                 .show()
         }
 
+        val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
+        val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
         val notificationOnOff = view.findViewById<Switch>(R.id.notificationOnOff)
+        val frequentNotificationOnOff = view.findViewById<Switch>(R.id.frequentNotificationOnOff)
         val notificationOnOffCondition = sharedPreferences.getString("notificationOnOffCondition", "true")
         notificationOnOff.isChecked = notificationOnOffCondition.toBoolean()
         notificationOnOff?.setOnCheckedChangeListener { _, isChecked ->
@@ -164,8 +168,6 @@ class SettingFragment : Fragment() {
                     commit()
                 }
 
-                val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
-                val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
                 if (wifiCheckingStatus || positioningCheckingStatus) {
                     Firebase.messaging.subscribeToTopic("RemindingManuallyRestartService")
                         .addOnCompleteListener { task ->
@@ -175,6 +177,7 @@ class SettingFragment : Fragment() {
                         }
                 }
 
+                frequentNotificationOnOff.isClickable = true
                 Toast.makeText(requireContext(), getString(R.string.notificationOnMessage), Toast.LENGTH_LONG).show()
             } else {
                 with(sharedPreferences.edit()) {
@@ -183,6 +186,35 @@ class SettingFragment : Fragment() {
                 }
                 Toast.makeText(requireContext(), getString(R.string.notificationOffMessage), Toast.LENGTH_LONG).show()
                 Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
+
+                frequentNotificationOnOff.isChecked = false
+                frequentNotificationOnOff.isClickable = false
+            }
+        }
+
+        val frequentNotificationOnOffCondition = sharedPreferences.getString("frequentNotificationOnOffCondition", "false")
+        frequentNotificationOnOff.isChecked = frequentNotificationOnOffCondition.toBoolean()
+        frequentNotificationOnOff?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                with(sharedPreferences.edit()) {
+                    putString( "frequentNotificationOnOffCondition", "true")
+                    commit()
+                }
+
+                if (wifiCheckingStatus || positioningCheckingStatus) {
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartServiceAdditionalMorning")
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartServiceAdditionalEvening")
+                }
+                Toast.makeText(requireContext(), getString(R.string.frequentNotificationOnMessage), Toast.LENGTH_LONG).show()
+            } else {
+                with(sharedPreferences.edit()) {
+                    putString( "frequentNotificationOnOffCondition", "false")
+                    commit()
+                }
+
+                Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalMorning")
+                Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalEvening")
+                Toast.makeText(requireContext(), getString(R.string.frequentNotificationOffMessage), Toast.LENGTH_LONG).show()
             }
         }
 

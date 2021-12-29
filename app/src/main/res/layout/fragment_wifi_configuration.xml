@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="#4D000000"
+                    android:textColor="@color/black"
                     android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="#4D000000"
+                    android:textColor="@color/black"
                     android:inputType="textUri"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="#4D000000"
+                    android:textColor="@color/black"
                     android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -214,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="#4D000000"
+                    android:textColor="@color/black"
                     android:inputType="number"/>
             </com.google.android.material.textfield.TextInputLayout>
 

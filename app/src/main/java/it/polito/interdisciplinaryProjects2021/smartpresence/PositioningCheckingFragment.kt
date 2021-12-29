@@ -74,6 +74,12 @@ class PositioningCheckingFragment : Fragment() {
                             Toast.makeText(requireContext(), getString(R.string.subscribeNotSuccess), Toast.LENGTH_LONG).show()
                         }
                     }
+
+                val frequentNotificationOnOffCondition = sharedPreferences.getString("frequentNotificationOnOffCondition", "false").toBoolean()
+                if (frequentNotificationOnOffCondition) {
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartServiceAdditionalMorning")
+                    Firebase.messaging.subscribeToTopic("RemindingManuallyRestartServiceAdditionalEvening")
+                }
             }
 
             sound.play(MediaActionSound.START_VIDEO_RECORDING)
