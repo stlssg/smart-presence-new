@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -160,7 +161,14 @@ class SettingFragment : Fragment() {
         val notificationOnOff = view.findViewById<Switch>(R.id.notificationOnOff)
         val frequentNotificationOnOff = view.findViewById<Switch>(R.id.frequentNotificationOnOff)
         val notificationOnOffCondition = sharedPreferences.getString("notificationOnOffCondition", "true")
+        val frequentNotificationOnOffText = view.findViewById<TextView>(R.id.frequentNotificationOnOffText)
         notificationOnOff.isChecked = notificationOnOffCondition.toBoolean()
+
+        if (notificationOnOff.isChecked) {
+            frequentNotificationOnOffText.setTextColor(Color.parseColor("#FF000000"))
+        } else {
+            frequentNotificationOnOffText.setTextColor(Color.parseColor("#66000000"))
+        }
         notificationOnOff?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 with(sharedPreferences.edit()) {
@@ -178,6 +186,7 @@ class SettingFragment : Fragment() {
                 }
 
                 frequentNotificationOnOff.isClickable = true
+                frequentNotificationOnOffText.setTextColor(Color.parseColor("#FF000000"))
                 Toast.makeText(requireContext(), getString(R.string.notificationOnMessage), Toast.LENGTH_LONG).show()
             } else {
                 with(sharedPreferences.edit()) {
@@ -189,6 +198,7 @@ class SettingFragment : Fragment() {
 
                 frequentNotificationOnOff.isChecked = false
                 frequentNotificationOnOff.isClickable = false
+                frequentNotificationOnOffText.setTextColor(Color.parseColor("#66000000"))
             }
         }
 
