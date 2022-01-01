@@ -243,4 +243,8 @@
     <string name="frequentNotificationOffMessage">You will no longer receive frequent notification.</string>
     <string name="settingNotificationContent">We strongly suggest you to turn on the daily notification so that you can restart your background service in case it stops.
     We will inspect the behaviour of your smart phone and we will let you know when you need to turn on the frequent notification.</string>
+    <string name="frequentNotificationRemindTitle">Please turn on frequent notification</string>
+    <string name="frequentNotificationRemindMessage">We detect that the background service does not perform very well in your device. We strongly suggested that you turn
+    on the frequent notification to remind yourself to restart the service more frequently. Thanks.</string>
+    <string name="frequentNotificationRemindPositiveButton">Go to setting</string>
 </resources>

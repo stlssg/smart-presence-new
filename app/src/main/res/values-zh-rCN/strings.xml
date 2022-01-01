@@ -213,4 +213,7 @@
     <string name="frequentNotificationOnMessage">除去正常的通知，你还会收到更加频繁的每日推送，一次在7:00，一次在18:00。</string>
     <string name="frequentNotificationOffMessage">你将不再收到更加频繁的通知。</string>
     <string name="settingNotificationContent">我们强烈建议你打开每日通知，这样如果后台服务停止了，你可以重启它。我们会检测你手机的行为并让你知道何时需要打开更频繁的通知。</string>
+    <string name="frequentNotificationRemindTitle">请打开频繁通知</string>
+    <string name="frequentNotificationRemindMessage">我们检测到对于您的设备，后台服务的状况并不好。我们强烈建议你打开频繁通知，这样可以多次提醒您重启服务。谢谢。</string>
+    <string name="frequentNotificationRemindPositiveButton">前往设置</string>
 </resources>

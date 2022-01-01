@@ -1,5 +1,6 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -7,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -14,6 +16,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.databinding.ActivityMainBinding
 import java.util.*
 
@@ -22,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    @SuppressLint("LongLogTag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,6 +83,27 @@ class MainActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= 25) {
             Shortcuts.setUp(applicationContext)
+        }
+
+        val currentAccount = sharedPreferences.getString("keyCurrentAccount", "noEmail")
+        if (currentAccount != "noEmail") {
+            val db = Firebase.firestore
+            val docRef = db.collection("RegisteredUser").document(currentAccount.toString())
+            docRef.get().addOnSuccessListener { document ->
+                if (document.data?.get("needFrequentNotification") == "YES") {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(getString(R.string.frequentNotificationRemindTitle))
+                        .setMessage(getString(R.string.frequentNotificationRemindMessage))
+                        .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                        .setPositiveButton(getString(R.string.frequentNotificationRemindPositiveButton)) { _, _ ->
+                            navController.navigate(R.id.nav_setting)
+                        }
+                        .show()
+
+                    val input = hashMapOf("needFrequentNotification" to "NO")
+                    docRef.set(input, SetOptions.merge())
+                }
+            }
         }
 
         val checkFromNotification = intent.getStringExtra("fromNotificationToFragmentOrNot")

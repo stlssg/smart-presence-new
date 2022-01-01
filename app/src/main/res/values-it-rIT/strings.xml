@@ -244,4 +244,8 @@
     <string name="frequentNotificationOffMessage">Non riceverai più notifiche frequenti.</string>
     <string name="settingNotificationContent">Ti consigliamo vivamente di attivare la notifica giornaliera in modo da poter riavviare il servizio in background nel caso in cui si interrompa.
     Ispezioneremo il comportamento del tuo smartphone e ti faremo sapere quando sarà necessario attivare la notifica frequente.</string>
+    <string name="frequentNotificationRemindTitle">Si prega di attivare le notifiche frequenti</string>
+    <string name="frequentNotificationRemindMessage">Rileviamo che il servizio in background non funziona molto bene nel tuo dispositivo. Abbiamo fortemente suggerito di girare
+     sulla notifica frequente per ricordarsi di riavviare il servizio più frequentemente. Grazie.</string>
+    <string name="frequentNotificationRemindPositiveButton">Vai alle impostazioni</string>
 </resources>

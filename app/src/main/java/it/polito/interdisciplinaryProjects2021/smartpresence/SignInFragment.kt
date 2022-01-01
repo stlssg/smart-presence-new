@@ -33,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
@@ -145,8 +146,8 @@ class SignInFragment : Fragment() {
                                         if (passwordSettingInput != passwordConfirmSettingInput) {
                                             Toast.makeText(requireContext(), getString(R.string.passwordSettingNotSame), Toast.LENGTH_SHORT).show()
                                         } else {
-                                            val input = hashMapOf("email" to emailAsUserNameSettingInput, "password" to passwordSettingInput)
-                                            registeredUserCollection.add(input)
+                                            val input = hashMapOf("email" to emailAsUserNameSettingInput, "password" to passwordSettingInput, "needFrequentNotification" to "NO")
+                                            registeredUserCollection.document(emailAsUserNameSettingInput).set(input, SetOptions.merge())
                                                 .addOnSuccessListener { _ ->
                                                     writeSharedPreferences(emailAsUserNameSettingInput)
                                                     Toast.makeText(requireContext(), getString(R.string.logInAndRegisteredSuccess), Toast.LENGTH_SHORT).show()
@@ -251,6 +252,10 @@ class SignInFragment : Fragment() {
                     if (acc != null) {
                         val currentEmail = acc.email.toString()
                         writeSharedPreferences(currentEmail)
+                        val db = Firebase.firestore
+                        val registeredUserCollection = db.collection("RegisteredUser")
+                        val input = hashMapOf("email" to currentEmail, "password" to "NONE", "needFrequentNotification" to "NO")
+                        registeredUserCollection.document(currentEmail).set(input, SetOptions.merge())
                     }
                     findNavController().navigate(R.id.declarationFragment)
                 } else {
