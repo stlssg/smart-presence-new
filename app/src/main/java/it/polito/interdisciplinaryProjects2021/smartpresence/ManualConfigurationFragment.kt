@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class ManualConfigurationFragment : Fragment() {
@@ -90,7 +93,6 @@ class ManualConfigurationFragment : Fragment() {
                                 "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
                         .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
                         .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
-                            findNavController().popBackStack()
                             Toast.makeText(requireContext(), getString(R.string.configuration_alert_toast), Toast.LENGTH_LONG).show()
                             with(sharedPreferences.edit()) {
                                 putString("address", address_input.replace(" ", "_"))
@@ -99,6 +101,14 @@ class ManualConfigurationFragment : Fragment() {
                                 putString("maxOccupancyConfigurationFinished", "true")
                                 apply()
                             }
+
+                            val db = Firebase.firestore
+                            val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
+                            val docRef = user?.let { db.collection("RegisteredUser").document(it) }
+                            val input = hashMapOf("targetBuilding" to address_input.replace(" ", "_"))
+                            docRef?.set(input, SetOptions.merge())
+
+                            findNavController().popBackStack()
                         }
                         .show()
                 }
