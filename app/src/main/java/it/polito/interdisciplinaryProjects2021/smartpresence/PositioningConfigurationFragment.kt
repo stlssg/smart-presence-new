@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -112,10 +110,27 @@ class PositioningConfigurationFragment : Fragment() {
             }
         }
 
-
         val update_address_button = view.findViewById<Button>(R.id.update_address_button)
         update_address_button.setOnClickListener {
             findNavController().navigate(R.id.mapFragment)
+        }
+
+        val radiusSpinner = view.findViewById<Spinner>(R.id.radiusSpinner)
+        val radius_list = resources.getStringArray(R.array.radius_list)
+        if (radiusSpinner != null) {
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, radius_list)
+            radiusSpinner.adapter = adapter
+        }
+        val radiusSpinnerPosition = sharedPreferences.getString("radiusSpinnerPosition", "2")?.toInt()
+        radiusSpinnerPosition?.let { radiusSpinner.setSelection(it) }
+        radiusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                with(sharedPreferences.edit()) {
+                    putString( "radiusSpinnerPosition", position.toString())
+                    commit()
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) { }
         }
     }
 

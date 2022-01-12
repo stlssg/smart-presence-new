@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
 //        Log.d("language!!!!!!!!", Locale.getDefault().language)
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val firstInstallChecking = sharedPreferences.getString("firstInstallChecking", "true")?.toBoolean()
+        if (firstInstallChecking != false) {
+            with(sharedPreferences.edit()) {
+                putString("firstInstallChecking", "true")
+                commit()
+            }
+        }
+
         val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
         val customizedLanguage = sharedPreferences.getString("customizedLanguage", "false")?.toBoolean()
         if (customizedLanguage == true) {

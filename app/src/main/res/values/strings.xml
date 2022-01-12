@@ -247,4 +247,18 @@
     <string name="frequentNotificationRemindMessage">We detect that the background service does not perform very well in your device. We strongly suggested that you turn
     on the frequent notification to remind yourself to restart the service more frequently. Thanks.</string>
     <string name="frequentNotificationRemindPositiveButton">Go to setting</string>
+    <string name="firstInstallRemindTitle">Reminding upon first installment</string>
+    <string name="firstInstallRemindMessage">Dear user, the app relies strongly on the background service and it may requires some customized settings in your device, which
+    cannot be modified by the app itself but only by you manually, so please make sure you have enabled the permission or changed the settings to allow background service for
+    this app!!! Thank you for your cooperation.</string>
+    <string name="radius_spinner">Radius(m) determining presence</string>
+    <string name="radius_spinner_description">The radius that defines the range in which you will be considered as presence. The larger the value, the less energy consumed.</string>
+    <string-array name="radius_list">
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>400</item>
+    </string-array>
 </resources>

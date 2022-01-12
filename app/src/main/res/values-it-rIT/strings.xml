@@ -248,4 +248,18 @@
     <string name="frequentNotificationRemindMessage">Rileviamo che il servizio in background non funziona molto bene nel tuo dispositivo. Abbiamo fortemente suggerito di girare
      sulla notifica frequente per ricordarsi di riavviare il servizio più frequentemente. Grazie.</string>
     <string name="frequentNotificationRemindPositiveButton">Vai alle impostazioni</string>
+    <string name="firstInstallRemindTitle">Ricordando alla prima rata</string>
+    <string name="firstInstallRemindMessage">Gentile utente, l\'app si basa fortemente sul servizio in background e potrebbe richiedere alcune impostazioni personalizzate nel tuo dispositivo, che
+     non può essere modificato dall\'app stessa ma solo da te manualmente, quindi assicurati di aver abilitato l\'autorizzazione o modificato le impostazioni per consentire il servizio in background!!!
+     Grazie per la collaborazione.</string>
+    <string name="radius_spinner">Raggio(m) che determina la presenza</string>
+    <string name="radius_spinner_description">Il raggio che definisce l\'intervallo in cui verrai considerato come presenza. Maggiore è il valore, minore è il consumo di energia.</string>
+    <string-array name="radius_list">
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>400</item>
+    </string-array>
 </resources>

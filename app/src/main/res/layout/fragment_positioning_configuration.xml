@@ -168,6 +168,41 @@
                 android:textSize="10sp"
                 tools:ignore="SmallSp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="@string/radius_spinner"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"/>
+
+                <Spinner
+                    android:id="@+id/radiusSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/radius_spinner_description"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
             <Switch
                 android:id="@+id/energySavingModeOnOff"
                 android:layout_width="match_parent"

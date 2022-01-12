@@ -216,4 +216,17 @@
     <string name="frequentNotificationRemindTitle">请打开频繁通知</string>
     <string name="frequentNotificationRemindMessage">我们检测到对于您的设备，后台服务的状况并不好。我们强烈建议你打开频繁通知，这样可以多次提醒您重启服务。谢谢。</string>
     <string name="frequentNotificationRemindPositiveButton">前往设置</string>
+    <string name="firstInstallRemindTitle">首次安装提醒</string>
+    <string name="firstInstallRemindMessage">亲爱的用户，该应用非常依赖后台服务，其可能需要某些特别的设置，这些设置无法被应用本身更改，只可被你手动更改，故请确保你已经为该应用授予了权限或更改了
+    设置以允许运行后台服务！！！感谢您的配合。</string>
+    <string name="radius_spinner">决定存在的半径(米)</string>
+    <string name="radius_spinner_description">该半径会定义一个范围，在其内你会被认为存在。其数值越大，消耗能量越少。</string>
+    <string-array name="radius_list">
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>400</item>
+    </string-array>
 </resources>

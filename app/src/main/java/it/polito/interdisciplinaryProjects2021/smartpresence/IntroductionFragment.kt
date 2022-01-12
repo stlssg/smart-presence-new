@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class IntroductionFragment : Fragment() {
 
@@ -36,6 +38,21 @@ class IntroductionFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val firstInstallChecking = sharedPreferences.getString("firstInstallChecking", "true")?.toBoolean()
+        if (firstInstallChecking == true) {
+            with(sharedPreferences.edit()) {
+                putString("firstInstallChecking", "false")
+                commit()
+            }
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.firstInstallRemindTitle))
+                .setMessage(getString(R.string.firstInstallRemindMessage))
+                .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
+                .show()
+        }
 
         val packageName = (activity as AppCompatActivity).packageName
         val introduction_more_text = view.findViewById<TextView>(R.id.introduction_more_text)
