@@ -269,4 +269,7 @@
     <string name="modeSwitchButton">Yes, switch</string>
     <string name="modeSwitchMessage_regularAccount">By switching to professional mode, you can also visualize your building occupancy profile and potentially perform other actions.</string>
     <string name="modeSwitchMessage_professionalAccount">By switching to regular mode, you will go back to the layout with basic features.</string>
+    <string name="proActionTabName">Others</string>
+    <string name="proFragmentName">Pro</string>
+    <string name="proFragmentTitle">Professional Actions</string>
 </resources>

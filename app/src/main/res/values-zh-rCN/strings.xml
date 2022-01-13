@@ -237,4 +237,7 @@
     <string name="modeSwitchButton">是的，转换</string>
     <string name="modeSwitchMessage_regularAccount">通过转成专业模式，你可以可视化你的建筑占有率并进行可能的行为。</string>
     <string name="modeSwitchMessage_professionalAccount">通过转换成普通模式，你会回到只有基本更能的布局。</string>
+    <string name="proActionTabName">其他</string>
+    <string name="proFragmentName">专业</string>
+    <string name="proFragmentTitle">专业行为</string>
 </resources>

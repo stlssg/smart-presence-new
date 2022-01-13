@@ -270,4 +270,7 @@
     <string name="modeSwitchButton">Sì, cambia</string>
     <string name="modeSwitchMessage_regularAccount">Passando alla modalità professionale, puoi anche visualizzare il profilo di occupazione dell\'edificio ed eseguire potenzialmente altre azioni.</string>
     <string name="modeSwitchMessage_professionalAccount">Passando alla modalità normale, tornerai al layout con le funzionalità di base.</string>
+    <string name="proActionTabName">Altri</string>
+    <string name="proFragmentName">Pro</string>
+    <string name="proFragmentTitle">Azioni professionali</string>
 </resources>
