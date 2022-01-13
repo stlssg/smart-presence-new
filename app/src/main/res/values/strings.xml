@@ -261,4 +261,12 @@
         <item>300</item>
         <item>400</item>
     </string-array>
+    <string name="professionalAccountSettingDescription">You have the right to require to delete your data stored remotely. You can also switch to regular mode.</string>
+    <string name="regularAccountSettingDescription">You have the right to require to delete your data stored remotely. You can also switch to professional mode.</string>
+    <string name="professionalAccountModeName">regular mode</string>
+    <string name="regularAccountModeName">professional mode</string>
+    <string name="modeSwitchTitle">Mode Switching</string>
+    <string name="modeSwitchButton">Yes, switch</string>
+    <string name="modeSwitchMessage_regularAccount">By switching to professional mode, you can also visualize your building occupancy profile and potentially perform other actions.</string>
+    <string name="modeSwitchMessage_professionalAccount">By switching to regular mode, you will go back to the layout with basic features.</string>
 </resources>

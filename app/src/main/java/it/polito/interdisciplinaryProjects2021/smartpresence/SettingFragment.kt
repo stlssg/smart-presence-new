@@ -1,15 +1,23 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +25,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.recreate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -34,6 +43,7 @@ class SettingFragment : Fragment() {
     private var working_interval: Int = 15
     private var language: String = "English"
     private var signOutCondition: Boolean = false
+    private lateinit var accountModeNameForPair: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,6 +60,48 @@ class SettingFragment : Fragment() {
 
         val currentAccount = sharedPreferences.getString("keyCurrentAccount", "noEmail")
         view.findViewById<TextView>(R.id.setting_current_account).text = currentAccount
+
+        val professionalOrNot = sharedPreferences.getString("professionalOrNot", "false")?.toBoolean()
+        val account_description = view.findViewById<TextView>(R.id.account_description)
+        account_description.text = if (professionalOrNot == true) {
+            accountModeNameForPair = getString(R.string.professionalAccountModeName)
+            getString(R.string.professionalAccountSettingDescription)
+        } else {
+            accountModeNameForPair = getString(R.string.regularAccountModeName)
+            getString(R.string.regularAccountSettingDescription)
+        }
+        account_description.makeLinks(
+            Pair(accountModeNameForPair, View.OnClickListener {
+                if (professionalOrNot == true) {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(getString(R.string.modeSwitchTitle))
+                        .setMessage(getString(R.string.modeSwitchMessage_professionalAccount))
+                        .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                        .setPositiveButton(getString(R.string.modeSwitchButton)) { _, _ ->
+                            with(sharedPreferences.edit()) {
+                                putString("professionalOrNot", "false")
+                                apply()
+                            }
+
+                            restartAppFromSettingFragment()
+                        }
+                        .show()
+                } else {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(getString(R.string.modeSwitchTitle))
+                        .setMessage(getString(R.string.modeSwitchMessage_regularAccount))
+                        .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                        .setPositiveButton(getString(R.string.modeSwitchButton)) { _, _ ->
+                            with(sharedPreferences.edit()) {
+                                putString("professionalOrNot", "true")
+                                apply()
+                            }
+
+                            restartAppFromSettingFragment()
+                        }
+                        .show()
+                }
+            }))
 
         val working_interval_list = resources.getStringArray(R.array.working_interval)
         val workingIntervalSpinner = view.findViewById<Spinner>(R.id.workingIntervalSpinner)
@@ -270,9 +322,41 @@ class SettingFragment : Fragment() {
             commit()
         }
 
+        restartAppFromSettingFragment()
+    }
+
+    private fun restartAppFromSettingFragment() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         intent.putExtra("fromSettingChangeLanguage", "yes")
         startActivity(intent)
+    }
+
+    private fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(this.text)
+        var startIndexOfLink = -1
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun updateDrawState(textPaint: TextPaint) {
+                    textPaint.color = textPaint.linkColor
+                    textPaint.isUnderlineText = true
+                }
+
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as TextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            startIndexOfLink = this.text.toString().indexOf(link.first, startIndexOfLink + 1)
+
+            spannableString.setSpan(
+                clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        this.movementMethod =
+            LinkMovementMethod.getInstance()
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     override fun onPause() {

@@ -262,4 +262,12 @@
         <item>300</item>
         <item>400</item>
     </string-array>
+    <string name="professionalAccountSettingDescription">Hai il diritto di richiedere la cancellazione dei tuoi dati archiviati in remoto. Puoi anche passare alla modalità normale.</string>
+    <string name="regularAccountSettingDescription">Hai il diritto di richiedere la cancellazione dei tuoi dati archiviati in remoto. Puoi anche passare alla modalità professionale.</string>
+    <string name="professionalAccountModeName">modalità normale</string>
+    <string name="regularAccountModeName">modalità professionale</string>
+    <string name="modeSwitchTitle">Cambio di modalità</string>
+    <string name="modeSwitchButton">Sì, cambia</string>
+    <string name="modeSwitchMessage_regularAccount">Passando alla modalità professionale, puoi anche visualizzare il profilo di occupazione dell\'edificio ed eseguire potenzialmente altre azioni.</string>
+    <string name="modeSwitchMessage_professionalAccount">Passando alla modalità normale, tornerai al layout con le funzionalità di base.</string>
 </resources>

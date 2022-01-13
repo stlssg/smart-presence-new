@@ -124,6 +124,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingStart="5dp"
+                tools:ignore="RtlSymmetry">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/account_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="You have the right to require to delete your data stored remotely. You can also switch to professional mode."
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,SmallSp"
+                    android:textColor="@color/black_overlay"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:minHeight="35dp"
                 android:padding="5dp"
                 android:layout_marginTop="10dp">

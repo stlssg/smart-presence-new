@@ -229,4 +229,12 @@
         <item>300</item>
         <item>400</item>
     </string-array>
+    <string name="professionalAccountSettingDescription">您有权要求删除储存云端的数据。你还可以转成普通模式。</string>
+    <string name="regularAccountSettingDescription">您有权要求删除储存云端的数据。你还可以转成专业模式。</string>
+    <string name="professionalAccountModeName">普通模式</string>
+    <string name="regularAccountModeName">专业模式</string>
+    <string name="modeSwitchTitle">转换模式</string>
+    <string name="modeSwitchButton">是的，转换</string>
+    <string name="modeSwitchMessage_regularAccount">通过转成专业模式，你可以可视化你的建筑占有率并进行可能的行为。</string>
+    <string name="modeSwitchMessage_professionalAccount">通过转换成普通模式，你会回到只有基本更能的布局。</string>
 </resources>
