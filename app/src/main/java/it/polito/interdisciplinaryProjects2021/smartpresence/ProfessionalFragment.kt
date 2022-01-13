@@ -30,6 +30,8 @@ class ProfessionalFragment : Fragment() {
         myViewPager.adapter = PageAdapter(childFragmentManager, getString(R.string.fragment_name_graph), getString(R.string.proActionTabName))
         val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         tabLayout.setupWithViewPager(myViewPager)
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_baseline_bar_chart_24)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_baseline_lightbulb_24)
     }
 
 }
