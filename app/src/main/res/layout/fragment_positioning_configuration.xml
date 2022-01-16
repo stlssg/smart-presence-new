@@ -176,7 +176,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="2"
                     android:text="@string/radius_spinner"
                     android:textSize="15sp"
                     android:gravity="center_vertical"
@@ -188,8 +188,9 @@
                     android:id="@+id/radiusSpinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center"/>
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_gravity="end" />
 
             </LinearLayout>
 

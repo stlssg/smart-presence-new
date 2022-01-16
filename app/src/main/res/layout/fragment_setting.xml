@@ -229,7 +229,8 @@
                         android:gravity="center_vertical"
                         android:paddingStart="10dp"
                         tools:ignore="RtlSymmetry,SmallSp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black_overlay"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -300,7 +301,8 @@
                         android:gravity="center_vertical"
                         android:paddingStart="10dp"
                         tools:ignore="RtlSymmetry,SmallSp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/black_overlay"/>
 
                 </LinearLayout>
 
@@ -420,7 +422,8 @@
                     tools:ignore="RtlSymmetry,SmallSp"
                     android:textSize="10sp"
                     android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_overlay"/>
 
             </LinearLayout>
 
