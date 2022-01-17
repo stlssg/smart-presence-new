@@ -233,7 +233,7 @@
     <string name="graphDailySubtitle">Valore medio per ogni ora durante un giorno</string>
     <string name="graphYTitle">Percentuale[%]</string>
     <string name="graphOptionDaily">Quotidiano</string>
-    <string name="graphOptionWeekly">settimanalmente</string>
+    <string name="graphOptionWeekly">Settimanalmente</string>
     <string name="graphOptionMonthly">Mensile</string>
     <string name="graphOptionYearly">Annuale</string>
     <string name="graphOptionTotal">Totale</string>

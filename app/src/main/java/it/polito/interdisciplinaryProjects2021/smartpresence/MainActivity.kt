@@ -2,6 +2,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -133,8 +135,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val fromSettingChangeLanguage = intent.getStringExtra("fromSettingChangeLanguage")
-        if (fromSettingChangeLanguage != null) {
+        if (fromSettingChangeLanguage == "yes") {
             navController.navigate(R.id.nav_setting)
+            intent.putExtra("fromSettingChangeLanguage", "no")
         }
     }
 
