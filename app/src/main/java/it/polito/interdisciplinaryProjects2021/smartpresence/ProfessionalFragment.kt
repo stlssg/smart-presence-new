@@ -1,14 +1,13 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.content.res.Resources
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -32,6 +31,20 @@ class ProfessionalFragment : Fragment() {
         tabLayout.setupWithViewPager(myViewPager)
         tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_baseline_bar_chart_24)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_baseline_lightbulb_24)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            (activity as AppCompatActivity).supportActionBar?.hide()
+            tabLayout.visibility = View.GONE
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        (activity as AppCompatActivity).supportActionBar?.show()
+        view?.findViewById<TabLayout>(R.id.tabLayout)?.visibility = View.VISIBLE
     }
 
 }

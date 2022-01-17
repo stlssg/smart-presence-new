@@ -67,11 +67,37 @@ class GraphFragment : Fragment() {
         val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
         val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
         val totalOption = view.findViewById<TextView>(R.id.totalOption)
-        dailyOption.text = getString(R.string.graphOptionDaily)
-        weeklyOption.text = getString(R.string.graphOptionWeekly)
-        monthlyOption.text = getString(R.string.graphOptionMonthly)
-        yearlyOption.text = getString(R.string.graphOptionYearly)
-        totalOption.text = getString(R.string.graphOptionTotal)
+//        dailyOption.text = getString(R.string.graphOptionDaily)
+//        weeklyOption.text = getString(R.string.graphOptionWeekly)
+//        monthlyOption.text = getString(R.string.graphOptionMonthly)
+//        yearlyOption.text = getString(R.string.graphOptionYearly)
+//        totalOption.text = getString(R.string.graphOptionTotal)
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+        when (languageSpinnerPosition) {
+            1 -> {
+                dailyOption.text = "Quotidiano"
+                weeklyOption.text = "Settimanalmente"
+                monthlyOption.text = "Mensile"
+                yearlyOption.text = "Annuale"
+                totalOption.text = "Totale"
+            }
+            2 -> {
+                dailyOption.text = "日"
+                weeklyOption.text = "周"
+                monthlyOption.text = "月"
+                yearlyOption.text = "年"
+                totalOption.text = "总"
+            }
+            else -> {
+                dailyOption.text = "Daily"
+                weeklyOption.text = "Weekly"
+                monthlyOption.text = "Monthly"
+                yearlyOption.text = "Yearly"
+                totalOption.text = "Total"
+            }
+        }
 
         dailyOption.setOnClickListener {
             resetData()
