@@ -250,8 +250,8 @@
     <string name="frequentNotificationRemindPositiveButton">Vai alle impostazioni</string>
     <string name="firstInstallRemindTitle">Ricordando alla prima rata</string>
     <string name="firstInstallRemindMessage">Gentile utente, l\'app si basa fortemente sul servizio in background e potrebbe richiedere alcune impostazioni personalizzate nel tuo dispositivo, che
-     non può essere modificato dall\'app stessa ma solo da te manualmente, quindi assicurati di aver abilitato l\'autorizzazione o modificato le impostazioni per consentire il servizio in background!!!
-     Grazie per la collaborazione.</string>
+    non può essere modificato dall\'app stessa ma solo da te manualmente, quindi assicurati di aver abilitato l\'autorizzazione o modificato le impostazioni per consentire il servizio in background!!!
+    Inoltre, devi anche abilitare il WiFi e il servizio di localizzazione!!! Grazie per la collaborazione.</string>
     <string name="radius_spinner">Raggio(m) che determina la presenza</string>
     <string name="radius_spinner_description">Il raggio che definisce l\'intervallo in cui verrai considerato come presenza. Maggiore è il valore, minore è il consumo di energia.</string>
     <string-array name="radius_list">
@@ -273,4 +273,8 @@
     <string name="proActionTabName">Altri</string>
     <string name="proFragmentName">Pro</string>
     <string name="proFragmentTitle">Azioni professionali</string>
+    <string name="wifiOrLocationServiceOffAlertTitle">Il servizio essenziale è disattivato</string>
+    <string name="wifiOffLocationOffAlertMessage">Notiamo che il WiFi e i servizi di localizzazione sono stati disattivati. Sono molto importanti per l\'app. Si prega di abilitarli.</string>
+    <string name="wifiOnLocationOffAlertMessage">Notiamo che i servizi di localizzazione sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
+    <string name="wifiOffLocationOnAlertMessage">Notiamo che i servizi WiFi sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
 </resources>

@@ -6,7 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -22,6 +24,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,7 +37,7 @@ class IntroductionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_introduction, container, false)
     }
 
-    @SuppressLint("BatteryLife")
+    @SuppressLint("BatteryLife", "WifiManagerLeak")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,11 +50,18 @@ class IntroductionFragment : Fragment() {
                 commit()
             }
 
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.firstInstallRemindTitle))
-                .setMessage(getString(R.string.firstInstallRemindMessage))
-                .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
-                .show()
+            showAlertDialog(getString(R.string.firstInstallRemindTitle), getString(R.string.firstInstallRemindMessage), requireContext())
+        } else {
+            val wifiManager = context?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+            if (!wifiManager.isWifiEnabled && !LocationManagerCompat.isLocationEnabled(locationManager)) {
+                showAlertDialog(getString(R.string.wifiOrLocationServiceOffAlertTitle), getString(R.string.wifiOffLocationOffAlertMessage), requireContext())
+            } else if (wifiManager.isWifiEnabled && !LocationManagerCompat.isLocationEnabled(locationManager)) {
+                showAlertDialog(getString(R.string.wifiOrLocationServiceOffAlertTitle), getString(R.string.wifiOnLocationOffAlertMessage), requireContext())
+            } else if (!wifiManager.isWifiEnabled && LocationManagerCompat.isLocationEnabled(locationManager)) {
+                showAlertDialog(getString(R.string.wifiOrLocationServiceOffAlertTitle), getString(R.string.wifiOffLocationOnAlertMessage), requireContext())
+            }
         }
 
         val packageName = (activity as AppCompatActivity).packageName
@@ -111,6 +121,14 @@ class IntroductionFragment : Fragment() {
         }
         this.movementMethod = LinkMovementMethod.getInstance()
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
+
+    private fun showAlertDialog(title: String, content: String, context: Context) {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(title)
+            .setMessage(content)
+            .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
+            .show()
     }
 
 }

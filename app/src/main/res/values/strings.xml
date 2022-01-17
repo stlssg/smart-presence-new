@@ -250,7 +250,7 @@
     <string name="firstInstallRemindTitle">Reminding upon first installment</string>
     <string name="firstInstallRemindMessage">Dear user, the app relies strongly on the background service and it may requires some customized settings in your device, which
     cannot be modified by the app itself but only by you manually, so please make sure you have enabled the permission or changed the settings to allow background service for
-    this app!!! Thank you for your cooperation.</string>
+    this app!!! Moreover, you also need to enable WiFi and location service!!! Thank you for your cooperation.</string>
     <string name="radius_spinner">Radius(m) determining presence</string>
     <string name="radius_spinner_description">The radius that defines the range in which you will be considered as presence. The larger the value, the less energy consumed.</string>
     <string-array name="radius_list">
@@ -272,4 +272,8 @@
     <string name="proActionTabName">Others</string>
     <string name="proFragmentName">Pro</string>
     <string name="proFragmentTitle">Professional Actions</string>
+    <string name="wifiOrLocationServiceOffAlertTitle">Essential service is off</string>
+    <string name="wifiOffLocationOffAlertMessage">We notice that the WiFi and location services have been turned off. They are very crucial to the app. Please enable them.</string>
+    <string name="wifiOnLocationOffAlertMessage">We notice that the location services has been turned off. It is very crucial to the app. Please enable it.</string>
+    <string name="wifiOffLocationOnAlertMessage">We notice that the WiFi services has been turned off. It is very crucial to the app. Please enable it.</string>
 </resources>

@@ -218,7 +218,7 @@
     <string name="frequentNotificationRemindPositiveButton">前往设置</string>
     <string name="firstInstallRemindTitle">首次安装提醒</string>
     <string name="firstInstallRemindMessage">亲爱的用户，该应用非常依赖后台服务，其可能需要某些特别的设置，这些设置无法被应用本身更改，只可被你手动更改，故请确保你已经为该应用授予了权限或更改了
-    设置以允许运行后台服务！！！感谢您的配合。</string>
+    设置以允许运行后台服务！！！另外，你也需要启动WiFi和定位服务！！！感谢您的配合。</string>
     <string name="radius_spinner">决定存在的半径(米)</string>
     <string name="radius_spinner_description">该半径会定义一个范围，在其内你会被认为存在。其数值越大，消耗能量越少。</string>
     <string-array name="radius_list">
@@ -240,4 +240,8 @@
     <string name="proActionTabName">其他</string>
     <string name="proFragmentName">专业</string>
     <string name="proFragmentTitle">专业行为</string>
+    <string name="wifiOrLocationServiceOffAlertTitle">关键服务关闭</string>
+    <string name="wifiOffLocationOffAlertMessage">我们注意到WiFi和定位服务已经被关闭，他们对应用至关重要，请务必打开。</string>
+    <string name="wifiOnLocationOffAlertMessage">我们注意到定位服务已经被关闭，其对应用至关重要，请务必打开。</string>
+    <string name="wifiOffLocationOnAlertMessage">我们注意到WiFi服务已经被关闭，其对应用至关重要，请务必打开。</string>
 </resources>
