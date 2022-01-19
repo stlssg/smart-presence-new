@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.LocationManager
 import android.net.Uri
 import android.net.wifi.WifiManager
@@ -19,6 +20,7 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -41,6 +43,11 @@ class IntroductionFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            (activity as AppCompatActivity).supportActionBar?.hide()
+        }
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val firstInstallChecking = sharedPreferences.getString("firstInstallChecking", "true")?.toBoolean()
@@ -129,6 +136,13 @@ class IntroductionFragment : Fragment() {
             .setMessage(content)
             .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
             .show()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        (activity as AppCompatActivity).supportActionBar?.show()
     }
 
 }
