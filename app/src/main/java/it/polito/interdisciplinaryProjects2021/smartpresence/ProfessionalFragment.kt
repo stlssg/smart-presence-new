@@ -30,7 +30,7 @@ class ProfessionalFragment : Fragment() {
         val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         tabLayout.setupWithViewPager(myViewPager)
         tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_baseline_bar_chart_24)
-        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_baseline_lightbulb_24)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_baseline_list_24)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
