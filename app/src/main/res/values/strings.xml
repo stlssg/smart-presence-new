@@ -289,4 +289,11 @@
     <string name="answer_3">First of all, the service will work for very long time in the background,
     which can be done only by all time permission. Secondly, both of the WiFi method and positioning
     method require location service to be turned on to access certain information.</string>
+    <string name="question_4">What device settings should I change?</string>
+    <string name="answer_4">This totally depend on the specific device you are using since different manufacturers
+    have their own customized Android system which limit the background service in different way. In general, the most
+    common settings you need to vary are: all time positioning permission, battery optimization, background service allowance.</string>
+    <string name="question_5">Why the app does not work properly?</string>
+    <string name="answer_5">There are several scenarios: permissions are not granted; background service is
+    restricted; WiFi service is turned off; location service is turned off; you seldom use your phone.</string>
 </resources>

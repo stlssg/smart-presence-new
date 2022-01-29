@@ -252,4 +252,9 @@
     <string name="answer_2">本应用的核心功能会长期利用安卓后台工作的特性，其可能会受到影响且由于电池优化而停止。为了保证服务的连续性以获得可靠的占用情况，必须这样做。</string>
     <string name="question_3">为什么我必须授予所有时间定位权限?</string>
     <string name="answer_3">首先，服务会在后台运行很长时间，这只能通过所有时间的许可来完成。 其次，无论是WiFi方式还是定位方法都需要打开位置服务才能访问某些信息。</string>
+    <string name="question_4">What device settings should I change?</string>
+    <string name="answer_4">这完全取决于您使用的特定设备，因为不同的制造商拥有自己定制的安卓系统，它们以不同的方式限制后台服务。 一般来说，
+    您最需要更改的常见设置是：所有时间定位权限、电池优化、后台服务允许。</string>
+    <string name="question_5">为什么应用程序无法正常运行?</string>
+    <string name="answer_5">有几种情况：权限未授予；后台服务是受限制的;WiFi服务已关闭；位置服务已关闭；你很少使用手机。</string>
 </resources>

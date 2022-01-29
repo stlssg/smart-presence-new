@@ -290,4 +290,12 @@
     <string name="answer_3">Innanzitutto, il servizio funzionerà per molto tempo in background,
      che può essere fatto solo con il permesso di sempre. In secondo luogo, sia il metodo WiFi che il posizionamento
      richiedono l\'attivazione del servizio di localizzazione per accedere a determinate informazioni.</string>
+    <string name="question_4">Quali impostazioni del dispositivo devo modificare?</string>
+    <string name="answer_4">Questo dipende totalmente dal dispositivo specifico che stai utilizzando da diversi produttori
+    hanno il proprio sistema Android personalizzato che limita il servizio in background in modo diverso. In generale, il massimo
+    le impostazioni comuni che devi modificare sono: autorizzazione di posizionamento permanente, ottimizzazione della batteria,
+    indennità di servizio in background.</string>
+    <string name="question_5">Perché l\'app non funziona correttamente?</string>
+    <string name="answer_5">Esistono diversi scenari: le autorizzazioni non vengono concesse; il servizio in background è
+     limitato; Il servizio Wi-Fi è disattivato; il servizio di localizzazione è disattivato; usi raramente il telefono.</string>
 </resources>
