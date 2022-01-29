@@ -25,18 +25,18 @@ class FaqFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        backLinearLayout = view.findViewById<LinearLayout>(R.id.backLinearLayout)
+        backLinearLayout = view.findViewById(R.id.backLinearLayout)
 
         view.findViewById<ImageButton>(R.id.arrowBtn1).setOnClickListener {
-            dealWithExpandableView(it as ImageButton, view.findViewById<TextView>(R.id.ans1))
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans1))
         }
 
         view.findViewById<ImageButton>(R.id.arrowBtn2).setOnClickListener {
-            dealWithExpandableView(it as ImageButton, view.findViewById<TextView>(R.id.ans2))
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans2))
         }
 
         view.findViewById<ImageButton>(R.id.arrowBtn3).setOnClickListener {
-            dealWithExpandableView(it as ImageButton, view.findViewById<TextView>(R.id.ans3))
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans3))
         }
 
     }
