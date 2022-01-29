@@ -27,14 +27,26 @@ class FaqFragment : Fragment() {
 
         backLinearLayout = view.findViewById(R.id.backLinearLayout)
 
+        // 1
+        view.findViewById<CardView>(R.id.card1).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn1), view.findViewById(R.id.ans1))
+        }
         view.findViewById<ImageButton>(R.id.arrowBtn1).setOnClickListener {
             dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans1))
         }
 
+        // 2
+        view.findViewById<CardView>(R.id.card2).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn2), view.findViewById(R.id.ans2))
+        }
         view.findViewById<ImageButton>(R.id.arrowBtn2).setOnClickListener {
             dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans2))
         }
 
+        // 3
+        view.findViewById<CardView>(R.id.card3).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn3), view.findViewById(R.id.ans3))
+        }
         view.findViewById<ImageButton>(R.id.arrowBtn3).setOnClickListener {
             dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans3))
         }
