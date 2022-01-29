@@ -270,11 +270,24 @@
     <string name="modeSwitchButton">Sì, cambia</string>
     <string name="modeSwitchMessage_regularAccount">Passando alla modalità professionale, puoi anche visualizzare il profilo di occupazione dell\'edificio ed eseguire potenzialmente altre azioni.</string>
     <string name="modeSwitchMessage_professionalAccount">Passando alla modalità normale, tornerai al layout con le funzionalità di base.</string>
-    <string name="proActionTabName">Altri</string>
+    <string name="proActionTabName">Info</string>
     <string name="proFragmentName">Pro</string>
     <string name="proFragmentTitle">Azioni professionali</string>
     <string name="wifiOrLocationServiceOffAlertTitle">Il servizio essenziale è disattivato</string>
     <string name="wifiOffLocationOffAlertMessage">Notiamo che il WiFi e i servizi di localizzazione sono stati disattivati. Sono molto importanti per l\'app. Si prega di abilitarli.</string>
     <string name="wifiOnLocationOffAlertMessage">Notiamo che i servizi di localizzazione sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
     <string name="wifiOffLocationOnAlertMessage">Notiamo che i servizi WiFi sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
+    <string name="faqFragmentTitle">Domande</string>
+    <string name="question_1">Quale metodo devo utilizzare per il rilevamento della presenza?</string>
+    <string name="answer_1">Abbiamo fornito tre metodi in totale. In generale, il metodo WiFi è quello più consigliato perché semplice e affidabile.
+    Tuttavia, se non è installato alcun dispositivo WiFi nell\'edificio di destinazione o semplicemente non si desidera utilizzare il WiFi, il metodo di posizionamento è più versatile che
+    richiede solo il servizio di localizzazione del tuo smartphone, ma non è affidabile come il precedente e potrebbe consumare più batteria. Alla fine, c\'è sempre il
+    manuale, ma è necessario fare clic manualmente sul pulsante check-in/out, che si basa totalmente sulla tua abitudine. Il vantaggio è che è molto affidabile e preciso.</string>
+    <string name="question_2">Perché devo disabilitare l\'ottimizzazione della batteria?</string>
+    <string name="answer_2">La funzione principale di questa app sfrutterà la funzionalità del lavoro in background di Android periodicamente a lungo termine, che potrebbe essere influenzata e
+    interrotto a causa dell\'ottimizzazione della batteria. Al fine di garantire la continuità del servizio per ricavare un profilo di occupazione affidabile, è obbligatorio farlo.</string>
+    <string name="question_3">Perché devo concedere il permesso di posizionamento permanente?</string>
+    <string name="answer_3">Innanzitutto, il servizio funzionerà per molto tempo in background,
+     che può essere fatto solo con il permesso di sempre. In secondo luogo, sia il metodo WiFi che il posizionamento
+     richiedono l\'attivazione del servizio di localizzazione per accedere a determinate informazioni.</string>
 </resources>

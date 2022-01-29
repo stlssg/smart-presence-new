@@ -269,11 +269,24 @@
     <string name="modeSwitchButton">Yes, switch</string>
     <string name="modeSwitchMessage_regularAccount">By switching to professional mode, you can also visualize your building occupancy profile and potentially perform other actions.</string>
     <string name="modeSwitchMessage_professionalAccount">By switching to regular mode, you will go back to the layout with basic features.</string>
-    <string name="proActionTabName">Others</string>
+    <string name="proActionTabName">Info</string>
     <string name="proFragmentName">Pro</string>
     <string name="proFragmentTitle">Professional Actions</string>
     <string name="wifiOrLocationServiceOffAlertTitle">Essential service is off</string>
     <string name="wifiOffLocationOffAlertMessage">We notice that the WiFi and location services have been turned off. They are very crucial to the app. Please enable them.</string>
     <string name="wifiOnLocationOffAlertMessage">We notice that the location services has been turned off. It is very crucial to the app. Please enable it.</string>
     <string name="wifiOffLocationOnAlertMessage">We notice that the WiFi services has been turned off. It is very crucial to the app. Please enable it.</string>
+    <string name="faqFragmentTitle">Questions</string>
+    <string name="question_1">Which method should I use for presence detection?</string>
+    <string name="answer_1">We have provided three methods in total. In general, the WiFi method is the most recommended one because it is simple and reliable.
+    However, if there\'s no WiFi device installed in your target building or you simply do not want to use WiFi, the positioning method is a more versatile one which
+    only requires the location service of your smart phone, but it is not as reliable as the previous one and may consume more battery. At last, there is always the
+    manual one, but you need to manually click the check in/out button, which totally relies on your habit. The advantage of it is that it is very reliable and accurate.</string>
+    <string name="question_2">Why do I have to disable the battery optimization?</string>
+    <string name="answer_2">The core function of this app will exploit the feature of Android background work periodically in a long term, which may be affected and
+    stopped due to battery optimization. In order to guarantee the continuity of the service to derive a reliable occupancy profile, it is mandatory to do it.</string>
+    <string name="question_3">Why do I have to grant the all time positioning permission?</string>
+    <string name="answer_3">First of all, the service will work for very long time in the background,
+    which can be done only by all time permission. Secondly, both of the WiFi method and positioning
+    method require location service to be turned on to access certain information.</string>
 </resources>

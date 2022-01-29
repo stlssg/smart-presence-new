@@ -327,31 +327,31 @@ class GraphFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
-
-        when (languageSpinnerPosition) {
-            1 -> setLang("it")
-            2 -> setLang("zh")
-            else -> setLang("en")
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
-
-        when (languageSpinnerPosition) {
-            1 -> setLang("it")
-            2 -> setLang("zh")
-            else -> setLang("en")
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+//        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+//
+//        when (languageSpinnerPosition) {
+//            1 -> setLang("it")
+//            2 -> setLang("zh")
+//            else -> setLang("en")
+//        }
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//
+//        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+//        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+//
+//        when (languageSpinnerPosition) {
+//            1 -> setLang("it")
+//            2 -> setLang("zh")
+//            else -> setLang("en")
+//        }
+//    }
 
     private fun setLang(lang: String) {
         val locale = Locale(lang)

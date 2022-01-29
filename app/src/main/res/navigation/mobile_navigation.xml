@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_introduction_to_infoBrandFragment"
             app:destination="@id/infoBrandFragment" />
+        <action
+            android:id="@+id/action_nav_introduction_to_faqFragment"
+            app:destination="@id/faqFragment" />
     </fragment>
 
     <fragment
@@ -133,4 +136,9 @@
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.ProfessionalFragment"
         android:label="@string/proFragmentTitle"
         tools:layout="@layout/fragment_professional" />
+    <fragment
+        android:id="@+id/faqFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.FaqFragment"
+        android:label="@string/faqFragmentTitle"
+        tools:layout="@layout/fragment_faq" />
 </navigation>
