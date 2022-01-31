@@ -25,6 +25,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -42,6 +43,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.polito.interdisciplinaryProjects2021.smartpresence.databinding.ActivityMainBinding
 
 class DeclarationFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            // Leave it like this to disable going back
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

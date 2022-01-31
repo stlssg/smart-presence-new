@@ -98,7 +98,8 @@
     <fragment
         android:id="@+id/mapFragment"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.MapFragment"
-        android:label="@string/map_fragment_name" />
+        android:label="@string/map_fragment_name"
+        tools:layout="@layout/fragment_map"/>
     <fragment
         android:id="@+id/positioningConfigurationFragment"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.PositioningConfigurationFragment"
