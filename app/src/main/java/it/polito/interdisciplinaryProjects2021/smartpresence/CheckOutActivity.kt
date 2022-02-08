@@ -28,9 +28,14 @@ class CheckOutActivity : AppCompatActivity() {
 
             val now = DateTime.now()
 
-            val input = hashMapOf(now.toString() to "OUT")
+            val input = hashMapOf("presence" to "OUT", "timestamp" to now.toString())
 
-            address?.let { db.collection(it).document("$user+MANUAL").set(input, SetOptions.merge()) }
+            db.collection(address!!).document(user!!).set(hashMapOf("UserName" to user), SetOptions.merge())
+            db.collection(address)
+                .document(user)
+                .collection("MANUAL")
+                .document(now.toString())
+                .set(input, SetOptions.merge())
 
             Toast.makeText(applicationContext, getString(R.string.shortcutCheckOutMessage), Toast.LENGTH_LONG).show()
         } else {

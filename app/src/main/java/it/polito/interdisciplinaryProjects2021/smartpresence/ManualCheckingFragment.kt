@@ -71,10 +71,15 @@ class ManualCheckingFragment : Fragment() {
         val now = DateTime.now()
 
         val inputBuildingInfo = hashMapOf("Address" to address, "MaxOccupancy" to maxOccupancy)
-        val input = hashMapOf(now.toString() to action)
+        val input = hashMapOf("presence" to action, "timestamp" to now.toString())
 
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
-        db.collection(address).document("$user+MANUAL").set(input, SetOptions.merge())
+        db.collection(address).document(user!!).set(hashMapOf("UserName" to user), SetOptions.merge())
+        db.collection(address)
+            .document(user)
+            .collection("MANUAL")
+            .document(now.toString())
+            .set(input, SetOptions.merge())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
