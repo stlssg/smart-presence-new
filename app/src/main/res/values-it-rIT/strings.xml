@@ -298,4 +298,19 @@
     <string name="question_5">Perché l\'app non funziona correttamente?</string>
     <string name="answer_5">Esistono diversi scenari: le autorizzazioni non vengono concesse; il servizio in background è
      limitato; Il servizio Wi-Fi è disattivato; il servizio di localizzazione è disattivato; usi raramente il telefono.</string>
+    <string name="question_6">Quale modalità devo selezionare, normale o professionale?</string>
+    <string name="answer_6">Nella maggior parte dei casi, si consiglia di selezionare la modalità normale poiché è leggera
+     e semplice. Se sei un esperto o personale correlato, la modalità professionale può aiutarti a esibirti
+     più azioni da remoto. Tuttavia, dipende totalmente da te, la modalità professionale non ti costerà di più.</string>
+    <string name="question_7">Per il metodo di controllo WiFi, cos\'è SSID e BSSID?</string>
+    <string name="answer_7">SSID è il cosiddetto identificatore del set di servizi, che è semplicemente il nome WiFi
+     mentre BSSID è l\'identificatore del set di servizi di base, che è un\'etichetta a 48 bit assegnata dal router. Sono
+     entrambi utilizzati per identificare il router nell\'edificio di destinazione. SSID è il cosiddetto identificatore
+    del set di servizi, che è semplicemente il nome WiFi mentre BSSID è l\'identificatore del set di servizi di base,
+    che è un\'etichetta a 48 bit assegnata dal router. Sono entrambi utilizzati per identificare il router nell\'edificio di destinazione.</string>
+    <string name="question_8">A che tipo di impostazione dell\'ora devo fare riferimento?</string>
+    <string name="answer_8">Normalmente, si suggerisce di seguire quelli di default, poiché hanno più alti
+     precisione e può coprire il periodo di tempo più significativo durante una giornata. Tuttavia, puoi scegliere di personalizzare
+     in base al proprio comportamento. Ad esempio, se lavori sempre fuori durante la notte, devi farlo
+     cambia l\'ora di arresto in un\'istanza in ritardo.</string>
 </resources>

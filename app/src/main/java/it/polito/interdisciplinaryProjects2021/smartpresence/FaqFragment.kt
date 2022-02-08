@@ -69,6 +69,29 @@ class FaqFragment : Fragment() {
             dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans5))
         }
 
+        // 6
+        view.findViewById<CardView>(R.id.card6).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn6), view.findViewById(R.id.ans6))
+        }
+        view.findViewById<ImageButton>(R.id.arrowBtn6).setOnClickListener {
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans6))
+        }
+
+        // 7
+        view.findViewById<CardView>(R.id.card7).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn7), view.findViewById(R.id.ans7))
+        }
+        view.findViewById<ImageButton>(R.id.arrowBtn7).setOnClickListener {
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans7))
+        }
+
+        // 8
+        view.findViewById<CardView>(R.id.card8).setOnClickListener {
+            dealWithExpandableView(view.findViewById(R.id.arrowBtn8), view.findViewById(R.id.ans8))
+        }
+        view.findViewById<ImageButton>(R.id.arrowBtn8).setOnClickListener {
+            dealWithExpandableView(it as ImageButton, view.findViewById(R.id.ans8))
+        }
     }
 
     private fun dealWithExpandableView(btn: ImageButton, view: TextView) {

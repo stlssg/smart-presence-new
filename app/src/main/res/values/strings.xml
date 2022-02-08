@@ -296,4 +296,17 @@
     <string name="question_5">Why the app does not work properly?</string>
     <string name="answer_5">There are several scenarios: permissions are not granted; background service is
     restricted; WiFi service is turned off; location service is turned off; you seldom use your phone.</string>
+    <string name="question_6">Which mode should I select, regular or professional?</string>
+    <string name="answer_6">In most cases, it is suggested to select regular mode since it is lightweight
+    and simple. If you are an expert or related personnel, the professional mode can help you to perform
+    more actions remotely. However, it is totally up to you, the professional mode won\'t cost you more.</string>
+    <string name="question_7">For WiFi checking method, what is SSID and BSSID?</string>
+    <string name="answer_7">SSID is the so-called service set identifier, which is simply the WiFi name
+    while BSSID is basic service set identifier, which is a 48-bit label assigned by the router. They are
+    both used to identify the router in the target building.</string>
+    <string name="question_8">What kind of time setting should I refer to?</string>
+    <string name="answer_8">Normally, it is suggested to follow the default ones, since they have higher
+    accuracy and can cover most meaningful time period during a day. However, you can choose to customize
+    based on your own behaviour. For instance, if you always work outside during the night, you need to
+    change the stop time to a late time instance.</string>
 </resources>

@@ -257,4 +257,12 @@
     您最需要更改的常见设置是：所有时间定位权限、电池优化、后台服务允许。</string>
     <string name="question_5">为什么应用程序无法正常运行?</string>
     <string name="answer_5">有几种情况：权限未授予；后台服务是受限制的；WiFi服务已关闭；位置服务已关闭；你很少使用手机。</string>
+    <string name="question_6">我应该选择哪种模式，常规模式还是专业模式？</string>
+    <string name="answer_6">在大多数情况下，建议选择常规模式，因为它是轻量级的且简单。 如果您是专家或相关人员，专业模
+    式可以帮助您执行更多远程操作。 但是，这完全取决于您，专业模式不会产生更多花费。</string>
+    <string name="question_7">对于WiFi检查方法，什么是SSID和BSSID?</string>
+    <string name="answer_7">SSID就是所谓的服务集标识符，简单来说就是WiFi名称而BSSID是基本服务集标识符，是路由器分配的48位标签。他们两者都用于识别目标建筑物中的路由器。</string>
+    <string name="question_8">我应该参考什么样的时间设置？</string>
+    <string name="answer_8">通常，建议遵循默认值，因为它们具有更高的准确性，并且可以涵盖一天中最有意义的时间段。但是，您可以根据你自己的行为选择自定义。
+    例如，如果您总是在夜间在外面工作，您需要将停止时间更改为延迟时间实例。</string>
 </resources>
