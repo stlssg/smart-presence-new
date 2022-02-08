@@ -47,8 +47,12 @@ class MyPeriodicWifiCheckingWork (context: Context, workerParameters: WorkerPara
                 if (!(currentBSSID != bssid && currentSSID != ssid)) {
                     val collectionPath = inputData.getString("collection").toString()
                     val documentPath = inputData.getString("document").toString()
-                    val input = hashMapOf(now.toString() to "CONNECTED")
-                    db.collection(collectionPath).document("$documentPath+WIFI").set(input, SetOptions.merge())
+                    val input = hashMapOf("presence" to "CONNECTED", "timestamp" to now.toString())
+                    db.collection(collectionPath)
+                        .document(documentPath)
+                        .collection("WIFI")
+                        .document(now.toString())
+                        .set(input, SetOptions.merge())
                 }
             }
         }

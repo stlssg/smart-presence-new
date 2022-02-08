@@ -45,6 +45,7 @@ class WifiCheckingFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
 
         setHasOptionsMenu(true)
+
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
 
         val wifiStart = view.findViewById<Button>(R.id.wifiStart)
@@ -120,6 +121,8 @@ class WifiCheckingFragment : Fragment() {
             stopWork()
 
             Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartService")
+            Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalMorning")
+            Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalEvening")
 
             sound.play(MediaActionSound.STOP_VIDEO_RECORDING)
         }
@@ -193,7 +196,7 @@ class WifiCheckingFragment : Fragment() {
         val inputBuildingInfo = hashMapOf("Address" to address, "SSID" to ssid, "BSSID" to bssid, "MaxOccupancy" to maxOccupancy)
         val inputUserInfo = hashMapOf("UserName" to user, "start" to start_timestamp, "end" to end_timestamp, "working_interval" to working_interval)
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
-        db.collection(address).document("$user+WIFI").set(inputUserInfo, SetOptions.merge())
+        db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())
     }
 
     private fun startMyPeriodicWork(address: String?,
