@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.others
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -28,19 +28,11 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import it.polito.interdisciplinaryProjects2021.smartpresence.databinding.ActivityMainBinding
+import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class DeclarationFragment : Fragment() {
 

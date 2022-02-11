@@ -1,9 +1,8 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.MediaActionSound
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -16,6 +15,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class PositioningCheckingFragment : Fragment() {
 

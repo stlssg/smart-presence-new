@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased
 
 import android.content.Context
 import android.content.Intent
@@ -9,12 +9,14 @@ import android.widget.Toast
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import org.joda.time.DateTime
 
-class CheckOutActivity : AppCompatActivity() {
+class CheckInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_check_out)
+//        setContentView(R.layout.activity_check_in)
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val addressConfigurationFinished = sharedPreferences.getString("addressConfigurationFinished", "false").toBoolean()
@@ -28,7 +30,7 @@ class CheckOutActivity : AppCompatActivity() {
 
             val now = DateTime.now()
 
-            val input = hashMapOf("presence" to "OUT", "timestamp" to now.toString())
+            val input = hashMapOf("presence" to "IN", "timestamp" to now.toString())
 
             db.collection(address!!).document(user!!).set(hashMapOf("UserName" to user), SetOptions.merge())
             db.collection(address)
@@ -37,7 +39,7 @@ class CheckOutActivity : AppCompatActivity() {
                 .document(now.toString())
                 .set(input, SetOptions.merge())
 
-            Toast.makeText(applicationContext, getString(R.string.shortcutCheckOutMessage), Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, getString(R.string.shortcutCheckInMessage), Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, getString(R.string.shortcutNoConfiguration), Toast.LENGTH_LONG).show()
 

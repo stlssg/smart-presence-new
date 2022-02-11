@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.professional
 
 import android.graphics.Color
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class ProActionFragment : Fragment() {
 

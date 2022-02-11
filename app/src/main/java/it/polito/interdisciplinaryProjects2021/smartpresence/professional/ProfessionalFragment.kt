@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.professional
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class ProfessionalFragment : Fragment() {
 
@@ -26,7 +27,9 @@ class ProfessionalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val myViewPager = view.findViewById<ViewPager>(R.id.myViewPager)
-        myViewPager.adapter = PageAdapter(childFragmentManager, getString(R.string.fragment_name_graph), getString(R.string.proActionTabName))
+        myViewPager.adapter = PageAdapter(childFragmentManager, getString(R.string.fragment_name_graph), getString(
+            R.string.proActionTabName
+        ))
         val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         tabLayout.setupWithViewPager(myViewPager)
         tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_baseline_bar_chart_24)

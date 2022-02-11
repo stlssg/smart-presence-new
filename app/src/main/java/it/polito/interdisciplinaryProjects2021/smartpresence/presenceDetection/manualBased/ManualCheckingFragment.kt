@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -12,6 +12,7 @@ import androidx.transition.TransitionInflater
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import org.joda.time.DateTime
 
 class ManualCheckingFragment : Fragment() {

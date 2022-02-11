@@ -1,11 +1,10 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.MediaActionSound
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.Toast
@@ -21,6 +20,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import java.util.concurrent.TimeUnit
 
 class WifiCheckingFragment : Fragment() {

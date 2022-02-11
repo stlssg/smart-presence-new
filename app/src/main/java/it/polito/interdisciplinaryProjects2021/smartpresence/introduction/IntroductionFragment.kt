@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.introduction
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -27,6 +27,7 @@ import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class IntroductionFragment : Fragment() {
 

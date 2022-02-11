@@ -2,17 +2,12 @@ package it.polito.interdisciplinaryProjects2021.smartpresence
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -23,6 +18,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.databinding.ActivityMainBinding
+import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased.Shortcuts
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

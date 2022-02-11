@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased
 
 import android.content.Context
 import android.net.wifi.WifiManager

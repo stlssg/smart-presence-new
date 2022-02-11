@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_introduction"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.IntroductionFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.introduction.IntroductionFragment"
         android:label="@string/fragment_name_introduction"
         tools:layout="@layout/fragment_introduction" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_presence_detection"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.PresenceDetectionFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.PresenceDetectionFragment"
         android:label="@string/fragment_detection_title"
         tools:layout="@layout/fragment_presence_detection" >
         <action
@@ -36,13 +36,13 @@
 
     <fragment
         android:id="@+id/nav_setting"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.SettingFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.SettingFragment"
         android:label="@string/fragment_name_setting"
         tools:layout="@layout/fragment_setting" />
 
     <fragment
         android:id="@+id/wifiCheckingFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.WifiCheckingFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased.WifiCheckingFragment"
         android:label="@string/fragment_wifi_checking_name"
         tools:layout="@layout/fragment_wifi_checking" >
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.SignInFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/declarationFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.DeclarationFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.DeclarationFragment"
         android:label="fragment_declaration"
         tools:layout="@layout/fragment_declaration" >
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/manualCheckingFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.ManualCheckingFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased.ManualCheckingFragment"
         android:label="@string/fragment_manual_checking_name"
         tools:layout="@layout/fragment_manual_checking" >
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/positioningCheckingFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.PositioningCheckingFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased.PositioningCheckingFragment"
         android:label="@string/fragment_positioning_checking_name"
         tools:layout="@layout/fragment_positioning_checking" >
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/wifiConfigurationFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.WifiConfigurationFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased.WifiConfigurationFragment"
         android:label="@string/fragment_configuration_name"
         tools:layout="@layout/fragment_wifi_configuration" >
         <action
@@ -97,12 +97,12 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.MapFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.MapFragment"
         android:label="@string/map_fragment_name"
         tools:layout="@layout/fragment_map"/>
     <fragment
         android:id="@+id/positioningConfigurationFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.PositioningConfigurationFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased.PositioningConfigurationFragment"
         android:label="@string/fragment_configuration_name"
         tools:layout="@layout/fragment_positioning_configuration" >
         <action
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/manualConfigurationFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.ManualConfigurationFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased.ManualConfigurationFragment"
         android:label="@string/fragment_configuration_name"
         tools:layout="@layout/fragment_manual_configuration" >
         <action
@@ -120,12 +120,12 @@
     </fragment>
     <fragment
         android:id="@+id/infoBrandFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.InfoBrandFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.introduction.InfoBrandFragment"
         android:label="@string/fragment_info_brand_name"
         tools:layout="@layout/fragment_info_brand" />
     <fragment
         android:id="@+id/startFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.StartFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -134,12 +134,12 @@
     </fragment>
     <fragment
         android:id="@+id/nav_chart"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.ProfessionalFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.professional.ProfessionalFragment"
         android:label="@string/proFragmentTitle"
         tools:layout="@layout/fragment_professional" />
     <fragment
         android:id="@+id/faqFragment"
-        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.FaqFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.introduction.FaqFragment"
         android:label="@string/faqFragmentTitle"
         tools:layout="@layout/fragment_faq" />
     <fragment

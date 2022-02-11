@@ -1,14 +1,14 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.manualBased
 
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import android.content.res.Resources
 import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 const val shortcut_id_IN = "id_in"
 const val shortcut_id_OUT = "id_out"

@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.others
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class StartFragment : Fragment() {
 

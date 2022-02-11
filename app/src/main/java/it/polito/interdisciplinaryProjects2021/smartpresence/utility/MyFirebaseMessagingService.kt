@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.utility
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -13,6 +13,8 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavDeepLinkBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 const val channelId = "notification_channel"
 const val channelName = "it.polito.interdisciplinaryProjects2021.smartpresence"

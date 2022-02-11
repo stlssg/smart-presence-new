@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.professional
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +15,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.github.aachartmodel.aainfographics.aachartcreator.*
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import java.util.*
 
 class GraphFragment : Fragment() {
@@ -119,7 +113,9 @@ class GraphFragment : Fragment() {
                                     dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                 }
                                 aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(dailyLabel, dailyData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                    generateChart(dailyLabel, dailyData, getString(R.string.graphDailyTitle), getString(
+                                        R.string.graphDailySubtitle
+                                    ))
                                 )
                             }
                     } else {
@@ -157,7 +153,9 @@ class GraphFragment : Fragment() {
                                     weeklyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                 }
                                 aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(weeklyLabel, weeklyData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                    generateChart(weeklyLabel, weeklyData, getString(R.string.graphDailyTitle), getString(
+                                        R.string.graphDailySubtitle
+                                    ))
                                 )
                             }
                     } else {
@@ -195,7 +193,9 @@ class GraphFragment : Fragment() {
                                     monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                 }
                                 aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(monthlyLabel, monthlyData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                    generateChart(monthlyLabel, monthlyData, getString(R.string.graphDailyTitle), getString(
+                                        R.string.graphDailySubtitle
+                                    ))
                                 )
                             }
                     } else {
@@ -233,7 +233,9 @@ class GraphFragment : Fragment() {
                                     yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                 }
                                 aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(yearlyLabel, yearlyData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                    generateChart(yearlyLabel, yearlyData, getString(R.string.graphDailyTitle), getString(
+                                        R.string.graphDailySubtitle
+                                    ))
                                 )
                             }
                     } else {
@@ -271,7 +273,9 @@ class GraphFragment : Fragment() {
                                     totalData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                 }
                                 aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(totalLabel, totalData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                    generateChart(totalLabel, totalData, getString(R.string.graphDailyTitle), getString(
+                                        R.string.graphDailySubtitle
+                                    ))
                                 )
                             }
                     } else {
@@ -308,7 +312,9 @@ class GraphFragment : Fragment() {
                             }
 //                            Log.d("data!!!!!!!", "$dailyData and $dailyLabel")
                             aaChartView.aa_drawChartWithChartModel(
-                                generateChart(dailyLabel, dailyData, getString(R.string.graphDailyTitle), getString(R.string.graphDailySubtitle))
+                                generateChart(dailyLabel, dailyData, getString(R.string.graphDailyTitle), getString(
+                                    R.string.graphDailySubtitle
+                                ))
                             )
                         }
                 } else {

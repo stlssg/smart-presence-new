@@ -1,4 +1,4 @@
-package it.polito.interdisciplinaryProjects2021.smartpresence
+package it.polito.interdisciplinaryProjects2021.smartpresence.introduction
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class FaqFragment : Fragment() {
 
