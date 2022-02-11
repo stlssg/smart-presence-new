@@ -129,8 +129,8 @@
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
-            android:id="@+id/action_startFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/action_startFragment_to_splashBaseFragment"
+            app:destination="@id/splashBaseFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_chart"
@@ -142,4 +142,13 @@
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.FaqFragment"
         android:label="@string/faqFragmentTitle"
         tools:layout="@layout/fragment_faq" />
+    <fragment
+        android:id="@+id/splashBaseFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.splashScreen.SplashBaseFragment"
+        android:label="fragment_splash_base"
+        tools:layout="@layout/fragment_splash_base" >
+        <action
+            android:id="@+id/action_splashBaseFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
