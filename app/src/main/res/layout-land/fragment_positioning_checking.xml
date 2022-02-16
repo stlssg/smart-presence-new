@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/startButton"
-        app:icon="@drawable/ic_baseline_not_started_24"
+        app:icon="@drawable/ic_baseline_play_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/positioningShowInfo"
         app:layout_constraintStart_toStartOf="parent"

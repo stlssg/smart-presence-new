@@ -313,4 +313,6 @@
      precisione e può coprire il periodo di tempo più significativo durante una giornata. Tuttavia, puoi scegliere di personalizzare
      in base al proprio comportamento. Ad esempio, se lavori sempre fuori durante la notte, devi farlo
      cambia l\'ora di arresto in un\'istanza in ritardo.</string>
+    <string name="geofenceWorkingStatus">Geofence funziona</string>
+    <string name="geofenceNotWorkingStatus">Geofence non funziona</string>
 </resources>

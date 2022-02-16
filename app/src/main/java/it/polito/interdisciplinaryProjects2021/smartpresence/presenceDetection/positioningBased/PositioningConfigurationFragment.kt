@@ -61,7 +61,7 @@ class PositioningConfigurationFragment : Fragment() {
         val latitude = sharedPreferences.getString("latitude", "nothing")
         val longitude = sharedPreferences.getString("longitude", "nothing")
         val maxOccupancy = sharedPreferences.getString("maxOccupancy", "nothing")
-        val energySavingMode = sharedPreferences.getString("energySavingMode", "nothing")
+        val energySavingMode = sharedPreferences.getString("energySavingMode", "off")
 
         if (latitude != "nothing") {
             latitude_input.editText?.setText(latitude?.replace("_", " "))
@@ -76,7 +76,7 @@ class PositioningConfigurationFragment : Fragment() {
             max_occupancy_input.editText?.setText(maxOccupancy?.replace("_", " "))
         }
 
-        energySavingModeOnOff.isChecked = !(energySavingMode == "nothing" || energySavingMode == "off")
+        energySavingModeOnOff.isChecked = (energySavingMode != "off")
 
         energySavingModeOnOff?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -174,6 +174,10 @@ class PositioningConfigurationFragment : Fragment() {
                                 putString("longitude", longitude_input)
                                 putString("address", address_input.replace(" ", "_"))
                                 putString("maxOccupancy", max_occupancy_input)
+                                putString("addressConfigurationFinished", "true")
+                                putString("maxOccupancyConfigurationFinished", "true")
+                                putString("latitudeConfigurationFinished", "true")
+                                putString("longitudeConfigurationFinished", "true")
                                 apply()
                             }
 

@@ -309,4 +309,6 @@
     accuracy and can cover most meaningful time period during a day. However, you can choose to customize
     based on your own behaviour. For instance, if you always work outside during the night, you need to
     change the stop time to a late time instance.</string>
+    <string name="geofenceWorkingStatus">Geofence is working</string>
+    <string name="geofenceNotWorkingStatus">Geofence is not working</string>
 </resources>

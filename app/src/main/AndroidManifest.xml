@@ -19,6 +19,12 @@
         android:roundIcon="@drawable/smart_presence"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartPresence">
+
+        <receiver android:name=".presenceDetection.positioningBased.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedReceiver" />
+
         <activity
             android:name=".presenceDetection.manualBased.CheckOutActivity"
             android:exported="false"

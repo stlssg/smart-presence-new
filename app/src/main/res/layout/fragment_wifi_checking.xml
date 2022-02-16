@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView_wifiGuide"
         android:text="@string/startButton"
-        app:icon="@drawable/ic_baseline_not_started_24"/>
+        app:icon="@drawable/ic_baseline_play_circle_24"/>
 
     <Button
         android:id="@+id/wifiRestart"

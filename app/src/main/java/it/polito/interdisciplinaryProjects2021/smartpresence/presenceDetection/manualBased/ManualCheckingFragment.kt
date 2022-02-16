@@ -71,7 +71,7 @@ class ManualCheckingFragment : Fragment() {
 
         val now = DateTime.now()
 
-        val inputBuildingInfo = hashMapOf("Address" to address, "MaxOccupancy" to maxOccupancy)
+        val inputBuildingInfo = hashMapOf("Address" to address, "Maximum_expected_number" to maxOccupancy)
         val input = hashMapOf("presence" to action, "timestamp" to now.toString())
 
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())

@@ -265,4 +265,6 @@
     <string name="question_8">我应该参考什么样的时间设置？</string>
     <string name="answer_8">通常，建议遵循默认值，因为它们具有更高的准确性，并且可以涵盖一天中最有意义的时间段。但是，您可以根据你自己的行为选择自定义。
     例如，如果您总是在夜间在外面工作，您需要将停止时间更改为延迟时间实例。</string>
+    <string name="geofenceWorkingStatus">地理围栏正在工作</string>
+    <string name="geofenceNotWorkingStatus">地理围栏不工作</string>
 </resources>

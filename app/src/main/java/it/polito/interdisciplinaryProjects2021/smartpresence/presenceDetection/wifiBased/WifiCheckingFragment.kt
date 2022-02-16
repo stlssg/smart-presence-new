@@ -193,7 +193,7 @@ class WifiCheckingFragment : Fragment() {
         working_interval:String) {
 
         val db = Firebase.firestore
-        val inputBuildingInfo = hashMapOf("Address" to address, "SSID" to ssid, "BSSID" to bssid, "MaxOccupancy" to maxOccupancy)
+        val inputBuildingInfo = hashMapOf("Address" to address, "SSID" to ssid, "BSSID" to bssid, "Maximum_expected_number" to maxOccupancy)
         val inputUserInfo = hashMapOf("UserName" to user, "start" to start_timestamp, "end" to end_timestamp, "working_interval" to working_interval)
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())
