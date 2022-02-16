@@ -276,7 +276,7 @@
     <string name="wifiOffLocationOffAlertMessage">We notice that the WiFi and location services have been turned off. They are very crucial to the app. Please enable them.</string>
     <string name="wifiOnLocationOffAlertMessage">We notice that the location services has been turned off. It is very crucial to the app. Please enable it.</string>
     <string name="wifiOffLocationOnAlertMessage">We notice that the WiFi services has been turned off. It is very crucial to the app. Please enable it.</string>
-    <string name="faqFragmentTitle">Questions</string>
+    <string name="faqFragmentTitle">Questions&amp;Answers</string>
     <string name="question_1">Which method should I use for presence detection?</string>
     <string name="answer_1">We have provided three methods in total. In general, the WiFi method is the most recommended one because it is simple and reliable.
     However, if there\'s no WiFi device installed in your target building or you simply do not want to use WiFi, the positioning method is a more versatile one which

@@ -277,7 +277,7 @@
     <string name="wifiOffLocationOffAlertMessage">Notiamo che il WiFi e i servizi di localizzazione sono stati disattivati. Sono molto importanti per l\'app. Si prega di abilitarli.</string>
     <string name="wifiOnLocationOffAlertMessage">Notiamo che i servizi di localizzazione sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
     <string name="wifiOffLocationOnAlertMessage">Notiamo che i servizi WiFi sono stati disattivati. È molto importante per l\'app. Si prega di abilitarlo.</string>
-    <string name="faqFragmentTitle">Domande</string>
+    <string name="faqFragmentTitle">Domande&amp;Risposte</string>
     <string name="question_1">Quale metodo devo utilizzare per il rilevamento della presenza?</string>
     <string name="answer_1">Abbiamo fornito tre metodi in totale. In generale, il metodo WiFi è quello più consigliato perché semplice e affidabile.
     Tuttavia, se non è installato alcun dispositivo WiFi nell\'edificio di destinazione o semplicemente non si desidera utilizzare il WiFi, il metodo di posizionamento è più versatile che

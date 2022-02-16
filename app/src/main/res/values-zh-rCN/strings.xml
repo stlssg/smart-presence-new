@@ -244,7 +244,7 @@
     <string name="wifiOffLocationOffAlertMessage">我们注意到WiFi和定位服务已经被关闭，他们对应用至关重要，请务必打开。</string>
     <string name="wifiOnLocationOffAlertMessage">我们注意到定位服务已经被关闭，其对应用至关重要，请务必打开。</string>
     <string name="wifiOffLocationOnAlertMessage">我们注意到WiFi服务已经被关闭，其对应用至关重要，请务必打开。</string>
-    <string name="faqFragmentTitle">问题</string>
+    <string name="faqFragmentTitle">问题&amp;答案</string>
     <string name="question_1">我应该用哪种方法来探测是否存在?</string>
     <string name="answer_1">我们一共提供了三种方法。 一般来说，WiFi方法是最推荐的一种，因为它简单可靠。但是，如果您的目标建筑物中没有安装WiFi设备，或者您只是不想使用WiFi，则定位方法是一种更通用
     的方法，它只需要智能手机的定位服务，但不如上一个可靠，且可能会消耗更多电池。 最后，还有手动方法，但是您需要手动点击签入/签出按钮，这完全取决于您的习惯。 它的优点是非常可靠和准确。</string>
