@@ -312,4 +312,15 @@
     <string name="geofenceWorkingStatus">Geofence is working</string>
     <string name="geofenceNotWorkingStatus">Geofence is not working</string>
     <string name="blurViewText">Please stop the service that is running before changing any configurations!</string>
+    <string name="splash1Title">Presence to Occupancy</string>
+    <string name="splash1Content">By detecting your presence in target building, the occupancy can be
+    derived to support your smart building management.</string>
+    <string name="splash2Title">Three Approaches</string>
+    <string name="splash2Content">The app offers three methods in total. You can choose among them
+    for your own convenience.</string>
+    <string name="splash3Title">More for Experts</string>
+    <string name="splash3Content">If you are a professional who works on smart building, data analysis
+    or related regions, you have more functions for visualization, etc.</string>
+    <string name="splashButtonSkip">Skip</string>
+    <string name="splashButtonStart">Get Started</string>
 </resources>

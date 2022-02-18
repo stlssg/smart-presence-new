@@ -316,4 +316,15 @@
     <string name="geofenceWorkingStatus">Geofence funziona</string>
     <string name="geofenceNotWorkingStatus">Geofence non funziona</string>
     <string name="blurViewText">Si prega di interrompere il servizio in esecuzione prima di modificare qualsiasi configurazione!</string>
+    <string name="splash1Title">Presenza per occupazione</string>
+    <string name="splash1Content">Rilevando la tua presenza nell\'edificio di destinazione, l\'occupazione può essere
+    derivato per supportare la gestione intelligente degli edifici.</string>
+    <string name="splash2Title">Tre approcci</string>
+    <string name="splash2Content">L\'app offre tre metodi in totale. Puoi scegliere tra di loro
+    per la tua comodità.</string>
+    <string name="splash3Title">Altro per esperti</string>
+    <string name="splash3Content">Se sei un professionista che si occupa di smart building, analisi dei dati
+    o regioni correlate, hai più funzioni per la visualizzazione, ecc.</string>
+    <string name="splashButtonSkip">Saltare</string>
+    <string name="splashButtonStart">Iniziare</string>
 </resources>

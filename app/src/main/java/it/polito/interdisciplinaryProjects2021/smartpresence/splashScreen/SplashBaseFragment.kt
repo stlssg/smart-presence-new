@@ -39,7 +39,7 @@ class SplashBaseFragment : Fragment() {
 
         val splashScreenBaseViewPager = view.findViewById<ViewPager2>(R.id.splashScreenBaseViewPager)
         val navController = findNavController()
-        splashScreenBaseViewPager.adapter = ViewPagerAdapter(titleList, contentList, imageList, navController)
+        splashScreenBaseViewPager.adapter = ViewPagerAdapter(titleList, contentList, imageList, getString(R.string.splashButtonStart), navController)
         splashScreenBaseViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         val indicator = view.findViewById<CircleIndicator3>(R.id.indicator)
@@ -53,9 +53,9 @@ class SplashBaseFragment : Fragment() {
     }
 
     private fun postToList() {
-        for (i in 1..3) {
-            addToList("Title: $i", "Content: $i", R.mipmap.ic_launcher_round)
-        }
+        addToList(getString(R.string.splash1Title), getString(R.string.splash1Content), R.drawable.pic_splash_1)
+        addToList(getString(R.string.splash2Title), getString(R.string.splash2Content), R.drawable.pic_splash_2)
+        addToList(getString(R.string.splash3Title), getString(R.string.splash3Content), R.drawable.pic_splash_3)
     }
 
     override fun onResume() {
@@ -77,6 +77,7 @@ class SplashBaseFragment : Fragment() {
 class ViewPagerAdapter(private var title: List<String>,
                        private var content: List<String>,
                        private var image: List<Int>,
+                       private var textForThirdPage: String,
                        private var navController: NavController): RecyclerView.Adapter<ViewPagerAdapter.Pager2ViewHolder>() {
 
     inner class Pager2ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -105,7 +106,7 @@ class ViewPagerAdapter(private var title: List<String>,
         holder.imageView.setImageResource(image[position])
 
         if (position == 2) {
-            holder.finishSplashButton.text = "Finish"
+            holder.finishSplashButton.text = textForThirdPage
         }
     }
 
