@@ -57,6 +57,7 @@
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable" />
+
         <service
             android:name=".utility.MyFirebaseMessagingService"
             android:exported="false"
@@ -65,6 +66,18 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="location|dataSync"
+            tools:node="merge"
+            tools:ignore="Instantiatable" />
+
+        <service
+            android:name=".presenceDetection.positioningBased.MyPeriodicBackgroundPositioningCheckingWork"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>
