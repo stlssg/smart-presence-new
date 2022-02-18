@@ -311,4 +311,5 @@
     change the stop time to a late time instance.</string>
     <string name="geofenceWorkingStatus">Geofence is working</string>
     <string name="geofenceNotWorkingStatus">Geofence is not working</string>
+    <string name="blurViewText">Please stop the service that is running before changing any configurations!</string>
 </resources>

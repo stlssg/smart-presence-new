@@ -267,4 +267,5 @@
     例如，如果您总是在夜间在外面工作，您需要将停止时间更改为延迟时间实例。</string>
     <string name="geofenceWorkingStatus">地理围栏正在工作</string>
     <string name="geofenceNotWorkingStatus">地理围栏不工作</string>
+    <string name="blurViewText">请在更改任何配置之前停止正在运行的服务！</string>
 </resources>

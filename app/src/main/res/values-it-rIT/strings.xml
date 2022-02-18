@@ -315,4 +315,5 @@
      cambia l\'ora di arresto in un\'istanza in ritardo.</string>
     <string name="geofenceWorkingStatus">Geofence funziona</string>
     <string name="geofenceNotWorkingStatus">Geofence non funziona</string>
+    <string name="blurViewText">Si prega di interrompere il servizio in esecuzione prima di modificare qualsiasi configurazione!</string>
 </resources>

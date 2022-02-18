@@ -70,8 +70,8 @@ class PositioningCheckingFragment : Fragment() {
         val positioningRestart = view.findViewById<Button>(R.id.positioningRestart)
         val positioningShowInfo = view.findViewById<Button>(R.id.positioningShowInfo)
 
-        val wifiCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false")
-        if (wifiCheckingStatus.toBoolean()) {
+        val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false")
+        if (positioningCheckingStatus.toBoolean()) {
             positioningStart.isVisible = false
             positioningRestart.isVisible = true
             positioningStop.isEnabled = true

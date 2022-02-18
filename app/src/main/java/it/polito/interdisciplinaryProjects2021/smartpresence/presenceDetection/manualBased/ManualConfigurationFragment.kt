@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import eightbitlab.com.blurview.BlurView
+import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class ManualConfigurationFragment : Fragment() {
@@ -30,16 +32,31 @@ class ManualConfigurationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(true)
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
+        val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
+        val update_address_button = view.findViewById<Button>(R.id.update_address_button)
+
+        val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
+        val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
+        if (positioningCheckingStatus || wifiCheckingStatus) {
+            blurBackground(view)
+            setHasOptionsMenu(false)
+            address_input.isEnabled = false
+            max_occupancy_input.isEnabled = false
+            update_address_button.isEnabled = false
+        } else {
+            setHasOptionsMenu(true)
+            val blurViewText = view.findViewById<TextView>(R.id.blurViewText)
+            blurViewText.visibility = View.GONE
+        }
 
         val address_required = view.findViewById<TextView>(R.id.address_required)
         val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
 
         makeLayoutGone(address_required)
         makeLayoutGone(maxOccupancy_required)
-
-        val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
-        val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
 
         address_input.editText?.doAfterTextChanged {
             makeLayoutGone(address_required)
@@ -48,7 +65,6 @@ class ManualConfigurationFragment : Fragment() {
             makeLayoutGone(maxOccupancy_required)
         }
 
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val address = sharedPreferences.getString("address", "nothing")
         val maxOccupancy = sharedPreferences.getString("maxOccupancy", "nothing")
 
@@ -59,7 +75,6 @@ class ManualConfigurationFragment : Fragment() {
             max_occupancy_input.editText?.setText(maxOccupancy?.replace("_", " "))
         }
 
-        val update_address_button = view.findViewById<Button>(R.id.update_address_button)
         update_address_button.setOnClickListener {
             findNavController().navigate(R.id.mapFragment)
         }
@@ -130,6 +145,20 @@ class ManualConfigurationFragment : Fragment() {
         val para_layout = view.layoutParams
         para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
         view.layoutParams = para_layout
+    }
+
+    private fun blurBackground(view: View) {
+        val blurView = view.findViewById<BlurView>(R.id.blurView)
+        val decorView = activity?.window?.decorView
+        val rootView = decorView?.findViewById<ViewGroup>(android.R.id.content)
+        val windowBackground = decorView?.background
+
+        blurView.setupWith(rootView!!)
+            .setFrameClearDrawable(windowBackground)
+            .setBlurAlgorithm(RenderScriptBlur(requireContext()))
+            .setBlurRadius(3f)
+            .setBlurAutoUpdate(true)
+            .setHasFixedTransformationMatrix(true)
     }
 
 }

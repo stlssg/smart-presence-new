@@ -15,6 +15,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import eightbitlab.com.blurview.BlurView
+import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class WifiConfigurationFragment : Fragment() {
@@ -29,7 +31,31 @@ class WifiConfigurationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(true)
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val ssid_input = view.findViewById<TextInputLayout>(R.id.ssid_input)
+        val bssid_input = view.findViewById<TextInputLayout>(R.id.bssid_input)
+        val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
+        val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
+        val update_wifi_info_button = view.findViewById<Button>(R.id.update_wifi_info_button)
+        val update_address_button = view.findViewById<Button>(R.id.update_address_button)
+
+        val positioningCheckingStatus = sharedPreferences.getString("positioningCheckingStatus", "false").toBoolean()
+        val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()
+        if (positioningCheckingStatus || wifiCheckingStatus) {
+            blurBackground(view)
+            setHasOptionsMenu(false)
+            address_input.isEnabled = false
+            max_occupancy_input.isEnabled = false
+            ssid_input.isEnabled = false
+            bssid_input.isEnabled = false
+            update_wifi_info_button.isEnabled = false
+            update_address_button.isEnabled = false
+        } else {
+            setHasOptionsMenu(true)
+            val blurViewText = view.findViewById<TextView>(R.id.blurViewText)
+            blurViewText.visibility = View.GONE
+        }
 
 //        view.findViewById<TextInputLayout>(R.id.latitude).isVisible = false
 //        view.findViewById<TextInputLayout>(R.id.longitude).isVisible = false
@@ -52,11 +78,6 @@ class WifiConfigurationFragment : Fragment() {
         makeLayoutGone(address_required)
         makeLayoutGone(maxOccupancy_required)
 
-        val ssid_input = view.findViewById<TextInputLayout>(R.id.ssid_input)
-        val bssid_input = view.findViewById<TextInputLayout>(R.id.bssid_input)
-        val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
-        val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
-
         ssid_input.editText?.doAfterTextChanged {
             makeLayoutGone(ssid_required)
         }
@@ -70,7 +91,6 @@ class WifiConfigurationFragment : Fragment() {
             makeLayoutGone(maxOccupancy_required)
         }
 
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val ssid = sharedPreferences.getString("ssid", "nothing")
         val bssid = sharedPreferences.getString("bssid", "nothing")
         val address = sharedPreferences.getString("address", "nothing")
@@ -89,7 +109,6 @@ class WifiConfigurationFragment : Fragment() {
             max_occupancy_input.editText?.setText(maxOccupancy?.replace("_", " "))
         }
 
-        val update_wifi_info_button = view.findViewById<Button>(R.id.update_wifi_info_button)
         update_wifi_info_button.setOnClickListener {
             val wifiManager = requireContext().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiInfo = wifiManager.connectionInfo
@@ -116,7 +135,6 @@ class WifiConfigurationFragment : Fragment() {
             }
         }
 
-        val update_address_button = view.findViewById<Button>(R.id.update_address_button)
         update_address_button.setOnClickListener {
             findNavController().navigate(R.id.mapFragment)
         }
@@ -199,6 +217,20 @@ class WifiConfigurationFragment : Fragment() {
         val para_layout = view.layoutParams
         para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
         view.layoutParams = para_layout
+    }
+
+    private fun blurBackground(view: View) {
+        val blurView = view.findViewById<BlurView>(R.id.blurView)
+        val decorView = activity?.window?.decorView
+        val rootView = decorView?.findViewById<ViewGroup>(android.R.id.content)
+        val windowBackground = decorView?.background
+
+        blurView.setupWith(rootView!!)
+            .setFrameClearDrawable(windowBackground)
+            .setBlurAlgorithm(RenderScriptBlur(requireContext()))
+            .setBlurRadius(3f)
+            .setBlurAutoUpdate(true)
+            .setHasFixedTransformationMatrix(true)
     }
 
 }
