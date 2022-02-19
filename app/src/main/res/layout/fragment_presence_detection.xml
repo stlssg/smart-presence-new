@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".presenceDetection.PresenceDetectionFragment"
     android:orientation="vertical">
+<!--    android:background="@drawable/bg"-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="methods"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textSize="30sp"-->
+<!--        android:layout_margin="30dp"/>-->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/wifiChecking"
@@ -120,4 +130,5 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+    
 </LinearLayout>
