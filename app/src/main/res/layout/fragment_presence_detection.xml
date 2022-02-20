@@ -1,134 +1,846 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenceDetection.PresenceDetectionFragment"
-    android:orientation="vertical">
+    android:background="@drawable/bg"
+    tools:context=".presenceDetection.PresenceDetectionFragment">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Choose your method"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/guideline110"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Click to select method, long click to see its guidance."
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline110"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SmallSp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/wifiChecking"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:rotationY="0"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="@string/wifi_based_method_name"
+                    android:textColor="@color/purple_500"
+                    android:textSize="25sp" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/wifi"
+                    app:lottie_speed="1" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/positioningChecking"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="1"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline12">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="@string/positioning_based_method_name"
+                    android:textColor="@color/purple_500"
+                    android:textSize="25sp" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/positioning"
+                    app:lottie_speed="1" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/manualChecking"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline13">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="@string/manual_method_name"
+                    android:textColor="@color/purple_500"
+                    android:textSize="25sp" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/manual"
+                    app:lottie_speed="1" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.81" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.59" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline110"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline111"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline112"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/wifiCheckingGuidanceCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline110">
+
+        <ScrollView
+            android:id="@+id/wifiCheckingGuidance"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:text="@string/wifi_guidance" />
+
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/positioningCheckingGuidanceCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline111"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline111">
+
+        <ScrollView
+            android:id="@+id/positioningCheckingGuidance"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:text="@string/wifi_guidance" />
+
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/manualCheckingGuidanceCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="-100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline112">
+
+        <ScrollView
+            android:id="@+id/manualCheckingGuidance"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:text="@string/manual_guidance" />
+
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.81" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/startButton"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            app:iconTint="@color/purple_500"
+            app:icon="@drawable/ic_baseline_play_circle_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline1111"
+            app:strokeColor="@color/purple_200"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="@string/stopButton"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            app:iconTint="@color/purple_500"
+            app:icon="@drawable/ic_baseline_stop_circle_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button2"
+            app:layout_constraintTop_toTopOf="@+id/guideline1111"
+            app:strokeColor="@color/purple_200"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Show Status"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            app:iconTint="@color/purple_500"
+            app:icon="@drawable/ic_baseline_info_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/guideline1111"
+            app:strokeColor="@color/purple_200"
+            app:strokeWidth="1dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
 <!--    android:background="@drawable/bg"-->
+<!--    tools:context=".presenceDetection.PresenceDetectionFragment">-->
 
 <!--    <TextView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:text="methods"-->
 <!--        android:gravity="center"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:textSize="30sp"-->
-<!--        android:layout_margin="30dp"/>-->
+<!--        android:text="Choose your method"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="40sp"-->
+<!--        android:textStyle="bold|italic"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline10"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:layout_editor_absoluteX="30dp" />-->
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/wifiChecking"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
-        app:cardElevation="40dp"
-        app:cardCornerRadius="10dp">
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Click to select method, long click to see its guidance."-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="10sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline10"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        tools:ignore="SmallSp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline11"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guideline10"-->
+<!--        android:visibility="visible">-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/wifi_based_method_name"
-                android:gravity="center"
-                android:textColor="@color/purple_500"
-                android:textSize="30sp"/>
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/wifiChecking"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:checkable="true"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            app:cardCornerRadius="10dp"-->
+<!--            app:cardElevation="5dp">-->
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/wifi"
-                app:lottie_speed="1" />
-        </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
 
-    </com.google.android.material.card.MaterialCardView>
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/wifi_based_method_name"-->
+<!--                    android:textColor="@color/purple_500"-->
+<!--                    android:textSize="30sp" />-->
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/positioningChecking"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
-        app:cardElevation="40dp"
-        app:cardCornerRadius="10dp">
+<!--                <com.airbnb.lottie.LottieAnimationView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:lottie_autoPlay="true"-->
+<!--                    app:lottie_loop="true"-->
+<!--                    app:lottie_rawRes="@raw/wifi"-->
+<!--                    app:lottie_speed="1" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+<!--            </LinearLayout>-->
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/positioning"
-                app:lottie_speed="1" />
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/positioning_based_method_name"
-                android:gravity="center"
-                android:textColor="@color/purple_500"
-                android:textSize="30sp"/>
-        </LinearLayout>
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/positioningChecking"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginVertical="5dp"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:checkable="true"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            app:cardCornerRadius="10dp"-->
+<!--            app:cardElevation="5dp">-->
 
-    </com.google.android.material.card.MaterialCardView>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/manualChecking"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
-        app:cardElevation="40dp"
-        app:cardCornerRadius="10dp">
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/positioning_based_method_name"-->
+<!--                    android:textColor="@color/purple_500"-->
+<!--                    android:textSize="30sp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+<!--                <com.airbnb.lottie.LottieAnimationView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:lottie_autoPlay="true"-->
+<!--                    app:lottie_loop="true"-->
+<!--                    app:lottie_rawRes="@raw/positioning"-->
+<!--                    app:lottie_speed="1" />-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/manual_method_name"
-                android:gravity="center"
-                android:textColor="@color/purple_500"
-                android:textSize="30sp"/>
+<!--            </LinearLayout>-->
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/manual"
-                app:lottie_speed="1" />
-        </LinearLayout>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
-    </com.google.android.material.card.MaterialCardView>
-    
-</LinearLayout>
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/manualChecking"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:checkable="true"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            app:cardCornerRadius="10dp"-->
+<!--            app:cardElevation="5dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/manual_method_name"-->
+<!--                    android:textColor="@color/purple_500"-->
+<!--                    android:textSize="30sp" />-->
+
+<!--                <com.airbnb.lottie.LottieAnimationView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:lottie_autoPlay="true"-->
+<!--                    app:lottie_loop="true"-->
+<!--                    app:lottie_rawRes="@raw/manual"-->
+<!--                    app:lottie_speed="1" />-->
+<!--            </LinearLayout>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline10"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_percent="0.15" />-->
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline11"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_percent="0.81" />-->
+
+<!--    <eightbitlab.com.blurview.BlurView-->
+<!--        android:id="@+id/blurView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/guidanceCard"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginVertical="20dp"-->
+<!--                android:layout_weight="3"-->
+<!--                app:cardCornerRadius="10dp"-->
+<!--                app:cardElevation="5dp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/guidanceText"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:text="GUIDANCE"-->
+<!--                    android:gravity="center"/>-->
+
+<!--            </com.google.android.material.card.MaterialCardView>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1">-->
+
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guideline12"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.15" />-->
+
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guideline13"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.81" />-->
+
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guideline14"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.37" />-->
+
+<!--                <androidx.constraintlayout.widget.Guideline-->
+<!--                    android:id="@+id/guideline15"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintGuide_percent="0.59" />-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/wifiCheckingInBlurView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="5dp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/guideline14"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/guideline12"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <com.airbnb.lottie.LottieAnimationView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        app:lottie_autoPlay="true"-->
+<!--                        app:lottie_loop="true"-->
+<!--                        app:lottie_rawRes="@raw/wifi"-->
+<!--                        app:lottie_speed="1" />-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/positioningCheckingInBlurView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_marginVertical="5dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="5dp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/guideline15"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/guideline14">-->
+
+<!--                    <com.airbnb.lottie.LottieAnimationView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        app:lottie_autoPlay="true"-->
+<!--                        app:lottie_loop="true"-->
+<!--                        app:lottie_rawRes="@raw/positioning"-->
+<!--                        app:lottie_speed="1" />-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/manualCheckingInBlurView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="5dp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/guideline13"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/guideline15"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="10dp">-->
+
+<!--                    <com.airbnb.lottie.LottieAnimationView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        app:lottie_autoPlay="true"-->
+<!--                        app:lottie_loop="true"-->
+<!--                        app:lottie_rawRes="@raw/manual"-->
+<!--                        app:lottie_speed="1" />-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </eightbitlab.com.blurview.BlurView>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context=".presenceDetection.PresenceDetectionFragment"-->
+<!--android:orientation="vertical">-->
+
+<!--<com.google.android.material.card.MaterialCardView-->
+<!--    android:id="@+id/wifiChecking"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="0dp"-->
+<!--    android:layout_weight="1"-->
+<!--    android:clickable="true"-->
+<!--    android:focusable="true"-->
+<!--    android:layout_margin="10dp"-->
+<!--    app:cardElevation="40dp"-->
+<!--    app:cardCornerRadius="10dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="@string/wifi_based_method_name"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/purple_500"-->
+<!--            android:textSize="30sp"/>-->
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_loop="true"-->
+<!--            app:lottie_rawRes="@raw/wifi"-->
+<!--            app:lottie_speed="1" />-->
+<!--    </LinearLayout>-->
+
+<!--</com.google.android.material.card.MaterialCardView>-->
+
+<!--<com.google.android.material.card.MaterialCardView-->
+<!--    android:id="@+id/positioningChecking"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="0dp"-->
+<!--    android:layout_weight="1"-->
+<!--    android:clickable="true"-->
+<!--    android:focusable="true"-->
+<!--    android:layout_margin="10dp"-->
+<!--    app:cardElevation="40dp"-->
+<!--    app:cardCornerRadius="10dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_loop="true"-->
+<!--            app:lottie_rawRes="@raw/positioning"-->
+<!--            app:lottie_speed="1" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="@string/positioning_based_method_name"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/purple_500"-->
+<!--            android:textSize="30sp"/>-->
+<!--    </LinearLayout>-->
+
+<!--</com.google.android.material.card.MaterialCardView>-->
+
+<!--<com.google.android.material.card.MaterialCardView-->
+<!--    android:id="@+id/manualChecking"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="0dp"-->
+<!--    android:layout_weight="1"-->
+<!--    android:clickable="true"-->
+<!--    android:focusable="true"-->
+<!--    android:layout_margin="10dp"-->
+<!--    app:cardElevation="40dp"-->
+<!--    app:cardCornerRadius="10dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="@string/manual_method_name"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/purple_500"-->
+<!--            android:textSize="30sp"/>-->
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_loop="true"-->
+<!--            app:lottie_rawRes="@raw/manual"-->
+<!--            app:lottie_speed="1" />-->
+<!--    </LinearLayout>-->
+
+<!--</com.google.android.material.card.MaterialCardView>-->
+
+<!--</LinearLayout>-->
