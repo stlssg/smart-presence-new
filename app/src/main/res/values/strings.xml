@@ -323,4 +323,9 @@
     or related regions, you have more functions for visualization, etc.</string>
     <string name="splashButtonSkip">Skip</string>
     <string name="splashButtonStart">Get Started</string>
+    <string name="wifi_based_method_guidance_title">WiFi Based Method Guidance:</string>
+    <string name="positioning_based_method_guidance_title">Positioning Based Method Guidance:</string>
+    <string name="manual_method_guidance_title">Manual Method Guidance:</string>
+    <string name="presence_detection_page_content_title">Presence Detection Methods</string>
+    <string name="presence_detection_page_content_subtitle">Long-click to select/unselect method, short-click to see its guidance</string>
 </resources>

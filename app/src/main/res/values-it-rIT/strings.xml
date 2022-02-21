@@ -327,4 +327,9 @@
     o regioni correlate, hai più funzioni per la visualizzazione, ecc.</string>
     <string name="splashButtonSkip">Saltare</string>
     <string name="splashButtonStart">Iniziare</string>
+    <string name="wifi_based_method_guidance_title">Guida al metodo basato su Wi-Fi:</string>
+    <string name="positioning_based_method_guidance_title">Guida al metodo basato sul posizionamento:</string>
+    <string name="manual_method_guidance_title">Guida al metodo manuale:</string>
+    <string name="presence_detection_page_content_title">Metodi di rilevamento della presenza</string>
+    <string name="presence_detection_page_content_subtitle">Fare clic a lungo per selezionare/deseleziona il metodo, fare clic brevemente per visualizzarne la guida</string>
 </resources>
