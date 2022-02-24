@@ -53,7 +53,7 @@ class StartFragment : Fragment() {
                 } else {
                     findNavController().navigate(R.id.signInFragment)
                 }
-            },6000)
+            },5500)
         }
     }
 
