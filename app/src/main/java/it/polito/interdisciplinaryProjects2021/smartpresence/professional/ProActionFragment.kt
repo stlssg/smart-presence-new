@@ -21,18 +21,18 @@ class ProActionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentNumberOccupants = view.findViewById<TextView>(R.id.currentNumberOccupants)
-        currentNumberOccupants.text = "2"
-        val selectedHourlyOccupancy = view.findViewById<TextView>(R.id.selectedHourlyOccupancy)
-        selectedHourlyOccupancy.text = "0.8"
-        val allHourlyOccupancy = view.findViewById<TextView>(R.id.allHourlyOccupancy)
-        allHourlyOccupancy.text = "0.9"
-
-        val selectedHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.selectedHourlyOccupancyBar)
-        setProgressBar(selectedHourlyOccupancyBar, 0.8f)
-
-        val allHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.allHourlyOccupancyBar)
-        setProgressBar(allHourlyOccupancyBar, 0.9f)
+//        val currentNumberOccupants = view.findViewById<TextView>(R.id.currentNumberOccupants)
+//        currentNumberOccupants.text = "2"
+//        val selectedHourlyOccupancy = view.findViewById<TextView>(R.id.selectedHourlyOccupancy)
+//        selectedHourlyOccupancy.text = "0.8"
+//        val allHourlyOccupancy = view.findViewById<TextView>(R.id.allHourlyOccupancy)
+//        allHourlyOccupancy.text = "0.9"
+//
+//        val selectedHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.selectedHourlyOccupancyBar)
+//        setProgressBar(selectedHourlyOccupancyBar, 0.8f)
+//
+//        val allHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.allHourlyOccupancyBar)
+//        setProgressBar(allHourlyOccupancyBar, 0.9f)
 
     }
 
