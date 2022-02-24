@@ -332,4 +332,5 @@
     <string name="manual_method_guidance_title">Guida al metodo manuale:</string>
     <string name="presence_detection_page_content_title">Metodi di rilevamento della presenza</string>
     <string name="presence_detection_page_content_subtitle">Fare clic a lungo per selezionare/deseleziona il metodo, fare clic brevemente per visualizzarne la guida</string>
+    <string name="pro_action_description_at_end">Altre funzioni stanno arrivando.</string>
 </resources>

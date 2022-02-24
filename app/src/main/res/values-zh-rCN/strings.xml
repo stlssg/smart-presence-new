@@ -281,4 +281,5 @@
     <string name="manual_method_guidance_title">手动方法指导:</string>
     <string name="presence_detection_page_content_title">存在检测方法</string>
     <string name="presence_detection_page_content_subtitle">长按选择/取消方法，短按查看其指导</string>
+    <string name="pro_action_description_at_end">更多功能即将推出。</string>
 </resources>

@@ -328,4 +328,5 @@
     <string name="manual_method_guidance_title">Manual Method Guidance:</string>
     <string name="presence_detection_page_content_title">Presence Detection Methods</string>
     <string name="presence_detection_page_content_subtitle">Long-click to select/unselect method, short-click to see its guidance</string>
+    <string name="pro_action_description_at_end">More functions are coming.</string>
 </resources>
