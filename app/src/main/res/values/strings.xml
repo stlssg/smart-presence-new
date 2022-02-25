@@ -192,7 +192,7 @@
     <string name="onMapMarkerClickMessage">The Address is: </string>
     <string name="geocoderNotWorkingMessage">The GeoCoder service is not implemented in your devices, you need to input the address manually.</string>
     <string name="configurationAlertAddressName">Address</string>
-    <string name="configurationAlertMaxName">Maximum expected occupancy</string>
+    <string name="configurationAlertMaxName">Maximum expected occupants</string>
     <string name="configurationAlertLatName">Latitude</string>
     <string name="configurationAlertLonName">Longitude</string>
     <string name="notificationTitle">Please restart the service.</string>
@@ -329,4 +329,11 @@
     <string name="presence_detection_page_content_title">Presence Detection Methods</string>
     <string name="presence_detection_page_content_subtitle">Long-click to select/unselect method, short-click to see its guidance</string>
     <string name="pro_action_description_at_end">More functions are coming.</string>
+    <string name="pro_action_info_information_title">Information of target building:</string>
+    <string name="pro_action_info_statistics_title">Statistics:</string>
+    <string name="pro_action_info_current_number">Current number of occupants in target building</string>
+    <string name="pro_action_info_avg_selected">Average hourly occupancy (selected interval):</string>
+    <string name="pro_action_info_avg_all">Average hourly occupancy (all day):</string>
+    <string name="pro_action_info_not_available">Not available</string>
+    <string name="pro_action_info_max_string">max</string>
 </resources>

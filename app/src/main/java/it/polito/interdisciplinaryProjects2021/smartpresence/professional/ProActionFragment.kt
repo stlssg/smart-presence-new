@@ -21,32 +21,47 @@ class ProActionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_pro_action, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-//
-//        val address = sharedPreferences.getString("address", "nothing")
-//        val latitude = sharedPreferences.getString("latitude", "nothing")
-//        val longitude = sharedPreferences.getString("longitude", "nothing")
-//        val ssid = sharedPreferences.getString("ssid", "nothing")
-//        val bssid = sharedPreferences.getString("bssid", "nothing")
-//        val maxOccupancy = sharedPreferences.getString("maxOccupancy", "nothing")
-//
-//        val infoProAddress = view.findViewById<TextView>(R.id.infoProAddress)
-//        val infoProLat = view.findViewById<TextView>(R.id.infoProLat)
-//        val infoProLon = view.findViewById<TextView>(R.id.infoProLon)
-//        val infoProSSID = view.findViewById<TextView>(R.id.infoProSSID)
-//        val infoProBSSID = view.findViewById<TextView>(R.id.infoProBSSID)
-//        val infoProMax = view.findViewById<TextView>(R.id.infoProMax)
-//
-//        // need change
-//        assignContentForBuildingInfo(address?.replace("_", " "), "Address", infoProAddress)
-//        assignContentForBuildingInfo(latitude, "Latitude", infoProLat)
-//        assignContentForBuildingInfo(longitude, "Longitude", infoProLon)
-//        assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
-//        assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
-//        assignContentForBuildingInfo(maxOccupancy, "Maximum expected occupants", infoProMax)
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val address = sharedPreferences.getString("address", "nothing")
+        val latitude = sharedPreferences.getString("latitude", "nothing")
+        val longitude = sharedPreferences.getString("longitude", "nothing")
+        val ssid = sharedPreferences.getString("ssid", "nothing")
+        val bssid = sharedPreferences.getString("bssid", "nothing")
+        val maxOccupancy = sharedPreferences.getString("maxOccupancy", "nothing")
+
+        val infoProAddress = view.findViewById<TextView>(R.id.infoProAddress)
+        val infoProLat = view.findViewById<TextView>(R.id.infoProLat)
+        val infoProLon = view.findViewById<TextView>(R.id.infoProLon)
+        val infoProSSID = view.findViewById<TextView>(R.id.infoProSSID)
+        val infoProBSSID = view.findViewById<TextView>(R.id.infoProBSSID)
+        val infoProMax = view.findViewById<TextView>(R.id.infoProMax)
+
+        assignContentForBuildingInfo(address?.replace("_", " "), getString(R.string.configurationAlertAddressName), infoProAddress)
+        assignContentForBuildingInfo(latitude, getString(R.string.configurationAlertLatName), infoProLat)
+        assignContentForBuildingInfo(longitude, getString(R.string.configurationAlertLonName), infoProLon)
+        assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
+        assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
+        assignContentForBuildingInfo(maxOccupancy, getString(R.string.configurationAlertMaxName), infoProMax)
+
+        // need change
+        val maxString = if (maxOccupancy == "nothing") {
+            getString(R.string.pro_action_info_not_available)
+        } else {
+            maxOccupancy
+        }
+        val currentNumberOccupantsTitle = view.findViewById<TextView>(R.id.currentNumberOccupantsTitle)
+        currentNumberOccupantsTitle.text =
+            getString(R.string.pro_action_info_current_number) +
+            " (" +
+            getString(R.string.pro_action_info_max_string) +
+            ": " +
+            maxString +
+            "):"
 
         val currentNumberOccupants = view.findViewById<TextView>(R.id.currentNumberOccupants)
         currentNumberOccupants.text = "2"
@@ -89,7 +104,7 @@ class ProActionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun assignContentForBuildingInfo(stringInput: String?, additionalString: String, tv: TextView) {
         if (stringInput == "nothing") {
-            tv.text = "$additionalString: Not available" // need change
+            tv.text = "$additionalString: " + getString(R.string.pro_action_info_not_available)
         } else {
             tv.text = "$additionalString: $stringInput"
         }

@@ -282,4 +282,11 @@
     <string name="presence_detection_page_content_title">存在检测方法</string>
     <string name="presence_detection_page_content_subtitle">长按选择/取消方法，短按查看其指导</string>
     <string name="pro_action_description_at_end">更多功能即将推出。</string>
+    <string name="pro_action_info_information_title">目标建筑信息：</string>
+    <string name="pro_action_info_statistics_title">统计数据:</string>
+    <string name="pro_action_info_current_number">目标建筑中的当前居住人数</string>
+    <string name="pro_action_info_avg_selected">平均每小时占有人数（已选区间）:</string>
+    <string name="pro_action_info_avg_all">平均每小时占有人数（全天）:</string>
+    <string name="pro_action_info_not_available">无法获取</string>
+    <string name="pro_action_info_max_string">最大</string>
 </resources>
