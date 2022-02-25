@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,6 +33,7 @@
                 android:text="@string/huawei_description"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -56,6 +57,7 @@
                 android:text="@string/samsung_description"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -79,6 +81,7 @@
                 android:text="@string/onePlus_description"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -102,6 +105,7 @@
                 android:text="@string/meizu_description"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"/>
+
         </LinearLayout>
 
         <TextView
