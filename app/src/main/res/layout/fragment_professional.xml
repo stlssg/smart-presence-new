@@ -28,4 +28,120 @@
         app:layout_constraintStart_toEndOf="@+id/tabLayout"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/proFragmentBlurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/building_list_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/transparentColor"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Target Building List"
+                    android:textColor="@color/purple_700"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="10dp" />
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_building"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_search_bar"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:iconifiedByDefault="false" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/building_list_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/grant_access_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Grant Professional Access"
+                android:textColor="@color/purple_700"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/access_code_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Access code"
+                app:endIconMode="clear_text"
+                app:startIconContentDescription="temp"
+                app:startIconDrawable="@drawable/ic_baseline_security_24"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:backgroundTint="@color/transparentColor"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/check_code_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check"
+                android:backgroundTint="@color/white"
+                android:textAllCaps="false"
+                android:textColor="@color/purple_700"
+                app:iconTint="@color/purple_500"
+                app:strokeColor="@color/purple_200"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Input the code retrieved from tha desktop software and click on the check button to be able to access more contents."
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginHorizontal="40dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </eightbitlab.com.blurview.BlurView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
