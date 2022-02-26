@@ -300,4 +300,10 @@
     <string name="long_click_card_no_stop_service">要取消选择该方法，您必须停止服务</string>
     <string name="show_status_for_manual_method">您选择了手动方法，它没有状态</string>
     <string name="show_status_for_no_selection">您还没有选择任何方法，现在没有状态</string>
+    <string name="graph_no_data_message">没有可用的数据</string>
+    <string name="building_list_title">目标建筑列表</string>
+    <string name="grant_access_title">授予专业访问权限</string>
+    <string name="code_title">访问密码</string>
+    <string name="code_check_title">校验</string>
+    <string name="access_grant_description">输入从桌面软件得到到的密码，然后单击验证按钮以访问更多内容。</string>
 </resources>

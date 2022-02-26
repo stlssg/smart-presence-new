@@ -351,4 +351,10 @@
     <string name="long_click_card_no_stop_service">Per deselezionare o modificare il metodo, è necessario interrompere il servizio</string>
     <string name="show_status_for_manual_method">hai scelto il metodo manuale e non c\'è stato per esso</string>
     <string name="show_status_for_no_selection">non hai ancora selezionato alcun metodo e non c\'è nessuno stato ora</string>
+    <string name="graph_no_data_message">Nessun dato disponibile</string>
+    <string name="building_list_title">Elenco degli edifici di destinazione</string>
+    <string name="grant_access_title">Concedi l\'accesso professionale</string>
+    <string name="code_title">Codice d\'accesso</string>
+    <string name="code_check_title">Verificare</string>
+    <string name="access_grant_description">Immettere il codice recuperato dal software desktop e fare clic sul pulsante di verifica per poter accedere a più contenuti.</string>
 </resources>

@@ -37,15 +37,14 @@ class ProfessionalFragment : Fragment() {
 
         blurView = view.findViewById<BlurView>(R.id.proFragmentBlurView)
         blurBackground(blurView)
-
-        grant_access_layout = view.findViewById<LinearLayout>(R.id.grant_access_layout)
-        building_list_card = view.findViewById<LinearLayout>(R.id.building_list_card)
-
         blurView.setOnClickListener{
             blurView.visibility = View.GONE
             grant_access_layout.visibility = View.GONE
             building_list_card.visibility = View.GONE
         }
+
+        grant_access_layout = view.findViewById<LinearLayout>(R.id.grant_access_layout)
+        building_list_card = view.findViewById<LinearLayout>(R.id.building_list_card)
 
         val myViewPager = view.findViewById<ViewPager>(R.id.myViewPager)
         myViewPager.adapter = PageAdapter(childFragmentManager, getString(R.string.fragment_name_graph), getString(
@@ -82,6 +81,7 @@ class ProfessionalFragment : Fragment() {
                 if (blurView.visibility == View.VISIBLE) {
                     blurView.visibility = View.GONE
                     grant_access_layout.visibility = View.GONE
+                    building_list_card.visibility = View.GONE
                 } else {
                     blurView.visibility = View.VISIBLE
                     grant_access_layout.visibility = View.VISIBLE
@@ -93,6 +93,7 @@ class ProfessionalFragment : Fragment() {
                 if (blurView.visibility == View.VISIBLE) {
                     blurView.visibility = View.GONE
                     building_list_card.visibility = View.GONE
+                    grant_access_layout.visibility = View.GONE
                 } else {
                     blurView.visibility = View.VISIBLE
                     building_list_card.visibility = View.VISIBLE

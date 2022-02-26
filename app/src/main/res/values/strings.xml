@@ -347,4 +347,10 @@
     <string name="long_click_card_no_stop_service">To unselect or change the method, you have to stop the service</string>
     <string name="show_status_for_manual_method">you have chosen the manual method and there is no status for it</string>
     <string name="show_status_for_no_selection">you have not selected any methods yet and there is no status now</string>
+    <string name="graph_no_data_message">No Data is Available</string>
+    <string name="building_list_title">Target Building List</string>
+    <string name="grant_access_title">Grant Professional Access</string>
+    <string name="code_title">Access code</string>
+    <string name="code_check_title">Verify</string>
+    <string name="access_grant_description">Input the code retrieved from tha desktop software and click on the verification button to be able to access more contents.</string>
 </resources>
