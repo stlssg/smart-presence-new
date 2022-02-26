@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.media.MediaActionSound
 import android.os.Build
@@ -715,6 +716,19 @@ class PresenceDetectionFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @SuppressLint("SourceLockedOrientationActivity")
+    override fun onResume() {
+        super.onResume()
+
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
     }
 
 }
