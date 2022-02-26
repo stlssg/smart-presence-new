@@ -345,4 +345,10 @@
     <string name="manual_based_card_description">Fai clic manualmente sui pulsanti per effettuare il check-in o il check-out ogni volta che entri o esci dall\'edificio target</string>
     <string name="simple_show_status">Stato</string>
     <string name="already_selected_method_message">Devi deselezionare quello scelto prima di cambiare metodo</string>
+    <string name="no_selection_go_conf_message">È necessario selezionare un metodo prima di configurare le impostazioni</string>
+    <string name="no_selection_manual_click_button">È necessario selezionare il metodo manuale per sfruttare la funzione di check-in o check-out</string>
+    <string name="no_selection_click_start">È necessario selezionare il metodo basato su Wi-Fi o basato sul posizionamento per avviare il servizio in background</string>
+    <string name="long_click_card_no_stop_service">Per deselezionare o modificare il metodo, è necessario interrompere il servizio</string>
+    <string name="show_status_for_manual_method">hai scelto il metodo manuale e non c\'è stato per esso</string>
+    <string name="show_status_for_no_selection">non hai ancora selezionato alcun metodo e non c\'è nessuno stato ora</string>
 </resources>

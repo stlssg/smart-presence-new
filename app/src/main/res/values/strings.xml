@@ -341,4 +341,10 @@
     <string name="manual_based_card_description">Manually click on buttons to check in or out whenever you enter or leave target building</string>
     <string name="simple_show_status">Status</string>
     <string name="already_selected_method_message">You have to unselect the chosen one before changing methods</string>
+    <string name="no_selection_go_conf_message">You need to select one method before configuring your settings</string>
+    <string name="no_selection_manual_click_button">You need to select manual method to exploit check-in or check-out function</string>
+    <string name="no_selection_click_start">You need to select WiFi based or Positioning based method to start the background service</string>
+    <string name="long_click_card_no_stop_service">To unselect or change the method, you have to stop the service</string>
+    <string name="show_status_for_manual_method">you have chosen the manual method and there is no status for it</string>
+    <string name="show_status_for_no_selection">you have not selected any methods yet and there is no status now</string>
 </resources>

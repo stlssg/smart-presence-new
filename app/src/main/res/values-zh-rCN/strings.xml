@@ -294,4 +294,10 @@
     <string name="manual_based_card_description">每当您进入或离开目标建筑物时，手动单击按钮以签入或签出</string>
     <string name="simple_show_status">状态</string>
     <string name="already_selected_method_message">您必须在更改方法之前取消选择所选的</string>
+    <string name="no_selection_go_conf_message">您需要在配置设置之前选择一种方法</string>
+    <string name="no_selection_manual_click_button">您需要选择手动方法来利用签入或签出功能</string>
+    <string name="no_selection_click_start">您需要选择基于WiFi或基于定位的方法来启动后台服务</string>
+    <string name="long_click_card_no_stop_service">要取消选择该方法，您必须停止服务</string>
+    <string name="show_status_for_manual_method">您选择了手动方法，它没有状态</string>
+    <string name="show_status_for_no_selection">您还没有选择任何方法，现在没有状态</string>
 </resources>
