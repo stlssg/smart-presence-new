@@ -301,6 +301,7 @@ class SignInFragment : Fragment() {
             putString("frequentNotificationOnOffCondition", "false")
             putString("radiusSpinnerPosition", "2")
             putString("detectionMethodSelection", "nothing")
+            putString("professionalAccessGranted", "false")
             commit()
         }
     }

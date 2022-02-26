@@ -357,4 +357,9 @@
     <string name="code_title">Codice d\'accesso</string>
     <string name="code_check_title">Verificare</string>
     <string name="access_grant_description">Immettere il codice recuperato dal software desktop e fare clic sul pulsante di verifica per poter accedere a più contenuti.</string>
+    <string name="no_building_for_list_message">Nessun edificio è disponibile</string>
+    <string name="select_address_message">Hai selezionato con successo l\'edificio di destinazione</string>
+    <string name="not_grant_pro_access_message">Non hai ancora il permesso di accesso</string>
+    <string name="wrong_code_message">Il codice che hai inserito è sbagliato</string>
+    <string name="right_code_message">Il codice è corretto, ora puoi accedere alle informazioni per tutti gli edifici</string>
 </resources>

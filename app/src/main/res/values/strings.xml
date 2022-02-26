@@ -353,4 +353,9 @@
     <string name="code_title">Access code</string>
     <string name="code_check_title">Verify</string>
     <string name="access_grant_description">Input the code retrieved from tha desktop software and click on the verification button to be able to access more contents.</string>
+    <string name="no_building_for_list_message">No Building is available</string>
+    <string name="select_address_message">You have successfully selected the target building</string>
+    <string name="not_grant_pro_access_message">You do not have the access permission yet</string>
+    <string name="wrong_code_message">The code you input is wrong</string>
+    <string name="right_code_message">The code is correct, now you can access the information for all buildings</string>
 </resources>

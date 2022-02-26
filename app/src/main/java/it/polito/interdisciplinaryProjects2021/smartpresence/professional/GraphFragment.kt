@@ -362,6 +362,8 @@ class GraphFragment : Fragment() {
             2 -> setLang("zh")
             else -> setLang("en")
         }
+
+        resetData()
     }
 
     override fun onPause() {
@@ -375,6 +377,8 @@ class GraphFragment : Fragment() {
             2 -> setLang("zh")
             else -> setLang("en")
         }
+
+        resetData()
     }
 
     private fun setLang(lang: String) {

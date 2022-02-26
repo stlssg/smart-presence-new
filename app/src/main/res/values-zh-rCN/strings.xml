@@ -306,4 +306,9 @@
     <string name="code_title">访问密码</string>
     <string name="code_check_title">校验</string>
     <string name="access_grant_description">输入从桌面软件得到到的密码，然后单击验证按钮以访问更多内容。</string>
+    <string name="no_building_for_list_message">没有可用的建筑</string>
+    <string name="select_address_message">您已成功选择目标建筑</string>
+    <string name="not_grant_pro_access_message">您还没有访问权限</string>
+    <string name="wrong_code_message">您输入的代码错误</string>
+    <string name="right_code_message">代码正确，现在您可以访问所有建筑的信息</string>
 </resources>

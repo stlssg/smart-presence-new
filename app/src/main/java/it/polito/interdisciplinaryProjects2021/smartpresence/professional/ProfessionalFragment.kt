@@ -1,27 +1,37 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence.professional
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputLayout
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
+@Suppress("DEPRECATION")
 class ProfessionalFragment : Fragment() {
 
     private lateinit var blurView: BlurView
-    private lateinit var grant_access_layout: LinearLayout
-    private lateinit var building_list_card: LinearLayout
+    private lateinit var grantAccessLayout: LinearLayout
+    private lateinit var buildingListLayout: LinearLayout
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +45,18 @@ class ProfessionalFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        grantAccessLayout = view.findViewById<LinearLayout>(R.id.grant_access_layout)
+        buildingListLayout = view.findViewById<LinearLayout>(R.id.buildingListLayout)
+
         blurView = view.findViewById<BlurView>(R.id.proFragmentBlurView)
         blurBackground(blurView)
         blurView.setOnClickListener{
             blurView.visibility = View.GONE
-            grant_access_layout.visibility = View.GONE
-            building_list_card.visibility = View.GONE
+            grantAccessLayout.visibility = View.GONE
+            buildingListLayout.visibility = View.GONE
         }
-
-        grant_access_layout = view.findViewById<LinearLayout>(R.id.grant_access_layout)
-        building_list_card = view.findViewById<LinearLayout>(R.id.building_list_card)
 
         val myViewPager = view.findViewById<ViewPager>(R.id.myViewPager)
         myViewPager.adapter = PageAdapter(childFragmentManager, getString(R.string.fragment_name_graph), getString(
@@ -59,6 +71,61 @@ class ProfessionalFragment : Fragment() {
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
             (activity as AppCompatActivity).supportActionBar?.hide()
             tabLayout.visibility = View.GONE
+        }
+
+        val noBuildingMessage = view.findViewById<TextView>(R.id.noBuildingMessage)
+        val myBuildingListRecyclerView = view.findViewById<RecyclerView>(R.id.building_list_recyclerView)
+        myBuildingListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val buildingList = mutableListOf<String>()
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("first address first address first address first address first address first address")
+        buildingList.add("second address")
+        buildingList.add("third address")
+
+        if (buildingList.size == 0) {
+            noBuildingMessage.visibility = View.VISIBLE
+            myBuildingListRecyclerView.visibility = View.GONE
+        } else {
+            noBuildingMessage.visibility = View.GONE
+            myBuildingListRecyclerView.visibility = View.VISIBLE
+        }
+
+        val rvAdapter = BuildingCardListAdapter(
+            buildingList,
+            requireContext(),
+            blurView,
+            buildingListLayout,
+            grantAccessLayout,
+            getString(R.string.select_address_message),
+            fragmentManager,
+            this
+        )
+        myBuildingListRecyclerView.adapter = rvAdapter
+
+        val verifyCodeButton = view.findViewById<Button>(R.id.verifyCodeButton)
+        verifyCodeButton.setOnClickListener {
+            val accessCodeInput = requireView().findViewById<TextInputLayout>(R.id.accessCodeInput).editText?.text.toString()
+            if (accessCodeInput != "yes") {
+                Toast.makeText(context, getString(R.string.wrong_code_message), Toast.LENGTH_SHORT).show()
+            } else {
+                with(sharedPreferences.edit()) {
+                    putString( "professionalAccessGranted", "true")
+                    commit()
+                }
+                Toast.makeText(context, getString(R.string.right_code_message), Toast.LENGTH_SHORT).show()
+                blurView.visibility = View.GONE
+                grantAccessLayout.visibility = View.GONE
+                buildingListLayout.visibility = View.GONE
+            }
         }
     }
 
@@ -80,23 +147,27 @@ class ProfessionalFragment : Fragment() {
             R.id.action_access_grant -> {
                 if (blurView.visibility == View.VISIBLE) {
                     blurView.visibility = View.GONE
-                    grant_access_layout.visibility = View.GONE
-                    building_list_card.visibility = View.GONE
+                    grantAccessLayout.visibility = View.GONE
+                    buildingListLayout.visibility = View.GONE
                 } else {
                     blurView.visibility = View.VISIBLE
-                    grant_access_layout.visibility = View.VISIBLE
+                    grantAccessLayout.visibility = View.VISIBLE
                 }
 
                 return true
             }
             R.id.action_list_building -> {
-                if (blurView.visibility == View.VISIBLE) {
-                    blurView.visibility = View.GONE
-                    building_list_card.visibility = View.GONE
-                    grant_access_layout.visibility = View.GONE
+                if (sharedPreferences.getString("professionalAccessGranted", "false").toBoolean()) {
+                    if (blurView.visibility == View.VISIBLE) {
+                        blurView.visibility = View.GONE
+                        buildingListLayout.visibility = View.GONE
+                        grantAccessLayout.visibility = View.GONE
+                    } else {
+                        blurView.visibility = View.VISIBLE
+                        buildingListLayout.visibility = View.VISIBLE
+                    }
                 } else {
-                    blurView.visibility = View.VISIBLE
-                    building_list_card.visibility = View.VISIBLE
+                    Toast.makeText(context, getString(R.string.not_grant_pro_access_message), Toast.LENGTH_SHORT).show()
                 }
 
                 return true
@@ -120,6 +191,7 @@ class ProfessionalFragment : Fragment() {
 
 }
 
+@Suppress("DEPRECATION")
 class PageAdapter(fm: FragmentManager, private val tabName_1: String, private val tabName_2: String) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
@@ -148,4 +220,53 @@ class PageAdapter(fm: FragmentManager, private val tabName_1: String, private va
         return 2
     }
 
+}
+
+class BuildingCardListAdapter (
+    private val buildingList: List<String>,
+    val context: Context,
+    val blurView: BlurView,
+    private val buildingListLayout: LinearLayout,
+    private val grantAccessLayout: LinearLayout,
+    private val messageString: String,
+    private val fm: FragmentManager?,
+    private val fragment: Fragment
+): RecyclerView.Adapter<BuildingCardListAdapter.BuildingCardViewHolder>() {
+    class BuildingCardViewHolder(v: View): RecyclerView.ViewHolder(v) {
+        val listIndex: TextView = v.findViewById(R.id.listIndex)
+        val addressText: TextView = v.findViewById(R.id.addressText)
+        val singleBuildingCard: MaterialCardView = v.findViewById(R.id.singleBuildingCard)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuildingCardViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.single_building_card, parent, false)
+        return BuildingCardViewHolder(v)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: BuildingCardViewHolder, position: Int) {
+        holder.listIndex.text = (position + 1).toString()
+        holder.addressText.text = buildingList[position]
+
+        holder.singleBuildingCard.setOnClickListener{
+            Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show()
+
+            blurView.visibility = View.GONE
+            buildingListLayout.visibility = View.GONE
+            grantAccessLayout.visibility = View.GONE
+
+            (it as MaterialCardView).isChecked = !it.isChecked
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                fm?.beginTransaction()?.detach(fragment)?.commitNow()
+                fm?.beginTransaction()?.attach(fragment)?.commitNow()
+            } else {
+                fm?.beginTransaction()?.detach(fragment)?.attach(fragment)?.commit()
+            }
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return buildingList.size
+    }
 }
