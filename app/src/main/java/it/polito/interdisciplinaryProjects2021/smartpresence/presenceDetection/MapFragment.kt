@@ -23,6 +23,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -133,6 +136,10 @@ class MapFragment : Fragment() {
                             putString("longitude", longitude.toString())
                             apply()
                         }
+
+                        val db = Firebase.firestore
+                        db.collection("BuildingNameList").document(addressInput).set(hashMapOf("BuildingName" to addressInput), SetOptions.merge())
+
                         findNavController().popBackStack()
                         Toast.makeText(requireContext(), getString(R.string.success_location_save), Toast.LENGTH_LONG).show()
                     }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.LinearLayout
@@ -21,6 +22,8 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
@@ -40,6 +43,7 @@ class ProfessionalFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_professional, container, false)
     }
 
+    @SuppressLint("LongLogTag")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,38 +82,38 @@ class ProfessionalFragment : Fragment() {
         myBuildingListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val buildingList = mutableListOf<String>()
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("first address first address first address first address first address first address")
-        buildingList.add("second address")
-        buildingList.add("third address")
+        val db = Firebase.firestore
+        db.collection("BuildingNameList")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    buildingList.add(document.id)
+                    Log.d("Documents: ", document.id)
+                }
 
-        if (buildingList.size == 0) {
-            noBuildingMessage.visibility = View.VISIBLE
-            myBuildingListRecyclerView.visibility = View.GONE
-        } else {
-            noBuildingMessage.visibility = View.GONE
-            myBuildingListRecyclerView.visibility = View.VISIBLE
-        }
+                if (buildingList.size == 0) {
+                    noBuildingMessage.visibility = View.VISIBLE
+                    myBuildingListRecyclerView.visibility = View.GONE
+                } else {
+                    noBuildingMessage.visibility = View.GONE
+                    myBuildingListRecyclerView.visibility = View.VISIBLE
+                }
 
-        val rvAdapter = BuildingCardListAdapter(
-            buildingList,
-            requireContext(),
-            blurView,
-            buildingListLayout,
-            grantAccessLayout,
-            getString(R.string.select_address_message),
-            fragmentManager,
-            this
-        )
-        myBuildingListRecyclerView.adapter = rvAdapter
+                val rvAdapter = BuildingCardListAdapter(
+                    buildingList,
+                    requireContext(),
+                    blurView,
+                    buildingListLayout,
+                    grantAccessLayout,
+                    getString(R.string.select_address_message),
+                    fragmentManager,
+                    this
+                )
+                myBuildingListRecyclerView.adapter = rvAdapter
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Error getting documents: ", "$exception")
+            }
 
         val verifyCodeButton = view.findViewById<Button>(R.id.verifyCodeButton)
         verifyCodeButton.setOnClickListener {

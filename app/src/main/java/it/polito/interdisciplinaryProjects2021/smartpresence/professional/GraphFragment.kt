@@ -42,7 +42,8 @@ class GraphFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_graph, container, false)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @Suppress("NAME_SHADOWING")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
