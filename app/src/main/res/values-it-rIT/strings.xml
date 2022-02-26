@@ -340,4 +340,9 @@
     <string name="pro_action_info_avg_all">Occupazione oraria media (tutto il giorno):</string>
     <string name="pro_action_info_not_available">Non disponibile</string>
     <string name="pro_action_info_max_string">max</string>
+    <string name="wifi_based_card_description">Controlla periodicamente la tua connessione WiFi e determina la tua presenza in base alla configurazione</string>
+    <string name="positioning_based_card_description">Controlla periodicamente la tua posizione e confrontala con la tua posizione attuale, oppure usa Geofence</string>
+    <string name="manual_based_card_description">Fai clic manualmente sui pulsanti per effettuare il check-in o il check-out ogni volta che entri o esci dall\'edificio target</string>
+    <string name="simple_show_status">Stato</string>
+    <string name="already_selected_method_message">Devi deselezionare quello scelto prima di cambiare metodo</string>
 </resources>

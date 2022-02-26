@@ -152,6 +152,7 @@ class SettingFragment : Fragment() {
                 putString("professionalOrNot", "false")
                 putString("frequentNotificationOnOffCondition", "false")
                 putString("radiusSpinnerPosition", "2")
+                putString("detectionMethodSelection", "nothing")
                 commit()
             }
             signOutCondition = true

@@ -289,4 +289,9 @@
     <string name="pro_action_info_avg_all">平均每小时占有人数（全天）:</string>
     <string name="pro_action_info_not_available">无法获取</string>
     <string name="pro_action_info_max_string">最大</string>
+    <string name="wifi_based_card_description">定期检查您的 WiFi 连接并根据配置确定您的存在定期检查您的WiFi连接并根据配置确定您的存在</string>
+    <string name="positioning_based_card_description">定期检查您的位置并与您当前的位置进行比较，或使用地理围栏</string>
+    <string name="manual_based_card_description">每当您进入或离开目标建筑物时，手动单击按钮以签入或签出</string>
+    <string name="simple_show_status">状态</string>
+    <string name="already_selected_method_message">您必须在更改方法之前取消选择所选的</string>
 </resources>

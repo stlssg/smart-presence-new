@@ -1,13 +1,12 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -21,6 +20,8 @@ import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
 class PresenceDetectionFragment : Fragment() {
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -30,90 +31,88 @@ class PresenceDetectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val blurView = view.findViewById<BlurView>(R.id.blurView)
-//        blurBackground(blurView)
-//
-//        val wifiCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.wifiCheckingGuidanceCard)
-//        val positioningCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.positioningCheckingGuidanceCard)
-//        val manualCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.manualCheckingGuidanceCard)
+        sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        val detectionMethodSelection = sharedPreferences.getString("detectionMethodSelection", "nothing")
 
-//        val wifiCheckingGuidance = view.findViewById<LinearLayout>(R.id.wifiCheckingGuidance)
-//        val positioningCheckingGuidance = view.findViewById<LinearLayout>(R.id.positioningCheckingGuidance)
-//        val manualCheckingGuidance = view.findViewById<LinearLayout>(R.id.manualCheckingGuidance)
+        val blurView = view.findViewById<BlurView>(R.id.blurView)
+        blurBackground(blurView)
 
-        val goToWifiChecking = view.findViewById<MaterialCardView>(R.id.wifiChecking)
-        val goToPositioningChecking = view.findViewById<MaterialCardView>(R.id.positioningChecking)
-        val goToManualChecking = view.findViewById<MaterialCardView>(R.id.manualChecking)
+        val wifiCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.wifiCheckingGuidanceCard)
+        val positioningCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.positioningCheckingGuidanceCard)
+        val manualCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.manualCheckingGuidanceCard)
 
-//        val wifiCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.wifiCheckingGuidanceCancelButton)
-//        val positioningCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.positioningCheckingGuidanceCancelButton)
-//        val manualCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.manualCheckingGuidanceCancelButton)
+        val wifiCheckingGuidance = view.findViewById<LinearLayout>(R.id.wifiCheckingGuidance)
+        val positioningCheckingGuidance = view.findViewById<LinearLayout>(R.id.positioningCheckingGuidance)
+        val manualCheckingGuidance = view.findViewById<LinearLayout>(R.id.manualCheckingGuidance)
 
-//        fun onClickActionsForHiddenViewRemovingOthers() = cancelBlurEffectAndMakeInvisible(
-//            wifiCheckingGuidanceCard,
-//            positioningCheckingGuidanceCard,
-//            manualCheckingGuidanceCard,
-//            blurView,
-//            wifiCheckingGuidance,
-//            positioningCheckingGuidance,
-//            manualCheckingGuidance
-//        )
+        val wifiChecking = view.findViewById<MaterialCardView>(R.id.wifiChecking)
+        val positioningChecking = view.findViewById<MaterialCardView>(R.id.positioningChecking)
+        val manualChecking = view.findViewById<MaterialCardView>(R.id.manualChecking)
 
-//        blurView.setOnClickListener {
-//            onClickActionsForHiddenViewRemovingOthers()
-//        }
-//
-//        wifiCheckingGuidanceCancelButton.setOnClickListener {
-//            onClickActionsForHiddenViewRemovingOthers()
-//        }
-//
-//        positioningCheckingGuidanceCancelButton.setOnClickListener {
-//            onClickActionsForHiddenViewRemovingOthers()
-//        }
-//
-//        manualCheckingGuidanceCancelButton.setOnClickListener {
-//            onClickActionsForHiddenViewRemovingOthers()
-//        }
-//
-//        goToWifiChecking.setOnClickListener {
-//            TransitionManager.beginDelayedTransition(wifiCheckingGuidanceCard, AutoTransition())
-//            blurView.visibility = View.VISIBLE
-//            wifiCheckingGuidance.visibility = View.VISIBLE
-//        }
-//        goToWifiChecking.setOnLongClickListener {
-//            goToWifiChecking.isChecked = !goToWifiChecking.isChecked
-//            true
-//        }
-//
-//        goToPositioningChecking.setOnClickListener {
-//            TransitionManager.beginDelayedTransition(positioningCheckingGuidanceCard, AutoTransition())
-//            blurView.visibility = View.VISIBLE
-//            positioningCheckingGuidance.visibility = View.VISIBLE
-//        }
-//        goToPositioningChecking.setOnLongClickListener {
-//            goToPositioningChecking.isChecked = !goToPositioningChecking.isChecked
-//            true
-//        }
-//
-//        goToManualChecking.setOnClickListener {
-//            TransitionManager.beginDelayedTransition(manualCheckingGuidanceCard, AutoTransition())
-//            blurView.visibility = View.VISIBLE
-//            manualCheckingGuidance.visibility = View.VISIBLE
-//        }
-//        goToManualChecking.setOnLongClickListener {
-//            goToManualChecking.isChecked = !goToManualChecking.isChecked
-//            true
-//        }
-
-        goToWifiChecking.setOnClickListener {
-            findNavController().navigate(R.id.wifiCheckingFragment)
+        when (detectionMethodSelection) {
+            "wifiChecking" -> {
+                wifiChecking.isChecked = true
+            }
+            "positioningChecking" -> {
+                positioningChecking.isChecked = true
+            }
+            "manualChecking" -> {
+                manualChecking.isChecked = true
+            }
+            else -> {
+                wifiChecking.isChecked = false
+                positioningChecking.isChecked = false
+                manualChecking.isChecked = false
+            }
         }
-        goToPositioningChecking.setOnClickListener {
-            findNavController().navigate(R.id.positioningCheckingFragment)
+
+        val wifiCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.wifiCheckingGuidanceCancelButton)
+        val positioningCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.positioningCheckingGuidanceCancelButton)
+        val manualCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.manualCheckingGuidanceCancelButton)
+
+        fun onClickActionsForHiddenViewRemovingOthers() = cancelBlurEffectAndMakeInvisible(
+            wifiCheckingGuidanceCard,
+            positioningCheckingGuidanceCard,
+            manualCheckingGuidanceCard,
+            blurView,
+            wifiCheckingGuidance,
+            positioningCheckingGuidance,
+            manualCheckingGuidance
+        )
+
+        blurView.setOnClickListener { onClickActionsForHiddenViewRemovingOthers() }
+        wifiCheckingGuidanceCancelButton.setOnClickListener { onClickActionsForHiddenViewRemovingOthers() }
+        positioningCheckingGuidanceCancelButton.setOnClickListener { onClickActionsForHiddenViewRemovingOthers() }
+        manualCheckingGuidanceCancelButton.setOnClickListener { onClickActionsForHiddenViewRemovingOthers() }
+
+        wifiChecking.setOnClickListener { showMethodGuidance(wifiCheckingGuidanceCard, blurView, wifiCheckingGuidance) }
+        wifiChecking.setOnLongClickListener { longClickToSelectMethod(it as MaterialCardView, "wifiChecking") }
+
+        positioningChecking.setOnClickListener { showMethodGuidance(positioningCheckingGuidanceCard, blurView, positioningCheckingGuidance) }
+        positioningChecking.setOnLongClickListener { longClickToSelectMethod(it as MaterialCardView, "positioningChecking") }
+
+        manualChecking.setOnClickListener { showMethodGuidance(manualCheckingGuidanceCard, blurView, manualCheckingGuidance) }
+        manualChecking.setOnLongClickListener { longClickToSelectMethod(it as MaterialCardView, "manualChecking") }
+
+        val startButton = view.findViewById<Button>(R.id.startButton)
+        val restartButton = view.findViewById<Button>(R.id.restartButton)
+        val stopButton = view.findViewById<Button>(R.id.stopButton)
+        val showStatusButton = view.findViewById<Button>(R.id.showStatusButton)
+        val checkInButton = view.findViewById<Button>(R.id.checkInButton)
+        val checkOutButton = view.findViewById<Button>(R.id.checkOutButton)
+
+        startButton.setOnClickListener {
+            startButton.visibility = View.GONE
+            restartButton.visibility = View.VISIBLE
+            stopButton.isEnabled = true
         }
-        goToManualChecking.setOnClickListener {
-            findNavController().navigate(R.id.manualCheckingFragment)
+
+        stopButton.setOnClickListener{
+            startButton.visibility = View.VISIBLE
+            restartButton.visibility = View.GONE
+            stopButton.isEnabled = false
         }
+
     }
 
     private fun blurBackground(blurView: BlurView) {
@@ -146,4 +145,44 @@ class PresenceDetectionFragment : Fragment() {
         linearLayout2.visibility = View.GONE
         linearLayout3.visibility = View.GONE
     }
+
+    private fun showMethodGuidance(card: MaterialCardView, blurView: BlurView, guidance: LinearLayout) {
+        TransitionManager.beginDelayedTransition(card, AutoTransition())
+        blurView.visibility = View.VISIBLE
+        guidance.visibility = View.VISIBLE
+    }
+
+    @Suppress("SameParameterValue")
+    private fun longClickToSelectMethod(card: MaterialCardView, methodString: String): Boolean {
+        val detectionMethodSelectionTemp = sharedPreferences.getString("detectionMethodSelection", "nothing")
+
+        if (card.isChecked) {
+            with(sharedPreferences.edit()) {
+                putString( "detectionMethodSelection", "nothing")
+                commit()
+            }
+            card.isChecked = !card.isChecked
+        } else if (detectionMethodSelectionTemp != methodString && detectionMethodSelectionTemp != "nothing") {
+            Toast.makeText(requireContext(), getString(R.string.already_selected_method_message), Toast.LENGTH_SHORT).show()
+        } else {
+            with(sharedPreferences.edit()) {
+                putString( "detectionMethodSelection", methodString)
+                commit()
+            }
+            card.isChecked = !card.isChecked
+        }
+
+        return true
+    }
 }
+
+
+//        wifiChecking.setOnClickListener {
+//            findNavController().navigate(R.id.wifiCheckingFragment)
+//        }
+//        positioningChecking.setOnClickListener {
+//            findNavController().navigate(R.id.positioningCheckingFragment)
+//        }
+//        manualChecking.setOnClickListener {
+//            findNavController().navigate(R.id.manualCheckingFragment)
+//        }
