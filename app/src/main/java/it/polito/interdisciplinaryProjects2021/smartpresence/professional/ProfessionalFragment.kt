@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -24,6 +25,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.sun.mail.imap.protocol.FetchResponse.getItem
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
@@ -35,6 +37,7 @@ class ProfessionalFragment : Fragment() {
     private lateinit var grantAccessLayout: LinearLayout
     private lateinit var buildingListLayout: LinearLayout
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var menu: Menu
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +63,10 @@ class ProfessionalFragment : Fragment() {
             blurView.visibility = View.GONE
             grantAccessLayout.visibility = View.GONE
             buildingListLayout.visibility = View.GONE
+            menu.getItem(0).setIcon(R.drawable.ic_baseline_lock_open_24)
+            menu.getItem(1).setIcon(R.drawable.ic_baseline_format_list_bulleted_24)
+            menu.getItem(0).isEnabled = true
+            menu.getItem(1).isEnabled = true
         }
 
         val myViewPager = view.findViewById<ViewPager>(R.id.myViewPager)
@@ -117,19 +124,29 @@ class ProfessionalFragment : Fragment() {
 
         val verifyCodeButton = view.findViewById<Button>(R.id.verifyCodeButton)
         verifyCodeButton.setOnClickListener {
+            val account = sharedPreferences.getString("keyCurrentAccount", "noEmail")
             val accessCodeInput = requireView().findViewById<TextInputLayout>(R.id.accessCodeInput).editText?.text.toString()
-            if (accessCodeInput != "yes") {
-                Toast.makeText(context, getString(R.string.wrong_code_message), Toast.LENGTH_SHORT).show()
-            } else {
-                with(sharedPreferences.edit()) {
-                    putString( "professionalAccessGranted", "true")
-                    commit()
+            db.collection("RegisteredUser").document(account!!)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document.data?.get("accessCode") == null || document.data?.get("accessCode") != accessCodeInput) {
+                        Toast.makeText(context, getString(R.string.wrong_code_message), Toast.LENGTH_SHORT).show()
+                    } else {
+                        with(sharedPreferences.edit()) {
+                            putString( "professionalAccessGranted", "true")
+                            commit()
+                        }
+                        Toast.makeText(context, getString(R.string.right_code_message), Toast.LENGTH_SHORT).show()
+                        blurView.visibility = View.GONE
+                        grantAccessLayout.visibility = View.GONE
+                        buildingListLayout.visibility = View.GONE
+                        menu.getItem(0).setIcon(R.drawable.ic_baseline_lock_open_24)
+                        menu.getItem(1).isEnabled = true
+                    }
                 }
-                Toast.makeText(context, getString(R.string.right_code_message), Toast.LENGTH_SHORT).show()
-                blurView.visibility = View.GONE
-                grantAccessLayout.visibility = View.GONE
-                buildingListLayout.visibility = View.GONE
-            }
+                .addOnFailureListener { exception ->
+                    Log.d("get failed with ", "$exception")
+                }
         }
     }
 
@@ -143,6 +160,7 @@ class ProfessionalFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        this.menu = menu
         inflater.inflate(R.menu.professional_fragment_menu, menu)
     }
 
@@ -150,10 +168,14 @@ class ProfessionalFragment : Fragment() {
         when (item.itemId) {
             R.id.action_access_grant -> {
                 if (blurView.visibility == View.VISIBLE) {
+                    menu.getItem(0).setIcon(R.drawable.ic_baseline_lock_open_24)
                     blurView.visibility = View.GONE
                     grantAccessLayout.visibility = View.GONE
                     buildingListLayout.visibility = View.GONE
+                    menu.getItem(1).isEnabled = true
                 } else {
+                    menu.getItem(1).isEnabled = false
+                    menu.getItem(0).setIcon(R.drawable.ic_baseline_close_24)
                     blurView.visibility = View.VISIBLE
                     grantAccessLayout.visibility = View.VISIBLE
                 }
@@ -163,10 +185,14 @@ class ProfessionalFragment : Fragment() {
             R.id.action_list_building -> {
                 if (sharedPreferences.getString("professionalAccessGranted", "false").toBoolean()) {
                     if (blurView.visibility == View.VISIBLE) {
+                        menu.getItem(1).setIcon(R.drawable.ic_baseline_format_list_bulleted_24)
                         blurView.visibility = View.GONE
                         buildingListLayout.visibility = View.GONE
                         grantAccessLayout.visibility = View.GONE
+                        menu.getItem(0).isEnabled = true
                     } else {
+                        menu.getItem(0).isEnabled = false
+                        menu.getItem(1).setIcon(R.drawable.ic_baseline_close_24)
                         blurView.visibility = View.VISIBLE
                         buildingListLayout.visibility = View.VISIBLE
                     }
