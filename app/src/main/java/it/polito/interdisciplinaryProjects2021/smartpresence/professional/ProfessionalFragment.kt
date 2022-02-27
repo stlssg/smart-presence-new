@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -29,6 +30,8 @@ import com.sun.mail.imap.protocol.FetchResponse.getItem
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class ProfessionalFragment : Fragment() {
@@ -38,6 +41,9 @@ class ProfessionalFragment : Fragment() {
     private lateinit var buildingListLayout: LinearLayout
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var menu: Menu
+    private lateinit var myBuildingListRecyclerView: RecyclerView
+    private lateinit var buildingList: ArrayList<String>
+    private lateinit var tempBuildingList: ArrayList<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,18 +91,22 @@ class ProfessionalFragment : Fragment() {
         }
 
         val noBuildingMessage = view.findViewById<TextView>(R.id.noBuildingMessage)
-        val myBuildingListRecyclerView = view.findViewById<RecyclerView>(R.id.building_list_recyclerView)
+        myBuildingListRecyclerView = view.findViewById<RecyclerView>(R.id.building_list_recyclerView)
         myBuildingListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val buildingList = mutableListOf<String>()
+        val searchView = view.findViewById<SearchView>(R.id.search_building)
+
+//        val buildingList = mutableListOf<String>()
         val db = Firebase.firestore
         db.collection("BuildingNameList")
             .get()
             .addOnSuccessListener { result ->
+                buildingList = arrayListOf<String>()
+                tempBuildingList = arrayListOf<String>()
                 for (document in result) {
                     buildingList.add(document.id)
-                    Log.d("Documents: ", document.id)
                 }
+                tempBuildingList.addAll(buildingList)
 
                 if (buildingList.size == 0) {
                     noBuildingMessage.visibility = View.VISIBLE
@@ -107,7 +117,7 @@ class ProfessionalFragment : Fragment() {
                 }
 
                 val rvAdapter = BuildingCardListAdapter(
-                    buildingList,
+                    tempBuildingList,
                     requireContext(),
                     blurView,
                     buildingListLayout,
@@ -117,6 +127,32 @@ class ProfessionalFragment : Fragment() {
                     this
                 )
                 myBuildingListRecyclerView.adapter = rvAdapter
+
+                searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return false
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        tempBuildingList.clear()
+                        val searchText = newText!!.toLowerCase(Locale.getDefault())
+                        if (searchText.isNotEmpty()) {
+                            buildingList.forEach {
+                                if (it.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                                    tempBuildingList.add(it)
+                                }
+                            }
+                            myBuildingListRecyclerView.adapter?.notifyDataSetChanged()
+                        } else {
+                            tempBuildingList.clear()
+                            tempBuildingList.addAll(buildingList)
+                            myBuildingListRecyclerView.adapter?.notifyDataSetChanged()
+                        }
+                        return false
+                    }
+
+                })
             }
             .addOnFailureListener { exception ->
                 Log.d("Error getting documents: ", "$exception")
