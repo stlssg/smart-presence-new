@@ -39,6 +39,9 @@ class CheckOutActivity : AppCompatActivity() {
                 .document(now.toString())
                 .set(input, SetOptions.merge())
 
+            val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "OUT"))
+            db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
+
             Toast.makeText(applicationContext, getString(R.string.shortcutCheckOutMessage), Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, getString(R.string.shortcutNoConfiguration), Toast.LENGTH_LONG).show()

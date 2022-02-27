@@ -39,10 +39,16 @@ class GeofenceBroadcastReceiver: BroadcastReceiver() {
             Geofence.GEOFENCE_TRANSITION_ENTER -> {
                 val inputIn = hashMapOf("presence" to "IN", "timestamp" to now.toString())
                 dbRef.set(inputIn, SetOptions.merge())
+
+                val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "IN"))
+                db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
             }
             Geofence.GEOFENCE_TRANSITION_EXIT -> {
                 val inputOut = hashMapOf("presence" to "OUT", "timestamp" to now.toString())
                 dbRef.set(inputOut, SetOptions.merge())
+
+                val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "OUT"))
+                db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
             }
             else -> {
                 Log.d("GeofenceBroadcastReceiver", "the wrong action is $geofencingTransition")

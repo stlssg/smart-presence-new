@@ -53,6 +53,9 @@ class MyPeriodicWifiCheckingWork (context: Context, workerParameters: WorkerPara
                         .collection("WIFI")
                         .document(now.toString())
                         .set(input, SetOptions.merge())
+
+                    val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "CONNECTED"))
+                    db.collection("RegisteredUser").document(documentPath).set(newestAction, SetOptions.merge())
                 }
             }
         }

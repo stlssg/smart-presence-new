@@ -609,6 +609,9 @@ class PresenceDetectionFragment : Fragment() {
             .collection("MANUAL")
             .document(now.toString())
             .set(input, SetOptions.merge())
+
+        val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to action))
+        db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
     }
 
     private fun buttonStatusWhenWorking(startBtn: Button, restartBtn: Button, stopBtn: Button) {

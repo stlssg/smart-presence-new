@@ -100,6 +100,9 @@ class MyPeriodicBackgroundPositioningCheckingWork (context: Context, workerParam
                                     .collection("POSITIONING")
                                     .document(now.toString())
                                     .set(input, SetOptions.merge())
+
+                                val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "CONNECTED"))
+                                db.collection("RegisteredUser").document(documentPath).set(newestAction, SetOptions.merge())
                             }
                         }
                         else Log.e("locationChecking", "fail to get location")
