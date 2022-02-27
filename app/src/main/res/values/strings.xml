@@ -277,6 +277,51 @@
     <string name="wifiOnLocationOffAlertMessage">We notice that the location services has been turned off. It is very crucial to the app. Please enable it.</string>
     <string name="wifiOffLocationOnAlertMessage">We notice that the WiFi services has been turned off. It is very crucial to the app. Please enable it.</string>
     <string name="faqFragmentTitle">Questions&amp;Answers</string>
+    <string-array name="question_list">
+        <item>Which method should I use for presence detection?</item>
+        <item>Why do I have to disable the battery optimization?</item>
+        <item>Why do I have to grant the all time positioning permission?</item>
+        <item>What device settings should I change?</item>
+        <item>Why the app does not work properly?</item>
+        <item>Which mode should I select, regular or professional?</item>
+        <item>For WiFi checking method, what is SSID and BSSID?</item>
+        <item>What kind of time setting should I refer to?</item>
+        <item>How can I get the professional access permission?</item>
+        <item>Why I cannot use the map to select address?</item>
+    </string-array>
+    <string-array name="answer_list">
+        <item>We have provided three methods in total. In general, the WiFi method is the most recommended one because it is simple and reliable.
+    However, if there\'s no WiFi device installed in your target building or you simply do not want to use WiFi, the positioning method is a more versatile one which
+    only requires the location service of your smart phone, but it is not as reliable as the previous one and may consume more battery. At last, there is always the
+    manual one, but you need to manually click the check in/out button, which totally relies on your habit. The advantage of it is that it is very reliable and accurate.</item>
+        <item>The core function of this app will exploit the feature of Android background work periodically in a long term, which may be affected and
+    stopped due to battery optimization. In order to guarantee the continuity of the service to derive a reliable occupancy profile, it is mandatory to do it.</item>
+        <item>First of all, the service will work for very long time in the background,
+    which can be done only by all time permission. Secondly, both of the WiFi method and positioning
+    method require location service to be turned on to access certain information.</item>
+        <item>This totally depend on the specific device you are using since different manufacturers
+    have their own customized Android system which limit the background service in different way. In general, the most
+    common settings you need to vary are: all time positioning permission, battery optimization, background service allowance.</item>
+        <item>There are several scenarios: permissions are not granted; background service is
+    restricted; WiFi service is turned off; location service is turned off; you seldom use your phone.</item>
+        <item>In most cases, it is suggested to select regular mode since it is lightweight
+    and simple. If you are an expert or related personnel, the professional mode can help you to perform
+    more actions remotely. However, it is totally up to you, the professional mode won\'t cost you more.</item>
+        <item>SSID is the so-called service set identifier, which is simply the WiFi name
+    while BSSID is basic service set identifier, which is a 48-bit label assigned by the router. They are
+    both used to identify the router in the target building.</item>
+        <item>Normally, it is suggested to follow the default ones, since they have higher
+    accuracy and can cover most meaningful time period during a day. However, you can choose to customize
+    based on your own behaviour. For instance, if you always work outside during the night, you need to
+    change the stop time to a late time instance.</item>
+        <item>You need to be an expert who works with our desktop software, in which you can retrieve the code for permission.
+        Otherwise, even if you refer to professional mode, you can only access your own information.</item>
+        <item>There are multiple reasons: your location service is turned off or failed, your device does not
+        support the so-called geocoder function, your device does not support google service, your internet
+        connection is off. In any case, if you cannot access the address and location, you can always manually
+        input them. However, you need to make sure that the address is exactly as same as other occupants and
+        the location including latitude and longitude has to be correct and precise.</item>
+    </string-array>
     <string name="question_1">Which method should I use for presence detection?</string>
     <string name="answer_1">We have provided three methods in total. In general, the WiFi method is the most recommended one because it is simple and reliable.
     However, if there\'s no WiFi device installed in your target building or you simply do not want to use WiFi, the positioning method is a more versatile one which

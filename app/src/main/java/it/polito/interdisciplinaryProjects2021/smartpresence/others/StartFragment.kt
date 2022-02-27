@@ -47,7 +47,7 @@ class StartFragment : Fragment() {
             val handler = Handler()
             handler.postDelayed(Runnable {
                 (activity as AppCompatActivity).supportActionBar?.show()
-                val enableSplash = false
+                val enableSplash = true
                 if (enableSplash) {
                     findNavController().navigate(R.id.splashBaseFragment)
                 } else {
