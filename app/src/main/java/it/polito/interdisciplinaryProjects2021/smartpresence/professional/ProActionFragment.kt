@@ -5,13 +5,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import org.joda.time.DateTime
 
 class ProActionFragment : Fragment() {
 
@@ -21,7 +25,7 @@ class ProActionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_pro_action, container, false)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "LongLogTag")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,7 +52,7 @@ class ProActionFragment : Fragment() {
         assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
         assignContentForBuildingInfo(maxOccupancy, getString(R.string.configurationAlertMaxName), infoProMax)
 
-        // need change
+        // need change !!!!!!!
         val maxString = if (maxOccupancy == "nothing") {
             getString(R.string.pro_action_info_not_available)
         } else {
@@ -64,7 +68,35 @@ class ProActionFragment : Fragment() {
             "):"
 
         val currentNumberOccupants = view.findViewById<TextView>(R.id.currentNumberOccupants)
-        currentNumberOccupants.text = "2"
+//        currentNumberOccupants.text = "2"
+
+        val db = Firebase.firestore
+        db.collection("RegisteredUser")
+            .whereEqualTo("targetBuilding", address)
+            .get()
+            .addOnSuccessListener { documents ->
+                var numCurrentOccupants = 0
+                val now = DateTime.now()
+                for (document in documents) {
+                    val currentPresenceCondition = (document.data["newestAction"] as Map<*, *>)["presence"].toString()
+                    val currentTimestamp = (document.data["newestAction"] as Map<*, *>)["timestamp"].toString()
+                    val currentDateTime = DateTime.parse(currentTimestamp)
+                    Log.d("targetBuilding: ", "$currentPresenceCondition and $currentTimestamp")
+                    Log.d("targetBuilding: ", "${(now.millis - currentDateTime.millis) / 1000 / 60}")
+
+                    if (currentPresenceCondition == "IN") {
+                        numCurrentOccupants ++
+                    } else if ((now.millis - currentDateTime.millis) / 1000 / 60 <= 90 && currentPresenceCondition == "CONNECTED") {
+                        numCurrentOccupants ++
+                    }
+                }
+
+                currentNumberOccupants.text = numCurrentOccupants.toString()
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Error getting documents: ", "$exception")
+            }
+
         val selectedHourlyOccupancy = view.findViewById<TextView>(R.id.selectedHourlyOccupancy)
         selectedHourlyOccupancy.text = "0.8"
         val allHourlyOccupancy = view.findViewById<TextView>(R.id.allHourlyOccupancy)
