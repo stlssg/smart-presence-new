@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.ktx.firestore
@@ -38,7 +40,7 @@ class ProfessionalFragment : Fragment() {
 
     private lateinit var blurView: BlurView
     private lateinit var grantAccessLayout: LinearLayout
-    private lateinit var buildingListLayout: LinearLayout
+    private lateinit var buildingListLayout: ConstraintLayout
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var menu: Menu
     private lateinit var myBuildingListRecyclerView: RecyclerView
@@ -61,7 +63,7 @@ class ProfessionalFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
 
         grantAccessLayout = view.findViewById<LinearLayout>(R.id.grant_access_layout)
-        buildingListLayout = view.findViewById<LinearLayout>(R.id.buildingListLayout)
+        buildingListLayout = view.findViewById<ConstraintLayout>(R.id.buildingListLayout)
 
         blurView = view.findViewById<BlurView>(R.id.proFragmentBlurView)
         blurBackground(blurView)
@@ -106,6 +108,25 @@ class ProfessionalFragment : Fragment() {
                 for (document in result) {
                     buildingList.add(document.id)
                 }
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+                buildingList.add("xxxxxxxxxxxxxxx")
+
                 tempBuildingList.addAll(buildingList)
 
                 if (buildingList.size == 0) {
@@ -157,6 +178,13 @@ class ProfessionalFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.d("Error getting documents: ", "$exception")
             }
+
+        val goBackToTopFab = view.findViewById<FloatingActionButton>(R.id.goBackToTopFab)
+        goBackToTopFab.setOnClickListener{
+            myBuildingListRecyclerView.smoothScrollToPosition(0)
+//            Log.d("recyclerview first position: ", "${(myBuildingListRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()}")
+//            Log.d("recyclerview last position: ", "${(myBuildingListRecyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()}")
+        }
 
         val verifyCodeButton = view.findViewById<Button>(R.id.verifyCodeButton)
         verifyCodeButton.setOnClickListener {
@@ -292,7 +320,7 @@ class BuildingCardListAdapter (
     private val buildingList: List<String>,
     val context: Context,
     val blurView: BlurView,
-    private val buildingListLayout: LinearLayout,
+    private val buildingListLayout: ConstraintLayout,
     private val grantAccessLayout: LinearLayout,
     private val messageString: String,
     private val fm: FragmentManager?,
