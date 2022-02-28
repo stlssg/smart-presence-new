@@ -68,6 +68,8 @@ class ProActionFragment : Fragment() {
         val infoTitle = view.findViewById<TextView>(R.id.textView5)
         val statisticsTitle = view.findViewById<TextView>(R.id.textView3)
         val endDescription = view.findViewById<TextView>(R.id.endDescription)
+        var stringMax: String
+        var stringCurrentOccupants: String
 
         when (languageSpinnerPosition) {
             1 -> {
@@ -82,6 +84,8 @@ class ProActionFragment : Fragment() {
                 infoTitle.text = "Informazioni sull'edificio di destinazione:"
                 statisticsTitle.text = "Statistiche:"
                 endDescription.text = "Altre funzioni stanno arrivando."
+                stringMax = "max"
+                stringCurrentOccupants = "Numero attuale di occupanti nell'edificio di destinazione"
             }
             2 -> {
                 assignContentForBuildingInfo(address?.replace("_", " "), "地址", infoProAddress)
@@ -95,6 +99,8 @@ class ProActionFragment : Fragment() {
                 infoTitle.text = "目标建筑信息:"
                 statisticsTitle.text = "统计数据:"
                 endDescription.text = "更多功能即将推出."
+                stringMax = "最大"
+                stringCurrentOccupants = "目标建筑中的当前居住人数"
             }
             else -> {
                 assignContentForBuildingInfo(address?.replace("_", " "), "Address", infoProAddress)
@@ -108,6 +114,8 @@ class ProActionFragment : Fragment() {
                 infoTitle.text = "Information of target building:"
                 statisticsTitle.text = "Statistics:"
                 endDescription.text = "More functions are coming."
+                stringMax = "max"
+                stringCurrentOccupants = "Current number of occupants in target building"
             }
         }
 
@@ -126,9 +134,11 @@ class ProActionFragment : Fragment() {
         }
         val currentNumberOccupantsTitle = view.findViewById<TextView>(R.id.currentNumberOccupantsTitle)
         currentNumberOccupantsTitle.text =
-            getString(R.string.pro_action_info_current_number) +
+//            getString(R.string.pro_action_info_current_number) +
+            stringCurrentOccupants +
             " (" +
-            getString(R.string.pro_action_info_max_string) +
+//            getString(R.string.pro_action_info_max_string) +
+            stringMax +
             ": " +
             maxString +
             "):"
