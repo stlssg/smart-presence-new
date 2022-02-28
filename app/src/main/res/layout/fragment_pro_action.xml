@@ -260,6 +260,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/avgOccupancySelectedTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -324,6 +325,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/avgOccupancyAllTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -387,6 +389,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/endDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

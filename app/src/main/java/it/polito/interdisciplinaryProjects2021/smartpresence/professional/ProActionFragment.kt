@@ -3,6 +3,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.professional
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -11,13 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import org.joda.time.DateTime
+import java.util.*
 
 class ProActionFragment : Fragment() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var notAvailableString: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,7 +35,20 @@ class ProActionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+        notAvailableString = when (languageSpinnerPosition) {
+            1 -> {
+                "Non disponibile"
+            }
+            2 -> {
+                "无法获取"
+            }
+            else -> {
+                "Not available"
+            }
+        }
 
         val address = sharedPreferences.getString("address", "nothing")
         val latitude = sharedPreferences.getString("latitude", "nothing")
@@ -44,17 +63,64 @@ class ProActionFragment : Fragment() {
         val infoProSSID = view.findViewById<TextView>(R.id.infoProSSID)
         val infoProBSSID = view.findViewById<TextView>(R.id.infoProBSSID)
         val infoProMax = view.findViewById<TextView>(R.id.infoProMax)
+        val avgOccupancySelectedTitle = view.findViewById<TextView>(R.id.avgOccupancySelectedTitle)
+        val avgOccupancyAllTitle = view.findViewById<TextView>(R.id.avgOccupancyAllTitle)
+        val infoTitle = view.findViewById<TextView>(R.id.textView5)
+        val statisticsTitle = view.findViewById<TextView>(R.id.textView3)
+        val endDescription = view.findViewById<TextView>(R.id.endDescription)
 
-        assignContentForBuildingInfo(address?.replace("_", " "), getString(R.string.configurationAlertAddressName), infoProAddress)
-        assignContentForBuildingInfo(latitude, getString(R.string.configurationAlertLatName), infoProLat)
-        assignContentForBuildingInfo(longitude, getString(R.string.configurationAlertLonName), infoProLon)
-        assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
-        assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
-        assignContentForBuildingInfo(maxOccupancy, getString(R.string.configurationAlertMaxName), infoProMax)
+        when (languageSpinnerPosition) {
+            1 -> {
+                assignContentForBuildingInfo(address?.replace("_", " "), "Indirizzo", infoProAddress)
+                assignContentForBuildingInfo(latitude, "Latitudine", infoProLat)
+                assignContentForBuildingInfo(longitude, "Longitudine", infoProLon)
+                assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
+                assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
+                assignContentForBuildingInfo(maxOccupancy, "Occupanti massimi previsti", infoProMax)
+                avgOccupancySelectedTitle.text = "Occupazione oraria media (intervallo selezionato):"
+                avgOccupancyAllTitle.text = "Occupazione oraria media (tutto il giorno):"
+                infoTitle.text = "Informazioni sull'edificio di destinazione:"
+                statisticsTitle.text = "Statistiche:"
+                endDescription.text = "Altre funzioni stanno arrivando."
+            }
+            2 -> {
+                assignContentForBuildingInfo(address?.replace("_", " "), "地址", infoProAddress)
+                assignContentForBuildingInfo(latitude, "纬度", infoProLat)
+                assignContentForBuildingInfo(longitude, "经度", infoProLon)
+                assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
+                assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
+                assignContentForBuildingInfo(maxOccupancy, "最大预期人数", infoProMax)
+                avgOccupancySelectedTitle.text = "平均每小时占用率（选定时间）:"
+                avgOccupancyAllTitle.text = "平均每小时人数（全天）:"
+                infoTitle.text = "目标建筑信息:"
+                statisticsTitle.text = "统计数据:"
+                endDescription.text = "更多功能即将推出."
+            }
+            else -> {
+                assignContentForBuildingInfo(address?.replace("_", " "), "Address", infoProAddress)
+                assignContentForBuildingInfo(latitude, "Latitude", infoProLat)
+                assignContentForBuildingInfo(longitude, "Longitude", infoProLon)
+                assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
+                assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
+                assignContentForBuildingInfo(maxOccupancy, "Maximum expected occupants", infoProMax)
+                avgOccupancySelectedTitle.text = "Average hourly occupancy (selected interval):"
+                avgOccupancyAllTitle.text = "Average hourly occupancy (all day):"
+                infoTitle.text = "Information of target building:"
+                statisticsTitle.text = "Statistics:"
+                endDescription.text = "More functions are coming."
+            }
+        }
+
+//        assignContentForBuildingInfo(address?.replace("_", " "), getString(R.string.configurationAlertAddressName), infoProAddress)
+//        assignContentForBuildingInfo(latitude, getString(R.string.configurationAlertLatName), infoProLat)
+//        assignContentForBuildingInfo(longitude, getString(R.string.configurationAlertLonName), infoProLon)
+//        assignContentForBuildingInfo(ssid, "SSID", infoProSSID)
+//        assignContentForBuildingInfo(bssid, "BSSID", infoProBSSID)
+//        assignContentForBuildingInfo(maxOccupancy, getString(R.string.configurationAlertMaxName), infoProMax)
 
         // need change !!!!!!!
         val maxString = if (maxOccupancy == "nothing") {
-            getString(R.string.pro_action_info_not_available)
+            notAvailableString
         } else {
             maxOccupancy
         }
@@ -81,8 +147,8 @@ class ProActionFragment : Fragment() {
                     val currentPresenceCondition = (document.data["newestAction"] as Map<*, *>)["presence"].toString()
                     val currentTimestamp = (document.data["newestAction"] as Map<*, *>)["timestamp"].toString()
                     val currentDateTime = DateTime.parse(currentTimestamp)
-                    Log.d("targetBuilding: ", "$currentPresenceCondition and $currentTimestamp")
-                    Log.d("targetBuilding: ", "${(now.millis - currentDateTime.millis) / 1000 / 60}")
+//                    Log.d("targetBuilding: ", "$currentPresenceCondition and $currentTimestamp")
+//                    Log.d("targetBuilding: ", "${(now.millis - currentDateTime.millis) / 1000 / 60}")
 
                     if (currentPresenceCondition == "IN") {
                         numCurrentOccupants ++
@@ -136,10 +202,42 @@ class ProActionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun assignContentForBuildingInfo(stringInput: String?, additionalString: String, tv: TextView) {
         if (stringInput == "nothing") {
-            tv.text = "$additionalString: " + getString(R.string.pro_action_info_not_available)
+            tv.text = "$additionalString: $notAvailableString"
         } else {
             tv.text = "$additionalString: $stringInput"
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
+            1 -> setLang("it")
+            2 -> setLang("zh")
+            else -> setLang("en")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
+            1 -> setLang("it")
+            2 -> setLang("zh")
+            else -> setLang("en")
+        }
+    }
+
+    private fun setLang(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        (activity as AppCompatActivity).baseContext.resources.updateConfiguration(config, (activity as AppCompatActivity).baseContext.resources.displayMetrics)
     }
 
 }

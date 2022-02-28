@@ -69,8 +69,7 @@ class GraphFragment : Fragment() {
 //        totalOption.text = getString(R.string.graphOptionTotal)
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
-        when (languageSpinnerPosition) {
+        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
             1 -> {
                 dailyOption.text = "Quotidiano"
                 weeklyOption.text = "Settimanalmente"
@@ -356,9 +355,8 @@ class GraphFragment : Fragment() {
         super.onResume()
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
 
-        when (languageSpinnerPosition) {
+        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
             1 -> setLang("it")
             2 -> setLang("zh")
             else -> setLang("en")
@@ -371,9 +369,8 @@ class GraphFragment : Fragment() {
         super.onPause()
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
 
-        when (languageSpinnerPosition) {
+        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
             1 -> setLang("it")
             2 -> setLang("zh")
             else -> setLang("en")

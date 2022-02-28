@@ -517,12 +517,12 @@
                     android:text="@string/startButton"
                     android:textAllCaps="false"
                     android:textColor="@color/purple_700"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     app:icon="@drawable/ic_baseline_play_arrow_24"
                     app:iconTint="@color/purple_500"
                     app:strokeColor="@color/purple_200"
                     app:strokeWidth="1dp"
-                    tools:ignore="ButtonStyle"
+                    tools:ignore="ButtonStyle,SmallSp"
                     android:visibility="visible"/>
 
                 <Button
@@ -549,14 +549,14 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:text="@string/stopButton"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     android:textAllCaps="false"
                     android:textColor="@color/purple_700"
                     app:icon="@drawable/ic_baseline_stop_24"
                     app:iconTint="@color/purple_500"
                     app:strokeColor="@color/purple_200"
                     app:strokeWidth="1dp"
-                    tools:ignore="ButtonStyle"
+                    tools:ignore="ButtonStyle,SmallSp"
                     android:enabled="false"/>
 
                 <Button
@@ -566,14 +566,14 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:text="@string/simple_show_status"
-                    android:textSize="13sp"
+                    android:textSize="10sp"
                     android:textAllCaps="false"
                     android:textColor="@color/purple_700"
                     app:icon="@drawable/ic_baseline_info_24"
                     app:iconTint="@color/purple_500"
                     app:strokeColor="@color/purple_200"
                     app:strokeWidth="1dp"
-                    tools:ignore="ButtonStyle" />
+                    tools:ignore="ButtonStyle,SmallSp" />
 
             </LinearLayout>
 
