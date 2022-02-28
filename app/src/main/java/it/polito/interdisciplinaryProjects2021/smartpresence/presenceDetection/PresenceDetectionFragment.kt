@@ -2,12 +2,15 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.app.PendingIntent
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.icu.text.SimpleDateFormat
 import android.media.MediaActionSound
 import android.os.Build
 import android.os.Bundle
@@ -38,6 +41,8 @@ import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.p
 import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased.MyPeriodicBackgroundPositioningCheckingWork
 import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased.MyPeriodicWifiCheckingWork
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class PresenceDetectionFragment : Fragment() {
@@ -58,7 +63,7 @@ class PresenceDetectionFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.Q)
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NAME_SHADOWING")
-    @SuppressLint("UnspecifiedImmutableFlag")
+    @SuppressLint("UnspecifiedImmutableFlag", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -104,6 +109,8 @@ class PresenceDetectionFragment : Fragment() {
         val positioningCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.positioningCheckingGuidanceCancelButton)
         val manualCheckingGuidanceCancelButton = view.findViewById<ImageButton>(R.id.manualCheckingGuidanceCancelButton)
 
+        val specificTimeCheckCard = view.findViewById<MaterialCardView>(R.id.specificTimeCheckCard)
+
         fun onClickActionsForHiddenViewRemovingOthers() = cancelBlurEffectAndMakeInvisible(
             wifiCheckingGuidanceCard,
             positioningCheckingGuidanceCard,
@@ -111,7 +118,8 @@ class PresenceDetectionFragment : Fragment() {
             blurView,
             wifiCheckingGuidance,
             positioningCheckingGuidance,
-            manualCheckingGuidance
+            manualCheckingGuidance,
+            specificTimeCheckCard
         )
 
         blurView.setOnClickListener { onClickActionsForHiddenViewRemovingOthers() }
@@ -379,7 +387,7 @@ class PresenceDetectionFragment : Fragment() {
             } else {
                 if (addressConfigurationFinished && maxOccupancyConfigurationFinished) {
                     Toast.makeText(requireContext(), getString(R.string.checkInMessage), Toast.LENGTH_SHORT).show()
-                    processingCheck("IN")
+                    processingCheck(DateTime.now().toString(), "IN")
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
                 }
@@ -392,12 +400,95 @@ class PresenceDetectionFragment : Fragment() {
                 Toast.makeText(requireContext(), getString(R.string.no_selection_manual_click_button), Toast.LENGTH_SHORT).show()
             } else {
                 if (addressConfigurationFinished && maxOccupancyConfigurationFinished) {
-                    Toast.makeText(requireContext(), getString(R.string.checkInMessage), Toast.LENGTH_SHORT).show()
-                    processingCheck("OUT")
+                    Toast.makeText(requireContext(), getString(R.string.checkOutMessage), Toast.LENGTH_SHORT).show()
+                    processingCheck(DateTime.now().toString(), "OUT")
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        val cancelSpecificCheckCardButton = view.findViewById<ImageButton>(R.id.cancelSpecificCheckCardButton)
+        val dateForCheck = view.findViewById<TextView>(R.id.dateForCheck)
+        val timeForCheck = view.findViewById<TextView>(R.id.timeForCheck)
+        val specificCheckButton = view.findViewById<Button>(R.id.specificCheckButton)
+
+        checkInButton.setOnLongClickListener {
+            val detectionMethodSelectionTemp = sharedPreferences.getString("detectionMethodSelection", "nothing")
+            if (detectionMethodSelectionTemp != "manualChecking") {
+                Toast.makeText(requireContext(), getString(R.string.no_selection_manual_click_button), Toast.LENGTH_SHORT).show()
+            } else {
+                if (addressConfigurationFinished && maxOccupancyConfigurationFinished) {
+                    blurView.visibility = View.VISIBLE
+                    specificTimeCheckCard.visibility = View.VISIBLE
+                    specificCheckButton.text = getString(R.string.checkInButton)
+                    assignDateAndTimeToText(dateForCheck, timeForCheck)
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            true
+        }
+
+        checkOutButton.setOnLongClickListener {
+            val detectionMethodSelectionTemp = sharedPreferences.getString("detectionMethodSelection", "nothing")
+            if (detectionMethodSelectionTemp != "manualChecking") {
+                Toast.makeText(requireContext(), getString(R.string.no_selection_manual_click_button), Toast.LENGTH_SHORT).show()
+            } else {
+                if (addressConfigurationFinished && maxOccupancyConfigurationFinished) {
+                    blurView.visibility = View.VISIBLE
+                    specificTimeCheckCard.visibility = View.VISIBLE
+                    specificCheckButton.text = getString(R.string.checkOutButton)
+                    assignDateAndTimeToText(dateForCheck, timeForCheck)
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            true
+        }
+
+        cancelSpecificCheckCardButton.setOnClickListener {
+            blurView.visibility = View.GONE
+            specificTimeCheckCard.visibility = View.GONE
+        }
+
+        dateForCheck.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                dateForCheck.text = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
+            }
+            DatePickerDialog(requireContext(), dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+        timeForCheck.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                timeForCheck.text = SimpleDateFormat("HH:mm").format(cal.time)
+            }
+            TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
+
+        specificCheckButton.setOnClickListener {
+            blurView.visibility = View.GONE
+            specificTimeCheckCard.visibility = View.GONE
+
+            val action = if (specificCheckButton.text == getString(R.string.checkInButton)) {
+                Toast.makeText(requireContext(), getString(R.string.checkInMessage), Toast.LENGTH_SHORT).show()
+                "IN"
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.checkOutMessage), Toast.LENGTH_SHORT).show()
+                "OUT"
+            }
+
+            val specificDateTime = "${dateForCheck.text}T${timeForCheck.text}:00.000+01:00"
+            processingCheck(specificDateTime, action)
         }
 
     }
@@ -590,27 +681,25 @@ class PresenceDetectionFragment : Fragment() {
         Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalEvening")
     }
 
-    private fun processingCheck(action: String) {
+    private fun processingCheck(timestamp: String, action: String) {
         val db = Firebase.firestore
 
         val address = sharedPreferences.getString("address", "nothing")
         val maxOccupancy = sharedPreferences.getString("maxOccupancy", "nothing")
         val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
 
-        val now = DateTime.now()
-
         val inputBuildingInfo = hashMapOf("Address" to address, "Maximum_expected_number" to maxOccupancy)
-        val input = hashMapOf("presence" to action, "timestamp" to now.toString())
+        val input = hashMapOf("presence" to action, "timestamp" to timestamp)
 
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document(user!!).set(hashMapOf("UserName" to user), SetOptions.merge())
         db.collection(address)
             .document(user)
             .collection("MANUAL")
-            .document(now.toString())
+            .document(timestamp)
             .set(input, SetOptions.merge())
 
-        val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to action))
+        val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to timestamp, "presence" to action))
         db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
     }
 
@@ -646,7 +735,8 @@ class PresenceDetectionFragment : Fragment() {
         blurView: BlurView,
         linearLayout1: LinearLayout,
         linearLayout2: LinearLayout,
-        linearLayout3: LinearLayout
+        linearLayout3: LinearLayout,
+        card4: MaterialCardView
     ) {
         TransitionManager.beginDelayedTransition(card1, AutoTransition())
         TransitionManager.beginDelayedTransition(card2, AutoTransition())
@@ -655,6 +745,7 @@ class PresenceDetectionFragment : Fragment() {
         linearLayout1.visibility = View.GONE
         linearLayout2.visibility = View.GONE
         linearLayout3.visibility = View.GONE
+        card4.visibility = View.GONE
     }
 
     private fun showMethodGuidance(card: MaterialCardView, blurView: BlurView, guidance: LinearLayout) {
@@ -732,6 +823,14 @@ class PresenceDetectionFragment : Fragment() {
         super.onPause()
 
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+    }
+
+    private fun assignDateAndTimeToText(date: TextView, time: TextView) {
+        val now = DateTime.now()
+        val formatDate = DateTimeFormat.forPattern("yyyy-MM-dd")
+        val formatTime = DateTimeFormat.forPattern("HH:mm")
+        date.text = now.toString(formatDate)
+        time.text = now.toString(formatTime)
     }
 
 }

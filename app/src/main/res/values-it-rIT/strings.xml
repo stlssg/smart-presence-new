@@ -409,4 +409,8 @@
     <string name="not_grant_pro_access_message">Non hai ancora il permesso di accesso</string>
     <string name="wrong_code_message">Il codice che hai inserito è sbagliato</string>
     <string name="right_code_message">Il codice è corretto, ora puoi accedere alle informazioni per tutti gli edifici</string>
+    <string name="long_click_check_message">Pulsanti a clic lungo per effettuare il check-in/check-out a un\'ora specifica.</string>
+    <string name="specific_check_title">Check In/Out a un orario specifico</string>
+    <string name="date_string">Data</string>
+    <string name="time_string">Volta</string>
 </resources>

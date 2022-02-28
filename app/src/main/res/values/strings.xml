@@ -403,4 +403,8 @@
     <string name="not_grant_pro_access_message">You do not have the access permission yet</string>
     <string name="wrong_code_message">The code you input is wrong</string>
     <string name="right_code_message">The code is correct, now you can access the information for all buildings</string>
+    <string name="long_click_check_message">Long click buttons to check in/out at a specific time.</string>
+    <string name="specific_check_title">Check In/Out on a specific time</string>
+    <string name="date_string">Date</string>
+    <string name="time_string">Time</string>
 </resources>

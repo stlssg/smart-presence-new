@@ -341,4 +341,8 @@
     <string name="not_grant_pro_access_message">您还没有访问权限</string>
     <string name="wrong_code_message">您输入的代码错误</string>
     <string name="right_code_message">代码正确，现在您可以访问所有建筑的信息</string>
+    <string name="long_click_check_message">长按按钮可在特定时间签入/签出。</string>
+    <string name="specific_check_title">在特定时间签入/签出</string>
+    <string name="date_string">日期</string>
+    <string name="time_string">时间</string>
 </resources>
