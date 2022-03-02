@@ -57,6 +57,7 @@ class GraphFragment : Fragment() {
         val graphConstraintLayout = view.findViewById<ConstraintLayout>(R.id.graphConstraintLayout)
 
         if (targetBuildingForPro == "nothing") {
+            noTargetBuildingText.visibility = VISIBLE
             when (languageSpinnerPosition) {
                 1 -> {
                     noTargetBuildingText.text = "Non hai ancora specificato il tuo edificio di destinazione."
@@ -73,7 +74,7 @@ class GraphFragment : Fragment() {
             val docRef = db.collection(targetBuildingForPro!!).document("Results")
             docRef.get()
                 .addOnSuccessListener { document ->
-                    if (document.data?.get("total_available") == true) {
+                    if (document.data?.get("daily_available") == true) {
                         noTargetBuildingText.visibility = GONE
                         graphConstraintLayout.visibility = VISIBLE
 
@@ -376,6 +377,7 @@ class GraphFragment : Fragment() {
                                 errorTextView.text = getString(R.string.graphErrorMessage)
                             }
                     } else {
+                        noTargetBuildingText.visibility = VISIBLE
                         when (languageSpinnerPosition) {
                             1 -> {
                                 noTargetBuildingText.text = "I risultati non sono ancora disponibili in questo momento, per favore prova più tardi."

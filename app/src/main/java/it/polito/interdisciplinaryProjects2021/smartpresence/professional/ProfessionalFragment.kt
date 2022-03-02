@@ -105,27 +105,28 @@ class ProfessionalFragment : Fragment() {
             .addOnSuccessListener { result ->
                 buildingList = arrayListOf<String>()
                 tempBuildingList = arrayListOf<String>()
+                buildingList.add(sharedPreferences.getString("address", "nothing").toString())
                 for (document in result) {
                     buildingList.add(document.id)
                 }
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
-                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
+//                buildingList.add("xxxxxxxxxxxxxxx")
 
                 tempBuildingList.addAll(buildingList)
 
@@ -144,6 +145,7 @@ class ProfessionalFragment : Fragment() {
                     buildingListLayout,
                     grantAccessLayout,
                     getString(R.string.select_address_message),
+                    sharedPreferences,
                     fragmentManager,
                     this
                 )
@@ -323,6 +325,7 @@ class BuildingCardListAdapter (
     private val buildingListLayout: ConstraintLayout,
     private val grantAccessLayout: LinearLayout,
     private val messageString: String,
+    private val sharedPreferences: SharedPreferences,
     private val fm: FragmentManager?,
     private val fragment: Fragment
 ): RecyclerView.Adapter<BuildingCardListAdapter.BuildingCardViewHolder>() {
@@ -330,6 +333,7 @@ class BuildingCardListAdapter (
         val listIndex: TextView = v.findViewById(R.id.listIndex)
         val addressText: TextView = v.findViewById(R.id.addressText)
         val singleBuildingCard: MaterialCardView = v.findViewById(R.id.singleBuildingCard)
+        val targetBuildingMsgForCard: TextView = v.findViewById(R.id.targetBuildingMsgForCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuildingCardViewHolder {
@@ -339,8 +343,13 @@ class BuildingCardListAdapter (
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BuildingCardViewHolder, position: Int) {
-        holder.listIndex.text = (position + 1).toString()
-        holder.addressText.text = buildingList[position]
+        if (position == 0) { holder.targetBuildingMsgForCard.visibility = View.VISIBLE }
+
+        holder.listIndex.text = position.toString()
+        holder.addressText.text = buildingList[position].replace("_", " ")
+
+        val targetBuildingForPro = sharedPreferences.getString("targetBuildingForPro", "nothing")
+        holder.singleBuildingCard.isChecked = holder.addressText.text.toString().replace(" ", "_") == targetBuildingForPro
 
         holder.singleBuildingCard.setOnClickListener{
             Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show()
@@ -349,7 +358,12 @@ class BuildingCardListAdapter (
             buildingListLayout.visibility = View.GONE
             grantAccessLayout.visibility = View.GONE
 
-            (it as MaterialCardView).isChecked = !it.isChecked
+//            (it as MaterialCardView).isChecked = !it.isChecked
+
+            with(sharedPreferences.edit()) {
+                putString( "targetBuildingForPro", holder.addressText.text.toString().replace(" ", "_"))
+                apply()
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 fm?.beginTransaction()?.detach(fragment)?.commitNow()

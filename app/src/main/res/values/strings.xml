@@ -408,4 +408,5 @@
     <string name="date_string">Date</string>
     <string name="time_string">Time</string>
     <string name="no_target_building_message">You haven\'t specify your target building yet.</string>
+    <string name="target_msg_card">This is the target building of your own.</string>
 </resources>

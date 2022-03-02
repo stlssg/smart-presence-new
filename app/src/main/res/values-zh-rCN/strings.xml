@@ -346,4 +346,5 @@
     <string name="date_string">日期</string>
     <string name="time_string">时间</string>
     <string name="no_target_building_message">您尚未指定目标建筑.</string>
+    <string name="target_msg_card">这是您自己的目标建筑。</string>
 </resources>

@@ -46,6 +46,7 @@ class ProActionFragment : Fragment() {
         val proInfoScrollView = view.findViewById<ScrollView>(R.id.proInfoScrollView)
 
         if (targetBuildingForPro == "nothing") {
+            noTargetBuildingText1.visibility = View.VISIBLE
             when (languageSpinnerPosition) {
                 1 -> {
                     noTargetBuildingText1.text = "Non hai ancora specificato il tuo edificio di destinazione."
@@ -62,7 +63,7 @@ class ProActionFragment : Fragment() {
             val docRef = db.collection(targetBuildingForPro!!).document("Results")
             docRef.get()
                 .addOnSuccessListener { document ->
-                    if (document.data?.get("total_available") == true) {
+                    if (document.data?.get("daily_available") == true) {
                         noTargetBuildingText1.visibility = View.GONE
                         proInfoScrollView.visibility = View.VISIBLE
 
@@ -211,6 +212,7 @@ class ProActionFragment : Fragment() {
                         val allHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.allHourlyOccupancyBar)
                         setProgressBar(allHourlyOccupancyBar, 0.9f)
                     } else {
+                        noTargetBuildingText1.visibility = View.VISIBLE
                         when (languageSpinnerPosition) {
                             1 -> {
                                 noTargetBuildingText1.text = "I risultati non sono ancora disponibili in questo momento, per favore prova più tardi."
