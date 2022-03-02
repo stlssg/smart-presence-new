@@ -127,17 +127,19 @@ class GraphFragment : Fragment() {
                             errorTextView.visibility = GONE
                             loadingAnim.visibility = VISIBLE
 
-                            example_results.get()
+                            val docRef = db.collection(targetBuildingForPro).document("Results")
+
+                            docRef.get()
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("daily_available") == true) {
-                                        example_results.collection("daily_data")
-                                            .orderBy("time_interval")
+                                        docRef.collection("daily_data")
+                                            .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    dailyLabel.add(document.data.getValue("time_interval").toString())
+                                                    dailyLabel.add(document.data.getValue("interval").toString())
                                                     dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
@@ -145,7 +147,8 @@ class GraphFragment : Fragment() {
                                                         dailyLabel,
                                                         dailyData,
                                                         getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle)
+                                                        getString(R.string.graphDailySubtitle),
+                                                        targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
                                             }
@@ -174,13 +177,13 @@ class GraphFragment : Fragment() {
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("weekly_available") == true) {
                                         example_results.collection("weekly_data")
-                                            .orderBy("time_interval")
+                                            .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    weeklyLabel.add(document.data.getValue("time_interval").toString())
+                                                    weeklyLabel.add(document.data.getValue("interval").toString())
                                                     weeklyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
@@ -188,7 +191,8 @@ class GraphFragment : Fragment() {
                                                         weeklyLabel,
                                                         weeklyData,
                                                         getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle)
+                                                        getString(R.string.graphDailySubtitle),
+                                                        targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
                                             }
@@ -217,13 +221,13 @@ class GraphFragment : Fragment() {
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("monthly_available") == true) {
                                         example_results.collection("monthly_data")
-                                            .orderBy("time_interval")
+                                            .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    monthlyLabel.add(document.data.getValue("time_interval").toString())
+                                                    monthlyLabel.add(document.data.getValue("interval").toString())
                                                     monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
@@ -231,7 +235,8 @@ class GraphFragment : Fragment() {
                                                         monthlyLabel,
                                                         monthlyData,
                                                         getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle)
+                                                        getString(R.string.graphDailySubtitle),
+                                                        targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
                                             }
@@ -260,13 +265,13 @@ class GraphFragment : Fragment() {
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("yearly_available") == true) {
                                         example_results.collection("yearly_data")
-                                            .orderBy("time_interval")
+                                            .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    yearlyLabel.add(document.data.getValue("time_interval").toString())
+                                                    yearlyLabel.add(document.data.getValue("interval").toString())
                                                     yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
@@ -274,7 +279,8 @@ class GraphFragment : Fragment() {
                                                         yearlyLabel,
                                                         yearlyData,
                                                         getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle)
+                                                        getString(R.string.graphDailySubtitle),
+                                                        targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
                                             }
@@ -303,13 +309,13 @@ class GraphFragment : Fragment() {
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("total_available") == true) {
                                         example_results.collection("total_data")
-                                            .orderBy("time_interval")
+                                            .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    totalLabel.add(document.data.getValue("time_interval").toString())
+                                                    totalLabel.add(document.data.getValue("interval").toString())
                                                     totalData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
@@ -317,7 +323,8 @@ class GraphFragment : Fragment() {
                                                         totalLabel,
                                                         totalData,
                                                         getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle)
+                                                        getString(R.string.graphDailySubtitle),
+                                                        targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
                                             }
@@ -336,12 +343,13 @@ class GraphFragment : Fragment() {
                                 }
                         }
 
-                        // initialization for graph of daily
-                        example_results.get()
+                        // initialization for graph of daily and need more!!!!!!!
+                        val docRef = db.collection(targetBuildingForPro).document("Results")
+                        docRef.get()
                             .addOnSuccessListener { document ->
                                 if (document.data?.get("daily_available") == true) {
-                                    example_results.collection("daily_data")
-                                        .orderBy("time_interval")
+                                    docRef.collection("daily_data")
+                                        .orderBy("interval")
                                         .get()
                                         .addOnSuccessListener { documents ->
                                             loadingAnim.visibility = GONE
@@ -350,7 +358,7 @@ class GraphFragment : Fragment() {
 //                                Log.d("data!!!!!!!", "${document.id} => " +
 //                                        "${document.data.getValue("occupancy")} and " +
 //                                        "${document.data.getValue("time_interval")}")
-                                                dailyLabel.add(document.data.getValue("time_interval").toString())
+                                                dailyLabel.add(document.data.getValue("interval").toString())
                                                 dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                             }
 //                            Log.d("data!!!!!!!", "$dailyData and $dailyLabel")
@@ -359,7 +367,8 @@ class GraphFragment : Fragment() {
                                                     dailyLabel,
                                                     dailyData,
                                                     getString(R.string.graphDailyTitle),
-                                                    getString(R.string.graphDailySubtitle)
+                                                    getString(R.string.graphDailySubtitle),
+                                                    targetBuildingForPro.replace("_", " ")
                                                 )
                                             )
                                         }
@@ -437,7 +446,8 @@ class GraphFragment : Fragment() {
     private fun generateChart(labels: MutableList<String>,
                               data: MutableList<Float>,
                               title: String,
-                              subtitle: String): AAChartModel {
+                              subtitle: String,
+                              buildingName: String): AAChartModel {
         val aaChartModel = AAChartModel()
             .chartType(AAChartType.Area)
             .animationType(AAChartAnimationType.EaseOutBack)
@@ -449,7 +459,7 @@ class GraphFragment : Fragment() {
             .colorsTheme(arrayOf("#fe117c"))
             .series(arrayOf(
                 AASeriesElement()
-                    .name("you house name")
+                    .name(buildingName)
                     .data(data.toTypedArray())
             ))
 
