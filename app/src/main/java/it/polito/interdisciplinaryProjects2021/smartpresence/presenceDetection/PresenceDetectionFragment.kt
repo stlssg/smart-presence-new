@@ -237,6 +237,7 @@ class PresenceDetectionFragment : Fragment() {
                         val inputUserInfo = hashMapOf("UserName" to user, "startTime" to startTimestamp, "stopTime" to endTimestamp, "working_interval" to workingInterval)
                         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
                         db.collection(address).document(user!!).set(inputUserInfo, SetOptions.merge())
+                        db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
 
                         if (energySavingMode == "on") {
                             createAndStartGeofence(latitude, longitude, radius, pendingIntent)
@@ -524,6 +525,7 @@ class PresenceDetectionFragment : Fragment() {
         val inputUserInfo = hashMapOf("UserName" to user, "startTime" to start_timestamp, "stopTime" to end_timestamp, "working_interval" to working_interval)
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())
+        db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
     }
 
     private fun startMyPeriodicWorkForWiFiBasedMethod(
@@ -692,6 +694,7 @@ class PresenceDetectionFragment : Fragment() {
         val input = hashMapOf("presence" to action, "timestamp" to timestamp)
 
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
+        db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
         db.collection(address).document(user!!).set(hashMapOf("UserName" to user), SetOptions.merge())
         db.collection(address)
             .document(user)

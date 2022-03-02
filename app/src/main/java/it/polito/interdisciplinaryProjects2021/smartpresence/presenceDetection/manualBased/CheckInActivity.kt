@@ -41,6 +41,7 @@ class CheckInActivity : AppCompatActivity() {
 
             val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "IN"))
             db.collection("RegisteredUser").document(user).set(newestAction, SetOptions.merge())
+            db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
 
             Toast.makeText(applicationContext, getString(R.string.shortcutCheckInMessage), Toast.LENGTH_LONG).show()
         } else {

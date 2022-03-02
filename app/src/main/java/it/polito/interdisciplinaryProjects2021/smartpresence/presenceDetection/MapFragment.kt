@@ -137,9 +137,6 @@ class MapFragment : Fragment() {
                             apply()
                         }
 
-                        val db = Firebase.firestore
-                        db.collection("BuildingNameList").document(addressInput).set(hashMapOf("BuildingName" to addressInput), SetOptions.merge())
-
                         findNavController().popBackStack()
                         Toast.makeText(requireContext(), getString(R.string.success_location_save), Toast.LENGTH_LONG).show()
                     }

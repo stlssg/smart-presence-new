@@ -302,6 +302,7 @@ class SignInFragment : Fragment() {
             putString("radiusSpinnerPosition", "2")
             putString("detectionMethodSelection", "nothing")
             putString("professionalAccessGranted", "false")
+            putString("targetBuildingForPro", "nothing")
             commit()
         }
     }
