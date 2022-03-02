@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.github.aachartmodel.aainfographics.aachartcreator.*
 import com.google.firebase.firestore.ktx.firestore
@@ -48,306 +50,349 @@ class GraphFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val db = Firebase.firestore
-        val example_results = db.collection("example_result").document("Results")
-
-        val aaChartView = view.findViewById<AAChartView>(R.id.aa_chart_view)
-        aaChartView.visibility = GONE
-        val errorTextView = view.findViewById<TextView>(R.id.errorTextView)
-        errorTextView.visibility = GONE
-        val loadingAnim = view.findViewById<LottieAnimationView>(R.id.loadingAnim)
-
-        val dailyOption = view.findViewById<TextView>(R.id.dailyOption)
-        val weeklyOption = view.findViewById<TextView>(R.id.weeklyOption)
-        val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
-        val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
-        val totalOption = view.findViewById<TextView>(R.id.totalOption)
-//        dailyOption.text = getString(R.string.graphOptionDaily)
-//        weeklyOption.text = getString(R.string.graphOptionWeekly)
-//        monthlyOption.text = getString(R.string.graphOptionMonthly)
-//        yearlyOption.text = getString(R.string.graphOptionYearly)
-//        totalOption.text = getString(R.string.graphOptionTotal)
-
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
-        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
-            1 -> {
-                dailyOption.text = "Quotidiano"
-                weeklyOption.text = "Settimanalmente"
-                monthlyOption.text = "Mensile"
-                yearlyOption.text = "Annuale"
-                totalOption.text = "Totale"
+        val targetBuildingForPro = sharedPreferences.getString("targetBuildingForPro", "nothing")
+        val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
+        val noTargetBuildingText = view.findViewById<TextView>(R.id.noTargetBuildingText)
+        val graphConstraintLayout = view.findViewById<ConstraintLayout>(R.id.graphConstraintLayout)
+
+        if (targetBuildingForPro == "nothing") {
+            when (languageSpinnerPosition) {
+                1 -> {
+                    noTargetBuildingText.text = "Non hai ancora specificato il tuo edificio di destinazione."
+                }
+                2 -> {
+                    noTargetBuildingText.text = "您尚未指定目标建筑."
+                }
+                else -> {
+                    noTargetBuildingText.text = "You haven't specify your target building yet."
+                }
             }
-            2 -> {
-                dailyOption.text = "日"
-                weeklyOption.text = "周"
-                monthlyOption.text = "月"
-                yearlyOption.text = "年"
-                totalOption.text = "总"
-            }
-            else -> {
-                dailyOption.text = "Daily"
-                weeklyOption.text = "Weekly"
-                monthlyOption.text = "Monthly"
-                yearlyOption.text = "Yearly"
-                totalOption.text = "Total"
-            }
-        }
-
-        dailyOption.setOnClickListener {
-            resetData()
-            setButton(dailyOption, weeklyOption, monthlyOption, yearlyOption, totalOption)
-            errorTextView.visibility = GONE
-            loadingAnim.visibility = VISIBLE
-
-            example_results.get()
-                .addOnSuccessListener { document ->
-                    if (document.data?.get("daily_available") == true) {
-                        example_results.collection("daily_data")
-                            .orderBy("time_interval")
-                            .get()
-                            .addOnSuccessListener { documents ->
-                                loadingAnim.visibility = GONE
-                                aaChartView.visibility = VISIBLE
-                                for (document in documents) {
-                                    dailyLabel.add(document.data.getValue("time_interval").toString())
-                                    dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                                }
-                                aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(
-                                        dailyLabel,
-                                        dailyData,
-                                        getString(R.string.graphDailyTitle),
-                                        getString(R.string.graphDailySubtitle)
-                                    )
-                                )
-                            }
-                    } else {
-                        loadingAnim.visibility = GONE
-                        aaChartView.visibility = GONE
-                        errorTextView.visibility = VISIBLE
-                        errorTextView.text = getString(R.string.graphNoDataMessage)
-                    }
-                }
-                .addOnFailureListener { _ ->
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphErrorMessage)
-                }
-        }
-
-        weeklyOption.setOnClickListener {
-            resetData()
-            setButton(weeklyOption, dailyOption, monthlyOption, yearlyOption, totalOption)
-            errorTextView.visibility = GONE
-            loadingAnim.visibility = VISIBLE
-
-            example_results.get()
-                .addOnSuccessListener { document ->
-                    if (document.data?.get("weekly_available") == true) {
-                        example_results.collection("weekly_data")
-                            .orderBy("time_interval")
-                            .get()
-                            .addOnSuccessListener { documents ->
-                                loadingAnim.visibility = GONE
-                                aaChartView.visibility = VISIBLE
-                                for (document in documents) {
-                                    weeklyLabel.add(document.data.getValue("time_interval").toString())
-                                    weeklyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                                }
-                                aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(
-                                        weeklyLabel,
-                                        weeklyData,
-                                        getString(R.string.graphDailyTitle),
-                                        getString(R.string.graphDailySubtitle)
-                                    )
-                                )
-                            }
-                    } else {
-                        loadingAnim.visibility = GONE
-                        aaChartView.visibility = GONE
-                        errorTextView.visibility = VISIBLE
-                        errorTextView.text = getString(R.string.graphNoDataMessage)
-                    }
-                }
-                .addOnFailureListener { _ ->
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphErrorMessage)
-                }
-        }
-
-        monthlyOption.setOnClickListener {
-            resetData()
-            setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption, totalOption)
-            errorTextView.visibility = GONE
-            loadingAnim.visibility = VISIBLE
-
-            example_results.get()
-                .addOnSuccessListener { document ->
-                    if (document.data?.get("monthly_available") == true) {
-                        example_results.collection("monthly_data")
-                            .orderBy("time_interval")
-                            .get()
-                            .addOnSuccessListener { documents ->
-                                loadingAnim.visibility = GONE
-                                aaChartView.visibility = VISIBLE
-                                for (document in documents) {
-                                    monthlyLabel.add(document.data.getValue("time_interval").toString())
-                                    monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                                }
-                                aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(
-                                        monthlyLabel,
-                                        monthlyData,
-                                        getString(R.string.graphDailyTitle),
-                                        getString(R.string.graphDailySubtitle)
-                                    )
-                                )
-                            }
-                    } else {
-                        loadingAnim.visibility = GONE
-                        aaChartView.visibility = GONE
-                        errorTextView.visibility = VISIBLE
-                        errorTextView.text = getString(R.string.graphNoDataMessage)
-                    }
-                }
-                .addOnFailureListener { _ ->
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphErrorMessage)
-                }
-        }
-
-        yearlyOption.setOnClickListener {
-            resetData()
-            setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption, totalOption)
-            errorTextView.visibility = GONE
-            loadingAnim.visibility = VISIBLE
-
-            example_results.get()
-                .addOnSuccessListener { document ->
-                    if (document.data?.get("yearly_available") == true) {
-                        example_results.collection("yearly_data")
-                            .orderBy("time_interval")
-                            .get()
-                            .addOnSuccessListener { documents ->
-                                loadingAnim.visibility = GONE
-                                aaChartView.visibility = VISIBLE
-                                for (document in documents) {
-                                    yearlyLabel.add(document.data.getValue("time_interval").toString())
-                                    yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                                }
-                                aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(
-                                        yearlyLabel,
-                                        yearlyData,
-                                        getString(R.string.graphDailyTitle),
-                                        getString(R.string.graphDailySubtitle)
-                                    )
-                                )
-                            }
-                    } else {
-                        loadingAnim.visibility = GONE
-                        aaChartView.visibility = GONE
-                        errorTextView.visibility = VISIBLE
-                        errorTextView.text = getString(R.string.graphNoDataMessage)
-                    }
-                }
-                .addOnFailureListener { _ ->
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphErrorMessage)
-                }
-        }
-
-        totalOption.setOnClickListener {
-            resetData()
-            setButton(totalOption, dailyOption, weeklyOption, monthlyOption, yearlyOption)
-            errorTextView.visibility = GONE
-            loadingAnim.visibility = VISIBLE
-
-            example_results.get()
+        } else {
+            val db = Firebase.firestore
+            val docRef = db.collection(targetBuildingForPro!!).document("Results")
+            docRef.get()
                 .addOnSuccessListener { document ->
                     if (document.data?.get("total_available") == true) {
-                        example_results.collection("total_data")
-                            .orderBy("time_interval")
-                            .get()
-                            .addOnSuccessListener { documents ->
-                                loadingAnim.visibility = GONE
-                                aaChartView.visibility = VISIBLE
-                                for (document in documents) {
-                                    totalLabel.add(document.data.getValue("time_interval").toString())
-                                    totalData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                                }
-                                aaChartView.aa_drawChartWithChartModel(
-                                    generateChart(
-                                        totalLabel,
-                                        totalData,
-                                        getString(R.string.graphDailyTitle),
-                                        getString(R.string.graphDailySubtitle)
-                                    )
-                                )
-                            }
-                    } else {
-                        loadingAnim.visibility = GONE
-                        aaChartView.visibility = GONE
-                        errorTextView.visibility = VISIBLE
-                        errorTextView.text = getString(R.string.graphNoDataMessage)
-                    }
-                }
-                .addOnFailureListener { _ ->
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphErrorMessage)
-                }
-        }
+                        noTargetBuildingText.visibility = GONE
+                        graphConstraintLayout.visibility = VISIBLE
 
-        // initialization for graph of daily
-        example_results.get()
-            .addOnSuccessListener { document ->
-                if (document.data?.get("daily_available") == true) {
-                    example_results.collection("daily_data")
-                        .orderBy("time_interval")
-                        .get()
-                        .addOnSuccessListener { documents ->
-                            loadingAnim.visibility = GONE
-                            aaChartView.visibility = VISIBLE
-                            for (document in documents) {
+                        val example_results = db.collection("example_result").document("Results")
+
+                        val aaChartView = view.findViewById<AAChartView>(R.id.aa_chart_view)
+                        aaChartView.visibility = GONE
+                        val errorTextView = view.findViewById<TextView>(R.id.errorTextView)
+                        errorTextView.visibility = GONE
+                        val loadingAnim = view.findViewById<LottieAnimationView>(R.id.loadingAnim)
+
+                        val dailyOption = view.findViewById<TextView>(R.id.dailyOption)
+                        val weeklyOption = view.findViewById<TextView>(R.id.weeklyOption)
+                        val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
+                        val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
+                        val totalOption = view.findViewById<TextView>(R.id.totalOption)
+                        //        dailyOption.text = getString(R.string.graphOptionDaily)
+                        //        weeklyOption.text = getString(R.string.graphOptionWeekly)
+                        //        monthlyOption.text = getString(R.string.graphOptionMonthly)
+                        //        yearlyOption.text = getString(R.string.graphOptionYearly)
+                        //        totalOption.text = getString(R.string.graphOptionTotal)
+
+                        when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
+                            1 -> {
+                                dailyOption.text = "Quotidiano"
+                                weeklyOption.text = "Settimanalmente"
+                                monthlyOption.text = "Mensile"
+                                yearlyOption.text = "Annuale"
+                                totalOption.text = "Totale"
+                            }
+                            2 -> {
+                                dailyOption.text = "日"
+                                weeklyOption.text = "周"
+                                monthlyOption.text = "月"
+                                yearlyOption.text = "年"
+                                totalOption.text = "总"
+                            }
+                            else -> {
+                                dailyOption.text = "Daily"
+                                weeklyOption.text = "Weekly"
+                                monthlyOption.text = "Monthly"
+                                yearlyOption.text = "Yearly"
+                                totalOption.text = "Total"
+                            }
+                        }
+
+                        dailyOption.setOnClickListener {
+                            resetData()
+                            setButton(dailyOption, weeklyOption, monthlyOption, yearlyOption, totalOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            example_results.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("daily_available") == true) {
+                                        example_results.collection("daily_data")
+                                            .orderBy("time_interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                for (document in documents) {
+                                                    dailyLabel.add(document.data.getValue("time_interval").toString())
+                                                    dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        dailyLabel,
+                                                        dailyData,
+                                                        getString(R.string.graphDailyTitle),
+                                                        getString(R.string.graphDailySubtitle)
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        weeklyOption.setOnClickListener {
+                            resetData()
+                            setButton(weeklyOption, dailyOption, monthlyOption, yearlyOption, totalOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            example_results.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("weekly_available") == true) {
+                                        example_results.collection("weekly_data")
+                                            .orderBy("time_interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                for (document in documents) {
+                                                    weeklyLabel.add(document.data.getValue("time_interval").toString())
+                                                    weeklyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        weeklyLabel,
+                                                        weeklyData,
+                                                        getString(R.string.graphDailyTitle),
+                                                        getString(R.string.graphDailySubtitle)
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        monthlyOption.setOnClickListener {
+                            resetData()
+                            setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption, totalOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            example_results.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("monthly_available") == true) {
+                                        example_results.collection("monthly_data")
+                                            .orderBy("time_interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                for (document in documents) {
+                                                    monthlyLabel.add(document.data.getValue("time_interval").toString())
+                                                    monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        monthlyLabel,
+                                                        monthlyData,
+                                                        getString(R.string.graphDailyTitle),
+                                                        getString(R.string.graphDailySubtitle)
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        yearlyOption.setOnClickListener {
+                            resetData()
+                            setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption, totalOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            example_results.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("yearly_available") == true) {
+                                        example_results.collection("yearly_data")
+                                            .orderBy("time_interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                for (document in documents) {
+                                                    yearlyLabel.add(document.data.getValue("time_interval").toString())
+                                                    yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        yearlyLabel,
+                                                        yearlyData,
+                                                        getString(R.string.graphDailyTitle),
+                                                        getString(R.string.graphDailySubtitle)
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        totalOption.setOnClickListener {
+                            resetData()
+                            setButton(totalOption, dailyOption, weeklyOption, monthlyOption, yearlyOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            example_results.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("total_available") == true) {
+                                        example_results.collection("total_data")
+                                            .orderBy("time_interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                for (document in documents) {
+                                                    totalLabel.add(document.data.getValue("time_interval").toString())
+                                                    totalData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        totalLabel,
+                                                        totalData,
+                                                        getString(R.string.graphDailyTitle),
+                                                        getString(R.string.graphDailySubtitle)
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        // initialization for graph of daily
+                        example_results.get()
+                            .addOnSuccessListener { document ->
+                                if (document.data?.get("daily_available") == true) {
+                                    example_results.collection("daily_data")
+                                        .orderBy("time_interval")
+                                        .get()
+                                        .addOnSuccessListener { documents ->
+                                            loadingAnim.visibility = GONE
+                                            aaChartView.visibility = VISIBLE
+                                            for (document in documents) {
 //                                Log.d("data!!!!!!!", "${document.id} => " +
 //                                        "${document.data.getValue("occupancy")} and " +
 //                                        "${document.data.getValue("time_interval")}")
-                                dailyLabel.add(document.data.getValue("time_interval").toString())
-                                dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-                            }
+                                                dailyLabel.add(document.data.getValue("time_interval").toString())
+                                                dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                            }
 //                            Log.d("data!!!!!!!", "$dailyData and $dailyLabel")
-                            aaChartView.aa_drawChartWithChartModel(
-                                generateChart(
-                                    dailyLabel,
-                                    dailyData,
-                                    getString(R.string.graphDailyTitle),
-                                    getString(R.string.graphDailySubtitle)
-                                )
-                            )
+                                            aaChartView.aa_drawChartWithChartModel(
+                                                generateChart(
+                                                    dailyLabel,
+                                                    dailyData,
+                                                    getString(R.string.graphDailyTitle),
+                                                    getString(R.string.graphDailySubtitle)
+                                                )
+                                            )
+                                        }
+                                } else {
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphNoDataMessage)
+                                }
+                            }
+                            .addOnFailureListener { _ ->
+                                loadingAnim.visibility = GONE
+                                aaChartView.visibility = GONE
+                                errorTextView.visibility = VISIBLE
+                                errorTextView.text = getString(R.string.graphErrorMessage)
+                            }
+                    } else {
+                        when (languageSpinnerPosition) {
+                            1 -> {
+                                noTargetBuildingText.text = "I risultati non sono ancora disponibili in questo momento, per favore prova più tardi."
+                            }
+                            2 -> {
+                                noTargetBuildingText.text = "暂时还没有结果，请稍后再试。"
+                            }
+                            else -> {
+                                noTargetBuildingText.text = "The results are still not available at this moment, please try it later."
+                            }
                         }
-                } else {
-                    loadingAnim.visibility = GONE
-                    aaChartView.visibility = GONE
-                    errorTextView.visibility = VISIBLE
-                    errorTextView.text = getString(R.string.graphNoDataMessage)
+                    }
                 }
-            }
-            .addOnFailureListener { _ ->
-                loadingAnim.visibility = GONE
-                aaChartView.visibility = GONE
-                errorTextView.visibility = VISIBLE
-                errorTextView.text = getString(R.string.graphErrorMessage)
-            }
+                .addOnFailureListener { exception ->
+                    Log.d("get failed with ", "$exception")
+                }
+        }
 
     }
 

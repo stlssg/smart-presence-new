@@ -413,4 +413,5 @@
     <string name="specific_check_title">Check In/Out a un orario specifico</string>
     <string name="date_string">Data</string>
     <string name="time_string">Volta</string>
+    <string name="no_target_building_message">Non hai ancora specificato il tuo edificio di destinazione.</string>
 </resources>

@@ -8,125 +8,139 @@
     android:layout_height="match_parent"
     tools:context=".professional.GraphFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loadingAnim"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loading"
-        app:lottie_speed="2" />
-
     <TextView
-        android:id="@+id/errorTextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/noTargetBuildingText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="no target building message"
         android:gravity="center"
-        android:text="@string/graph_no_data_message"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="30sp"
+        android:visibility="visible"
+        tools:ignore="HardcodedText" />
 
-    <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-        android:id="@+id/aa_chart_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/graphConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-    </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.85"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="65dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingAnim"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading"
+            app:lottie_speed="2" />
 
         <TextView
-            android:id="@+id/dailyOption"
-            android:layout_width="match_parent"
+            android:id="@+id/errorTextView"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/switch_trcks"
             android:gravity="center"
-            android:text="@string/graphOptionDaily"
-            android:textColor="@color/textColor"
-            android:textStyle="bold|normal"
-            android:layout_marginVertical="5dp"/>
+            android:text="@string/graph_no_data_message"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/weeklyOption"
-            android:layout_width="match_parent"
+        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+            android:id="@+id/aa_chart_view"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/graphOptionWeekly"
-            android:textColor="@color/light_blue_900"
-            android:textStyle="bold|normal"
-            android:layout_marginVertical="5dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/monthlyOption"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/graphOptionMonthly"
-            android:textColor="@color/light_blue_900"
-            android:textStyle="bold|normal"
-            android:layout_marginVertical="5dp"/>
+        </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
 
-        <TextView
-            android:id="@+id/yearlyOption"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/graphOptionYearly"
-            android:textColor="@color/light_blue_900"
-            android:textStyle="bold|normal"
-            android:layout_marginVertical="5dp"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.85"
+            android:orientation="vertical" />
 
-        <TextView
-            android:id="@+id/totalOption"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/graphOptionTotal"
-            android:textColor="@color/light_blue_900"
-            android:textStyle="bold|normal"
-            android:layout_marginVertical="5dp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="65dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/dailyOption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/switch_trcks"
+                android:gravity="center"
+                android:text="@string/graphOptionDaily"
+                android:textColor="@color/textColor"
+                android:textStyle="bold|normal"
+                android:layout_marginVertical="5dp"/>
 
+            <TextView
+                android:id="@+id/weeklyOption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/graphOptionWeekly"
+                android:textColor="@color/light_blue_900"
+                android:textStyle="bold|normal"
+                android:layout_marginVertical="5dp"/>
 
+            <TextView
+                android:id="@+id/monthlyOption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/graphOptionMonthly"
+                android:textColor="@color/light_blue_900"
+                android:textStyle="bold|normal"
+                android:layout_marginVertical="5dp"/>
 
+            <TextView
+                android:id="@+id/yearlyOption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/graphOptionYearly"
+                android:textColor="@color/light_blue_900"
+                android:textStyle="bold|normal"
+                android:layout_marginVertical="5dp"/>
 
+            <TextView
+                android:id="@+id/totalOption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/graphOptionTotal"
+                android:textColor="@color/light_blue_900"
+                android:textStyle="bold|normal"
+                android:layout_marginVertical="5dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
