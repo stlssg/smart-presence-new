@@ -107,7 +107,9 @@ class ProfessionalFragment : Fragment() {
                 tempBuildingList = arrayListOf<String>()
                 buildingList.add(sharedPreferences.getString("address", "nothing").toString())
                 for (document in result) {
-                    buildingList.add(document.id)
+                    if (document.id != sharedPreferences.getString("address", "nothing").toString()) {
+                        buildingList.add(document.id)
+                    }
                 }
 //                buildingList.add("xxxxxxxxxxxxxxx")
 //                buildingList.add("xxxxxxxxxxxxxxx")
