@@ -36,6 +36,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import it.polito.interdisciplinaryProjects2021.smartpresence.utility.MqttClient
 
 class SignInFragment : Fragment() {
 
@@ -45,6 +46,10 @@ class SignInFragment : Fragment() {
     }
 
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private val mqttClient: MqttClient by lazy {
+        MqttClient(requireContext())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,10 +67,12 @@ class SignInFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mqttClient.connect()
 
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
@@ -104,8 +111,8 @@ class SignInFragment : Fragment() {
             signUp.background = resources.getDrawable(R.drawable.switch_trcks,null)
             signUp.setTextColor(resources.getColor(R.color.textColor,null))
             logIn.background = null
-            signUpLayout.visibility = View.VISIBLE
-            logInLayout.visibility = View.GONE
+            signUpLayout.visibility = VISIBLE
+            logInLayout.visibility = GONE
             logIn.setTextColor(resources.getColor(R.color.light_blue_900,null))
             signInButton.text = getString(R.string.LOGINPAGE_log_in_and_sign_up_title)
         }
@@ -113,8 +120,8 @@ class SignInFragment : Fragment() {
             signUp.background = null
             signUp.setTextColor(resources.getColor(R.color.light_blue_900,null))
             logIn.background = resources.getDrawable(R.drawable.switch_trcks,null)
-            signUpLayout.visibility = View.GONE
-            logInLayout.visibility = View.VISIBLE
+            signUpLayout.visibility = GONE
+            logInLayout.visibility = VISIBLE
             logIn.setTextColor(resources.getColor(R.color.textColor,null))
             signInButton.text = getString(R.string.LOGINPAGE_log_in_title)
         }
@@ -142,11 +149,11 @@ class SignInFragment : Fragment() {
                                 .whereEqualTo("email", emailAsUserNameSettingInput)
                                 .get()
                                 .addOnSuccessListener { documents ->
-                                    var num_ducuments = 0
+                                    var numDocuments = 0
                                     for (document in documents) {
-                                        num_ducuments ++
+                                        numDocuments ++
                                     }
-                                    if (num_ducuments != 0) {
+                                    if (numDocuments != 0) {
                                         Toast.makeText(requireContext(), getString(R.string.userExist), Toast.LENGTH_SHORT).show()
                                     } else {
                                         if (passwordSettingInput != passwordConfirmSettingInput) {
@@ -154,18 +161,18 @@ class SignInFragment : Fragment() {
                                         } else {
                                             val input = hashMapOf("email" to emailAsUserNameSettingInput, "password" to passwordSettingInput, "needFrequentNotification" to "NO")
                                             registeredUserCollection.document(emailAsUserNameSettingInput).set(input, SetOptions.merge())
-                                                .addOnSuccessListener { _ ->
+                                                .addOnSuccessListener {
                                                     writeSharedPreferences(emailAsUserNameSettingInput)
                                                     Toast.makeText(requireContext(), getString(R.string.logInAndRegisteredSuccess), Toast.LENGTH_SHORT).show()
                                                     findNavController().navigate(R.id.declarationFragment)
                                                 }
-                                                .addOnFailureListener { _ ->
+                                                .addOnFailureListener {
                                                     Toast.makeText(requireContext(), getString(R.string.logInUnsuccess), Toast.LENGTH_SHORT).show()
                                                 }
                                         }
                                     }
                                 }
-                                .addOnFailureListener { _ ->
+                                .addOnFailureListener {
                                     Toast.makeText(requireContext(), getString(R.string.logInUnsuccess), Toast.LENGTH_SHORT).show()
                                 }
                         }
@@ -185,9 +192,9 @@ class SignInFragment : Fragment() {
                             .whereEqualTo("email", emailAsUserNameEnterInput)
                             .get()
                             .addOnSuccessListener { documents ->
-                                var num_ducuments = 0
+                                var numDocuments = 0
                                     for (document in documents) {
-                                        num_ducuments ++
+                                        numDocuments ++
                                         if (document.data["password"] != passwordEnterInput) {
                                             Toast.makeText(requireContext(), getString(R.string.passwordNotCorrect), Toast.LENGTH_SHORT).show()
                                         } else {
@@ -196,11 +203,11 @@ class SignInFragment : Fragment() {
                                             findNavController().navigate(R.id.declarationFragment)
                                         }
                                     }
-                                    if (num_ducuments == 0) {
+                                    if (numDocuments == 0) {
                                         Toast.makeText(requireContext(), getString(R.string.noSuchUser), Toast.LENGTH_SHORT).show()
                                     }
                             }
-                            .addOnFailureListener { _ ->
+                            .addOnFailureListener {
                                 Toast.makeText(requireContext(), getString(R.string.logInUnsuccess), Toast.LENGTH_SHORT).show()
                             }
                     }
@@ -211,9 +218,30 @@ class SignInFragment : Fragment() {
             }
         }
 
-//        val forgetPassword = view.findViewById<TextView>(R.id.forgetPassword)
-//        forgetPassword.setOnClickListener {
-//        }
+        val forgetPasswordButton = view.findViewById<TextView>(R.id.forgetPasswordButton)
+        forgetPasswordButton.setOnClickListener {
+            val tempEmail = view.findViewById<TextInputLayout>(R.id.emailAsUserNameEnter).editText?.text.toString()
+            if (!isEmailValid(tempEmail)) {
+                Toast.makeText(requireContext(), getString(R.string.notEmailMessage), Toast.LENGTH_SHORT).show()
+            } else {
+                registeredUserCollection
+                    .whereEqualTo("email", tempEmail)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        var numDocuments = 0
+                        for (document in documents) { numDocuments ++ }
+                        if (numDocuments == 0) {
+                            Toast.makeText(requireContext(), getString(R.string.noSuchUser), Toast.LENGTH_SHORT).show()
+                        } else {
+                            mqttClient.publishMessage("POLITO_ICT4SS_IP/smartPresenceApp/forgetPassword", tempEmail)
+                            Toast.makeText(requireContext(), "The message including your password has been sent to your email address", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), getString(R.string.logInUnsuccess), Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
 
     }
 
@@ -226,6 +254,7 @@ class SignInFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -234,7 +263,7 @@ class SignInFragment : Fragment() {
             val exception = task.exception
             if (task.isSuccessful){
                 try {
-                    val account = task.getResult(ApiException::class.java)!!
+                    val account = task.getResult(ApiException::class.java)
                     Log.d("signInFragment", "firebaseAuthWithGoogle:" + account.id)
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
@@ -246,6 +275,7 @@ class SignInFragment : Fragment() {
         }
     }
 
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         val mAuth = FirebaseAuth.getInstance()
@@ -319,6 +349,8 @@ class SignInFragment : Fragment() {
 
         (activity as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view).visibility = VISIBLE
         (activity as AppCompatActivity).supportActionBar?.show()
+
+        mqttClient.close()
     }
 
 }

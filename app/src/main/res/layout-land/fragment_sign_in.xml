@@ -151,16 +151,17 @@
                         android:textStyle="normal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/forgetPassword"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="@string/forget_password"-->
-                <!--                    android:textAlignment="textEnd"-->
-                <!--                    android:textColor="#616161"-->
-                <!--                    android:textSize="11sp"-->
-                <!--                    android:textStyle="normal"-->
-                <!--                    android:layout_marginTop="3dp"/>-->
+                <TextView
+                    android:id="@+id/forgetPasswordButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forget_password"
+                    android:textAlignment="textEnd"
+                    android:textColor="#616161"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
