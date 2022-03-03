@@ -22,7 +22,7 @@
         android:id="@+id/graphConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadingAnim"
@@ -103,41 +103,51 @@
                 android:textStyle="bold|normal"
                 android:layout_marginVertical="5dp"/>
 
-            <TextView
-                android:id="@+id/monthlyOption"
-                android:layout_width="match_parent"
+            <CheckBox
+                android:id="@+id/withStandardOrNotCheckBox"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/graphOptionMonthly"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"
+                android:text="Standard"
+                android:layout_gravity="center"
+                tools:ignore="HardcodedText"
                 android:layout_marginVertical="5dp"/>
 
-            <TextView
-                android:id="@+id/yearlyOption"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/graphOptionYearly"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"
-                android:layout_marginVertical="5dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/monthlyOption"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/graphOptionMonthly"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"-->
+<!--                android:layout_marginVertical="5dp"/>-->
 
-            <TextView
-                android:id="@+id/totalOption"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/graphOptionTotal"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"
-                android:layout_marginVertical="5dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/yearlyOption"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/graphOptionYearly"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"-->
+<!--                android:layout_marginVertical="5dp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/totalOption"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/graphOptionTotal"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"-->
+<!--                android:layout_marginVertical="5dp"/>-->
 
         </LinearLayout>
 

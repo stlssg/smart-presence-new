@@ -22,7 +22,7 @@
         android:id="@+id/graphConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadingAnim"
@@ -87,7 +87,9 @@
                 android:layout_gravity="center"
                 android:background="@drawable/switch_trcks"
                 android:textStyle="bold|normal"
-                android:textColor="@color/textColor"/>
+                android:textColor="@color/textColor"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"/>
 
             <TextView
                 android:id="@+id/weeklyOption"
@@ -98,40 +100,51 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"/>
+                android:textStyle="bold|normal"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"/>
 
-            <TextView
-                android:id="@+id/monthlyOption"
+            <CheckBox
+                android:id="@+id/withStandardOrNotCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/graphOptionMonthly"
-                android:gravity="center"
+                android:text="Standard"
                 android:layout_gravity="center"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"/>
+                tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/yearlyOption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/graphOptionYearly"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"/>
+<!--            <TextView-->
+<!--                android:id="@+id/monthlyOption"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/graphOptionMonthly"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"/>-->
 
-            <TextView
-                android:id="@+id/totalOption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/graphOptionTotal"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"/>
+<!--            <TextView-->
+<!--                android:id="@+id/yearlyOption"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/graphOptionYearly"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/totalOption"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/graphOptionTotal"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/light_blue_900"-->
+<!--                android:textStyle="bold|normal"/>-->
 
         </LinearLayout>
 
