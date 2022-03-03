@@ -277,17 +277,19 @@ class ProActionFragment : Fragment() {
                 val now = DateTime.now()
                 var numUsefulDoc = 0
                 for (document in documents) {
-                    numUsefulDoc += 1
-                    val currentPresenceCondition = (document.data["newestAction"] as Map<*, *>)["presence"].toString()
-                    val currentTimestamp = (document.data["newestAction"] as Map<*, *>)["timestamp"].toString()
-                    val currentDateTime = DateTime.parse(currentTimestamp)
+                    if (document.data["newestAction"] != null) {
+                        numUsefulDoc += 1
+                        val currentPresenceCondition = (document.data["newestAction"] as Map<*, *>)["presence"].toString()
+                        val currentTimestamp = (document.data["newestAction"] as Map<*, *>)["timestamp"].toString()
+                        val currentDateTime = DateTime.parse(currentTimestamp)
 //                        Log.d("targetBuilding!!!", "$currentPresenceCondition and $currentTimestamp")
 //                        Log.d("targetBuilding!!!", "${(now.millis - currentDateTime.millis) / 1000 / 60}")
 
-                    if (currentPresenceCondition == "IN") {
-                        numCurrentOccupants ++
-                    } else if ((now.millis - currentDateTime.millis) / 1000 / 60 <= 90 && currentPresenceCondition == "CONNECTED") {
-                        numCurrentOccupants ++
+                        if (currentPresenceCondition == "IN") {
+                            numCurrentOccupants ++
+                        } else if ((now.millis - currentDateTime.millis) / 1000 / 60 <= 90 && currentPresenceCondition == "CONNECTED") {
+                            numCurrentOccupants ++
+                        }
                     }
                 }
 
