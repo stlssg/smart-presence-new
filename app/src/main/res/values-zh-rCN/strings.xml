@@ -347,4 +347,15 @@
     <string name="time_string">时间</string>
     <string name="no_target_building_message">您尚未指定目标建筑.</string>
     <string name="target_msg_card">这是您自己的目标建筑。</string>
+    <string name="email_sent_msg">包含您的密码的消息已发送到您的电子邮件地址。</string>
+    <string name="pair_delete">删除</string>
+    <string name="reset_password_title">重设密码</string>
+    <string name="reset_password_gmail_msg">您现在使用gmail进行谷歌登录，在这种情况下您无法更改密码。</string>
+    <string name="old_p_str">旧密码</string>
+    <string name="new_p_str">新密码</string>
+    <string name="repeat_p_str">重复新密码</string>
+    <string name="confirm_p_str">确认</string>
+    <string name="reset_p_not_same">新密码不一样</string>
+    <string name="new_p_used">新密码已被使用。</string>
+    <string name="successfully_reset_p">您已成功更改了密码。</string>
 </resources>

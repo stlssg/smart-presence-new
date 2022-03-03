@@ -234,7 +234,7 @@ class SignInFragment : Fragment() {
                             Toast.makeText(requireContext(), getString(R.string.noSuchUser), Toast.LENGTH_SHORT).show()
                         } else {
                             mqttClient.publishMessage("POLITO_ICT4SS_IP/smartPresenceApp/forgetPassword", tempEmail)
-                            Toast.makeText(requireContext(), "The message including your password has been sent to your email address", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.email_sent_msg), Toast.LENGTH_SHORT).show()
                         }
                     }
                     .addOnFailureListener {

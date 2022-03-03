@@ -415,4 +415,15 @@
     <string name="time_string">Volta</string>
     <string name="no_target_building_message">Non hai ancora specificato il tuo edificio di destinazione.</string>
     <string name="target_msg_card">Questo è il tuo edificio di destinazione.</string>
+    <string name="email_sent_msg">Il messaggio con la tua password è stato inviato al tuo indirizzo email.</string>
+    <string name="pair_delete">cancellazione dei tuoi dati</string>
+    <string name="reset_password_title">Resetta la password</string>
+    <string name="reset_password_gmail_msg">Stai usando gmail con google login ora, non puoi cambiare la password in questo caso.</string>
+    <string name="old_p_str">Vecchia password</string>
+    <string name="new_p_str">Nuova password</string>
+    <string name="repeat_p_str">ripetere la nuova password</string>
+    <string name="confirm_p_str">Confermare</string>
+    <string name="reset_p_not_same">Le nuove password non sono le stesse</string>
+    <string name="new_p_used">La nuova password è già utilizzata.</string>
+    <string name="successfully_reset_p">Hai cambiato con successo la tua password.</string>
 </resources>

@@ -409,4 +409,15 @@
     <string name="time_string">Time</string>
     <string name="no_target_building_message">You haven\'t specify your target building yet.</string>
     <string name="target_msg_card">This is the target building of your own.</string>
+    <string name="email_sent_msg">The message including your password has been sent to your email address.</string>
+    <string name="pair_delete">delete your data</string>
+    <string name="reset_password_title">Reset Password</string>
+    <string name="reset_password_gmail_msg">You are using gmail with google login now, you cannot change password in this case.</string>
+    <string name="old_p_str">Old password</string>
+    <string name="new_p_str">New password</string>
+    <string name="repeat_p_str">Repeat new password</string>
+    <string name="confirm_p_str">Confirm</string>
+    <string name="reset_p_not_same">The new passwords are not the same</string>
+    <string name="new_p_used">The new password is alread used.</string>
+    <string name="successfully_reset_p">You have successfully changed your password.</string>
 </resources>

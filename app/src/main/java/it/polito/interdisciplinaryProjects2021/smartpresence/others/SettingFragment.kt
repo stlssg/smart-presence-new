@@ -64,6 +64,17 @@ class SettingFragment : Fragment() {
             getString(R.string.regularAccountSettingDescription)
         }
         account_description.makeLinks(
+            Pair(getString(R.string.pair_delete), View.OnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.setting_alert_title))
+                    .setMessage(getString(R.string.setting_alert_content))
+                    .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                    .setPositiveButton(getString(R.string.setting_alert_confirm)) { _, _ ->
+                        // Respond to positive button press
+                        Toast.makeText(requireContext(), getString(R.string.deleteDataMessage), Toast.LENGTH_LONG).show()
+                    }
+                    .show()
+            }),
             Pair(accountModeNameForPair, View.OnClickListener {
                 if (professionalOrNot == true) {
                     MaterialAlertDialogBuilder(requireContext())
@@ -94,7 +105,8 @@ class SettingFragment : Fragment() {
                         }
                         .show()
                 }
-            }))
+            })
+        )
 
         val working_interval_list = resources.getStringArray(R.array.working_interval)
         val workingIntervalSpinner = view.findViewById<Spinner>(R.id.workingIntervalSpinner)
@@ -108,7 +120,7 @@ class SettingFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 //                Toast.makeText(requireContext(), working_interval_list[position], Toast.LENGTH_SHORT).show()
                 working_interval = working_interval_list[position].toInt()
-                Log.d("working_interval", working_interval.toString())
+//                Log.d("working_interval", working_interval.toString())
                 with(sharedPreferences.edit()) {
                     putString( "workingIntervalSpinnerPosition", position.toString())
                     commit()
@@ -168,7 +180,7 @@ class SettingFragment : Fragment() {
         val cal = Calendar.getInstance()
         val setting_start_time = view.findViewById<TextView>(R.id.setting_start_time)
         val setting_start_time_input = sharedPreferences.getString("setting_start_time", "07:00")
-        Log.d("setting_start_time_input", setting_start_time_input.toString())
+//        Log.d("setting_start_time_input", setting_start_time_input.toString())
         setting_start_time.text = setting_start_time_input
         val setting_stop_time = view.findViewById<TextView>(R.id.setting_stop_time)
         val setting_stop_time_input = sharedPreferences.getString("setting_stop_time", "23:00")
@@ -194,17 +206,15 @@ class SettingFragment : Fragment() {
             timePickerDialog.show()
         }
 
-        val deleteDataButton = view.findViewById<Button>(R.id.deleteData)
-        deleteDataButton.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.setting_alert_title))
-                .setMessage(getString(R.string.setting_alert_content))
-                .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
-                .setPositiveButton(getString(R.string.setting_alert_confirm)) { _, _ ->
-                    // Respond to positive button press
-                    Toast.makeText(requireContext(), getString(R.string.deleteDataMessage), Toast.LENGTH_LONG).show()
-                }
-                .show()
+        val resetPassword = view.findViewById<Button>(R.id.resetPassword)
+        resetPassword.setOnClickListener {
+            val mAuth = FirebaseAuth.getInstance()
+            val user = mAuth.currentUser
+            if (user == null) {
+                findNavController().navigate(R.id.resetPasswordFragment)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.reset_password_gmail_msg), Toast.LENGTH_LONG).show()
+            }
         }
 
         val wifiCheckingStatus = sharedPreferences.getString("wifiCheckingStatus", "false").toBoolean()

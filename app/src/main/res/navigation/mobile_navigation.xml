@@ -47,7 +47,11 @@
         android:id="@+id/nav_setting"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.SettingFragment"
         android:label="@string/fragment_name_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_nav_setting_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/wifiCheckingFragment"
@@ -160,4 +164,9 @@
             android:id="@+id/action_splashBaseFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.ResetPasswordFragment"
+        android:label="@string/reset_password_title"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>

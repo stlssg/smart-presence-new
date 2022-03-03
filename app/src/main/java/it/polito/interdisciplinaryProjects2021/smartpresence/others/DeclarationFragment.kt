@@ -108,7 +108,8 @@ class DeclarationFragment : Fragment() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
-            }))
+            })
+        )
 
         val professionalSentence = view.findViewById<TextView>(R.id.professionalSentence)
         professionalSentence.makeLinks(
