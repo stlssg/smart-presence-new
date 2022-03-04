@@ -60,22 +60,28 @@ class PositioningConfigurationFragment : Fragment() {
             blurViewText.visibility = View.GONE
         }
 
-        val address_required = view.findViewById<TextView>(R.id.address_required)
-        val location_required = view.findViewById<TextView>(R.id.location_required)
-        val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
-
-        makeLayoutGone(address_required)
-        makeLayoutGone(location_required)
-        makeLayoutGone(maxOccupancy_required)
+//        val address_required = view.findViewById<TextView>(R.id.address_required)
+//        val location_required = view.findViewById<TextView>(R.id.location_required)
+//        val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
+//
+//        makeLayoutGone(address_required)
+//        makeLayoutGone(location_required)
+//        makeLayoutGone(maxOccupancy_required)
 
         address_input.editText?.doAfterTextChanged {
-            makeLayoutGone(address_required)
+            address_input.error = null
+//            makeLayoutGone(address_required)
         }
         latitude_input.editText?.doAfterTextChanged {
-            makeLayoutGone(location_required)
+            latitude_input.error = null
+//            makeLayoutGone(location_required)
+        }
+        longitude_input.editText?.doAfterTextChanged {
+            longitude_input.error = null
         }
         max_occupancy_input.editText?.doAfterTextChanged {
-            makeLayoutGone(maxOccupancy_required)
+            max_occupancy_input.error = null
+//            makeLayoutGone(maxOccupancy_required)
         }
 
         val address = sharedPreferences.getString("address", "nothing")
@@ -132,6 +138,11 @@ class PositioningConfigurationFragment : Fragment() {
         }
 
         update_address_button.setOnClickListener {
+            address_input.error = null
+            latitude_input.error = null
+            longitude_input.error = null
+            max_occupancy_input.error = null
+
             findNavController().navigate(R.id.mapFragment)
         }
 
@@ -169,13 +180,18 @@ class PositioningConfigurationFragment : Fragment() {
                 val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
 
                 if (latitude_input == "" || longitude_input == "" || address_input == "" || max_occupancy_input == "") {
-                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
-                    val location_required = requireView().findViewById<TextView>(R.id.location_required)
-                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
+//                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
+//                    val location_required = requireView().findViewById<TextView>(R.id.location_required)
+//                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
 
-                    if (address_input == "") { getLayoutBack(address_required) }
-                    if (latitude_input == "" || longitude_input == "") { getLayoutBack(location_required) }
-                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
+//                    if (address_input == "") { getLayoutBack(address_required) }
+//                    if (latitude_input == "" || longitude_input == "") { getLayoutBack(location_required) }
+//                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
+
+                    if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
+                    if (latitude_input == "") { view?.findViewById<TextInputLayout>(R.id.latitude_input)?.error = getString(R.string.fieldRequiredMessage) }
+                    if (longitude_input == "") { view?.findViewById<TextInputLayout>(R.id.longitude_input)?.error = getString(R.string.fieldRequiredMessage) }
+                    if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
 
                     Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
                 } else {
@@ -216,19 +232,19 @@ class PositioningConfigurationFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun makeLayoutGone(view: TextView) {
-        view.isVisible = false
-        val para_layout = view.layoutParams
-        para_layout.height = 0
-        view.layoutParams = para_layout
-    }
-
-    private fun getLayoutBack(view: TextView) {
-        view.isVisible = true
-        val para_layout = view.layoutParams
-        para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        view.layoutParams = para_layout
-    }
+//    private fun makeLayoutGone(view: TextView) {
+//        view.isVisible = false
+//        val para_layout = view.layoutParams
+//        para_layout.height = 0
+//        view.layoutParams = para_layout
+//    }
+//
+//    private fun getLayoutBack(view: TextView) {
+//        view.isVisible = true
+//        val para_layout = view.layoutParams
+//        para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//        view.layoutParams = para_layout
+//    }
 
     private fun blurBackground(view: View) {
         val blurView = view.findViewById<BlurView>(R.id.blurView)

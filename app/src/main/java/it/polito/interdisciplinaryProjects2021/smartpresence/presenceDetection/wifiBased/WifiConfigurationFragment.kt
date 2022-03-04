@@ -68,27 +68,31 @@ class WifiConfigurationFragment : Fragment() {
 //        layoutParams.height = 0
 //        linearLayout.layoutParams = layoutParams
 
-        val ssid_required = view.findViewById<TextView>(R.id.ssid_required)
-        val bssid_required = view.findViewById<TextView>(R.id.bssid_required)
-        val address_required = view.findViewById<TextView>(R.id.address_required)
-        val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
+//        val ssid_required = view.findViewById<TextView>(R.id.ssid_required)
+//        val bssid_required = view.findViewById<TextView>(R.id.bssid_required)
+//        val address_required = view.findViewById<TextView>(R.id.address_required)
+//        val maxOccupancy_required = view.findViewById<TextView>(R.id.maxOccupancy_required)
 
-        makeLayoutGone(ssid_required)
-        makeLayoutGone(bssid_required)
-        makeLayoutGone(address_required)
-        makeLayoutGone(maxOccupancy_required)
+//        makeLayoutGone(ssid_required)
+//        makeLayoutGone(bssid_required)
+//        makeLayoutGone(address_required)
+//        makeLayoutGone(maxOccupancy_required)
 
         ssid_input.editText?.doAfterTextChanged {
-            makeLayoutGone(ssid_required)
+//            makeLayoutGone(ssid_required)
+            ssid_input.error = null
         }
         bssid_input.editText?.doAfterTextChanged {
-            makeLayoutGone(bssid_required)
+//            makeLayoutGone(bssid_required)
+            bssid_input.error = null
         }
         address_input.editText?.doAfterTextChanged {
-            makeLayoutGone(address_required)
+//            makeLayoutGone(address_required)
+            address_input.error = null
         }
         max_occupancy_input.editText?.doAfterTextChanged {
-            makeLayoutGone(maxOccupancy_required)
+//            makeLayoutGone(maxOccupancy_required)
+            max_occupancy_input.error = null
         }
 
         val ssid = sharedPreferences.getString("ssid", "nothing")
@@ -136,6 +140,11 @@ class WifiConfigurationFragment : Fragment() {
         }
 
         update_address_button.setOnClickListener {
+            address_input.error = null
+            max_occupancy_input.error = null
+            bssid_input.error = null
+            ssid_input.error = null
+
             findNavController().navigate(R.id.mapFragment)
         }
     }
@@ -156,15 +165,20 @@ class WifiConfigurationFragment : Fragment() {
                 val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
 
                 if (ssid_input == "" || bssid_input == "" || address_input == "" || max_occupancy_input == "") {
-                    val ssid_required = requireView().findViewById<TextView>(R.id.ssid_required)
-                    val bssid_required = requireView().findViewById<TextView>(R.id.bssid_required)
-                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
-                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
+//                    val ssid_required = requireView().findViewById<TextView>(R.id.ssid_required)
+//                    val bssid_required = requireView().findViewById<TextView>(R.id.bssid_required)
+//                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
+//                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
 
-                    if (ssid_input == "") { getLayoutBack(ssid_required) }
-                    if (bssid_input == "") { getLayoutBack(bssid_required) }
-                    if (address_input == "") { getLayoutBack(address_required) }
-                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
+//                    if (ssid_input == "") { getLayoutBack(ssid_required) }
+//                    if (bssid_input == "") { getLayoutBack(bssid_required) }
+//                    if (address_input == "") { getLayoutBack(address_required) }
+//                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
+
+                    if (ssid_input == "") { view?.findViewById<TextInputLayout>(R.id.ssid_input)?.error = getString(R.string.fieldRequiredMessage) }
+                    if (bssid_input == "") { view?.findViewById<TextInputLayout>(R.id.bssid_input)?.error = getString(R.string.fieldRequiredMessage) }
+                    if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
+                    if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
 
                     Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
                 } else {
@@ -205,19 +219,19 @@ class WifiConfigurationFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun makeLayoutGone(view: TextView) {
-        view.isVisible = false
-        val para_layout = view.layoutParams
-        para_layout.height = 0
-        view.layoutParams = para_layout
-    }
-
-    private fun getLayoutBack(view: TextView) {
-        view.isVisible = true
-        val para_layout = view.layoutParams
-        para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        view.layoutParams = para_layout
-    }
+//    private fun makeLayoutGone(view: TextView) {
+//        view.isVisible = false
+//        val para_layout = view.layoutParams
+//        para_layout.height = 0
+//        view.layoutParams = para_layout
+//    }
+//
+//    private fun getLayoutBack(view: TextView) {
+//        view.isVisible = true
+//        val para_layout = view.layoutParams
+//        para_layout.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//        view.layoutParams = para_layout
+//    }
 
     private fun blurBackground(view: View) {
         val blurView = view.findViewById<BlurView>(R.id.blurView)

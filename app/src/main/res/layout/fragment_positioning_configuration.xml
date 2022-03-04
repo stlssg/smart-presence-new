@@ -22,11 +22,12 @@
                 android:id="@+id/address_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 android:hint="@string/address_input"
-                android:minHeight="40dp"
                 app:endIconMode="clear_text"
                 app:startIconContentDescription="temp"
-                app:startIconDrawable="@drawable/ic_baseline_edit_location_24">
+                app:startIconDrawable="@drawable/ic_baseline_edit_location_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -36,34 +37,35 @@
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/address_required"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/fieldRequiredMessage"
-                android:textColor="@color/pinkColor"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
+<!--            <TextView-->
+<!--                android:id="@+id/address_required"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="start"-->
+<!--                android:text="@string/fieldRequiredMessage"-->
+<!--                android:textColor="@color/pinkColor"-->
+<!--                android:textSize="10sp"-->
+<!--                tools:ignore="SmallSp" />-->
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:minHeight="40dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="-16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/latitude_input"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    app:errorEnabled="true"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:hint="@string/latitude"
                     app:endIconMode="clear_text"
                     app:startIconContentDescription="temp"
-                    app:startIconDrawable="@drawable/ic_baseline_add_location_24">
+                    app:startIconDrawable="@drawable/ic_baseline_add_location_24"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -76,13 +78,15 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/longitude_input"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    app:errorEnabled="true"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:hint="@string/longitude"
                     app:endIconMode="clear_text"
                     app:startIconContentDescription="temp"
-                    app:startIconDrawable="@drawable/ic_baseline_add_location_24">
+                    app:startIconDrawable="@drawable/ic_baseline_add_location_24"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -94,15 +98,15 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/location_required"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/fieldRequiredMessage"
-                android:textColor="@color/pinkColor"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
+<!--            <TextView-->
+<!--                android:id="@+id/location_required"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="start"-->
+<!--                android:text="@string/fieldRequiredMessage"-->
+<!--                android:textColor="@color/pinkColor"-->
+<!--                android:textSize="10sp"-->
+<!--                tools:ignore="SmallSp" />-->
 
             <Button
                 android:id="@+id/update_address_button"
@@ -110,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/browser_actions_bg_grey"
                 android:text="@string/update_address_button"
@@ -122,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="2dp"
                 android:gravity="center"
                 android:text="@string/update_address_description"
                 android:textSize="10sp"
@@ -131,12 +134,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/max_occupancy_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                app:errorEnabled="true"
                 android:hint="@string/max_occupancy_input"
-                android:minHeight="40dp"
                 app:endIconMode="clear_text"
                 app:startIconContentDescription="temp"
-                app:startIconDrawable="@drawable/ic_baseline_people_24">
+                app:startIconDrawable="@drawable/ic_baseline_people_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -146,22 +150,21 @@
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/maxOccupancy_required"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/fieldRequiredMessage"
-                android:textColor="@color/pinkColor"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
+<!--            <TextView-->
+<!--                android:id="@+id/maxOccupancy_required"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="start"-->
+<!--                android:text="@string/fieldRequiredMessage"-->
+<!--                android:textColor="@color/pinkColor"-->
+<!--                android:textSize="10sp"-->
+<!--                tools:ignore="SmallSp" />-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/max_occupancy_description"
                 android:textSize="10sp"
@@ -197,7 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="3dp"
                 android:gravity="center"
                 android:text="@string/radius_spinner_description"
                 android:textSize="10sp"
@@ -208,7 +211,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
                 android:text="@string/energySavingModeOnOff"
                 tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml" />
 
