@@ -12,8 +12,10 @@ import android.location.Location
 import android.os.Build
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -80,29 +82,33 @@ class MyPeriodicBackgroundPositioningCheckingWork (context: Context, workerParam
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             mLocation = task.result
-                            val currentLatitude = mLocation?.latitude!!.toDouble()
-                            val currentLongitude = mLocation?.longitude!!.toDouble()
-                            val targetLatitude = inputData.getString("latitude").toString().toDouble()
-                            val targetLongitude = inputData.getString("longitude").toString().toDouble()
-                            val radius = inputData.getString("radius").toString().toFloat()
-                            val results: FloatArray = floatArrayOf(0f, 0f, 0f)
+                            if (mLocation == null) {
+                                Toast.makeText(applicationContext, "The location service is not working properly, please try it later", Toast.LENGTH_LONG).show()
+                            } else {
+                                val currentLatitude = mLocation?.latitude!!.toDouble()
+                                val currentLongitude = mLocation?.longitude!!.toDouble()
+                                val targetLatitude = inputData.getString("latitude").toString().toDouble()
+                                val targetLongitude = inputData.getString("longitude").toString().toDouble()
+                                val radius = inputData.getString("radius").toString().toFloat()
+                                val results: FloatArray = floatArrayOf(0f, 0f, 0f)
 
-                            Location.distanceBetween(currentLatitude, currentLongitude, targetLatitude, targetLongitude, results)
-//                            Log.d("Current distance: ", "${results[0]} and radius is $radius")
+                                Location.distanceBetween(currentLatitude, currentLongitude, targetLatitude, targetLongitude, results)
+//                                Log.d("Current distance: ", "${results[0]} and radius is $radius")
 
-                            if (results[0] <= radius) {
-                                val db = Firebase.firestore
-                                val collectionPath = inputData.getString("collection").toString()
-                                val documentPath = inputData.getString("document").toString()
-                                val input = hashMapOf("presence" to "CONNECTED", "timestamp" to now.toString())
-                                db.collection(collectionPath)
-                                    .document(documentPath)
-                                    .collection("POSITIONING")
-                                    .document(now.toString())
-                                    .set(input, SetOptions.merge())
+                                if (results[0] <= radius) {
+                                    val db = Firebase.firestore
+                                    val collectionPath = inputData.getString("collection").toString()
+                                    val documentPath = inputData.getString("document").toString()
+                                    val input = hashMapOf("presence" to "CONNECTED", "timestamp" to now.toString())
+                                    db.collection(collectionPath)
+                                        .document(documentPath)
+                                        .collection("POSITIONING")
+                                        .document(now.toString())
+                                        .set(input, SetOptions.merge())
 
-                                val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "CONNECTED"))
-                                db.collection("RegisteredUser").document(documentPath).set(newestAction, SetOptions.merge())
+                                    val newestAction = hashMapOf("newestAction" to hashMapOf("timestamp" to now.toString(), "presence" to "CONNECTED"))
+                                    db.collection("RegisteredUser").document(documentPath).set(newestAction, SetOptions.merge())
+                                }
                             }
                         }
                         else Log.e("locationChecking", "fail to get location")
