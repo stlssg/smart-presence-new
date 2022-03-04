@@ -135,7 +135,12 @@
         android:id="@+id/infoBrandFragment"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.introduction.InfoBrandFragment"
         android:label="@string/fragment_info_brand_name"
-        tools:layout="@layout/fragment_info_brand" />
+        tools:layout="@layout/fragment_info_brand" >
+        <action
+            android:id="@+id/action_infoBrandFragment_to_sendEmailFragment"
+            app:destination="@id/sendEmailFragment"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/startFragment"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.StartFragment"
@@ -149,7 +154,11 @@
         android:id="@+id/nav_chart"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.professional.ProfessionalFragment"
         android:label="@string/proFragmentTitle"
-        tools:layout="@layout/fragment_professional" />
+        tools:layout="@layout/fragment_professional" >
+        <action
+            android:id="@+id/action_nav_chart_to_sendEmailFragment"
+            app:destination="@id/sendEmailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/faqFragment"
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.introduction.FaqFragment"
@@ -169,4 +178,13 @@
         android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.ResetPasswordFragment"
         android:label="@string/reset_password_title"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/sendEmailFragment"
+        android:name="it.polito.interdisciplinaryProjects2021.smartpresence.others.SendEmailFragment"
+        android:label="@string/send_email_frag_title"
+        tools:layout="@layout/fragment_send_email">
+        <argument
+            android:name="targetEmail"
+            app:argType="string" />
+    </fragment>
 </navigation>

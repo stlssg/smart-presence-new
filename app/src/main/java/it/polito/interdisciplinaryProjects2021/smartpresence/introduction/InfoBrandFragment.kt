@@ -3,12 +3,16 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.introduction
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
@@ -58,6 +62,15 @@ class InfoBrandFragment : Fragment() {
 
         val rvAdapter = BrandInfoCardAdapter(tempBrandInfoList, requireContext())
         brandInfoRecyclerView.adapter = rvAdapter
+
+        val contactAppProvider = view.findViewById<TextView>(R.id.textView7)
+        val appProviderEmail = "s287288@studenti.polito.it"
+        contactAppProvider.makeLinks(
+            Pair(appProviderEmail, View.OnClickListener {
+                val action = InfoBrandFragmentDirections.actionInfoBrandFragmentToSendEmailFragment(targetEmail=appProviderEmail)
+                findNavController().navigate(action)
+            })
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,6 +104,33 @@ class InfoBrandFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    private fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(this.text)
+        var startIndexOfLink = -1
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun updateDrawState(textPaint: TextPaint) {
+                    textPaint.color = textPaint.linkColor
+                    textPaint.isUnderlineText = true
+                }
+
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as TextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            startIndexOfLink = this.text.toString().indexOf(link.first, startIndexOfLink + 1)
+
+            spannableString.setSpan(
+                clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        this.movementMethod = LinkMovementMethod.getInstance()
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
 }

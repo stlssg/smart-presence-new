@@ -426,4 +426,9 @@
     <string name="reset_p_not_same">Le nuove password non sono le stesse</string>
     <string name="new_p_used">La nuova password è già utilizzata.</string>
     <string name="successfully_reset_p">Hai cambiato con successo la tua password.</string>
+    <string name="send_email_frag_title">Invia una email</string>
+    <string name="send_email_address_title">Indirizzo:</string>
+    <string name="send_email_subject_title">Argomento:</string>
+    <string name="send_email_content_title">Contenuto:</string>
+    <string name="send_email_btn">Spedire</string>
 </resources>

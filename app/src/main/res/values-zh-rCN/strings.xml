@@ -358,4 +358,9 @@
     <string name="reset_p_not_same">新密码不一样</string>
     <string name="new_p_used">新密码已被使用。</string>
     <string name="successfully_reset_p">您已成功更改了密码。</string>
+    <string name="send_email_frag_title">发送电子邮件</string>
+    <string name="send_email_address_title">地址：</string>
+    <string name="send_email_subject_title">主题：</string>
+    <string name="send_email_content_title">内容：</string>
+    <string name="send_email_btn">发送</string>
 </resources>
