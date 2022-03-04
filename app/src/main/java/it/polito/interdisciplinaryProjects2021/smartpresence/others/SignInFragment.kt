@@ -290,7 +290,7 @@ class SignInFragment : Fragment() {
                         writeSharedPreferences(currentEmail)
                         val db = Firebase.firestore
                         val registeredUserCollection = db.collection("RegisteredUser")
-                        val input = hashMapOf("email" to currentEmail, "password" to "NONE", "needFrequentNotification" to "NO")
+                        val input = hashMapOf("email" to currentEmail, "password" to "NONE", "needFrequentNotification" to "NO", "deleteRequirement" to "NO")
                         registeredUserCollection.document(currentEmail).set(input, SetOptions.merge())
                     }
                     findNavController().navigate(R.id.declarationFragment)

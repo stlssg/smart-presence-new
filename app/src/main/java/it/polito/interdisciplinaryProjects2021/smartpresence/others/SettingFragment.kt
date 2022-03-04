@@ -25,6 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
@@ -70,7 +72,26 @@ class SettingFragment : Fragment() {
                     .setMessage(getString(R.string.setting_alert_content))
                     .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
                     .setPositiveButton(getString(R.string.setting_alert_confirm)) { _, _ ->
-                        // Respond to positive button press
+                        val db = Firebase.firestore
+                        db.collection("RegisteredUser").document(currentAccount!!).set(hashMapOf("deleteRequirement" to "YES"), SetOptions.merge())
+
+                        with(sharedPreferences.edit()) {
+                            putString("ssid", "nothing")
+                            putString("bssid", "nothing")
+                            putString("address", "nothing")
+                            putString("maxOccupancy", "nothing")
+                            putString("latitude", "nothing")
+                            putString("longitude", "nothing")
+                            putString("ssidConfigurationFinished", "false")
+                            putString("bssidConfigurationFinished", "false")
+                            putString("addressConfigurationFinished", "false")
+                            putString("maxOccupancyConfigurationFinished", "false")
+                            putString("latitudeConfigurationFinished", "false")
+                            putString("longitudeConfigurationFinished", "false")
+                            putString("targetBuildingForPro", "nothing")
+                            commit()
+                        }
+
                         Toast.makeText(requireContext(), getString(R.string.deleteDataMessage), Toast.LENGTH_LONG).show()
                     }
                     .show()
