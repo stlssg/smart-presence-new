@@ -15,7 +15,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -31,15 +30,16 @@ import org.joda.time.LocalDate
 import org.joda.time.LocalTime
 import org.joda.time.format.DateTimeFormat
 
+@Suppress("DEPRECATION")
 class MyPeriodicBackgroundPositioningCheckingWork (context: Context, workerParameters: WorkerParameters) :
     CoroutineWorker(context, workerParameters) {
 
     companion object {
-        private val UPDATE_INTERVAL_IN_MIL: Long = 1000
-        private val FAST_UPDATE_INTERVAL_IN_MIL: Long = UPDATE_INTERVAL_IN_MIL / 2
-        private val MY_CHANNELID: String = "notification_channel_positioning"
-        private val MY_CHANNEL_NAME: String = "it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased"
-        private val NOTIFICATION_ID = 98765
+        private const val UPDATE_INTERVAL_IN_MIL: Long = 1000
+        private const val FAST_UPDATE_INTERVAL_IN_MIL: Long = UPDATE_INTERVAL_IN_MIL / 2
+        private const val MY_CHANNEL_ID: String = "notification_channel_positioning"
+        private const val MY_CHANNEL_NAME: String = "it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased"
+        private const val NOTIFICATION_ID = 98765
     }
 
     private var locationRequest : LocationRequest? = null
@@ -125,7 +125,7 @@ class MyPeriodicBackgroundPositioningCheckingWork (context: Context, workerParam
     private fun getNotification(): Notification {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(MY_CHANNELID, MY_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+            val notificationChannel = NotificationChannel(MY_CHANNEL_ID, MY_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
@@ -133,7 +133,7 @@ class MyPeriodicBackgroundPositioningCheckingWork (context: Context, workerParam
 
         val pendingIntent = PendingIntent.getActivity(applicationContext, 0 , intent, PendingIntent.FLAG_ONE_SHOT)
 
-        val builder: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, MY_CHANNELID)
+        val builder: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, MY_CHANNEL_ID)
             .setContentTitle("Background Location Update")
             .setContentText("We are comparing your current location and the location of target building to decide presence")
             .setAutoCancel(true)
