@@ -11,15 +11,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import it.polito.interdisciplinaryProjects2021.smartpresence.introduction.BrandInfo
+import it.polito.interdisciplinaryProjects2021.smartpresence.introduction.FaqCardAdapter
+import it.polito.interdisciplinaryProjects2021.smartpresence.introduction.QuestionAndAnswer
 import org.joda.time.DateTime
 import java.text.DecimalFormat
 import java.util.*
@@ -94,6 +107,7 @@ class ProActionFragment : Fragment() {
             val allHourlyOccupancy = view.findViewById<TextView>(R.id.allHourlyOccupancy)
             val selectedHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.selectedHourlyOccupancyBar)
             val allHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.allHourlyOccupancyBar)
+            val buildingOccupantsEmailTitle = view.findViewById<TextView>(R.id.buildingOccupantsEmailTitle)
 
             when (languageSpinnerPosition) {
                 1 -> {
@@ -102,6 +116,7 @@ class ProActionFragment : Fragment() {
                     infoTitle.text = "Informazioni sull'edificio di destinazione:"
                     statisticsTitle.text = "Statistiche:"
                     endDescription.text = "Altre funzioni stanno arrivando."
+                    buildingOccupantsEmailTitle.text = "Email degli occupanti dell'edificio:"
                     stringMax = "max"
                     stringCurrentOccupants = "Numero attuale di occupanti nell'edificio di destinazione"
                 }
@@ -111,6 +126,7 @@ class ProActionFragment : Fragment() {
                     infoTitle.text = "目标建筑信息:"
                     statisticsTitle.text = "统计数据:"
                     endDescription.text = "更多功能即将推出."
+                    buildingOccupantsEmailTitle.text = "建筑住户电子邮件："
                     stringMax = "最大"
                     stringCurrentOccupants = "目标建筑中的当前居住人数"
                 }
@@ -120,10 +136,42 @@ class ProActionFragment : Fragment() {
                     infoTitle.text = "Information of target building:"
                     statisticsTitle.text = "Statistics:"
                     endDescription.text = "More functions are coming."
+                    buildingOccupantsEmailTitle.text = "Building Occupants Emails:"
                     stringMax = "max"
                     stringCurrentOccupants = "Current number of occupants in target building"
                 }
             }
+
+            val buildingOccupantsEmailCard = view.findViewById<MaterialCardView>(R.id.buildingOccupantsEmailCard)
+            val buildingOccupantsEmailRecyclerView = view.findViewById<RecyclerView>(R.id.buildingOccupantsEmailRecyclerView)
+            val buildingOccupantsEmailArrow = view.findViewById<ImageView>(R.id.buildingOccupantsEmailArrow)
+            buildingOccupantsEmailCard.setOnClickListener {
+                TransitionManager.beginDelayedTransition(buildingOccupantsEmailCard, AutoTransition())
+                if (buildingOccupantsEmailRecyclerView.visibility == View.VISIBLE) {
+                    buildingOccupantsEmailRecyclerView.visibility = View.GONE
+                    buildingOccupantsEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24)
+                } else {
+                    buildingOccupantsEmailRecyclerView.visibility = View.VISIBLE
+                    buildingOccupantsEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
+                }
+            }
+
+            db.collection("RegisteredUser")
+                .whereEqualTo("targetBuilding", targetBuildingForPro)
+                .get()
+                .addOnSuccessListener { documents ->
+                    val occupantsEmailsList = arrayListOf<String>()
+                    for (doc in documents) {
+                        occupantsEmailsList.add(doc.id)
+                    }
+                    if (occupantsEmailsList.size == 0) {
+                        occupantsEmailsList.add(getString(R.string.no_building_for_list_message))
+                    }
+                    buildingOccupantsEmailRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    val navController = Navigation.findNavController(requireView())
+                    val rvAdapter = BuildingOccupantEmailCardAdapter(navController, occupantsEmailsList, requireContext())
+                    buildingOccupantsEmailRecyclerView.adapter = rvAdapter
+                }
 
             if (targetBuildingForPro == sharedPreferences.getString("address", "nothing")) {
                 noTargetBuildingText1.visibility = View.GONE
@@ -415,4 +463,36 @@ class ProActionFragment : Fragment() {
         (activity as AppCompatActivity).baseContext.resources.updateConfiguration(config, (activity as AppCompatActivity).baseContext.resources.displayMetrics)
     }
 
+}
+
+class BuildingOccupantEmailCardAdapter (
+    private val navController: NavController,
+    private val occupantsEmailsList: ArrayList<String>,
+    val context: Context,
+): RecyclerView.Adapter<BuildingOccupantEmailCardAdapter.BuildingOccupantEmailCardViewHolder>() {
+    class BuildingOccupantEmailCardViewHolder(v: View): RecyclerView.ViewHolder(v) {
+        val singleOccupantId: TextView = v.findViewById(R.id.singleOccupantId)
+        val singleOccupantEmail: TextView = v.findViewById(R.id.singleOccupantEmail)
+        val singleOccupantSendEmailBtn: ImageButton = v.findViewById(R.id.singleOccupantSendEmailBtn)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuildingOccupantEmailCardViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.single_occupant_email_card, parent, false)
+        return BuildingOccupantEmailCardViewHolder(v)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: BuildingOccupantEmailCardViewHolder, position: Int) {
+        holder.singleOccupantId.text = (position + 1).toString()
+        holder.singleOccupantEmail.text = occupantsEmailsList[position]
+
+        holder.singleOccupantSendEmailBtn.setOnClickListener {
+            val action = ProfessionalFragmentDirections.actionNavChartToSendEmailFragment(targetEmail = holder.singleOccupantEmail.text as String)
+            navController.navigate(action)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return occupantsEmailsList.size
+    }
 }
