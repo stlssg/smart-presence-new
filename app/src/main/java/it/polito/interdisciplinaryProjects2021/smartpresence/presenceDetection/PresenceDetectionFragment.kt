@@ -14,6 +14,7 @@ import android.icu.text.SimpleDateFormat
 import android.media.MediaActionSound
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
@@ -30,6 +31,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -49,6 +51,8 @@ class PresenceDetectionFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var geofencingClient: GeofencingClient
+    private lateinit var blurView: BlurView
+    private lateinit var menu: Menu
 
     companion object{
         private const val GEOFENCE_LOCATION_REQUEST_CODE = 999
@@ -62,7 +66,7 @@ class PresenceDetectionFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NAME_SHADOWING")
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NAME_SHADOWING", "DEPRECATION")
     @SuppressLint("UnspecifiedImmutableFlag", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,7 +77,7 @@ class PresenceDetectionFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
         val detectionMethodSelection = sharedPreferences.getString("detectionMethodSelection", "nothing")
 
-        val blurView = view.findViewById<BlurView>(R.id.blurView)
+        blurView = view.findViewById(R.id.blurView)
         blurBackground(blurView)
 
         val wifiCheckingGuidanceCard = view.findViewById<MaterialCardView>(R.id.wifiCheckingGuidanceCard)
@@ -492,6 +496,111 @@ class PresenceDetectionFragment : Fragment() {
             processingCheck(specificDateTime, action)
         }
 
+        val verifyCodeBtn = view.findViewById<Button>(R.id.verifyCodeBtn)
+        verifyCodeBtn.setOnClickListener {
+            val db = Firebase.firestore
+            val sharedCodeInput = view.findViewById<TextInputLayout>(R.id.sharedCodeInput).editText?.text.toString()
+            db.collection("BuildingNameList")
+                .whereEqualTo("sharedCode", sharedCodeInput)
+                .get()
+                .addOnSuccessListener { documents ->
+                    var numDocuments = 0
+                    for (document in documents) {
+                        numDocuments ++
+                        val configBuilding = document.data["BuildingName"].toString()
+
+                        db.collection(configBuilding)
+                            .document("Building_Information")
+                            .get()
+                            .addOnSuccessListener { document ->
+                                Log.d("DocumentSnapshot data:", "${document.data}")
+                                when {
+                                    document.data?.getValue("detectionMethod") == "WIFI" -> {
+                                        with(sharedPreferences.edit()) {
+                                            putString("ssid", document.data?.getValue("SSID").toString())
+                                            putString("bssid", document.data?.getValue("BSSID").toString())
+                                            putString("address", document.data?.getValue("Address").toString())
+                                            putString("maxOccupancy", document.data?.getValue("Maximum_expected_number").toString())
+                                            putString("ssidConfigurationFinished", "true")
+                                            putString("bssidConfigurationFinished", "true")
+                                            putString("addressConfigurationFinished", "true")
+                                            putString("maxOccupancyConfigurationFinished", "true")
+                                            putString("detectionMethodSelection", "wifiChecking")
+                                            putString("targetBuildingForPro", document.data?.getValue("Address").toString())
+                                            apply()
+                                        }
+                                    }
+                                    document.data?.getValue("detectionMethod") == "POSITIONING" -> {
+                                        with(sharedPreferences.edit()) {
+                                            putString("latitude", document.data?.getValue("latitude").toString())
+                                            putString("longitude", document.data?.getValue("longitude").toString())
+                                            putString("address", document.data?.getValue("Address").toString())
+                                            putString("maxOccupancy", document.data?.getValue("Maximum_expected_number").toString())
+                                            putString("addressConfigurationFinished", "true")
+                                            putString("maxOccupancyConfigurationFinished", "true")
+                                            putString("latitudeConfigurationFinished", "true")
+                                            putString("longitudeConfigurationFinished", "true")
+                                            putString("energySavingMode", "off")
+                                            putString("detectionMethodSelection", "positioningChecking")
+                                            putString("targetBuildingForPro", document.data?.getValue("Address").toString())
+                                            apply()
+                                        }
+                                    }
+                                    document.data?.getValue("detectionMethod") == "GEOFENCE" -> {
+                                        with(sharedPreferences.edit()) {
+                                            putString("latitude", document.data?.getValue("latitude").toString())
+                                            putString("longitude", document.data?.getValue("longitude").toString())
+                                            putString("address", document.data?.getValue("Address").toString())
+                                            putString("maxOccupancy", document.data?.getValue("Maximum_expected_number").toString())
+                                            putString("addressConfigurationFinished", "true")
+                                            putString("maxOccupancyConfigurationFinished", "true")
+                                            putString("latitudeConfigurationFinished", "true")
+                                            putString("longitudeConfigurationFinished", "true")
+                                            putString("energySavingMode", "on")
+                                            putString("detectionMethodSelection", "positioningChecking")
+                                            putString("targetBuildingForPro", document.data?.getValue("Address").toString())
+                                            apply()
+                                        }
+                                    }
+                                    document.data?.getValue("detectionMethod") == "MANUAL" -> {
+                                        with(sharedPreferences.edit()) {
+                                            putString("address", document.data?.getValue("Address").toString())
+                                            putString("maxOccupancy", document.data?.getValue("Maximum_expected_number").toString())
+                                            putString("addressConfigurationFinished", "true")
+                                            putString("maxOccupancyConfigurationFinished", "true")
+                                            putString("detectionMethodSelection", "manualChecking")
+                                            putString("targetBuildingForPro", document.data?.getValue("Address").toString())
+                                            apply()
+                                        }
+                                    }
+                                }
+
+                                val docRef = user?.let { db.collection("RegisteredUser").document(it) }
+                                val input = hashMapOf("targetBuilding" to document.data?.getValue("Address").toString())
+                                docRef?.set(input, SetOptions.merge())
+
+                                Toast.makeText(requireContext(), getString(R.string.finish_download_conf_msg), Toast.LENGTH_LONG).show()
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    fragmentManager?.beginTransaction()?.detach(this)?.commitNow()
+                                    fragmentManager?.beginTransaction()?.attach(this)?.commitNow()
+                                } else {
+                                    fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.d("get failed with ", "$exception")
+                            }
+                    }
+                    if (numDocuments == 0) {
+                        Toast.makeText(requireContext(), getString(R.string.no_match_shared_code_msg), Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), getString(R.string.logInUnsuccess), Toast.LENGTH_SHORT).show()
+                }
+        }
+
     }
 
     private fun manageMyPeriodicWorkForWiFiBasedMethod() {
@@ -749,6 +858,8 @@ class PresenceDetectionFragment : Fragment() {
         linearLayout2.visibility = View.GONE
         linearLayout3.visibility = View.GONE
         card4.visibility = View.GONE
+        menu.getItem(1).isEnabled = true
+        menu.getItem(0).setIcon(R.drawable.ic_baseline_cloud_download_24)
     }
 
     private fun showMethodGuidance(card: MaterialCardView, blurView: BlurView, guidance: LinearLayout) {
@@ -788,6 +899,7 @@ class PresenceDetectionFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        this.menu = menu
         inflater.inflate(R.menu.configuration_menu, menu)
     }
 
@@ -807,6 +919,22 @@ class PresenceDetectionFragment : Fragment() {
                     else -> {
                         Toast.makeText(requireContext(), getString(R.string.no_selection_go_conf_message), Toast.LENGTH_SHORT).show()
                     }
+                }
+
+                return true
+            }
+            R.id.action_download_conf -> {
+                val downloadConfLayout = view?.findViewById<LinearLayout>(R.id.downloadConfLayout)
+                if (blurView.visibility == View.GONE) {
+                    blurView.visibility = View.VISIBLE
+                    downloadConfLayout?.visibility = View.VISIBLE
+                    menu.getItem(1).isEnabled = false
+                    menu.getItem(0).setIcon(R.drawable.ic_baseline_close_24)
+                } else {
+                    blurView.visibility = View.GONE
+                    downloadConfLayout?.visibility = View.GONE
+                    menu.getItem(1).isEnabled = true
+                    menu.getItem(0).setIcon(R.drawable.ic_baseline_cloud_download_24)
                 }
 
                 return true

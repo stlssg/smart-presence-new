@@ -368,4 +368,9 @@
     <string name="upload_alert_content">作为建筑物管理员，您可以通过以下共享代码上传配置以与其他居住者共享以方便他们：</string>
     <string name="upload_alert_title">上传配置并生成共享代码。</string>
     <string name="already_upload_msg">您已经上传了配置，代码是：</string>
+    <string name="download_conf_title">下载配置</string>
+    <string name="shared_code_title">共享代码</string>
+    <string name="shared_code_description">您可以联系目标楼宇的楼宇管理员或相关人员获取共享代码并下载通用配置以启动服务。</string>
+    <string name="no_match_shared_code_msg">没有匹配或您的代码错误。</string>
+    <string name="finish_download_conf_msg">您已成功下载配置，您可以立即启动服务或签入/签出。</string>
 </resources>

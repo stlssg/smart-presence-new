@@ -436,4 +436,9 @@
     <string name="upload_alert_content">In qualità di gestore dell\'edificio, puoi caricare la configurazione da condividere con altri occupanti per loro comodità seguendo il codice condiviso:</string>
     <string name="upload_alert_title">Carica la configurazione e genera codice condiviso.</string>
     <string name="already_upload_msg">Hai già caricato la configurazione e il codice è:</string>
+    <string name="download_conf_title">Scarica configurazione</string>
+    <string name="shared_code_title">Codice condiviso</string>
+    <string name="shared_code_description">È possibile contattare il responsabile dell\'edificio o il personale correlato dell\'edificio di destinazione per recuperare il codice condiviso per scaricare la configurazione comune per avviare il servizio.</string>
+    <string name="no_match_shared_code_msg">Non c\'è corrispondenza o il tuo codice è sbagliato.</string>
+    <string name="finish_download_conf_msg">Hai scaricato correttamente la configurazione e puoi avviare il servizio o effettuare il check-in/out in questo momento.</string>
 </resources>

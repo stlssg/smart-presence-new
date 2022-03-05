@@ -430,4 +430,9 @@
     <string name="upload_alert_content">As the building manager, you can upload the configuration to share with other occupants for their convenience by following shared code:</string>
     <string name="upload_alert_title">Upload configuration and generate shared code.</string>
     <string name="already_upload_msg">You have already upload the configuration and the code is:</string>
+    <string name="download_conf_title">Download Configuration</string>
+    <string name="shared_code_title">Shared code</string>
+    <string name="shared_code_description">You can contact the building manager or related personnel of your target building to retrieve the shared code to download the common configuration to start the service.</string>
+    <string name="no_match_shared_code_msg">There is no matching or your code is wrong.</string>
+    <string name="finish_download_conf_msg">You have successfully downloaded the configuration and you can start the service or check in/out right now.</string>
 </resources>

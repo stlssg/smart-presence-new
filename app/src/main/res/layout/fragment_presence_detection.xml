@@ -773,7 +773,78 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"/>
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/downloadConfLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/download_conf_title"
+                android:textColor="@color/purple_700"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sharedCodeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shared_code_title"
+                app:endIconMode="clear_text"
+                app:startIconContentDescription="temp"
+                app:startIconDrawable="@drawable/ic_baseline_share_24"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:backgroundTint="@color/transparentColor"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/verifyCodeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/code_check_title"
+                android:backgroundTint="@color/white"
+                android:textAllCaps="false"
+                android:textColor="@color/purple_700"
+                app:iconTint="@color/purple_500"
+                app:strokeColor="@color/purple_200"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="10dp"
+                tools:ignore="TooManyViews" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/shared_code_description"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginHorizontal="40dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </eightbitlab.com.blurview.BlurView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
