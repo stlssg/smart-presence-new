@@ -105,7 +105,9 @@ class ProfessionalFragment : Fragment() {
             .addOnSuccessListener { result ->
                 buildingList = arrayListOf<String>()
                 tempBuildingList = arrayListOf<String>()
-                buildingList.add(sharedPreferences.getString("address", "nothing").toString())
+                if (sharedPreferences.getString("address", "nothing").toString() != "nothing") {
+                    buildingList.add(sharedPreferences.getString("address", "nothing").toString())
+                }
                 for (document in result) {
                     if (document.id != sharedPreferences.getString("address", "nothing").toString()) {
                         buildingList.add(document.id)
@@ -345,9 +347,12 @@ class BuildingCardListAdapter (
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BuildingCardViewHolder, position: Int) {
-        if (position == 0) { holder.targetBuildingMsgForCard.visibility = View.VISIBLE }
-
-        holder.listIndex.text = position.toString()
+        if (sharedPreferences.getString("address", "nothing").toString() == "nothing") {
+            holder.listIndex.text = (position + 1).toString()
+        } else {
+            if (position == 0) { holder.targetBuildingMsgForCard.visibility = View.VISIBLE }
+            holder.listIndex.text = position.toString()
+        }
         holder.addressText.text = buildingList[position].replace("_", " ")
 
         val targetBuildingForPro = sharedPreferences.getString("targetBuildingForPro", "nothing")

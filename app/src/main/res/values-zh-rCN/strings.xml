@@ -363,4 +363,9 @@
     <string name="send_email_subject_title">主题：</string>
     <string name="send_email_content_title">内容：</string>
     <string name="send_email_btn">发送</string>
+    <string name="upload_alert_btn">上传</string>
+    <string name="upload_success_msg">您已成功上传配置，其他住户可以使用共享代码下载该配置。</string>
+    <string name="upload_alert_content">作为建筑物管理员，您可以通过以下共享代码上传配置以与其他居住者共享以方便他们：</string>
+    <string name="upload_alert_title">上传配置并生成共享代码。</string>
+    <string name="already_upload_msg">您已经上传了配置，代码是：</string>
 </resources>

@@ -6,11 +6,11 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.view.*
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -18,8 +18,11 @@ import com.google.firebase.ktx.Firebase
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import java.util.*
 
 class WifiConfigurationFragment : Fragment() {
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +34,15 @@ class WifiConfigurationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val professionalAccessGranted = sharedPreferences.getString("professionalAccessGranted", "false").toBoolean()
+        val uploadConfWifiFab = view.findViewById<FloatingActionButton>(R.id.uploadConfWifiFab)
+        if (professionalAccessGranted) {
+            uploadConfWifiFab.visibility = View.VISIBLE
+        } else {
+            uploadConfWifiFab.visibility = View.GONE
+        }
 
         val ssid_input = view.findViewById<TextInputLayout>(R.id.ssid_input)
         val bssid_input = view.findViewById<TextInputLayout>(R.id.bssid_input)
@@ -51,6 +62,7 @@ class WifiConfigurationFragment : Fragment() {
             bssid_input.isEnabled = false
             update_wifi_info_button.isEnabled = false
             update_address_button.isEnabled = false
+            uploadConfWifiFab.isEnabled = false
         } else {
             setHasOptionsMenu(true)
             val blurViewText = view.findViewById<TextView>(R.id.blurViewText)
@@ -147,6 +159,10 @@ class WifiConfigurationFragment : Fragment() {
 
             findNavController().navigate(R.id.mapFragment)
         }
+
+        uploadConfWifiFab.setOnClickListener {
+            dealWithSavingOrUploadingConfiguration("uploading")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -157,14 +173,24 @@ class WifiConfigurationFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save_button -> {
-                val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+                dealWithSavingOrUploadingConfiguration("saving")
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-                val ssid_input = requireView().findViewById<TextInputLayout>(R.id.ssid_input).editText?.text.toString()
-                val bssid_input = requireView().findViewById<TextInputLayout>(R.id.bssid_input).editText?.text.toString()
-                val address_input = requireView().findViewById<TextInputLayout>(R.id.address_input).editText?.text.toString()
-                val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
+    private fun dealWithSavingOrUploadingConfiguration(action: String) {
+        val sharedCode = sharedPreferences.getString("sharedCode", "nothing")
+        if (sharedCode != "nothing" && action == "uploading") {
+            Toast.makeText(requireContext(), getString(R.string.already_upload_msg) + " " + sharedCode, Toast.LENGTH_SHORT).show()
+        } else {
+            val ssid_input = requireView().findViewById<TextInputLayout>(R.id.ssid_input).editText?.text.toString()
+            val bssid_input = requireView().findViewById<TextInputLayout>(R.id.bssid_input).editText?.text.toString()
+            val address_input = requireView().findViewById<TextInputLayout>(R.id.address_input).editText?.text.toString()
+            val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
 
-                if (ssid_input == "" || bssid_input == "" || address_input == "" || max_occupancy_input == "") {
+            if (ssid_input == "" || bssid_input == "" || address_input == "" || max_occupancy_input == "") {
 //                    val ssid_required = requireView().findViewById<TextView>(R.id.ssid_required)
 //                    val bssid_required = requireView().findViewById<TextView>(R.id.bssid_required)
 //                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
@@ -175,48 +201,81 @@ class WifiConfigurationFragment : Fragment() {
 //                    if (address_input == "") { getLayoutBack(address_required) }
 //                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
 
-                    if (ssid_input == "") { view?.findViewById<TextInputLayout>(R.id.ssid_input)?.error = getString(R.string.fieldRequiredMessage) }
-                    if (bssid_input == "") { view?.findViewById<TextInputLayout>(R.id.bssid_input)?.error = getString(R.string.fieldRequiredMessage) }
-                    if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
-                    if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (ssid_input == "") { view?.findViewById<TextInputLayout>(R.id.ssid_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (bssid_input == "") { view?.findViewById<TextInputLayout>(R.id.bssid_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
+                if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
 
-                    Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
-                } else {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(getString(R.string.configuration_confirm_title))
-                        .setMessage("SSID: ${ssid_input}\n" +
-                                "BSSID: ${bssid_input}\n" +
-                                "${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
-                                "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
-                        .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
-                        .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
-                            Toast.makeText(requireContext(), getString(R.string.configuration_alert_toast), Toast.LENGTH_LONG).show()
-                            with(sharedPreferences.edit()) {
-                                putString("ssid", ssid_input.replace(" ", "_"))
-                                putString("bssid", bssid_input)
-                                putString("address", address_input.replace(" ", "_"))
-                                putString("maxOccupancy", max_occupancy_input)
-                                putString("ssidConfigurationFinished", "true")
-                                putString("bssidConfigurationFinished", "true")
-                                putString("addressConfigurationFinished", "true")
-                                putString("maxOccupancyConfigurationFinished", "true")
-                                apply()
-                            }
-
-                            val db = Firebase.firestore
-                            val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
-                            val docRef = user?.let { db.collection("RegisteredUser").document(it) }
-                            val input = hashMapOf("targetBuilding" to address_input.replace(" ", "_"))
-                            docRef?.set(input, SetOptions.merge())
-
-                            findNavController().popBackStack()
+                Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_SHORT).show()
+            } else {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.configuration_confirm_title))
+                    .setMessage("SSID: ${ssid_input}\n" +
+                            "BSSID: ${bssid_input}\n" +
+                            "${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
+                            "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
+                    .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                    .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
+                        Toast.makeText(requireContext(), getString(R.string.configuration_alert_toast), Toast.LENGTH_SHORT).show()
+                        with(sharedPreferences.edit()) {
+                            putString("ssid", ssid_input.replace(" ", "_"))
+                            putString("bssid", bssid_input)
+                            putString("address", address_input.replace(" ", "_"))
+                            putString("maxOccupancy", max_occupancy_input)
+                            putString("ssidConfigurationFinished", "true")
+                            putString("bssidConfigurationFinished", "true")
+                            putString("addressConfigurationFinished", "true")
+                            putString("maxOccupancyConfigurationFinished", "true")
+                            apply()
                         }
-                        .show()
-                }
-                return true
+
+                        val db = Firebase.firestore
+                        val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
+                        val docRef = user?.let { db.collection("RegisteredUser").document(it) }
+                        val input = hashMapOf("targetBuilding" to address_input.replace(" ", "_"))
+                        docRef?.set(input, SetOptions.merge())
+
+                        if (action == "saving") {
+                            findNavController().popBackStack()
+                        } else if (action == "uploading") {
+                            val allowedCharacters = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM"
+                            val random = Random()
+                            val sb = StringBuilder(6)
+                            for (i in 0 until 6)
+                                sb.append(allowedCharacters[random.nextInt(allowedCharacters.length)])
+                            val finalCode = sb.toString()
+                            MaterialAlertDialogBuilder(requireContext())
+                                .setTitle(getString(R.string.upload_alert_title))
+                                .setMessage(getString(R.string.upload_alert_content) + " " + finalCode)
+                                .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                                .setPositiveButton(getString(R.string.upload_alert_btn)) { _, _ ->
+                                    Toast.makeText(requireContext(), getString(R.string.upload_success_msg), Toast.LENGTH_SHORT).show()
+
+                                    with(sharedPreferences.edit()) {
+                                        putString("sharedCode", finalCode)
+                                        apply()
+                                    }
+
+                                    val buildingInput = address_input.replace(" ", "_")
+                                    val inputBuildingList = hashMapOf("BuildingName" to buildingInput, "sharedCode" to finalCode)
+                                    val inputBuildingInfo = hashMapOf(
+                                        "Address" to buildingInput,
+                                        "Maximum_expected_number" to max_occupancy_input,
+                                        "BSSID" to bssid_input,
+                                        "SSID" to ssid_input.replace(" ", "_"),
+                                        "detectionMethod" to "WIFI"
+                                    )
+                                    db.collection("BuildingNameList").document(buildingInput).set(inputBuildingList, SetOptions.merge())
+                                    db.collection(buildingInput).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
+
+                                    findNavController().popBackStack()
+                                }
+                                .show()
+                        }
+                    }
+                    .show()
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 
 //    private fun makeLayoutGone(view: TextView) {

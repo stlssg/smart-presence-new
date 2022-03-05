@@ -431,4 +431,9 @@
     <string name="send_email_subject_title">Argomento:</string>
     <string name="send_email_content_title">Contenuto:</string>
     <string name="send_email_btn">Spedire</string>
+    <string name="upload_alert_btn">Caricamento</string>
+    <string name="upload_success_msg">Hai caricato correttamente la configurazione che può essere scaricata da altri occupanti con il codice condiviso.</string>
+    <string name="upload_alert_content">In qualità di gestore dell\'edificio, puoi caricare la configurazione da condividere con altri occupanti per loro comodità seguendo il codice condiviso:</string>
+    <string name="upload_alert_title">Carica la configurazione e genera codice condiviso.</string>
+    <string name="already_upload_msg">Hai già caricato la configurazione e il codice è:</string>
 </resources>

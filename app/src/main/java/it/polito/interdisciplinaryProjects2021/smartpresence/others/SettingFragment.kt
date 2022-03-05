@@ -188,6 +188,7 @@ class SettingFragment : Fragment() {
                 putString("detectionMethodSelection", "nothing")
                 putString("professionalAccessGranted", "false")
                 putString("targetBuildingForPro", "nothing")
+                putString("sharedCode", "nothing")
                 commit()
             }
             signOutCondition = true

@@ -425,4 +425,9 @@
     <string name="send_email_subject_title">Subject:</string>
     <string name="send_email_content_title">Body:</string>
     <string name="send_email_btn">Send</string>
+    <string name="upload_alert_btn">Upload</string>
+    <string name="upload_success_msg">You have successfully uploaded the configuration that can be downloaded by other occupants with the shared code.</string>
+    <string name="upload_alert_content">As the building manager, you can upload the configuration to share with other occupants for their convenience by following shared code:</string>
+    <string name="upload_alert_title">Upload configuration and generate shared code.</string>
+    <string name="already_upload_msg">You have already upload the configuration and the code is:</string>
 </resources>

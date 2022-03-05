@@ -11,6 +11,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -18,8 +19,11 @@ import com.google.firebase.ktx.Firebase
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import java.util.*
 
 class PositioningConfigurationFragment : Fragment() {
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +36,15 @@ class PositioningConfigurationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+        sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+
+        val professionalAccessGranted = sharedPreferences.getString("professionalAccessGranted", "false").toBoolean()
+        val uploadConfPositioningFab = view.findViewById<FloatingActionButton>(R.id.uploadConfPositioningFab)
+        if (professionalAccessGranted) {
+            uploadConfPositioningFab.visibility = View.VISIBLE
+        } else {
+            uploadConfPositioningFab.visibility = View.GONE
+        }
 
         val address_input = view.findViewById<TextInputLayout>(R.id.address_input)
         val max_occupancy_input = view.findViewById<TextInputLayout>(R.id.max_occupancy_input)
@@ -162,6 +174,10 @@ class PositioningConfigurationFragment : Fragment() {
             }
             override fun onNothingSelected(parent: AdapterView<*>) { }
         }
+
+        uploadConfPositioningFab.setOnClickListener {
+            dealWithSavingOrUploadingConfiguration("uploading")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -172,14 +188,24 @@ class PositioningConfigurationFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save_button -> {
-                val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
+                dealWithSavingOrUploadingConfiguration("saving")
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-                val address_input = requireView().findViewById<TextInputLayout>(R.id.address_input).editText?.text.toString()
-                val latitude_input = requireView().findViewById<TextInputLayout>(R.id.latitude_input).editText?.text.toString()
-                val longitude_input = requireView().findViewById<TextInputLayout>(R.id.longitude_input).editText?.text.toString()
-                val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
+    private fun dealWithSavingOrUploadingConfiguration(action: String) {
+        val sharedCode = sharedPreferences.getString("sharedCode", "nothing")
+        if (sharedCode != "nothing" && action == "uploading") {
+            Toast.makeText(requireContext(), getString(R.string.already_upload_msg) + " " + sharedCode, Toast.LENGTH_SHORT).show()
+        } else {
+            val address_input = requireView().findViewById<TextInputLayout>(R.id.address_input).editText?.text.toString()
+            val latitude_input = requireView().findViewById<TextInputLayout>(R.id.latitude_input).editText?.text.toString()
+            val longitude_input = requireView().findViewById<TextInputLayout>(R.id.longitude_input).editText?.text.toString()
+            val max_occupancy_input = requireView().findViewById<TextInputLayout>(R.id.max_occupancy_input).editText?.text.toString()
 
-                if (latitude_input == "" || longitude_input == "" || address_input == "" || max_occupancy_input == "") {
+            if (latitude_input == "" || longitude_input == "" || address_input == "" || max_occupancy_input == "") {
 //                    val address_required = requireView().findViewById<TextView>(R.id.address_required)
 //                    val location_required = requireView().findViewById<TextView>(R.id.location_required)
 //                    val maxOccupancy_required = requireView().findViewById<TextView>(R.id.maxOccupancy_required)
@@ -188,48 +214,86 @@ class PositioningConfigurationFragment : Fragment() {
 //                    if (latitude_input == "" || longitude_input == "") { getLayoutBack(location_required) }
 //                    if (max_occupancy_input == "") { getLayoutBack(maxOccupancy_required) }
 
-                    if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
-                    if (latitude_input == "") { view?.findViewById<TextInputLayout>(R.id.latitude_input)?.error = getString(R.string.fieldRequiredMessage) }
-                    if (longitude_input == "") { view?.findViewById<TextInputLayout>(R.id.longitude_input)?.error = getString(R.string.fieldRequiredMessage) }
-                    if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (address_input == "") { view?.findViewById<TextInputLayout>(R.id.address_input)?.error = " " }
+                if (latitude_input == "") { view?.findViewById<TextInputLayout>(R.id.latitude_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (longitude_input == "") { view?.findViewById<TextInputLayout>(R.id.longitude_input)?.error = getString(R.string.fieldRequiredMessage) }
+                if (max_occupancy_input == "") { view?.findViewById<TextInputLayout>(R.id.max_occupancy_input)?.error = getString(R.string.fieldRequiredMessage) }
 
-                    Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
-                } else {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(getString(R.string.configuration_confirm_title))
-                        .setMessage("${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
-                                "${getString(R.string.configurationAlertLatName)}: ${latitude_input}\n" +
-                                "${getString(R.string.configurationAlertLonName)}: ${longitude_input}\n" +
-                                "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
-                        .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
-                        .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
-                            Toast.makeText(requireContext(), getString(R.string.configuration_alert_toast), Toast.LENGTH_LONG).show()
-                            with(sharedPreferences.edit()) {
-                                putString("latitude", latitude_input)
-                                putString("longitude", longitude_input)
-                                putString("address", address_input.replace(" ", "_"))
-                                putString("maxOccupancy", max_occupancy_input)
-                                putString("addressConfigurationFinished", "true")
-                                putString("maxOccupancyConfigurationFinished", "true")
-                                putString("latitudeConfigurationFinished", "true")
-                                putString("longitudeConfigurationFinished", "true")
-                                apply()
-                            }
-
-                            val db = Firebase.firestore
-                            val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
-                            val docRef = user?.let { db.collection("RegisteredUser").document(it) }
-                            val input = hashMapOf("targetBuilding" to address_input.replace(" ", "_"))
-                            docRef?.set(input, SetOptions.merge())
-
-                            findNavController().popBackStack()
+                Toast.makeText(requireContext(), getString(R.string.configuration_empty_input_message), Toast.LENGTH_LONG).show()
+            } else {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.configuration_confirm_title))
+                    .setMessage("${getString(R.string.configurationAlertAddressName)}: ${address_input}\n" +
+                            "${getString(R.string.configurationAlertLatName)}: ${latitude_input}\n" +
+                            "${getString(R.string.configurationAlertLonName)}: ${longitude_input}\n" +
+                            "${getString(R.string.configurationAlertMaxName)}: ${max_occupancy_input}\n")
+                    .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                    .setPositiveButton(getString(R.string.configuration_alert_confirm_button)) { _, _ ->
+                        Toast.makeText(requireContext(), getString(R.string.configuration_alert_toast), Toast.LENGTH_LONG).show()
+                        with(sharedPreferences.edit()) {
+                            putString("latitude", latitude_input)
+                            putString("longitude", longitude_input)
+                            putString("address", address_input.replace(" ", "_"))
+                            putString("maxOccupancy", max_occupancy_input)
+                            putString("addressConfigurationFinished", "true")
+                            putString("maxOccupancyConfigurationFinished", "true")
+                            putString("latitudeConfigurationFinished", "true")
+                            putString("longitudeConfigurationFinished", "true")
+                            apply()
                         }
-                        .show()
-                }
-                return true
+
+                        val db = Firebase.firestore
+                        val user = sharedPreferences.getString("keyCurrentAccount", "noEmail")
+                        val docRef = user?.let { db.collection("RegisteredUser").document(it) }
+                        val input = hashMapOf("targetBuilding" to address_input.replace(" ", "_"))
+                        docRef?.set(input, SetOptions.merge())
+
+                        if (action == "saving") {
+                            findNavController().popBackStack()
+                        } else if (action == "uploading") {
+                            val allowedCharacters = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM"
+                            val random = Random()
+                            val sb = StringBuilder(6)
+                            for (i in 0 until 6)
+                                sb.append(allowedCharacters[random.nextInt(allowedCharacters.length)])
+                            val finalCode = sb.toString()
+                            MaterialAlertDialogBuilder(requireContext())
+                                .setTitle(getString(R.string.upload_alert_title))
+                                .setMessage(getString(R.string.upload_alert_content) + " " + finalCode)
+                                .setNeutralButton(getString(R.string.setting_alert_cancel)) { _, _ -> }
+                                .setPositiveButton(getString(R.string.upload_alert_btn)) { _, _ ->
+                                    Toast.makeText(requireContext(), getString(R.string.upload_success_msg), Toast.LENGTH_SHORT).show()
+
+                                    with(sharedPreferences.edit()) {
+                                        putString("sharedCode", finalCode)
+                                        apply()
+                                    }
+
+                                    val positioningMode = if (sharedPreferences.getString("energySavingMode", "off") == "on") {
+                                        "GEOFENCE"
+                                    } else {
+                                        "POSITIONING"
+                                    }
+                                    val buildingInput = address_input.replace(" ", "_")
+                                    val inputBuildingList = hashMapOf("BuildingName" to buildingInput, "sharedCode" to finalCode)
+                                    val inputBuildingInfo = hashMapOf(
+                                        "Address" to buildingInput,
+                                        "Maximum_expected_number" to max_occupancy_input,
+                                        "latitude" to latitude_input,
+                                        "longitude" to longitude_input,
+                                        "detectionMethod" to positioningMode
+                                    )
+                                    db.collection("BuildingNameList").document(buildingInput).set(inputBuildingList, SetOptions.merge())
+                                    db.collection(buildingInput).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
+
+                                    findNavController().popBackStack()
+                                }
+                                .show()
+                        }
+                    }
+                    .show()
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 
 //    private fun makeLayoutGone(view: TextView) {
