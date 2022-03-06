@@ -435,4 +435,20 @@
     <string name="shared_code_description">You can contact the building manager or related personnel of your target building to retrieve the shared code to download the common configuration to start the service.</string>
     <string name="no_match_shared_code_msg">There is no matching or your code is wrong.</string>
     <string name="finish_download_conf_msg">You have successfully downloaded the configuration and you can start the service or check in/out right now.</string>
+    <string name="graphWeeklyTitle">Weekly Occupancy</string>
+    <string name="graphWeeklySubtitle">Average value for each hour during whole week</string>
+    <string-array name="monthList">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
 </resources>

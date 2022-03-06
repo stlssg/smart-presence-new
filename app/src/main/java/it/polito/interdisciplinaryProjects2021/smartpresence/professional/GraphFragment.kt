@@ -13,8 +13,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -39,8 +38,9 @@ class GraphFragment : Fragment() {
     private val yearlyLabel : MutableList<String> = mutableListOf()
     private val totalLabel : MutableList<String> = mutableListOf()
 
+    private var resolutionSelection: String = "daily"
     private lateinit var withStandardOrNotCheckBox: CheckBox
-    private val standardOccupancy: MutableList<Float> = mutableListOf(
+    private val standardOccupancyWeekday: MutableList<Float> = mutableListOf(
         1f * 100,
         1f * 100,
         1f * 100,
@@ -60,6 +60,33 @@ class GraphFragment : Fragment() {
         0.5f * 100,
         0.5f * 100,
         0.5f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        1f * 100,
+        1f * 100
+    )
+
+    private val standardOccupancyWeekend: MutableList<Float> = mutableListOf(
+        1f * 100,
+        1f * 100,
+        1f * 100,
+        1f * 100,
+        1f * 100,
+        1f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
+        0.8f * 100,
         0.8f * 100,
         0.8f * 100,
         0.8f * 100,
@@ -105,11 +132,12 @@ class GraphFragment : Fragment() {
             val docRef = db.collection(targetBuildingForPro!!).document("Results")
             docRef.get()
                 .addOnSuccessListener { document ->
-                    if (document.data?.get("daily_available") == true) {
+                    if (document.data?.get("daily_available") == true ||
+                        document.data?.get("weekly_available") == true ||
+                        document.data?.get("monthly_12_available") == true ||
+                        document.data?.get("yearly_available") == true) {
                         noTargetBuildingText.visibility = GONE
                         graphConstraintLayout.visibility = VISIBLE
-
-                        val example_results = db.collection("example_result").document("Results")
 
                         val aaChartView = view.findViewById<AAChartView>(R.id.aa_chart_view)
                         aaChartView.visibility = GONE
@@ -119,50 +147,81 @@ class GraphFragment : Fragment() {
 
                         val dailyOption = view.findViewById<TextView>(R.id.dailyOption)
                         val weeklyOption = view.findViewById<TextView>(R.id.weeklyOption)
-//                        val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
-//                        val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
+                        val monthlyOption = view.findViewById<TextView>(R.id.monthlyOption)
+                        val yearlyOption = view.findViewById<TextView>(R.id.yearlyOption)
+
+                        val monthSpinner = view.findViewById<Spinner>(R.id.monthSpinner)
+                        val yearSpinner = view.findViewById<Spinner>(R.id.yearSpinner)
+
+                        val monthList = resources.getStringArray(R.array.monthList)
+                        if (monthSpinner != null) {
+                            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, monthList)
+                            monthSpinner.adapter = adapter
+                        }
+
+                        if (document.data?.get("yearly_available") == true) {
+                            docRef.collection("yearly_data")
+                                .get()
+                                .addOnSuccessListener { documents ->
+                                    val yearListTemp = mutableListOf<String>()
+                                    var tempYear = " "
+                                    for (doc in documents) {
+                                        val tempStr = doc.id.slice(0..3)
+                                        if (tempStr != tempYear) {
+                                            yearListTemp.add(tempStr)
+                                            tempYear = tempStr
+                                        }
+                                    }
+
+                                    val yearList: Array<String> = yearListTemp.toTypedArray()
+                                    if (yearSpinner != null) {
+                                        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, yearList)
+                                        yearSpinner.adapter = adapter
+                                    }
+                                }
+                        }
+
 //                        val totalOption = view.findViewById<TextView>(R.id.totalOption)
-                        //        dailyOption.text = getString(R.string.graphOptionDaily)
-                        //        weeklyOption.text = getString(R.string.graphOptionWeekly)
-                        //        monthlyOption.text = getString(R.string.graphOptionMonthly)
-                        //        yearlyOption.text = getString(R.string.graphOptionYearly)
-                        //        totalOption.text = getString(R.string.graphOptionTotal)
+//                        dailyOption.text = getString(R.string.graphOptionDaily)
+//                        weeklyOption.text = getString(R.string.graphOptionWeekly)
+//                        monthlyOption.text = getString(R.string.graphOptionMonthly)
+//                        yearlyOption.text = getString(R.string.graphOptionYearly)
+//                        totalOption.text = getString(R.string.graphOptionTotal)
 
                         when (sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()) {
                             1 -> {
                                 dailyOption.text = "Quotidiano"
                                 weeklyOption.text = "Settimanalmente"
-//                                monthlyOption.text = "Mensile"
-//                                yearlyOption.text = "Annuale"
+                                monthlyOption.text = "Mensile"
+                                yearlyOption.text = "Annuale"
 //                                totalOption.text = "Totale"
                                 withStandardOrNotCheckBox.text = "Standard"
                             }
                             2 -> {
                                 dailyOption.text = "日"
                                 weeklyOption.text = "周"
-//                                monthlyOption.text = "月"
-//                                yearlyOption.text = "年"
+                                monthlyOption.text = "月"
+                                yearlyOption.text = "年"
 //                                totalOption.text = "总"
                                 withStandardOrNotCheckBox.text = "标准"
                             }
                             else -> {
                                 dailyOption.text = "Daily"
                                 weeklyOption.text = "Weekly"
-//                                monthlyOption.text = "Monthly"
-//                                yearlyOption.text = "Yearly"
+                                monthlyOption.text = "Monthly"
+                                yearlyOption.text = "Yearly"
 //                                totalOption.text = "Total"
                                 withStandardOrNotCheckBox.text = "Standard"
                             }
                         }
 
                         dailyOption.setOnClickListener {
+                            resolutionSelection = "daily"
                             resetData()
-                            setButton(dailyOption, weeklyOption)
+                            setButton(dailyOption, weeklyOption, monthlyOption, yearlyOption)
 //                            setButton(dailyOption, weeklyOption, monthlyOption, yearlyOption, totalOption)
                             errorTextView.visibility = GONE
                             loadingAnim.visibility = VISIBLE
-
-                            val docRef = db.collection(targetBuildingForPro).document("Results")
 
                             docRef.get()
                                 .addOnSuccessListener { document ->
@@ -203,16 +262,17 @@ class GraphFragment : Fragment() {
                         }
 
                         weeklyOption.setOnClickListener {
+                            resolutionSelection = "weekly"
                             resetData()
-                            setButton(weeklyOption, dailyOption)
+                            setButton(weeklyOption, dailyOption, monthlyOption, yearlyOption)
 //                            setButton(weeklyOption, dailyOption, monthlyOption, yearlyOption, totalOption)
                             errorTextView.visibility = GONE
                             loadingAnim.visibility = VISIBLE
 
-                            example_results.get()
+                            docRef.get()
                                 .addOnSuccessListener { document ->
                                     if (document.data?.get("weekly_available") == true) {
-                                        example_results.collection("weekly_data")
+                                        docRef.collection("weekly_data")
                                             .orderBy("interval")
                                             .get()
                                             .addOnSuccessListener { documents ->
@@ -226,8 +286,8 @@ class GraphFragment : Fragment() {
                                                     generateChart(
                                                         weeklyLabel,
                                                         weeklyData,
-                                                        getString(R.string.graphDailyTitle),
-                                                        getString(R.string.graphDailySubtitle),
+                                                        getString(R.string.graphWeeklyTitle),
+                                                        getString(R.string.graphWeeklySubtitle),
                                                         targetBuildingForPro.replace("_", " ")
                                                     )
                                                 )
@@ -247,94 +307,221 @@ class GraphFragment : Fragment() {
                                 }
                         }
 
-//                        monthlyOption.setOnClickListener {
-//                            resetData()
-//                            setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption, totalOption)
-//                            errorTextView.visibility = GONE
-//                            loadingAnim.visibility = VISIBLE
-//
-//                            example_results.get()
-//                                .addOnSuccessListener { document ->
-//                                    if (document.data?.get("monthly_available") == true) {
-//                                        example_results.collection("monthly_data")
-//                                            .orderBy("interval")
-//                                            .get()
-//                                            .addOnSuccessListener { documents ->
-//                                                loadingAnim.visibility = GONE
-//                                                aaChartView.visibility = VISIBLE
-//                                                for (document in documents) {
-//                                                    monthlyLabel.add(document.data.getValue("interval").toString())
-//                                                    monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-//                                                }
-//                                                aaChartView.aa_drawChartWithChartModel(
-//                                                    generateChart(
-//                                                        monthlyLabel,
-//                                                        monthlyData,
-//                                                        getString(R.string.graphDailyTitle),
-//                                                        getString(R.string.graphDailySubtitle),
-//                                                        targetBuildingForPro.replace("_", " ")
-//                                                    )
-//                                                )
-//                                            }
-//                                    } else {
-//                                        loadingAnim.visibility = GONE
-//                                        aaChartView.visibility = GONE
-//                                        errorTextView.visibility = VISIBLE
-//                                        errorTextView.text = getString(R.string.graphNoDataMessage)
-//                                    }
-//                                }
-//                                .addOnFailureListener { _ ->
-//                                    loadingAnim.visibility = GONE
-//                                    aaChartView.visibility = GONE
-//                                    errorTextView.visibility = VISIBLE
-//                                    errorTextView.text = getString(R.string.graphErrorMessage)
-//                                }
-//                        }
+                        monthlyOption.setOnClickListener {
+                            resolutionSelection = "monthly"
+                            resetData()
+                            setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
 
-//                        yearlyOption.setOnClickListener {
-//                            resetData()
-//                            setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption, totalOption)
-//                            errorTextView.visibility = GONE
-//                            loadingAnim.visibility = VISIBLE
-//
-//                            example_results.get()
-//                                .addOnSuccessListener { document ->
-//                                    if (document.data?.get("yearly_available") == true) {
-//                                        example_results.collection("yearly_data")
-//                                            .orderBy("interval")
-//                                            .get()
-//                                            .addOnSuccessListener { documents ->
-//                                                loadingAnim.visibility = GONE
-//                                                aaChartView.visibility = VISIBLE
-//                                                for (document in documents) {
-//                                                    yearlyLabel.add(document.data.getValue("interval").toString())
-//                                                    yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
-//                                                }
-//                                                aaChartView.aa_drawChartWithChartModel(
-//                                                    generateChart(
-//                                                        yearlyLabel,
-//                                                        yearlyData,
-//                                                        getString(R.string.graphDailyTitle),
-//                                                        getString(R.string.graphDailySubtitle),
-//                                                        targetBuildingForPro.replace("_", " ")
-//                                                    )
-//                                                )
-//                                            }
-//                                    } else {
-//                                        loadingAnim.visibility = GONE
-//                                        aaChartView.visibility = GONE
-//                                        errorTextView.visibility = VISIBLE
-//                                        errorTextView.text = getString(R.string.graphNoDataMessage)
-//                                    }
-//                                }
-//                                .addOnFailureListener { _ ->
-//                                    loadingAnim.visibility = GONE
-//                                    aaChartView.visibility = GONE
-//                                    errorTextView.visibility = VISIBLE
-//                                    errorTextView.text = getString(R.string.graphErrorMessage)
-//                                }
-//                        }
+                            docRef.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("monthly_12_available") == true) {
+                                        docRef.collection("monthly_data")
+                                            .orderBy("interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                val selectedMonth = monthSpinner.selectedItem.toString()
+                                                for (document in documents) {
+                                                    if (selectedMonth == document.id.slice(0..2)) {
+                                                        monthlyLabel.add(document.data.getValue("interval").toString())
+                                                        monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                    }
+                                                }
+                                                if (monthlyData[0] < 0) {
+                                                    aaChartView.visibility = GONE
+                                                    errorTextView.visibility = VISIBLE
+                                                    errorTextView.text = getString(R.string.graphNoDataMessage)
+                                                } else {
+                                                    aaChartView.aa_drawChartWithChartModel(
+                                                        generateChart(
+                                                            monthlyLabel,
+                                                            monthlyData,
+                                                            getString(R.string.graphDailyTitle) + " (${selectedMonth})",
+                                                            getString(R.string.graphDailySubtitle) + " in $selectedMonth",
+                                                            targetBuildingForPro.replace("_", " ")
+                                                        )
+                                                    )
+                                                }
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
 
+                        monthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                                if (resolutionSelection == "monthly") {
+                                    resetData()
+                                    setButton(monthlyOption, dailyOption, weeklyOption, yearlyOption)
+                                    errorTextView.visibility = GONE
+                                    loadingAnim.visibility = VISIBLE
+
+                                    docRef.get()
+                                        .addOnSuccessListener { document ->
+                                            if (document.data?.get("monthly_12_available") == true) {
+                                                docRef.collection("monthly_data")
+                                                    .orderBy("interval")
+                                                    .get()
+                                                    .addOnSuccessListener { documents ->
+                                                        loadingAnim.visibility = GONE
+                                                        aaChartView.visibility = VISIBLE
+                                                        val selectedMonth = monthSpinner.selectedItem.toString()
+                                                        for (document in documents) {
+                                                            if (selectedMonth == document.id.slice(0..2)) {
+                                                                monthlyLabel.add(document.data.getValue("interval").toString())
+                                                                monthlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                            }
+                                                        }
+                                                        if (monthlyData[0] < 0) {
+                                                            aaChartView.visibility = GONE
+                                                            errorTextView.visibility = VISIBLE
+                                                            errorTextView.text = getString(R.string.graphNoDataMessage)
+                                                        } else {
+                                                            aaChartView.aa_drawChartWithChartModel(
+                                                                generateChart(
+                                                                    monthlyLabel,
+                                                                    monthlyData,
+                                                                    getString(R.string.graphDailyTitle) + " (${selectedMonth})",
+                                                                    getString(R.string.graphDailySubtitle) + " in $selectedMonth",
+                                                                    targetBuildingForPro.replace("_", " ")
+                                                                )
+                                                            )
+                                                        }
+                                                    }
+                                            } else {
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = GONE
+                                                errorTextView.visibility = VISIBLE
+                                                errorTextView.text = getString(R.string.graphNoDataMessage)
+                                            }
+                                        }
+                                        .addOnFailureListener { _ ->
+                                            loadingAnim.visibility = GONE
+                                            aaChartView.visibility = GONE
+                                            errorTextView.visibility = VISIBLE
+                                            errorTextView.text = getString(R.string.graphErrorMessage)
+                                        }
+                                }
+                            }
+
+                            override fun onNothingSelected(parent: AdapterView<*>) { }
+                        }
+
+                        yearlyOption.setOnClickListener {
+                            resolutionSelection = "yearly"
+                            resetData()
+                            setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption)
+                            errorTextView.visibility = GONE
+                            loadingAnim.visibility = VISIBLE
+
+                            docRef.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data?.get("yearly_available") == true) {
+                                        docRef.collection("yearly_data")
+                                            .orderBy("interval")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = VISIBLE
+                                                val selectedYear = yearSpinner.selectedItem.toString()
+                                                for (document in documents) {
+                                                    if (selectedYear == document.id.slice(0..3)) {
+                                                        yearlyLabel.add(document.data.getValue("interval").toString())
+                                                        yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                    }
+                                                }
+                                                aaChartView.aa_drawChartWithChartModel(
+                                                    generateChart(
+                                                        yearlyLabel,
+                                                        yearlyData,
+                                                        getString(R.string.graphDailyTitle) + " (${selectedYear})",
+                                                        getString(R.string.graphDailySubtitle) + " in $selectedYear",
+                                                        targetBuildingForPro.replace("_", " ")
+                                                    )
+                                                )
+                                            }
+                                    } else {
+                                        loadingAnim.visibility = GONE
+                                        aaChartView.visibility = GONE
+                                        errorTextView.visibility = VISIBLE
+                                        errorTextView.text = getString(R.string.graphNoDataMessage)
+                                    }
+                                }
+                                .addOnFailureListener { _ ->
+                                    loadingAnim.visibility = GONE
+                                    aaChartView.visibility = GONE
+                                    errorTextView.visibility = VISIBLE
+                                    errorTextView.text = getString(R.string.graphErrorMessage)
+                                }
+                        }
+
+                        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                                if (resolutionSelection == "yearly") {
+                                    resetData()
+                                    setButton(yearlyOption, dailyOption, weeklyOption, monthlyOption)
+                                    errorTextView.visibility = GONE
+                                    loadingAnim.visibility = VISIBLE
+
+                                    docRef.get()
+                                        .addOnSuccessListener { document ->
+                                            if (document.data?.get("yearly_available") == true) {
+                                                docRef.collection("yearly_data")
+                                                    .orderBy("interval")
+                                                    .get()
+                                                    .addOnSuccessListener { documents ->
+                                                        loadingAnim.visibility = GONE
+                                                        aaChartView.visibility = VISIBLE
+                                                        val selectedYear = yearSpinner.selectedItem.toString()
+                                                        for (document in documents) {
+                                                            if (selectedYear == document.id.slice(0..3)) {
+                                                                yearlyLabel.add(document.data.getValue("interval").toString())
+                                                                yearlyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
+                                                            }
+                                                        }
+                                                        aaChartView.aa_drawChartWithChartModel(
+                                                            generateChart(
+                                                                yearlyLabel,
+                                                                yearlyData,
+                                                                getString(R.string.graphDailyTitle) + " (${selectedYear})",
+                                                                getString(R.string.graphDailySubtitle) + " in $selectedYear",
+                                                                targetBuildingForPro.replace("_", " ")
+                                                            )
+                                                        )
+                                                    }
+                                            } else {
+                                                loadingAnim.visibility = GONE
+                                                aaChartView.visibility = GONE
+                                                errorTextView.visibility = VISIBLE
+                                                errorTextView.text = getString(R.string.graphNoDataMessage)
+                                            }
+                                        }
+                                        .addOnFailureListener { _ ->
+                                            loadingAnim.visibility = GONE
+                                            aaChartView.visibility = GONE
+                                            errorTextView.visibility = VISIBLE
+                                            errorTextView.text = getString(R.string.graphErrorMessage)
+                                        }
+                                }
+                            }
+
+                            override fun onNothingSelected(parent: AdapterView<*>) { }
+                        }
+
+//                        val example_results = db.collection("example_result").document("Results")
 //                        totalOption.setOnClickListener {
 //                            resetData()
 //                            setButton(totalOption, dailyOption, weeklyOption, monthlyOption, yearlyOption)
@@ -380,7 +567,6 @@ class GraphFragment : Fragment() {
 //                        }
 
                         // initialization for graph of daily and need more!!!!!!!
-                        val docRef = db.collection(targetBuildingForPro).document("Results")
                         docRef.get()
                             .addOnSuccessListener { document ->
                                 if (document.data?.get("daily_available") == true) {
@@ -391,13 +577,11 @@ class GraphFragment : Fragment() {
                                             loadingAnim.visibility = GONE
                                             aaChartView.visibility = VISIBLE
                                             for (document in documents) {
-//                                Log.d("data!!!!!!!", "${document.id} => " +
-//                                        "${document.data.getValue("occupancy")} and " +
-//                                        "${document.data.getValue("time_interval")}")
+//                                                Log.d("data!!!!!!!", "${document.id} => " + "${document.data.getValue("occupancy")} and " + "${document.data.getValue("time_interval")}")
                                                 dailyLabel.add(document.data.getValue("interval").toString())
                                                 dailyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                             }
-//                            Log.d("data!!!!!!!", "$dailyData and $dailyLabel")
+//                                            Log.d("data!!!!!!!", "$dailyData and $dailyLabel")
                                             aaChartView.aa_drawChartWithChartModel(
                                                 generateChart(
                                                     dailyLabel,
@@ -487,7 +671,7 @@ class GraphFragment : Fragment() {
         buildingName: String
     ): AAChartModel {
         var inputColor = arrayOf<Any>("#fe117c")
-        val inputArray = if (withStandardOrNotCheckBox.isChecked) {
+        val inputArray = if (withStandardOrNotCheckBox.isChecked && data.size == 24) {
             inputColor = arrayOf("#fe117c", "#06caf4")
             arrayOf(
                 AASeriesElement()
@@ -495,9 +679,22 @@ class GraphFragment : Fragment() {
                     .data(data.toTypedArray()),
                 AASeriesElement()
                     .name("EN 16798-1:2019")
-                    .data(standardOccupancy.toTypedArray())
+                    .data(standardOccupancyWeekday.toTypedArray())
             )
-        } else {
+        } else if (withStandardOrNotCheckBox.isChecked && data.size >= 24) {
+            inputColor = arrayOf("#fe117c", "#06caf4")
+            val standardOccupancyInput: MutableList<Float> = mutableListOf()
+            for (i in 0..4) { standardOccupancyInput.addAll(standardOccupancyWeekday) }
+            for (i in 0..1) { standardOccupancyInput.addAll(standardOccupancyWeekend) }
+            arrayOf(
+                AASeriesElement()
+                    .name(buildingName)
+                    .data(data.toTypedArray()),
+                AASeriesElement()
+                    .name("EN 16798-1:2019")
+                    .data(standardOccupancyInput.toTypedArray())
+            )
+        }else {
             arrayOf(
                 AASeriesElement()
                     .name(buildingName)
@@ -519,13 +716,31 @@ class GraphFragment : Fragment() {
         return aaChartModel
     }
 
+//    @RequiresApi(Build.VERSION_CODES.M)
+//    @SuppressLint("UseCompatLoadingForDrawables")
+//    private fun setButton(selectedButton: TextView, nonSelectedButton: TextView) {
+//        selectedButton.background = resources.getDrawable(R.drawable.switch_trcks,null)
+//        selectedButton.setTextColor(resources.getColor(R.color.textColor,null))
+//        nonSelectedButton.background = null
+//        nonSelectedButton.setTextColor(resources.getColor(R.color.light_blue_900,null))
+//    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setButton(selectedButton: TextView, nonSelectedButton: TextView) {
+    private fun setButton(
+        selectedButton: TextView,
+        nonSelectedButton1: TextView,
+        nonSelectedButton2: TextView,
+        nonSelectedButton3: TextView,
+    ) {
         selectedButton.background = resources.getDrawable(R.drawable.switch_trcks,null)
         selectedButton.setTextColor(resources.getColor(R.color.textColor,null))
-        nonSelectedButton.background = null
-        nonSelectedButton.setTextColor(resources.getColor(R.color.light_blue_900,null))
+        nonSelectedButton1.background = null
+        nonSelectedButton1.setTextColor(resources.getColor(R.color.light_blue_900,null))
+        nonSelectedButton2.background = null
+        nonSelectedButton2.setTextColor(resources.getColor(R.color.light_blue_900,null))
+        nonSelectedButton3.background = null
+        nonSelectedButton3.setTextColor(resources.getColor(R.color.light_blue_900,null))
     }
 
 //    @RequiresApi(Build.VERSION_CODES.M)

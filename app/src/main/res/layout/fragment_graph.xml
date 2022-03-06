@@ -64,87 +64,153 @@
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintGuide_percent="0.9"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline8">
+            app:layout_constraintTop_toTopOf="@+id/guideline8">
 
-            <TextView
-                android:id="@+id/dailyOption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/graphOptionDaily"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:background="@drawable/switch_trcks"
-                android:textStyle="bold|normal"
-                android:textColor="@color/textColor"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-            <TextView
-                android:id="@+id/weeklyOption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/dailyOption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/switch_trcks"
+                    android:gravity="center"
+                    android:text="@string/graphOptionDaily"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold|normal"
+                    android:textSize="12sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:id="@+id/weeklyOption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/graphOptionWeekly"
+                    android:textColor="@color/light_blue_900"
+                    android:textStyle="bold|normal"
+                    android:textSize="12sp"/>
+
+                <CheckBox
+                    android:id="@+id/withStandardOrNotCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Standard"
+                    tools:ignore="HardcodedText"
+                    android:textSize="12sp"/>
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/monthlyOption"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="@string/graphOptionMonthly"-->
+                <!--                android:gravity="center"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                android:textColor="@color/light_blue_900"-->
+                <!--                android:textStyle="bold|normal"/>-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/yearlyOption"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="@string/graphOptionYearly"-->
+                <!--                android:gravity="center"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                android:textColor="@color/light_blue_900"-->
+                <!--                android:textStyle="bold|normal"/>-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/totalOption"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="@string/graphOptionTotal"-->
+                <!--                android:gravity="center"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                android:textColor="@color/light_blue_900"-->
+                <!--                android:textStyle="bold|normal"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/graphOptionWeekly"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="@color/light_blue_900"
-                android:textStyle="bold|normal"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"/>
+                android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/withStandardOrNotCheckBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Standard"
-                android:layout_gravity="center"
-                tools:ignore="HardcodedText" />
+                <TextView
+                    android:id="@+id/monthlyOption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/graphOptionMonthly"
+                    android:textColor="@color/light_blue_900"
+                    android:textStyle="bold|normal"
+                    tools:ignore="NestedWeights"
+                    android:textSize="12sp"
+                    android:layout_marginStart="5dp"/>
 
-<!--            <TextView-->
-<!--                android:id="@+id/monthlyOption"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/graphOptionMonthly"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:textColor="@color/light_blue_900"-->
-<!--                android:textStyle="bold|normal"/>-->
+                <Spinner
+                    android:id="@+id/monthSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/yearlyOption"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/graphOptionYearly"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:textColor="@color/light_blue_900"-->
-<!--                android:textStyle="bold|normal"/>-->
+                <TextView
+                    android:id="@+id/yearlyOption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/graphOptionYearly"
+                    android:textColor="@color/light_blue_900"
+                    android:textStyle="bold|normal"
+                    android:textSize="12sp" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/totalOption"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/graphOptionTotal"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:textColor="@color/light_blue_900"-->
-<!--                android:textStyle="bold|normal"/>-->
+                <Spinner
+                    android:id="@+id/yearSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

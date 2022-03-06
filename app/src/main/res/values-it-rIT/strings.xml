@@ -441,4 +441,20 @@
     <string name="shared_code_description">È possibile contattare il responsabile dell\'edificio o il personale correlato dell\'edificio di destinazione per recuperare il codice condiviso per scaricare la configurazione comune per avviare il servizio.</string>
     <string name="no_match_shared_code_msg">Non c\'è corrispondenza o il tuo codice è sbagliato.</string>
     <string name="finish_download_conf_msg">Hai scaricato correttamente la configurazione e puoi avviare il servizio o effettuare il check-in/out in questo momento.</string>
+    <string name="graphWeeklyTitle">Occupazione settimanale</string>
+    <string name="graphWeeklySubtitle">Valore medio per ogni ora durante l\'intera settimana</string>
+    <string-array name="monthList">
+        <item>Gen</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>Mag</item>
+        <item>Jun</item>
+        <item>Lug</item>
+        <item>Ago</item>
+        <item>Set</item>
+        <item>Ott</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
 </resources>
