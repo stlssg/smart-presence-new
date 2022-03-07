@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         tools:ignore="UselessParent">
 
         <LinearLayout
@@ -446,7 +446,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:text="@string/setting_language"
                     android:textSize="15sp"
                     android:gravity="center_vertical"
@@ -459,8 +459,94 @@
                     android:id="@+id/languageSpinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="35dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_flaky_24"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="@string/setting_sensitivity_title"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlSymmetry"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/light_blue_600"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:minHeight="35dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+                <Switch
+                    android:id="@+id/sensitivityHighOrLow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml"
+                    android:text="@string/low_s"
+                    android:textColor="@color/black"
+                    android:textAlignment="viewStart"
+                    android:paddingStart="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="5dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:paddingStart="10dp"
+                    android:text="@string/setting_sensitivity_description"
+                    tools:ignore="RtlSymmetry,SmallSp"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_overlay"/>
 
             </LinearLayout>
 

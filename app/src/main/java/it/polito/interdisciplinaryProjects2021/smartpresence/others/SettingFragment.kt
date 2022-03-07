@@ -189,6 +189,7 @@ class SettingFragment : Fragment() {
                 putString("professionalAccessGranted", "false")
                 putString("targetBuildingForPro", "nothing")
                 putString("sharedCode", "nothing")
+                putString("sensitivityOnOrOff", "on")
                 commit()
             }
             signOutCondition = true
@@ -340,6 +341,32 @@ class SettingFragment : Fragment() {
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>) { }
+        }
+
+        val sensitivityHighOrLow = view.findViewById<Switch>(R.id.sensitivityHighOrLow)
+        val sensitivityOnOrOff = sharedPreferences.getString("sensitivityOnOrOff", "on")
+        if (sensitivityOnOrOff == "on") {
+            sensitivityHighOrLow.isChecked = true
+            sensitivityHighOrLow.text = getString(R.string.high_s)
+        } else {
+            sensitivityHighOrLow.isChecked = false
+            sensitivityHighOrLow.text = getString(R.string.low_s)
+        }
+
+        sensitivityHighOrLow?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                sensitivityHighOrLow.text = getString(R.string.high_s)
+                with(sharedPreferences.edit()) {
+                    putString( "sensitivityOnOrOff", "on")
+                    commit()
+                }
+            } else {
+                sensitivityHighOrLow.text = getString(R.string.low_s)
+                with(sharedPreferences.edit()) {
+                    putString( "sensitivityOnOrOff", "off")
+                    commit()
+                }
+            }
         }
     }
 

@@ -231,6 +231,7 @@ class PresenceDetectionFragment : Fragment() {
                         sound.play(MediaActionSound.START_VIDEO_RECORDING)
 
                         val db = Firebase.firestore
+                        val sensitivityOnOrOff = sharedPreferences.getString("sensitivityOnOrOff", "on")
 
                         val inputBuildingInfo = hashMapOf(
                             "Address" to address,
@@ -238,7 +239,13 @@ class PresenceDetectionFragment : Fragment() {
                             "latitude" to latitude.toString(),
                             "longitude" to longitude.toString()
                         )
-                        val inputUserInfo = hashMapOf("UserName" to user, "startTime" to startTimestamp, "stopTime" to endTimestamp, "working_interval" to workingInterval)
+                        val inputUserInfo = hashMapOf(
+                            "UserName" to user,
+                            "startTime" to startTimestamp,
+                            "stopTime" to endTimestamp,
+                            "working_interval" to workingInterval,
+                            "sensitivity" to sensitivityOnOrOff
+                        )
                         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
                         db.collection(address).document(user!!).set(inputUserInfo, SetOptions.merge())
                         db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
@@ -631,7 +638,14 @@ class PresenceDetectionFragment : Fragment() {
     ) {
         val db = Firebase.firestore
         val inputBuildingInfo = hashMapOf("Address" to address, "SSID" to ssid, "BSSID" to bssid, "Maximum_expected_number" to maxOccupancy)
-        val inputUserInfo = hashMapOf("UserName" to user, "startTime" to start_timestamp, "stopTime" to end_timestamp, "working_interval" to working_interval)
+        val sensitivityOnOrOff = sharedPreferences.getString("sensitivityOnOrOff", "on")
+        val inputUserInfo = hashMapOf(
+            "UserName" to user,
+            "startTime" to start_timestamp,
+            "stopTime" to end_timestamp,
+            "working_interval" to working_interval,
+            "sensitivity" to sensitivityOnOrOff
+        )
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())
         db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())

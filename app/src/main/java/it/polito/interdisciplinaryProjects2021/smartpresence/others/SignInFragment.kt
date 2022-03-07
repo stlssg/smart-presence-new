@@ -334,6 +334,7 @@ class SignInFragment : Fragment() {
             putString("professionalAccessGranted", "false")
             putString("targetBuildingForPro", "nothing")
             putString("sharedCode", "nothing")
+            putString("sensitivityOnOrOff", "on")
             commit()
         }
     }
