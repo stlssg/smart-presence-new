@@ -165,7 +165,7 @@ class ProActionFragment : Fragment() {
                         occupantsEmailsList.add(doc.id)
                     }
                     if (occupantsEmailsList.size == 0) {
-                        occupantsEmailsList.add(getString(R.string.no_building_for_list_message))
+                        occupantsEmailsList.add(getString(R.string.no_occupants_for_list_msg))
                     }
                     buildingOccupantsEmailRecyclerView.layoutManager = LinearLayoutManager(requireContext())
                     val navController = Navigation.findNavController(requireView())

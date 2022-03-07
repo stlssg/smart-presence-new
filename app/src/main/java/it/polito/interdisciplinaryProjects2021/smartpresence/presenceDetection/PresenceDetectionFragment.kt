@@ -244,7 +244,8 @@ class PresenceDetectionFragment : Fragment() {
                             "startTime" to startTimestamp,
                             "stopTime" to endTimestamp,
                             "working_interval" to workingInterval,
-                            "sensitivity" to sensitivityOnOrOff
+                            "sensitivity" to sensitivityOnOrOff,
+                            "serviceStatus" to "working"
                         )
                         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
                         db.collection(address).document(user!!).set(inputUserInfo, SetOptions.merge())
@@ -288,6 +289,9 @@ class PresenceDetectionFragment : Fragment() {
                     }
                 }
             }
+
+            val db = Firebase.firestore
+            db.collection(address!!).document(user!!).set(hashMapOf("serviceStatus" to "stopped"), SetOptions.merge())
         }
 
         restartButton.setOnClickListener{
@@ -644,7 +648,8 @@ class PresenceDetectionFragment : Fragment() {
             "startTime" to start_timestamp,
             "stopTime" to end_timestamp,
             "working_interval" to working_interval,
-            "sensitivity" to sensitivityOnOrOff
+            "sensitivity" to sensitivityOnOrOff,
+            "serviceStatus" to "working"
         )
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())

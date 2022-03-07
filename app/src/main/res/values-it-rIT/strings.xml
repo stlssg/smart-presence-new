@@ -461,4 +461,5 @@
     <string name="high_s">Alta sensibilità</string>
     <string name="low_s">Bassa sensibilità</string>
     <string name="setting_sensitivity_description">È difficile distinguere la durata di circa 1 ora sia per lo stato dormiente che per l\'uscita. Si prega di fare riferimento all\'alta sensibilità se la frequenza di uscita per circa 1 ora è molto inferiore alla frequenza del dispositivo in modalità di sospensione. Questo è molto importante per determinare la tua occupazione.Questo è molto importante per determinare la tua occupazione.</string>
+    <string name="no_occupants_for_list_msg">Nessun occupante è disponibile</string>
 </resources>

@@ -393,4 +393,5 @@
     <string name="high_s">高灵敏度</string>
     <string name="low_s">低灵敏度</string>
     <string name="setting_sensitivity_description">无论是休眠状态还是外出，都很难区分持续时间约为 1 小时。 如果您外出仅 1 小时左右的频率远低于您的设备处于睡眠模式的频率，请参考高灵敏度。这对于确定您的占有率非常重要。</string>
+    <string name="no_occupants_for_list_msg">没有信息可用</string>
 </resources>

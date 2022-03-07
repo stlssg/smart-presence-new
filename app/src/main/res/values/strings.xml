@@ -455,4 +455,5 @@
     <string name="high_s">High sensitivity</string>
     <string name="low_s">Low sensitivity</string>
     <string name="setting_sensitivity_description">It\'s hard to distinguish the duration around 1 hour either for dormant state or going out. Please refer to high sensitivity if the frequency of you going out for just around 1 hour is much less than the frequency of your device being in sleeping mode. This is very crucial for determining your occupancy.</string>
+    <string name="no_occupants_for_list_msg">No occupant is available</string>
 </resources>
