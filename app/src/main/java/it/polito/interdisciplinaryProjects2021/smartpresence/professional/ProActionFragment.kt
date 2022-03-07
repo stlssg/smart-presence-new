@@ -562,8 +562,10 @@ class BuildingOccupantEmailCardAdapter (
                 TransitionManager.beginDelayedTransition(parentCardView, AutoTransition())
                 if (holder.occupantDetailLayout.visibility == View.VISIBLE) {
                     holder.occupantDetailLayout.visibility = View.GONE
+                    holder.occupantEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24)
                 } else {
                     holder.occupantDetailLayout.visibility = View.VISIBLE
+                    holder.occupantEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
                 }
             }
         }

@@ -23,8 +23,8 @@
         android:id="@+id/proInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        android:padding="3dp">
+        android:padding="3dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,8 +63,8 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/browser_actions_bg_grey"
                         app:cardCornerRadius="10dp"
@@ -185,8 +185,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:paddingHorizontal="5dp"
                         android:gravity="center_vertical"
+                        android:paddingHorizontal="5dp"
                         android:paddingTop="5dp"
                         android:text="@string/pro_action_info_statistics_title"
                         android:textColor="@color/purple_700"
@@ -201,8 +201,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/browser_actions_bg_grey"
                         android:clickable="false"
                         android:focusable="false"
@@ -278,10 +278,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
+                                android:padding="5dp"
                                 android:text="@string/pro_action_info_avg_selected"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:padding="5dp"/>
+                                android:textSize="14sp" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -408,16 +408,16 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -427,25 +427,25 @@
                         <TextView
                             android:id="@+id/buildingOccupantsEmailTitle"
                             android:layout_width="0dp"
-                            android:layout_weight="10"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingHorizontal="5dp"
+                            android:layout_weight="10"
                             android:gravity="center_vertical"
+                            android:paddingHorizontal="5dp"
                             android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="Building Occupants Emails:"
                             android:textColor="@color/purple_700"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            android:paddingBottom="5dp"
                             tools:ignore="HardcodedText" />
 
                         <ImageView
                             android:id="@+id/buildingOccupantsEmailArrow"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                             tools:ignore="ContentDescription" />
 
@@ -458,10 +458,10 @@
                         android:layout_marginEnd="10dp"
                         android:gravity="end"
                         android:text="Green label means user service is working, red means stopped."
-                        android:textSize="10sp"
-                        tools:ignore="HardcodedText,SmallSp"
                         android:textColor="@color/black_overlay"
-                        android:visibility="gone"/>
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        tools:ignore="HardcodedText,SmallSp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/buildingOccupantsEmailRecyclerView"
@@ -469,7 +469,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginBottom="5dp"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -481,11 +481,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/pro_action_description_at_end"
                 android:textColor="@color/black_overlay"
-                android:textSize="12sp"
-                android:layout_marginBottom="20dp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 
