@@ -11,10 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
@@ -108,6 +105,7 @@ class ProActionFragment : Fragment() {
             val selectedHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.selectedHourlyOccupancyBar)
             val allHourlyOccupancyBar = view.findViewById<CircularProgressBar>(R.id.allHourlyOccupancyBar)
             val buildingOccupantsEmailTitle = view.findViewById<TextView>(R.id.buildingOccupantsEmailTitle)
+            val emailLabelDescription = view.findViewById<TextView>(R.id.emailLabelDescription)
 
             when (languageSpinnerPosition) {
                 1 -> {
@@ -119,6 +117,7 @@ class ProActionFragment : Fragment() {
                     buildingOccupantsEmailTitle.text = "Email degli occupanti dell'edificio:"
                     stringMax = "max"
                     stringCurrentOccupants = "Numero attuale di occupanti nell'edificio di destinazione"
+                    emailLabelDescription.text = "L'etichetta verde indica che il servizio utente funziona, il rosso indica che è stato interrotto."
                 }
                 2 -> {
                     avgOccupancySelectedTitle.text = "平均每小时占用率（选定时间）:"
@@ -129,6 +128,7 @@ class ProActionFragment : Fragment() {
                     buildingOccupantsEmailTitle.text = "建筑住户电子邮件："
                     stringMax = "最大"
                     stringCurrentOccupants = "目标建筑中的当前居住人数"
+                    emailLabelDescription.text = "绿色标签表示用户服务正在运行，红色表示已停止。"
                 }
                 else -> {
                     avgOccupancySelectedTitle.text = "Average hourly occupancy (selected interval):"
@@ -139,6 +139,7 @@ class ProActionFragment : Fragment() {
                     buildingOccupantsEmailTitle.text = "Building Occupants Emails:"
                     stringMax = "max"
                     stringCurrentOccupants = "Current number of occupants in target building"
+                    emailLabelDescription.text = "Green label means user service is working, red means stopped."
                 }
             }
 
@@ -149,9 +150,11 @@ class ProActionFragment : Fragment() {
                 TransitionManager.beginDelayedTransition(buildingOccupantsEmailCard, AutoTransition())
                 if (buildingOccupantsEmailRecyclerView.visibility == View.VISIBLE) {
                     buildingOccupantsEmailRecyclerView.visibility = View.GONE
+                    emailLabelDescription.visibility = View.GONE
                     buildingOccupantsEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24)
                 } else {
                     buildingOccupantsEmailRecyclerView.visibility = View.VISIBLE
+                    emailLabelDescription.visibility = View.VISIBLE
                     buildingOccupantsEmailArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
                 }
             }
@@ -160,16 +163,48 @@ class ProActionFragment : Fragment() {
                 .whereEqualTo("targetBuilding", targetBuildingForPro)
                 .get()
                 .addOnSuccessListener { documents ->
-                    val occupantsEmailsList = arrayListOf<String>()
+                    val occupantsList = arrayListOf<OccupantDetails>()
                     for (doc in documents) {
-                        occupantsEmailsList.add(doc.id)
+                        val occupantEmailInput = doc.id
+                        val lastDetectionTimestampInput =
+                            if (doc.data["newestAction"] == null) { notAvailableString } else { (doc.data["newestAction"] as Map<*, *>)["timestamp"].toString() }
+                        val lastDetectionPresenceConditionInput =
+                            if (doc.data["newestAction"] == null) { notAvailableString } else { (doc.data["newestAction"] as Map<*, *>)["presence"].toString() }
+                        val numDiscardedInput =
+                            if (doc.data["discardedNum"] == null) { notAvailableString } else { doc.data.getValue("discardedNum").toString() }
+                        val serviceStatusInput =
+                            if (doc.data["serviceStatus"] == null) { notAvailableString } else { doc.data.getValue("serviceStatus").toString() }
+                        val startTimeInput =
+                            if (doc.data["startTime"] == null) { notAvailableString } else { doc.data.getValue("startTime").toString() }
+                        val stopTimeInput =
+                            if (doc.data["stopTime"] == null) { notAvailableString } else { doc.data.getValue("stopTime").toString() }
+                        val workIntervalInput =
+                            if (doc.data["working_interval"] == null) { notAvailableString } else { doc.data.getValue("working_interval").toString() }
+
+                        val occupantDetails = OccupantDetails(
+                            occupantEmailInput,
+                            serviceStatusInput,
+                            lastDetectionTimestampInput,
+                            lastDetectionPresenceConditionInput,
+                            startTimeInput,
+                            stopTimeInput,
+                            workIntervalInput,
+                            numDiscardedInput
+                        )
+
+                        occupantsList.add(occupantDetails)
                     }
-                    if (occupantsEmailsList.size == 0) {
-                        occupantsEmailsList.add(getString(R.string.no_occupants_for_list_msg))
-                    }
+
+                    if (occupantsList.size == 0) { occupantsList.add(OccupantDetails(getString(R.string.no_occupants_for_list_msg))) }
                     buildingOccupantsEmailRecyclerView.layoutManager = LinearLayoutManager(requireContext())
                     val navController = Navigation.findNavController(requireView())
-                    val rvAdapter = BuildingOccupantEmailCardAdapter(navController, occupantsEmailsList, requireContext())
+                    val rvAdapter = BuildingOccupantEmailCardAdapter(
+                        navController,
+                        occupantsList,
+                        requireContext(),
+                        getString(R.string.no_occupants_for_list_msg),
+                        buildingOccupantsEmailCard
+                    )
                     buildingOccupantsEmailRecyclerView.adapter = rvAdapter
                 }
 
@@ -467,13 +502,25 @@ class ProActionFragment : Fragment() {
 
 class BuildingOccupantEmailCardAdapter (
     private val navController: NavController,
-    private val occupantsEmailsList: ArrayList<String>,
+    private val occupantsList: ArrayList<OccupantDetails>,
     val context: Context,
+    private val noOccupantMsg: String,
+    private val parentCardView: MaterialCardView
 ): RecyclerView.Adapter<BuildingOccupantEmailCardAdapter.BuildingOccupantEmailCardViewHolder>() {
     class BuildingOccupantEmailCardViewHolder(v: View): RecyclerView.ViewHolder(v) {
+        val singleOccupantCard: MaterialCardView = v.findViewById(R.id.singleOccupantCard)
         val singleOccupantId: TextView = v.findViewById(R.id.singleOccupantId)
         val singleOccupantEmail: TextView = v.findViewById(R.id.singleOccupantEmail)
         val singleOccupantSendEmailBtn: ImageButton = v.findViewById(R.id.singleOccupantSendEmailBtn)
+        val occupantEmailArrow: ImageView = v.findViewById(R.id.occupantEmailArrow)
+        val occupantDetailLayout: LinearLayout = v.findViewById(R.id.occupantDetailLayout)
+        val occupantServiceStatusContent: TextView = v.findViewById(R.id.occupantServiceStatusContent)
+        val occupantTimestampContent: TextView = v.findViewById(R.id.occupantTimestampContent)
+        val occupantPresenceConditionContent: TextView = v.findViewById(R.id.occupantPresenceConditionContent)
+        val occupantStartTimeContent: TextView = v.findViewById(R.id.occupantStartTimeContent)
+        val occupantStopTimeContent: TextView = v.findViewById(R.id.occupantStopTimeContent)
+        val occupantTimeIntervalContent: TextView = v.findViewById(R.id.occupantTimeIntervalContent)
+        val occupantDiscardedNumContent: TextView = v.findViewById(R.id.occupantDiscardedNumContent)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuildingOccupantEmailCardViewHolder {
@@ -484,15 +531,66 @@ class BuildingOccupantEmailCardAdapter (
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BuildingOccupantEmailCardViewHolder, position: Int) {
         holder.singleOccupantId.text = (position + 1).toString()
-        holder.singleOccupantEmail.text = occupantsEmailsList[position]
+        holder.singleOccupantEmail.text = occupantsList[position].occupantEmail
+        holder.occupantServiceStatusContent.text = occupantsList[position].serviceStatus
+        holder.occupantTimestampContent.text = occupantsList[position].lastDetectionTimestamp
+        holder.occupantPresenceConditionContent.text = occupantsList[position].lastDetectionPresenceCondition
+        holder.occupantStartTimeContent.text = occupantsList[position].startTime
+        holder.occupantStopTimeContent.text = occupantsList[position].stopTime
+        holder.occupantTimeIntervalContent.text = occupantsList[position].workInterval
+        holder.occupantDiscardedNumContent.text = occupantsList[position].numDiscarded
+
+        if (holder.occupantServiceStatusContent.text == "working") {
+            holder.singleOccupantId.setTextColor(Color.parseColor("#33cc5a"))
+        } else {
+            holder.singleOccupantId.setTextColor(Color.parseColor("#ff0016"))
+        }
 
         holder.singleOccupantSendEmailBtn.setOnClickListener {
             val action = ProfessionalFragmentDirections.actionNavChartToSendEmailFragment(targetEmail = holder.singleOccupantEmail.text as String)
             navController.navigate(action)
         }
+
+        if (holder.singleOccupantEmail.text == noOccupantMsg) {
+            holder.singleOccupantId.text = ""
+            holder.singleOccupantSendEmailBtn.visibility = View.GONE
+            holder.occupantEmailArrow.visibility = View.GONE
+        }
+
+        holder.singleOccupantCard.setOnClickListener {
+            if (holder.singleOccupantEmail.text != noOccupantMsg) {
+                TransitionManager.beginDelayedTransition(parentCardView, AutoTransition())
+                if (holder.occupantDetailLayout.visibility == View.VISIBLE) {
+                    holder.occupantDetailLayout.visibility = View.GONE
+                } else {
+                    holder.occupantDetailLayout.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return occupantsEmailsList.size
+        return occupantsList.size
     }
+}
+
+data class OccupantDetails(
+    var occupantEmailInput: String,
+    var serviceStatusInput: String = "",
+    var lastDetectionTimestampInput: String = "",
+    var lastDetectionPresenceConditionInput: String = "",
+    var startTimeInput: String = "",
+    var stopTimeInput: String = "",
+    var workIntervalInput : String = "",
+    var numDiscardedInput: String = ""
+) {
+    var occupantEmail: String = occupantEmailInput
+    var serviceStatus: String = serviceStatusInput
+    var lastDetectionTimestamp: String = lastDetectionTimestampInput
+    var lastDetectionPresenceCondition: String = lastDetectionPresenceConditionInput
+    var startTime: String = startTimeInput
+    var stopTime: String = stopTimeInput
+    var workInterval : String = workIntervalInput
+    var numDiscarded: String = numDiscardedInput
+    var id: String = ""
 }

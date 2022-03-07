@@ -250,6 +250,13 @@ class PresenceDetectionFragment : Fragment() {
                         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
                         db.collection(address).document(user!!).set(inputUserInfo, SetOptions.merge())
                         db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
+                        db.collection("RegisteredUser").document(user).set(hashMapOf(
+                            "startTime" to startTimestamp,
+                            "stopTime" to endTimestamp,
+                            "working_interval" to workingInterval,
+                            "sensitivity" to sensitivityOnOrOff,
+                            "serviceStatus" to "working"
+                        ), SetOptions.merge())
 
                         if (energySavingMode == "on") {
                             createAndStartGeofence(latitude, longitude, radius, pendingIntent)
@@ -292,6 +299,7 @@ class PresenceDetectionFragment : Fragment() {
 
             val db = Firebase.firestore
             db.collection(address!!).document(user!!).set(hashMapOf("serviceStatus" to "stopped"), SetOptions.merge())
+            db.collection("RegisteredUser").document(user).set(hashMapOf("serviceStatus" to "stopped"), SetOptions.merge())
         }
 
         restartButton.setOnClickListener{
@@ -654,6 +662,13 @@ class PresenceDetectionFragment : Fragment() {
         db.collection(address!!).document("Building_Information").set(inputBuildingInfo, SetOptions.merge())
         db.collection(address).document("$user").set(inputUserInfo, SetOptions.merge())
         db.collection("BuildingNameList").document(address).set(hashMapOf("BuildingName" to address), SetOptions.merge())
+        db.collection("RegisteredUser").document(user!!).set(hashMapOf(
+            "startTime" to start_timestamp,
+            "stopTime" to end_timestamp,
+            "working_interval" to working_interval,
+            "sensitivity" to sensitivityOnOrOff,
+            "serviceStatus" to "working"
+        ), SetOptions.merge())
     }
 
     private fun startMyPeriodicWorkForWiFiBasedMethod(

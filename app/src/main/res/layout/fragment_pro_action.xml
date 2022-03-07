@@ -23,7 +23,7 @@
         android:id="@+id/proInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:padding="3dp">
 
         <LinearLayout
@@ -450,6 +450,18 @@
                             tools:ignore="ContentDescription" />
 
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/emailLabelDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="end"
+                        android:text="Green label means user service is working, red means stopped."
+                        android:textSize="10sp"
+                        tools:ignore="HardcodedText,SmallSp"
+                        android:textColor="@color/black_overlay"
+                        android:visibility="gone"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/buildingOccupantsEmailRecyclerView"
