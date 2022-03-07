@@ -94,6 +94,21 @@ class GraphFragment : Fragment() {
         1f * 100
     )
 
+    private val monthListFixedString: MutableList<String> = mutableListOf(
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -323,7 +338,7 @@ class GraphFragment : Fragment() {
                                             .addOnSuccessListener { documents ->
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
-                                                val selectedMonth = monthSpinner.selectedItem.toString()
+                                                val selectedMonth = monthListFixedString[monthSpinner.selectedItemPosition]
                                                 for (document in documents) {
                                                     if (selectedMonth == document.id.slice(0..2)) {
                                                         monthlyLabel.add(document.data.getValue("interval").toString())
@@ -378,7 +393,7 @@ class GraphFragment : Fragment() {
                                                     .addOnSuccessListener { documents ->
                                                         loadingAnim.visibility = GONE
                                                         aaChartView.visibility = VISIBLE
-                                                        val selectedMonth = monthSpinner.selectedItem.toString()
+                                                        val selectedMonth = monthListFixedString[monthSpinner.selectedItemPosition]
                                                         for (document in documents) {
                                                             if (selectedMonth == document.id.slice(0..2)) {
                                                                 monthlyLabel.add(document.data.getValue("interval").toString())
