@@ -406,7 +406,7 @@ class ProActionFragment : Fragment() {
                         var numSelected = 0
                         for (document in documents) {
                             val tempValue = document.data.getValue("occupancy").toString()
-                            Log.d("tempValue!!!!", tempValue)
+//                            Log.d("tempValue!!!!", tempValue)
                             if (tempValue == "1.0") {
                                 dataAll += 1.0f
                             } else {

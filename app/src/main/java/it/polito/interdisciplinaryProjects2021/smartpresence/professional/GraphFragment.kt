@@ -294,7 +294,7 @@ class GraphFragment : Fragment() {
                                                 loadingAnim.visibility = GONE
                                                 aaChartView.visibility = VISIBLE
                                                 for (document in documents) {
-                                                    weeklyLabel.add(document.data.getValue("interval").toString())
+                                                    weeklyLabel.add(document.data.getValue("interval").toString().substring(2))
                                                     weeklyData.add(document.data.getValue("occupancy").toString().toFloat() * 100)
                                                 }
                                                 aaChartView.aa_drawChartWithChartModel(
