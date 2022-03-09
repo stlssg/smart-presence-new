@@ -29,6 +29,7 @@ import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -203,7 +204,7 @@ class PresenceDetectionFragment : Fragment() {
                         addressConfigurationFinished &&
                         maxOccupancyConfigurationFinished) {
                         buttonStatusWhenWorking(startButton, restartButton, stopButton)
-                        Toast.makeText(requireContext(), getString(R.string.startServiceMessage), Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), getString(R.string.startServiceMessage), Toast.LENGTH_SHORT).show()
                         with(sharedPreferences.edit()) {
                             putString("wifiCheckingStatus", "true")
                             apply()
@@ -213,6 +214,8 @@ class PresenceDetectionFragment : Fragment() {
 
                         startNotificationAndSubscribeTopic()
                         sound.play(MediaActionSound.START_VIDEO_RECORDING)
+
+                        popUpDialogueForStartService(requireContext())
                     } else {
                         Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
                     }
@@ -222,7 +225,7 @@ class PresenceDetectionFragment : Fragment() {
                         latitudeConfigurationFinished &&
                         longitudeConfigurationFinished) {
                         buttonStatusWhenWorking(startButton, restartButton, stopButton)
-                        Toast.makeText(requireContext(), getString(R.string.startServiceMessage), Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), getString(R.string.startServiceMessage), Toast.LENGTH_SHORT).show()
                         with(sharedPreferences.edit()) {
                             putString("positioningCheckingStatus", "true")
                             apply()
@@ -263,6 +266,8 @@ class PresenceDetectionFragment : Fragment() {
                         } else if (energySavingMode == "off") {
                             startPeriodicWorkForBackgroundLocationTracking(address, user, startTimestamp, endTimestamp, latitude, longitude, radius, workingInterval)
                         }
+
+                        popUpDialogueForStartService(requireContext())
                     } else {
                         Toast.makeText(requireContext(), getString(R.string.configurationNotFinishedMessage), Toast.LENGTH_SHORT).show()
                     }
@@ -996,6 +1001,16 @@ class PresenceDetectionFragment : Fragment() {
         val formatTime = DateTimeFormat.forPattern("HH:mm")
         date.text = now.toString(formatDate)
         time.text = now.toString(formatTime)
+    }
+
+    private fun popUpDialogueForStartService(context: Context){
+        MaterialAlertDialogBuilder(context)
+            .setTitle(getString(R.string.start_popUp_title))
+            .setMessage(getString(R.string.start_popUp_msg))
+            .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ ->
+                Toast.makeText(context, getString(R.string.startServiceMessage), Toast.LENGTH_SHORT).show()
+            }
+            .show()
     }
 
 }

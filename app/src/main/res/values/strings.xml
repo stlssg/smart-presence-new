@@ -465,4 +465,9 @@
     <string name="stop_time_title">Stop time per day:</string>
     <string name="work_interval_title">Service working interval:</string>
     <string name="discarded_num_title">Number of discarded periods:</string>
+    <string name="most_recommended">*Most recommended</string>
+    <string name="start_popUp_title">Reminding for settings</string>
+    <string name="start_popUp_msg">Please make sure you have disabled or changed all settings that may block background service, like battery optimization, background service permit, etc!!! Please make sure you have turned on the WiFi service and location service!!!</string>
+    <string name="address_remind_title">Reminding of address input</string>
+    <string name="address_remind_msg">If the address you selected turns out to be incorrect, it might be due to Geocoder in your device is not working. You can always choose to input manually but make sure it\'s exactly the same as other occupants!!!</string>
 </resources>

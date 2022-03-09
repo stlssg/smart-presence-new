@@ -38,6 +38,19 @@ class PositioningConfigurationFragment : Fragment() {
 
         sharedPreferences = requireContext().getSharedPreferences("AppSharedPreference", Context.MODE_PRIVATE)
 
+        if (sharedPreferences.getString("newAddressSaved", "false").toBoolean()) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.address_remind_title))
+                .setMessage(getString(R.string.address_remind_msg))
+                .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ ->
+                    with(sharedPreferences.edit()) {
+                        putString("newAddressSaved", "false")
+                        apply()
+                    }
+                }
+                .show()
+        }
+
         val professionalAccessGranted = sharedPreferences.getString("professionalAccessGranted", "false").toBoolean()
         val uploadConfPositioningFab = view.findViewById<FloatingActionButton>(R.id.uploadConfPositioningFab)
         if (professionalAccessGranted) {

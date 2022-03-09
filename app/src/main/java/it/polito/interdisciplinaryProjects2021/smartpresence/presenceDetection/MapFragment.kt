@@ -135,6 +135,7 @@ class MapFragment : Fragment() {
                             putString("latitude", latitude.toString())
                             putString("longitude", longitude.toString())
                             putString("targetBuildingForPro", addressInput)
+                            putString("newAddressSaved", "true")
                             apply()
                         }
 

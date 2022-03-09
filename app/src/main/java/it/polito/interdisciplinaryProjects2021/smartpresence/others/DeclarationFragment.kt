@@ -87,6 +87,7 @@ class DeclarationFragment : Fragment() {
 
         val packageName = (activity as AppCompatActivity).packageName
         val manuallySettings = view.findViewById<TextView>(R.id.manuallySettings)
+        val pm = requireContext().applicationContext.getSystemService(POWER_SERVICE) as PowerManager
         manuallySettings.makeLinks(
             Pair(getString(R.string.pairDeclaration1), View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -99,7 +100,6 @@ class DeclarationFragment : Fragment() {
                 }
             }),
             Pair(getString(R.string.pairDeclaration2), View.OnClickListener {
-                val pm = requireContext().applicationContext.getSystemService(POWER_SERVICE) as PowerManager
                 if (pm.isIgnoringBatteryOptimizations(packageName)) {
                     Toast.makeText(requireContext(), getString(R.string.alreadyStopBatteryOptimization), Toast.LENGTH_SHORT).show()
                 } else {
@@ -110,6 +110,13 @@ class DeclarationFragment : Fragment() {
                 }
             })
         )
+
+        if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName"))
+            intent.addCategory(Intent.CATEGORY_DEFAULT)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
         val professionalSentence = view.findViewById<TextView>(R.id.professionalSentence)
         professionalSentence.makeLinks(

@@ -403,4 +403,9 @@
     <string name="stop_time_title">每天停止时间：</string>
     <string name="work_interval_title">服务工作间隔：</string>
     <string name="discarded_num_title">丢弃的周期数：</string>
+    <string name="most_recommended">*最推荐</string>
+    <string name="start_popUp_title">设置提醒</string>
+    <string name="start_popUp_msg">请确保您已禁用或更改所有可能阻止后台服务的设置，如电池优化、后台服务许可等！！！ 请确保您已开启 WiFi 服务和定位服务！！！</string>
+    <string name="address_remind_title">地址输入提醒</string>
+    <string name="address_remind_msg">如果您选择的地址不正确，可能是由于您设备中的地理编码器无法正常工作。 您可以随时选择手动输入，但要确保与其他住户完全一样！！！</string>
 </resources>
