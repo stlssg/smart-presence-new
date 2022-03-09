@@ -2,7 +2,13 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.introduction
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -23,11 +29,14 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import it.polito.interdisciplinaryProjects2021.smartpresence.utility.AlarmReceiver
+import java.util.*
 
 class IntroductionFragment : Fragment() {
 
@@ -100,7 +109,38 @@ class IntroductionFragment : Fragment() {
         introduction_plus_text.makeLinks(
             Pair(getString(R.string.pairIntroduction3), View.OnClickListener {
                 findNavController().navigate(R.id.infoBrandFragment)
+//                createNotificationChannel()
+//                val alarmManager = activity?.getSystemService(ALARM_SERVICE) as AlarmManager
+//                val intent = Intent(context, AlarmReceiver::class.java)
+//                val pendingIntent = PendingIntent.getBroadcast(context, 12345, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//                val date = Date()
+//                val calAlarm = Calendar.getInstance()
+//                val calNow = Calendar.getInstance()
+//                calNow.time = date
+//                calAlarm.time = date
+//                calAlarm.set(Calendar.MINUTE, 0)
+//                calAlarm.set(Calendar.HOUR_OF_DAY, 14)
+//                if (calAlarm.before(calNow)) { calAlarm.add(Calendar.DATE,1) }
+//                alarmManager.setInexactRepeating(
+//                    AlarmManager.RTC_WAKEUP,
+//                    calAlarm.timeInMillis,
+//                    AlarmManager.INTERVAL_DAY,
+//                    pendingIntent
+//                )
             }))
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "thisIsMyChannel"
+            val description = "Channel for Alarm Manager"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("myNewChannel", name, importance)
+            channel.description = description
+            val notificationManager = activity?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     private fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
