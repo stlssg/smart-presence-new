@@ -476,4 +476,6 @@
     <string name="start_popUp_msg">Assicurati di aver disabilitato o modificato tutte le impostazioni che potrebbero bloccare il servizio in background, come l\'ottimizzazione della batteria, il permesso del servizio in background, ecc.!!! Assicurati di aver attivato il servizio WiFi e il servizio di localizzazione!!!</string>
     <string name="address_remind_title">Richiamo dell\'inserimento dell\'indirizzo</string>
     <string name="address_remind_msg">Se l\'indirizzo selezionato risulta essere errato, è possibile che il geocoder nel dispositivo non funzioni. Puoi sempre scegliere di inserire manualmente ma assicurati che sia esattamente lo stesso degli altri occupanti!!!</string>
+    <string name="local_notification_title">Notifica giornaliera locale</string>
+    <string name="local_notification_description">Poiché non tutti i dispositivi funzionano con la notifica push di Firebase, introduciamo anche quelli locali. Nel caso in cui ricevi notifiche duplicate contemporaneamente, puoi disattivarlo perché il tuo dispositivo funziona bene con i messaggi cloud.</string>
 </resources>

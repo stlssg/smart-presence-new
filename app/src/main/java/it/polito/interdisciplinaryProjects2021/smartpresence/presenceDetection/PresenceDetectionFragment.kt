@@ -2,10 +2,9 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.PendingIntent
-import android.app.TimePickerDialog
+import android.app.*
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
@@ -43,6 +42,7 @@ import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased.GeofenceBroadcastReceiver
 import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.positioningBased.MyPeriodicBackgroundPositioningCheckingWork
 import it.polito.interdisciplinaryProjects2021.smartpresence.presenceDetection.wifiBased.MyPeriodicWifiCheckingWork
+import it.polito.interdisciplinaryProjects2021.smartpresence.utility.AlarmReceiver
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.util.*
@@ -213,6 +213,7 @@ class PresenceDetectionFragment : Fragment() {
                         manageMyPeriodicWorkForWiFiBasedMethod()
 
                         startNotificationAndSubscribeTopic()
+                        startAlarmNotification()
                         sound.play(MediaActionSound.START_VIDEO_RECORDING)
 
                         popUpDialogueForStartService(requireContext())
@@ -231,6 +232,7 @@ class PresenceDetectionFragment : Fragment() {
                             apply()
                         }
                         startNotificationAndSubscribeTopic()
+                        startAlarmNotification()
                         sound.play(MediaActionSound.START_VIDEO_RECORDING)
 
                         val db = Firebase.firestore
@@ -280,6 +282,7 @@ class PresenceDetectionFragment : Fragment() {
             Toast.makeText(requireContext(), getString(R.string.stopServiceMessage), Toast.LENGTH_SHORT).show()
             buttonStatusWhenNoWorking(startButton, restartButton, stopButton)
             stopNotificationAndUnsubscribeTopic()
+            stopAlarmNotification()
             when (sharedPreferences.getString("detectionMethodSelection", "nothing")) {
                 "wifiChecking" -> {
                     with(sharedPreferences.edit()) {
@@ -625,6 +628,78 @@ class PresenceDetectionFragment : Fragment() {
                 }
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun startAlarmNotification() {
+        val localNotificationOnOrOff = sharedPreferences.getString("localNotificationOnOrOff", "true").toBoolean()
+        if (localNotificationOnOrOff) {
+            createNotificationChannel()
+            val alarmManager = activity?.getSystemService(ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 12345, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
+            alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                setUpCalendarForAlarmNotification(14),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+
+            val frequentNotificationOnOffCondition = sharedPreferences.getString("frequentNotificationOnOffCondition", "false").toBoolean()
+            if (frequentNotificationOnOffCondition) {
+                alarmManager.setInexactRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    setUpCalendarForAlarmNotification(7),
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent
+                )
+
+                alarmManager.setInexactRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    setUpCalendarForAlarmNotification(20),
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent
+                )
+
+            }
+        }
+    }
+
+    @Suppress("SameParameterValue")
+    private fun setUpCalendarForAlarmNotification(hour: Int): Long {
+        val date = Date()
+        val calAlarm = Calendar.getInstance()
+        val calNow = Calendar.getInstance()
+        calNow.time = date
+        calAlarm.time = date
+        calAlarm.set(Calendar.MINUTE, 0)
+        calAlarm.set(Calendar.HOUR_OF_DAY, hour)
+        if (calAlarm.before(calNow)) {
+            calAlarm.add(Calendar.DATE, 1)
+        }
+
+        return calAlarm.timeInMillis
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "thisIsMyChannel"
+            val description = "Channel for Alarm Manager"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("myNewChannel", name, importance)
+            channel.description = description
+            val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun stopAlarmNotification() {
+        val alarmManager = activity?.getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 12345, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        alarmManager.cancel(pendingIntent)
     }
 
     private fun manageMyPeriodicWorkForWiFiBasedMethod() {

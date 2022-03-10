@@ -191,6 +191,7 @@ class SettingFragment : Fragment() {
                 putString("sharedCode", "nothing")
                 putString("sensitivityOnOrOff", "on")
                 putString("newAddressSaved", "false")
+                putString("localNotificationOnOrOff", "true")
                 commit()
             }
             signOutCondition = true
@@ -310,6 +311,23 @@ class SettingFragment : Fragment() {
                 Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalMorning")
                 Firebase.messaging.unsubscribeFromTopic("RemindingManuallyRestartServiceAdditionalEvening")
                 Toast.makeText(requireContext(), getString(R.string.frequentNotificationOffMessage), Toast.LENGTH_LONG).show()
+            }
+        }
+
+        val localNotificationOnOff = view.findViewById<Switch>(R.id.localNotificationOnOff)
+        val localNotificationOnOrOff = sharedPreferences.getString("localNotificationOnOrOff", "true")
+        localNotificationOnOff.isChecked = localNotificationOnOrOff.toBoolean()
+        localNotificationOnOff.setOnCheckedChangeListener{ _, isChecked ->
+            if (isChecked) {
+                with(sharedPreferences.edit()) {
+                    putString( "localNotificationOnOrOff", "true")
+                    commit()
+                }
+            } else {
+                with(sharedPreferences.edit()) {
+                    putString( "localNotificationOnOrOff", "false")
+                    commit()
+                }
             }
         }
 

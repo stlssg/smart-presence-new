@@ -336,6 +336,7 @@ class SignInFragment : Fragment() {
             putString("sharedCode", "nothing")
             putString("sensitivityOnOrOff", "on")
             putString("newAddressSaved", "false")
+            putString("localNotificationOnOrOff", "true")
             commit()
         }
     }

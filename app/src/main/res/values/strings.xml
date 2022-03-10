@@ -470,4 +470,6 @@
     <string name="start_popUp_msg">Please make sure you have disabled or changed all settings that may block background service, like battery optimization, background service permit, etc!!! Please make sure you have turned on the WiFi service and location service!!!</string>
     <string name="address_remind_title">Reminding of address input</string>
     <string name="address_remind_msg">If the address you selected turns out to be incorrect, it might be due to Geocoder in your device is not working. You can always choose to input manually but make sure it\'s exactly the same as other occupants!!!</string>
+    <string name="local_notification_title">Local daily notification</string>
+    <string name="local_notification_description">Since not all devices work with firebase pushed notification, we also introduce local ones. In case you get duplicate notifications at the same time, you can turn this off because you device work well with cloud message.</string>
 </resources>
