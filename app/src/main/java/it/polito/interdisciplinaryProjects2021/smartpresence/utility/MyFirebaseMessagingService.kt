@@ -36,6 +36,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun generateNotification(title: String, message: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
         intent.putExtra("fromNotificationToFragmentOrNot", "YES")
 
         val pendingIntent = PendingIntent.getActivity(this, 0 , intent, PendingIntent.FLAG_ONE_SHOT)

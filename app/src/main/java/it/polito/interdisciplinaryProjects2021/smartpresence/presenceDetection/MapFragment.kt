@@ -56,14 +56,13 @@ class MapFragment : Fragment() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         RequestPermission()
         getLastLocation()
+
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Toast.makeText(requireContext(), getString(R.string.notInMyPositionMessage), Toast.LENGTH_LONG).show()
 
         Configuration.getInstance().load(activity, PreferenceManager.getDefaultSharedPreferences(activity))
         Configuration.getInstance().userAgentValue = requireContext().packageName;
@@ -160,11 +159,18 @@ class MapFragment : Fragment() {
         if(CheckPermission()){
             if(isLocationEnabled()){
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener {task->
-                    val location: Location? = task.result
-                    if(location == null){
-                        NewLocationData()
-                    }else{
-                        Log.d("Debug:" ,"Your Location:"+ location.longitude)
+                    try {
+                        val location: Location? = task.result
+                        if(location == null){
+                            NewLocationData()
+                        }else{
+                            Log.d("Debug:" ,"Your Location:"+ location.longitude)
+                        }
+
+                        Toast.makeText(requireContext(), getString(R.string.notInMyPositionMessage), Toast.LENGTH_LONG).show()
+                    } catch (e: Exception) {
+                        findNavController().popBackStack()
+                        Toast.makeText(requireContext(),getString(R.string.no_google_service_msg), Toast.LENGTH_SHORT).show()
                     }
                 }
             }else{

@@ -410,4 +410,5 @@
     <string name="address_remind_msg">如果您选择的地址不正确，可能是由于您设备中的地理编码器无法正常工作。 您可以随时选择手动输入，但要确保与其他住户完全一样！！！</string>
     <string name="local_notification_title">本地每日通知</string>
     <string name="local_notification_description">由于并非所有设备都支持Firebase推送通知，因此我们还介绍了本地通知。 如果您同时收到重复通知，您可以将其关闭，因为您的设备可以很好地使用云消息。</string>
+    <string name="no_google_service_msg">您的设备不支持谷歌服务，请不要使用地图或定位方式，而是手动输入。</string>
 </resources>
