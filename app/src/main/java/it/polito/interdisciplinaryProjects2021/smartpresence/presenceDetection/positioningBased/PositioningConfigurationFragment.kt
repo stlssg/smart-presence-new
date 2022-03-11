@@ -252,6 +252,7 @@ class PositioningConfigurationFragment : Fragment() {
                             putString("maxOccupancyConfigurationFinished", "true")
                             putString("latitudeConfigurationFinished", "true")
                             putString("longitudeConfigurationFinished", "true")
+                            putString("targetBuildingForPro", address_input.replace(" ", "_"))
                             apply()
                         }
 

@@ -239,6 +239,7 @@ class WifiConfigurationFragment : Fragment() {
                             putString("bssidConfigurationFinished", "true")
                             putString("addressConfigurationFinished", "true")
                             putString("maxOccupancyConfigurationFinished", "true")
+                            putString("targetBuildingForPro", address_input.replace(" ", "_"))
                             apply()
                         }
 

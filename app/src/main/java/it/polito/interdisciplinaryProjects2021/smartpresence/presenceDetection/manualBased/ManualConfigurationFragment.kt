@@ -161,6 +161,7 @@ class ManualConfigurationFragment : Fragment() {
                             putString("maxOccupancy", max_occupancy_input)
                             putString("addressConfigurationFinished", "true")
                             putString("maxOccupancyConfigurationFinished", "true")
+                            putString("targetBuildingForPro", address_input.replace(" ", "_"))
                             apply()
                         }
 
