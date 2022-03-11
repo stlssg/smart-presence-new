@@ -23,9 +23,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -44,6 +41,7 @@ class MapFragment : Fragment() {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     val PERMISSION_ID = 1010
 
+    @Suppress("DEPRECATION")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,19 +52,20 @@ class MapFragment : Fragment() {
         val ctx = requireContext()
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        RequestPermission()
+        requestPermission()
         getLastLocation()
 
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
+    @Suppress("DEPRECATION")
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         Configuration.getInstance().load(activity, PreferenceManager.getDefaultSharedPreferences(activity))
-        Configuration.getInstance().userAgentValue = requireContext().packageName;
-        map = view.findViewById<MapView>(R.id.map)
+        Configuration.getInstance().userAgentValue = requireContext().packageName
+        map = view.findViewById(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setMultiTouchControls(true)
         map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
@@ -90,15 +89,15 @@ class MapFragment : Fragment() {
             override fun onSingleTapConfirmed(e: MotionEvent, mapView: MapView): Boolean {
                 val projection = mapView.projection
                 val geoPoint = projection.fromPixels(e.x.toInt(), e.y.toInt())
-                val set_point = GeoPoint(geoPoint.latitude, geoPoint.longitude)
+                val setPoint = GeoPoint(geoPoint.latitude, geoPoint.longitude)
                 val geoCoder = Geocoder(requireContext(), Locale.getDefault())
                 Log.d("address!!!!!!", "${Geocoder.isPresent()}")
 
                 try {
-                    val latitude = set_point.latitude
-                    val longitude = set_point.longitude
+                    val latitude = setPoint.latitude
+                    val longitude = setPoint.longitude
                     val address = geoCoder.getFromLocation(latitude, longitude,1)
-                    startMarker.position = set_point
+                    startMarker.position = setPoint
                     startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                     map.overlays.add(startMarker)
 
@@ -156,13 +155,13 @@ class MapFragment : Fragment() {
     @SuppressLint("MissingPermission")
     @RequiresApi(Build.VERSION_CODES.Q)
     fun getLastLocation(){
-        if(CheckPermission()){
+        if(checkPermission()){
             if(isLocationEnabled()){
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener {task->
                     try {
                         val location: Location? = task.result
                         if(location == null){
-                            NewLocationData()
+                            newLocationData()
                         }else{
                             Log.d("Debug:" ,"Your Location:"+ location.longitude)
                         }
@@ -177,11 +176,11 @@ class MapFragment : Fragment() {
                 Toast.makeText(requireContext(),getString(R.string.turn_on_location_message), Toast.LENGTH_SHORT).show()
             }
         }else{
-            RequestPermission()
+            requestPermission()
         }
     }
 
-    private fun CheckPermission():Boolean{
+    private fun checkPermission():Boolean{
         if(
             ActivityCompat.checkSelfPermission(requireContext(),android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             ActivityCompat.checkSelfPermission(requireContext(),android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -192,13 +191,13 @@ class MapFragment : Fragment() {
     }
 
     private fun isLocationEnabled():Boolean{
-        var locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER)
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    private fun RequestPermission(){
+    private fun requestPermission(){
         ActivityCompat.requestPermissions(
             requireActivity(),
             arrayOf(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION,
@@ -207,13 +206,14 @@ class MapFragment : Fragment() {
 
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
-            var lastLocation: Location = locationResult.lastLocation
+            val lastLocation: Location = locationResult.lastLocation
             Log.d("Debug:","your last last location: "+ lastLocation.longitude.toString())
         }
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
     @SuppressLint("MissingPermission")
-    fun NewLocationData(){
+    private fun newLocationData(){
         val locationRequest =  LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0

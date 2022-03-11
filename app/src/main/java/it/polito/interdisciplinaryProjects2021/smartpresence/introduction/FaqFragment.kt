@@ -37,15 +37,15 @@ class FaqFragment : Fragment() {
         val questionList = resources.getStringArray(R.array.question_list)
         val answerList = resources.getStringArray(R.array.answer_list)
 
-        faqList = arrayListOf<QuestionAndAnswer>()
-        tempFaqList = arrayListOf<QuestionAndAnswer>()
+        faqList = arrayListOf()
+        tempFaqList = arrayListOf()
 
         for (i in questionList.indices) {
             faqList.add(QuestionAndAnswer(questionList[i], answerList[i]))
         }
         tempFaqList.addAll(faqList)
 
-        faqRecyclerView = view.findViewById<RecyclerView>(R.id.faqRecyclerView)
+        faqRecyclerView = view.findViewById(R.id.faqRecyclerView)
         faqRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val rvAdapter = FaqCardAdapter(faqRecyclerView, tempFaqList, requireContext())
@@ -67,10 +67,10 @@ class FaqFragment : Fragment() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(newText: String?): Boolean {
                 tempFaqList.clear()
-                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                val searchText = newText!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()) {
                     faqList.forEach {
-                        if (it.question.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                        if (it.question.lowercase(Locale.getDefault()).contains(searchText)) {
                             tempFaqList.add(it)
                         }
                     }

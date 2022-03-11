@@ -2,13 +2,7 @@ package it.polito.interdisciplinaryProjects2021.smartpresence.introduction
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Context.ALARM_SERVICE
-import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -29,14 +23,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
-import it.polito.interdisciplinaryProjects2021.smartpresence.utility.AlarmReceiver
-import java.util.*
 
 class IntroductionFragment : Fragment() {
 
@@ -81,8 +72,8 @@ class IntroductionFragment : Fragment() {
         }
 
         val packageName = (activity as AppCompatActivity).packageName
-        val introduction_more_text = view.findViewById<TextView>(R.id.introduction_more_text)
-        introduction_more_text.makeLinks(
+        val introductionMoreText = view.findViewById<TextView>(R.id.introduction_more_text)
+        introductionMoreText.makeLinks(
             Pair(getString(R.string.pairIntroduction1), View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
@@ -106,8 +97,8 @@ class IntroductionFragment : Fragment() {
             })
         )
 
-        val introduction_plus_text = view.findViewById<TextView>(R.id.introduction_plus_text)
-        introduction_plus_text.makeLinks(
+        val introductionPlusText = view.findViewById<TextView>(R.id.introduction_plus_text)
+        introductionPlusText.makeLinks(
             Pair(getString(R.string.pairIntroduction3), View.OnClickListener {
                 findNavController().navigate(R.id.infoBrandFragment)
             })

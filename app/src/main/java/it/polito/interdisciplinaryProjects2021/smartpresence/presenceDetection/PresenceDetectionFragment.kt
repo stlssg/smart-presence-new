@@ -661,7 +661,6 @@ class PresenceDetectionFragment : Fragment() {
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent
                 )
-
             }
         }
     }

@@ -1,8 +1,11 @@
 package it.polito.interdisciplinaryProjects2021.smartpresence.others
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -31,11 +34,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
+import it.polito.interdisciplinaryProjects2021.smartpresence.utility.AlarmReceiver
 import java.util.*
 
 class SettingFragment : Fragment() {
 
-    private var working_interval: Int = 15
+    private var workingInterval: Int = 15
     private var language: String = "English"
     private var signOutCondition: Boolean = false
     private lateinit var accountModeNameForPair: String
@@ -129,10 +133,10 @@ class SettingFragment : Fragment() {
             })
         )
 
-        val working_interval_list = resources.getStringArray(R.array.working_interval)
+        val workingIntervalList = resources.getStringArray(R.array.working_interval)
         val workingIntervalSpinner = view.findViewById<Spinner>(R.id.workingIntervalSpinner)
         if (workingIntervalSpinner != null) {
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, working_interval_list)
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, workingIntervalList)
             workingIntervalSpinner.adapter = adapter
         }
         val workingIntervalSpinnerPosition = sharedPreferences.getString("workingIntervalSpinnerPosition", "0")?.toInt()
@@ -140,7 +144,7 @@ class SettingFragment : Fragment() {
         workingIntervalSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 //                Toast.makeText(requireContext(), working_interval_list[position], Toast.LENGTH_SHORT).show()
-                working_interval = working_interval_list[position].toInt()
+                workingInterval = workingIntervalList[position].toInt()
 //                Log.d("working_interval", working_interval.toString())
                 with(sharedPreferences.edit()) {
                     putString( "workingIntervalSpinnerPosition", position.toString())
@@ -324,6 +328,11 @@ class SettingFragment : Fragment() {
                     commit()
                 }
             } else {
+                val alarmManager = activity?.getSystemService(ALARM_SERVICE) as AlarmManager
+                val intent = Intent(context, AlarmReceiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(context, 12345, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+                alarmManager.cancel(pendingIntent)
+
                 with(sharedPreferences.edit()) {
                     putString( "localNotificationOnOrOff", "false")
                     commit()
@@ -331,17 +340,17 @@ class SettingFragment : Fragment() {
             }
         }
 
-        val language_list = resources.getStringArray(R.array.language)
+        val languageList = resources.getStringArray(R.array.language)
         val languageSpinner = view.findViewById<Spinner>(R.id.languageSpinner)
         if (languageSpinner != null) {
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, language_list)
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, languageList)
             languageSpinner.adapter = adapter
         }
         val languageSpinnerPosition = sharedPreferences.getString("languageSpinnerPosition", "0")?.toInt()
         languageSpinnerPosition?.let { languageSpinner.setSelection(it) }
         languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                language = language_list[position]
+                language = languageList[position]
                 if (languageSpinnerPosition != position) {
                     when (position) {
                         0 -> {

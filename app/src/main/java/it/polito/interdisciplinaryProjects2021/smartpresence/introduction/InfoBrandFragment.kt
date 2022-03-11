@@ -8,17 +8,13 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.AutoTransition
 import androidx.transition.TransitionInflater
-import androidx.transition.TransitionManager
-import com.google.android.material.card.MaterialCardView
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,8 +44,8 @@ class InfoBrandFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        brandInfoList = arrayListOf<BrandInfo>()
-        tempBrandInfoList = arrayListOf<BrandInfo>()
+        brandInfoList = arrayListOf()
+        tempBrandInfoList = arrayListOf()
         brandInfoList.add(BrandInfo(R.drawable.huawei_logo, getString(R.string.huawei_description)))
         brandInfoList.add(BrandInfo(R.drawable.samsung_logo, getString(R.string.samsung_description)))
         brandInfoList.add(BrandInfo(R.drawable.oneplus_logo, getString(R.string.onePlus_description)))
@@ -57,7 +53,7 @@ class InfoBrandFragment : Fragment() {
         brandInfoList.add(BrandInfo(R.drawable.ic_baseline_phone_android_24, "More information will be available soon."))
         tempBrandInfoList.addAll(brandInfoList)
 
-        brandInfoRecyclerView = view.findViewById<RecyclerView>(R.id.brandInfoRecyclerView)
+        brandInfoRecyclerView = view.findViewById(R.id.brandInfoRecyclerView)
         brandInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val rvAdapter = BrandInfoCardAdapter(tempBrandInfoList, requireContext())
@@ -88,10 +84,10 @@ class InfoBrandFragment : Fragment() {
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(newText: String?): Boolean {
                 tempBrandInfoList.clear()
-                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                val searchText = newText!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()) {
                     brandInfoList.forEach {
-                        if (it.brandInfoText.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                        if (it.brandInfoText.lowercase(Locale.getDefault()).contains(searchText)) {
                             tempBrandInfoList.add(it)
                         }
                     }
