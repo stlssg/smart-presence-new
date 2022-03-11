@@ -639,7 +639,7 @@ class PresenceDetectionFragment : Fragment() {
             val intent = Intent(context, AlarmReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(context, 12345, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
-            alarmManager.setInexactRepeating(
+            alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 setUpCalendarForAlarmNotification(14),
                 AlarmManager.INTERVAL_DAY,
@@ -648,16 +648,16 @@ class PresenceDetectionFragment : Fragment() {
 
             val frequentNotificationOnOffCondition = sharedPreferences.getString("frequentNotificationOnOffCondition", "false").toBoolean()
             if (frequentNotificationOnOffCondition) {
-                alarmManager.setInexactRepeating(
+                alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,
                     setUpCalendarForAlarmNotification(7),
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent
                 )
 
-                alarmManager.setInexactRepeating(
+                alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,
-                    setUpCalendarForAlarmNotification(20),
+                    setUpCalendarForAlarmNotification(18),
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent
                 )

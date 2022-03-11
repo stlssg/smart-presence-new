@@ -16,7 +16,7 @@ import com.google.firebase.messaging.RemoteMessage
 import it.polito.interdisciplinaryProjects2021.smartpresence.MainActivity
 import it.polito.interdisciplinaryProjects2021.smartpresence.R
 
-const val channelId = "notification_channel"
+const val channelId = "notification_channel_new"
 const val channelName = "it.polito.interdisciplinaryProjects2021.smartpresence"
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
@@ -56,7 +56,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
-        notificationManager.notify(0, builder.build())
+        notificationManager.notify(999, builder.build())
     }
 
     private fun getRemoteView(title: String, message: String): RemoteViews {
