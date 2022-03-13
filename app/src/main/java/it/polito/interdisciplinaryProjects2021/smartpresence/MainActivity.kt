@@ -136,6 +136,17 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.nav_setting)
             intent.putExtra("fromSettingChangeLanguage", "no")
         }
+
+        val checkFromLocalNotification = intent.getStringExtra("fromLocalNotificationToFragmentOrNot")
+        if (checkFromLocalNotification != null) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.from_local_notification_title))
+                .setMessage(getString(R.string.from_local_notification_content))
+                .setPositiveButton(getString(R.string.energySavingModeAlertButton)) { _, _ -> }
+                .show()
+
+            navController.navigate(R.id.nav_presence_detection)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -672,7 +672,7 @@ class PresenceDetectionFragment : Fragment() {
         val calNow = Calendar.getInstance()
         calNow.time = date
         calAlarm.time = date
-        calAlarm.set(Calendar.MINUTE, 0)
+        calAlarm.set(Calendar.MINUTE, 5)
         calAlarm.set(Calendar.HOUR_OF_DAY, hour)
         if (calAlarm.before(calNow)) {
             calAlarm.add(Calendar.DATE, 1)

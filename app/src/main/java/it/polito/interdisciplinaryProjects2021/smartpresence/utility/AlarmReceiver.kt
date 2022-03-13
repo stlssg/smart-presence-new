@@ -23,7 +23,7 @@ class AlarmReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra("fromNotificationToFragmentOrNot", "YES")
+        intent.putExtra("fromLocalNotificationToFragmentOrNot", "YES")
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
         val notification = NotificationCompat.Builder(context!!, channelID)

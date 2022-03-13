@@ -479,4 +479,6 @@
     <string name="local_notification_title">Notifica giornaliera locale</string>
     <string name="local_notification_description">Poiché non tutti i dispositivi funzionano con la notifica push di Firebase, introduciamo anche quelli locali. Nel caso in cui ricevi notifiche duplicate contemporaneamente, puoi disattivarlo perché il tuo dispositivo funziona bene con i messaggi cloud.</string>
     <string name="no_google_service_msg">Il servizio Google non è disponibile nel tuo dispositivo, non utilizzare la mappa o il metodo di posizionamento ma inserisci manualmente.</string>
+    <string name="from_local_notification_title">Promemoria per la notifica duplicata locale</string>
+    <string name="from_local_notification_content">Potresti ricevere questa notifica duplicata poiché il tuo dispositivo potrebbe non funzionare bene con il messaggio cloud di Firebase. Nel caso in cui tu sia in grado di ricevere il messaggio cloud, puoi andare alle impostazioni per disabilitare quello locale per evitare notifiche duplicate.</string>
 </resources>
