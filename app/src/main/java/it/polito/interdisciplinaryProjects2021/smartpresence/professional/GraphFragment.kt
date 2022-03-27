@@ -368,7 +368,7 @@ class GraphFragment : Fragment() {
                                         errorTextView.text = getString(R.string.graphNoDataMessage)
                                     }
                                 }
-                                .addOnFailureListener { _ ->
+                                .addOnFailureListener {
                                     loadingAnim.visibility = GONE
                                     aaChartView.visibility = GONE
                                     errorTextView.visibility = VISIBLE
@@ -423,7 +423,7 @@ class GraphFragment : Fragment() {
                                                 errorTextView.text = getString(R.string.graphNoDataMessage)
                                             }
                                         }
-                                        .addOnFailureListener { _ ->
+                                        .addOnFailureListener {
                                             loadingAnim.visibility = GONE
                                             aaChartView.visibility = GONE
                                             errorTextView.visibility = VISIBLE
@@ -475,7 +475,7 @@ class GraphFragment : Fragment() {
                                         errorTextView.text = getString(R.string.graphNoDataMessage)
                                     }
                                 }
-                                .addOnFailureListener { _ ->
+                                .addOnFailureListener {
                                     loadingAnim.visibility = GONE
                                     aaChartView.visibility = GONE
                                     errorTextView.visibility = VISIBLE
@@ -524,7 +524,7 @@ class GraphFragment : Fragment() {
                                                 errorTextView.text = getString(R.string.graphNoDataMessage)
                                             }
                                         }
-                                        .addOnFailureListener { _ ->
+                                        .addOnFailureListener {
                                             loadingAnim.visibility = GONE
                                             aaChartView.visibility = GONE
                                             errorTextView.visibility = VISIBLE

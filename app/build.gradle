@@ -62,8 +62,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.sun.mail:android-mail:1.6.0'
     implementation 'com.sun.mail:android-activation:1.6.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
+    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:6.1.0'
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation 'me.relex:circleindicator:2.1.6'
